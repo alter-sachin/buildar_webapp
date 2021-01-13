@@ -14,6 +14,7 @@ import DefaultLayout from "common/layouts/DefaultLayout";
 import EmptyLayout from "common/layouts/EmptyLayout";
 
 // Page Components
+const Homepage = AsyncComponent(() => import("./modules/homepage"));
 const Authentication = AsyncComponent(() => import("./modules/authentication"));
 const Overview = AsyncComponent(() => import("./modules/overview"));
 const Profile = AsyncComponent(() => import("./modules/profile"));
@@ -37,7 +38,7 @@ class Router extends Component {
 							user={user}
 							render={() => (
 								<DefaultLayout key="/">
-									<Overview />
+									<Homepage />
 								</DefaultLayout>
 							)}
 						/>

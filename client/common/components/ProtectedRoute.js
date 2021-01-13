@@ -12,7 +12,7 @@ class ProtectedRoute extends Component {
 		const { path, user, hasAnyRole, hasAllRoles, hasAnyFeature, hasAllFeatures, hasAnySubscription, hasVerifiedEmail, disabled } = this.props;
 
 		// Create a common array of paths we should redirect when found
-		const unauthenticatedUserPaths = ["/register", "/forgot", "/signin", "/signin/help", "/reset"];
+		const unauthenticatedUserPaths = ["/","/register", "/forgot", "/signin", "/signin/help", "/reset"];
 
 		// Validate if user is logged in
 		const userLoggedIn = variableExists(user) && !isObjectEmpty(user) && variableExists(user.get("userId"));
@@ -37,10 +37,6 @@ class ProtectedRoute extends Component {
 		  NON-LOGGED-IN USER ROUTES
 		****************************/
 
-		// Redirect to signin page when on homepage and not logged in
-		if (path === "/" && !userLoggedIn) {
-			return <Redirect to="/signin" />;
-		}
 
 		// If component disabled, render the MissingPath component
 		if (disabled && !userLoggedIn) {
