@@ -46,8 +46,7 @@ class Navbar extends Component {
               </li>
             </ul>
             <span className="nav-item">
-              <a className="btn-outline-sm">
-				  <Link to="/signin" style={{color:"white"}}>LOG IN</Link></a>
+				    <Link to="/signin" className="btn-outline-sm">LOG IN</Link>
             </span>
           </div>
         </div> {/* end of container */}
