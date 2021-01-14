@@ -8,7 +8,8 @@ import Mainlogo from "common/media/icons/Mainlogo"
 class Navbar extends Component {
 	render() {
 		return (
-			<nav className="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+      <div>
+			<nav className="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top" style={{backgroundColor:"#726bfa"}}>
         <div className="container">
           <a className="navbar-brand logo-image" href="index.html"><img src="images/mainLogo.png" alt="alternative" style={{height:"10%",width:"10%"}}/></a> 
           {/* Mobile Menu Toggle Button */}
@@ -45,11 +46,13 @@ class Navbar extends Component {
               </li>
             </ul>
             <span className="nav-item">
-              <a className="btn-outline-sm" href="log-in.html">LOG IN</a>
+              <a className="btn-outline-sm">
+				  <Link to="/signin" style={{color:"white"}}>LOG IN</Link></a>
             </span>
           </div>
         </div> {/* end of container */}
       </nav>
+      </div>
 		);
 	}
 }
