@@ -1,7 +1,5 @@
 import React, { Component, Fragment } from "react";
 
-
-
 import Navbar from "./components/Navbar.js";
 import Hero from "./components/Hero.js";
 import Description from "./components/Description";

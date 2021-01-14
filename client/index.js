@@ -5,12 +5,12 @@ import Raven from "raven-js";
 import { Provider } from "react-redux";
 import { I18nextProvider } from "react-i18next";
 import { initializeGA } from "common/components/GoogleAnalytics";
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 import "./common/styles/entry.scss";
 
 import App from "./App";
 import store from "./common/store/store";
-
+import './styles.css';
 /* eslint-disable */
 
 // Load Google Analytics Tracking
