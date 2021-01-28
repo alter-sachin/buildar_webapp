@@ -29,16 +29,17 @@ module.exports = function(router) {
 		function(req, res, next) {
 			// Load browser language from header
 			const browserLng = browserResponseLng(req);
-
+			// console.log(req);
 			// Create object with authenticated user information
 			const authenticatedUser = {
 				userId: req.user.userId,
 				clientId: req.user.clientId
 			};
-
+			// console.log(authenticatedUser);
 			// Retrieve user profile details and return response
 			loadProfile(null, authenticatedUser, browserLng).then(
 				result => {
+					// console.log(result);
 					return res.status(200).send(result);
 				},
 				error => {

@@ -19,7 +19,7 @@ export function validateWorkspaceURL(requestProperties, authenticatedUser, brows
 		try {
 			// Load a client using a workspaceURL
 			const client = await models().client.findOne({ where: { workspaceURL: requestProperties.workspaceURL, active: true } }, { transaction: transaction });
-
+			
 			// Throw an error if the client was not returned for the WorkspaceURL
 			if (client === null || client.get("workspaceURL") === null || client.get("workspaceURL") !== requestProperties.workspaceURL) {
 				throw new ServerResponseError(403, t("validation.clientInvalidProperties", { lng: browserLng }), { workspaceURL: [t("validation.emptyWorkspaceURL", { lng: browserLng })] });

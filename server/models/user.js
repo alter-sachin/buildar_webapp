@@ -1,5 +1,5 @@
-module.exports = function(sequelize, DataTypes) {
-	return sequelize.define(
+module.exports = (sequelize, DataTypes) =>{
+	const User =  sequelize.define(
 		"user",
 		{
 			id: {
@@ -90,10 +90,19 @@ module.exports = function(sequelize, DataTypes) {
 				type: DataTypes.DATE,
 				allowNull: true,
 				field: "updatedAt"
-			}
+			},
 		},
 		{
 			tableName: "user"
 		}
 	);
+
+	User.associate = function(models){
+		User.hasMany(models.video,{
+
+			foreignKey : "id"
+		});
+	};
+	return User;
 };
+

@@ -27,7 +27,7 @@ export function loadProfile(requestProperties, authenticatedUser, browserLng) {
 
 			// Load user properties for authenticated user
 			const user = await models().user.findOne({ where: { id: authenticatedUser.userId, clientId: client.get("id"), active: true } }, { transaction: transaction });
-
+			
 			// Throw an error if the user does not exist
 			if (user === null) {
 				throw new ServerResponseError(403, t("validation.loadUserPropertiesFailed", { lng: browserLng }), { user: [t("validation.loadUserPropertiesFailed", { lng: browserLng })] });
