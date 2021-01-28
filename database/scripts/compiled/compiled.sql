@@ -422,3 +422,17 @@ VALUES
 
 ALTER TABLE `client`
 ADD COLUMN `description` varchar(255) NULL;
+
+CREATE TABLE `video` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+    `title` varchar(255) NOT NULL DEFAULT '',
+      `createdAt` datetime DEFAULT NULL,
+  `updatedAt` datetime DEFAULT NULL,
+  `description` varchar(300) DEFAULT NULL,
+  `thumbnail` varchar(255) DEFAULT NULL,
+  `videoURL` VARCHAR(300) DEFAULT NULL,
+  `textScript` VARCHAR(600) DEFAULT NULL,
+  `userId_FK` int(11) unsigned NOT NULL,
+  PRIMARY KEY(`id`),
+  FOREIGN KEY (userId_FK) REFERENCES user(id)
+  )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
