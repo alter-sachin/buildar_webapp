@@ -41,4 +41,46 @@ module.exports= function(router){
             	);
 			// return res.status(200).send("success");
 		});
+
+	router.post("/api/v1.0/video",
+		restrict({
+			registered:false,
+			unregistered:true
+		}),
+		function(req,res,next){
+            
+			// console.log(req)
+			// const browserLng = browserResponseLng(req);
+
+			const authenticatedUser = {
+				userId:1,
+				
+			};
+			console.log(req.body)
+			//first create the audio using our endpoint 35.232.47.147:8008/audio/
+			const audioInputs ={
+				speakerId:req.body.speakerId,
+				textScript: req.body.textScript
+			}
+
+			
+
+
+
+			loadVideo(null, authenticatedUser, null)
+				.then(
+					result=>{
+						
+						 console.log(result)
+							return res.status(200).send(result);
+						
+					},
+					error =>{
+						return next(error);
+					}
+            	);
+			// return res.status(200).send("success");
+		});
+
+
 };
