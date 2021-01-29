@@ -11,94 +11,127 @@ import { updateUserProfile, verifyEmail, changeSavedLanguage, changeUserPassword
 
 import {
 	createVideo,
-	loadVideo
+	loadVideo,
+	deleteVideo
 } from "../orchestrator/video";
 import { request, response } from "express";
 
-module.exports= function(router){
+module.exports = function (router) {
 	router.get("/api/v1.0/video",
 		restrict({
-			registered:false,
-			unregistered:true
+			registered: false,
+			unregistered: true
 		}),
-		function(req,res,next){
-            
+		function (req, res, next) {
+
 			const authenticatedUser = {
-				userId:1,
-				
+				userId: 1,
+
 			};
 
 			loadVideo(null, authenticatedUser, null)
 				.then(
-					result=>{
-						
-						 // eslint-disable-next-line no-console
-						 console.log(result);
+					result => {
+
+						// eslint-disable-next-line no-console
+						console.log(result);
 						return res.status(200).send(result);
-						
+
 					},
-					error =>{
+					error => {
 						return next(error);
 					}
-            	);
-			
+				);
+
 		});
 
-	
+
 
 	router.post("/api/v1.0/video",
 		restrict({
-			registered:false,
-			unregistered:true
-			
+			registered: false,
+			unregistered: true
+
 		}),
-		function(req,res,next){
-			
+		function (req, res, next) {
+
 			// console.log(req.body)
 			const browserLng = browserResponseLng(req);
-			const requestProperties={
-				title:req.body.title,
-				description:req.body.description,
-				thumbnail:req.body.thumbnail,
+			const requestProperties = {
+				title: req.body.title,
+				description: req.body.description,
+				thumbnail: req.body.thumbnail,
 				videoURL: "",
-				textScript:req.body.textScript,
-				userId_FK:req.body.userId
+				textScript: req.body.textScript,
+				userId_FK: req.body.userId
 			};
 			request.post(
 				{
-					url:"http://5f96bb387e2c.ngrok.io/video",
-					json:{
-						actorId:req.body.actorId,
-						audioUrl:req.body.audioUrl
+					url: "http://5f96bb387e2c.ngrok.io/video",
+					json: {
+						actorId: req.body.actorId,
+						audioUrl: req.body.audioUrl
 					},
-					headers:{
-						"Content-type":"application/json"
+					headers: {
+						"Content-type": "application/json"
 					}
 				},
-				(error,{body})=>{
-					requestProperties.videoURL=body.videoUrl;
+				(error, { body }) => {
+					requestProperties.videoURL = body.videoUrl;
 
-					createVideo(requestProperties,null,browserLng)
+					createVideo(requestProperties, null, browserLng)
 						.then(
-							result=>{
+							result => {
 								// console.log(result);
 								return res.send(result)
 							},
-							error=>{
+							error => {
 								return res.send(error);
 							}
 						);
-						
+
 				}
 			);
-		});	
-		
+		});
+
+	router.post("/api/v1.0/video",
+		restrict({
+			registered: false,
+			unregistered: true
+
+		}),
+		function (req, res, next) {
+
+			// console.log(req.body)
+			const browserLng = browserResponseLng(req);
+			const requestProperties = {
+				// title: req.body.title,
+				// description: req.body.description,
+				// thumbnail: req.body.thumbnail,
+				// videoURL: "",
+				// textScript: req.body.textScript,
+				userId_FK: req.body.userId
+			};
+			requestProperties.userId_FK = req.body.userId
+
+			console.log(requestProperties);
+			deleteVideo(requestProperties, null, browserLng)
+				.then(
+					result => {
+						// console.log(result);
+						return res.send(result)
+					},
+					error => {
+						return res.send(error);
+					}
+				);
+		});
 };
-			
 
 
 
-					
-	
+
+
+
 
 
