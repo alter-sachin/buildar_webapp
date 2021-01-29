@@ -21,19 +21,30 @@ export function loadVideo(requestProperties, authenticatedUser, browserLng){
 		catch(error){
 			console.error(error);
 		}
-		// Throw an error if the client does not exist
-		// if (client === null) {
-		// 	throw new ServerResponseError(403, t("validation.loadUserPropertiesFailed", { lng: browserLng }), { client: [t("validation.loadClientFailed", { lng: browserLng })] });
-		// }
+		
+	});
+}
 
-		// // Load user properties for authenticated user
-		// const user = await models().user.findOne({ where: { id: authenticatedUser.userId, clientId: client.get("id"), active: true } }, { transaction: transaction });
-			
-		// // Throw an error if the user does not exist
-		// if (user === null) {
-		// 	throw new ServerResponseError(403, t("validation.loadUserPropertiesFailed", { lng: browserLng }), { user: [t("validation.loadUserPropertiesFailed", { lng: browserLng })] });
-		// }
-        
-    
+export function createVideo(requestProperties, authenticatedUser, browserLng){
+	return database().transaction(async function(transaction){
+		try{
+			//Create video for authenticated User
+			// const user = await models().user.findOne({where :{id:authenticatedUser.userId, active:true}});
+			console.log(requestProperties);
+			const videoObj={
+				title:requestProperties.title,
+				description:requestProperties.description,
+				thumbnail:requestProperties.thumbnail,
+				textScript:requestProperties.textScript,
+				videoURL: requestProperties.videoUrl,
+				userId_FK:requestProperties.userId
+			}
+			const videoInstance = await models().video.create(videoObj, {transaction:transaction});
+			return videoInstance;
+		}
+		catch(error){
+			console.error(error);
+			return error;
+		}
 	});
 }
