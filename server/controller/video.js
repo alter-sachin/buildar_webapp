@@ -7,22 +7,22 @@ import validate from "shared/validation/validate";
 import { t } from "shared/translations/i18n";
 import { updateUserProfile, verifyEmail, changeSavedLanguage, changeUserPassword } from "shared/validation/profile";
 
-
+const request = require("request");
 
 import {
 	createVideo,
 	loadVideo,
 	deleteVideo
 } from "../orchestrator/video";
-import { request, response } from "express";
 
-module.exports = function (router) {
+
+module.exports = function(router) {
 	router.get("/api/v1.0/video",
 		restrict({
 			registered: false,
 			unregistered: true
 		}),
-		function (req, res, next) {
+		function(req, res, next) {
 
 			const authenticatedUser = {
 				userId: 1,
@@ -53,10 +53,10 @@ module.exports = function (router) {
 			unregistered: true
 
 		}),
-		function (req, res, next) {
+		function(req, res, next) {
 
-			// console.log(req.body)
-			const browserLng = browserResponseLng(req);
+			//  console.log(req.body.title);
+			// const browserLng = browserResponseLng(req);
 			const requestProperties = {
 				title: req.body.title,
 				description: req.body.description,
@@ -65,61 +65,63 @@ module.exports = function (router) {
 				textScript: req.body.textScript,
 				userId_FK: req.body.userId
 			};
+			const videoInputs={actorId:req.body.actorId,
+			audioUrl:req.body.audioUrl};
 			request.post(
 				{
-					url: "http://5f96bb387e2c.ngrok.io/video",
-					json: {
-						actorId: req.body.actorId,
-						audioUrl: req.body.audioUrl
-					},
+					url: "http://17cd090c2ffc.ngrok.io/video",
+					json: videoInputs,
 					headers: {
 						"Content-type": "application/json"
 					}
 				},
 				(error, { body }) => {
+					if(error){
+						console.error(error)
+					}
+					 console.log(body);
 					requestProperties.videoURL = body.videoUrl;
-
-					createVideo(requestProperties, null, browserLng)
+					
+					createVideo(requestProperties, null, null)
 						.then(
 							result => {
 								// console.log(result);
-								return res.send(result)
+								return res.send(result);
 							},
 							error => {
 								return res.send(error);
 							}
 						);
+					
 
 				}
 			);
 		});
 
-	router.post("/api/v1.0/video",
+	router.patch("/api/v1.0/video",
 		restrict({
 			registered: false,
 			unregistered: true
 
 		}),
-		function (req, res, next) {
+		function(req, res, next) {
 
 			// console.log(req.body)
 			const browserLng = browserResponseLng(req);
 			const requestProperties = {
-				// title: req.body.title,
-				// description: req.body.description,
-				// thumbnail: req.body.thumbnail,
-				// videoURL: "",
-				// textScript: req.body.textScript,
-				userId_FK: req.body.userId
+				videoId: req.body.videoId
 			};
-			requestProperties.userId_FK = req.body.userId
 
-			console.log(requestProperties);
+			// console.log(requestProperties);
 			deleteVideo(requestProperties, null, browserLng)
 				.then(
 					result => {
-						// console.log(result);
-						return res.send(result)
+						 if(result===1){
+							return res.status(200).send(`Video Deleted with id ${requestProperties.videoId}`);
+						 }
+						 else{
+							 return res.status(200).send("Video data does not exist in database.");
+						 }
 					},
 					error => {
 						return res.send(error);

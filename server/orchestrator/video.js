@@ -30,21 +30,22 @@ export function createVideo(requestProperties, authenticatedUser, browserLng) {
 		try {
 			//Create video for authenticated User
 			// const user = await models().user.findOne({where :{id:authenticatedUser.userId, active:true}});
-			console.log(requestProperties);
+			// console.log(requestProperties);
 			const videoObj = {
 				title: requestProperties.title,
 				description: requestProperties.description,
 				thumbnail: requestProperties.thumbnail,
 				textScript: requestProperties.textScript,
-				videoURL: requestProperties.videoUrl,
-				userId_FK: requestProperties.userId
+				videoURL: requestProperties.videoURL,
+				userId_FK: requestProperties.userId_FK
 			}
+			console.log(videoObj);
 			const videoInstance = await models().video.create(videoObj, { transaction: transaction });
 			return videoInstance;
 		}
 		catch (error) {
 			console.error(error);
-			return error;
+			 return error;
 		}
 	});
 }
@@ -55,16 +56,9 @@ export function deleteVideo(requestProperties, authenticatedUser, browserLng) {
 		try {
 			//Create video for authenticated User
 			// const user = await models().user.findOne({where :{id:authenticatedUser.userId, active:true}});
-			console.log(requestProperties);
-			const videoObj = {
-				// title: requestProperties.title,
-				// description: requestProperties.description,
-				// thumbnail: requestProperties.thumbnail,
-				// textScript: requestProperties.textScript,
-				// videoURL: requestProperties.videoUrl,
-				userId_FK: requestProperties.userId
-			}
-			const videoInstance = await models().video.destroy({ where: { userId_FK: user.id } }, { transaction: transaction });
+			// console.log(requestProperties);
+			
+			const videoInstance = await models().video.destroy({ where: { id:requestProperties.videoId } }, { transaction: transaction });
 			return videoInstance;
 		}
 		catch (error) {
