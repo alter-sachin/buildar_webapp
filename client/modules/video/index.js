@@ -8,28 +8,28 @@ class index extends Component {
     render() {
         return (
             <div>
-                <table>
-                    <tr>
-                        <td className="title">
+                <div class="container">
+                    <div class="row">
+                        <div className="title col-sm">
                             <button type="button" className="btn btn-link video-title">
                                 Video Title
                             </button>
-                        </td>
-                        <td >
+                        </div>
+                        <div className="col-sm">
                             <button type="button" className="btn create-video">
                                 Create Video
                             </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div className="col-sm">
                             <Actor />
-                        </td>
-                        <td>
+                        </div>
+                        <div className="col-sm">
                             <Videoplayer />
-                        </td>
-                    </tr>
-                </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         )
     }
