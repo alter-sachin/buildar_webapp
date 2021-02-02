@@ -1,0 +1,18 @@
+.title{
+    width: 200px;
+}
+
+.create-video{
+    color: orange;
+    font-size: medium;
+}
+
+.video-title{
+    font-size: large;
+    font-weight: 600;
+}
+
+.listen-button{
+    background-color: black;
+    font-size: medium;
+}
