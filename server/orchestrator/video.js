@@ -10,7 +10,7 @@ import { EMAIL_TYPE, LANGUAGE_CODES, SIGNED_URL_EXPIRY_TIME, ACL_POLICIES } from
 import { ServerResponseError } from "utilities/errors/serverResponseError";
 
 export function loadVideo(requestProperties, authenticatedUser, browserLng) {
-	return database().transaction(async function (transaction) {
+	return database().transaction(async function(transaction) {
 		try {
 			// Load client for authenticated user
 			const user = await models().user.findOne({ where: { id: authenticatedUser.userId, active: true } });
