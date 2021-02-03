@@ -13,12 +13,12 @@ class index extends Component {
                         <div className="title col-sm">
                             <button type="button" className="btn btn-link video-title">
                                 Video Title
-                            </button>
+            </button>
                         </div>
                         <div className="col-sm">
                             <button type="button" className="btn create-video">
                                 Create Video
-                            </button>
+            </button>
                         </div>
                     </div>
                     <div class="row">
