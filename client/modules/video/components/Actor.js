@@ -21,6 +21,8 @@ class Actor extends Component {
         			<div className="actor-list">
                     <img src={actors[0].thumbnail} width="100px"/>
                     {actors[0].name}
+                    <img src={actors[1].thumbnail} width="100px"/>
+                    {actors[1].name}
         			</div>
         			<div className="script-input">
         				<h3>Script</h3>

@@ -448,4 +448,6 @@ CREATE TABLE `actor`(
   PRIMARY KEY(`id`)
   )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO `reeve`(id,actorId,name,thumbnail) VALUES (1,1,'Sophie','https://ml8ygptwlcsq.i.optimole.com/fMKjlhs.f8AX~1c8f3/w:600/h:600/q:auto/https://www.unite.ai/wp-content/uploads/2020/10/600px-Woman_1.jpg');
+INSERT INTO `actor`(id,actorId,name,thumbnail) VALUES (1,1,'Sophie','https://ml8ygptwlcsq.i.optimole.com/fMKjlhs.f8AX~1c8f3/w:600/h:600/q:auto/https://www.unite.ai/wp-content/uploads/2020/10/600px-Woman_1.jpg');
+
+INSERT INTO `actor`(id,actorId,name,thumbnail) VALUES (2,2,'Carmen','https://buildar.in/actor2.png');
