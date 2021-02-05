@@ -11,12 +11,10 @@ module.exports=function(router){
 			unregistered:true
 		}),
 		function(req,res,next){
-			const requestProperties={
-				actorId:1,
-			};
+			
             // const browserLng = browserResponseLng(req);
-             console.log(requestProperties);
-			loadActor(requestProperties,null,null)
+            
+			loadActor(null,null,null)
 				.then(
 					result=>{
                         console.log(result);
