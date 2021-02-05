@@ -17,7 +17,7 @@ module.exports=function(router){
 			loadActor(null,null,null)
 				.then(
 					result=>{
-                        console.log(result);
+                        //console.log(result);
 						return res.status(200).send(result);
 					},
 					error=>{

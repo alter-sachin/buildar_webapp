@@ -436,3 +436,16 @@ CREATE TABLE `video` (
   PRIMARY KEY(`id`),
   FOREIGN KEY (userId_FK) REFERENCES user(id)
   )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+CREATE TABLE `actor`(
+ `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+    `actorId` int(11) NOT NULL,
+      `createdAt` datetime DEFAULT NULL,
+  `updatedAt` datetime DEFAULT NULL,
+  `name` varchar(300) DEFAULT NULL,
+  `thumbnail` varchar(255) DEFAULT NULL,
+  PRIMARY KEY(`id`)
+  )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO `reeve`(id,actorId,name,thumbnail) VALUES (1,1,'Sophie','https://ml8ygptwlcsq.i.optimole.com/fMKjlhs.f8AX~1c8f3/w:600/h:600/q:auto/https://www.unite.ai/wp-content/uploads/2020/10/600px-Woman_1.jpg');

@@ -49,6 +49,7 @@
 		"async": "^2.6.2",
 		"ava": "^1.4.1",
 		"aws-sdk": "^2.445.0",
+		"axios": "^0.21.1",
 		"babel-loader": "^8.0.5",
 		"babel-plugin-add-module-exports": "^1.0.2",
 		"babel-plugin-emotion": "^10.0.9",

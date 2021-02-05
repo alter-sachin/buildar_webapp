@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import Actor from "./components/Actor";
 import Videoplayer from "./components/Videoplayer";
-import "./styles/bootstrap.css";
-import "./styles/styles.css";
 import axios from "axios";
 
 
@@ -10,7 +8,7 @@ class Video extends Component {
 
     state = {
     	loading:true,
-    	photos:[]
+    	actors:[]
     }
     componentDidMount(){
     	axios
@@ -20,10 +18,10 @@ class Video extends Component {
     				
     				this.setState({
     					loading:false,
-    					photos:data
+    					actors:data
     				});
     			}
-    			console.log(this.state);
+    			//console.log(this.state.actors);
     		});
            
     }
@@ -52,7 +50,7 @@ class Video extends Component {
     					</div>
     					<div className="row">
     						<div className="col-sm">
-    							<Actor data = {this.state.photos} />
+    							<Actor data = {this.state.actors} />
     						</div>
     						<div className="col-sm">
     							<Videoplayer />
