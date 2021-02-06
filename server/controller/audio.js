@@ -22,17 +22,19 @@ module.exports= function(router){
 			// console.log(req)
 			// const browserLng = browserResponseLng(req);
 
-			const authenticatedUser = {
-				userId:1,
+			// const authenticatedUser = {
+			// 	userId:1,
 				
-			};
-			console.log(req.body.speakerId);
-			console.log(req.body.textScript);
+			// };
+			// console.log(req.body.speakerId);
+			// console.log(req.body.textScript);
 			
 			//first create the audio using our endpoint 35.232.47.147:8008/audio/
 			const audioInputs ={
+				
 				speakerId:req.body.speakerId,
-				textScript: req.body.textScript
+				textScript: req.body.textScript,
+				speed:req.body.speed
 			};
 
 			// the actual post call to the FASTAPI endpoint
@@ -40,7 +42,8 @@ module.exports= function(router){
 		
 			request.post(
 				{
-					url: "http://35.232.47.147:8008/audio",
+					url: "http://35.232.47.147:8008/audio"
+					,
 					json: audioInputs,
 
 					headers:{
@@ -48,7 +51,8 @@ module.exports= function(router){
 					}
 				},
 				(err,{body}) =>{
-					res.send(body.audio_url);
+					console.log(body)
+					res.send(body.audioUrl);
 				}
 
 
