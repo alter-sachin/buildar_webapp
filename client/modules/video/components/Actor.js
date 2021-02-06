@@ -21,20 +21,22 @@ class Actor extends Component {
 		 audioRequest(){
         	const data = {
         		textScript: this.state.textVal,
-        		speakerId:1,
+        		speakerId:0,
         		speed:0
         	};
         	axios.post(
         		"api/v1.0/audio",data)
         		.then(({data})=>{
+					console.log(data);
         			this.setState({audioUrl:data.audioUrl});
-			
+					
         		});	
-				console.log(this.state);
+				
 			
-        }
+		}
+		
         render() {
-        	
+        	console.log(this.state.audioUrl);
         	const { actors } = this.state;
         	
 
@@ -65,8 +67,9 @@ class Actor extends Component {
 					
                     Listen
         			</button>
+					
         			<audio className="audio-player" controls>
-        				<source src = {this.state.audioUrl} type="audio/wav"/>
+						{this.state.audioUrl==="" ? "Nothing to play yet": <source src = {this.state.audioUrl} type="audio/wav"/>}
         			</audio>
         		</div>
         	);

@@ -52,7 +52,7 @@ module.exports= function(router){
 				},
 				(err,{body}) =>{
 					console.log(body)
-					res.send(body.audioUrl);
+					res.send(body);
 				}
 
 
