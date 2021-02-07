@@ -15,6 +15,7 @@ class Actor extends Component {
         	audioUrl:""
         }
 		
+		
 		 handleChange(){
         	this.setState({textVal: event.target.value});
         }
@@ -27,13 +28,13 @@ class Actor extends Component {
         	axios.post(
         		"api/v1.0/audio",data)
         		.then(({data})=>{
-					console.log(data);
+        			console.log(data);
         			this.setState({audioUrl:data.audioUrl});
 					
         		});	
 				
 			
-		}
+        }
 		
         render() {
         	console.log(this.state.audioUrl);
@@ -44,12 +45,20 @@ class Actor extends Component {
         	return (
         		<div>
         			<h3>Select Actor</h3>
-        			<div className="actor-list">
-        				<img src={actors[0].thumbnail} width="100px"/>
+        			<div className="actor-list" style={{display:"flex",flexDirection:"row",alignItems:"center"}}>
+        			{actors.map((actor)=>(
+        				<p  key={actor.name} style={{display:"flex", flexDirection:"column", padding:"20px"}}>
+        					<img src={actor.thumbnail} style={{height:"100px"}}/>
+        					
+							{actor.name}
+							
+        				</p>
+        			))}
+					</div>
+        				{/* <img src={actors[0].thumbnail} width="10%" height="10%"/>
         				{actors[0].name}
-        				<img src={actors[1].thumbnail} width="100px"/>
-        				{actors[1].name}
-        			</div>
+        				<img src={actors[1].thumbnail} width="12%" height="12%"/>
+        				{actors[1].name} */}
         			<div className="script-input">
         				<h3>Script</h3>
         				<textarea
@@ -69,7 +78,7 @@ class Actor extends Component {
         			</button>
 					
         			<audio className="audio-player" controls>
-						{this.state.audioUrl==="" ? "Nothing to play yet": <source src = {this.state.audioUrl} type="audio/wav"/>}
+        				{this.state.audioUrl==="" ? "Nothing to play yet": <source src = {this.state.audioUrl} type="audio/wav"/>}
         			</audio>
         		</div>
         	);
