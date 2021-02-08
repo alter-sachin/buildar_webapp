@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { CountdownCircleTimer } from "react-countdown-circle-timer";
+import { size } from "underscore";
+
 
 class Actor extends Component {
 
@@ -35,6 +38,19 @@ class Actor extends Component {
 
 
 	}
+	renderTime = ({ remainingTime }) => {
+		if (remainingTime === 0) {
+			return <div className="timer">Done!!</div>;
+		}
+
+		return (
+			<div className="timer">
+				{/* <div className="text">Remaining</div> */}
+				<div className="value">{remainingTime}</div>
+				{/* <div className="text">seconds</div> */}
+			</div>
+		);
+	};
 
 	render() {
 		console.log(this.state.audioUrl);
@@ -72,6 +88,18 @@ class Actor extends Component {
 					<audio className="audio-player" controls>
 						{this.state.audioUrl === "" ? "Nothing to play yet" : <source src={this.state.audioUrl} type="audio/wav" />}
 					</audio>
+					<div className="timer-wrapper">
+						<CountdownCircleTimer
+							isPlaying
+							duration={10}
+							colors={[["#004777", 0.33], ["#F7B801", 0.33], ["#A30000"]]}
+							onComplete={() => [false, 1000]}
+							strokeWidth={8}
+							size={75}
+						>
+							{this.renderTime}
+						</CountdownCircleTimer>
+					</div>
 				</div>
 			</div>
 		);

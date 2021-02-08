@@ -2181,6 +2181,7 @@ a:hover.back-to-top {
   background-color: black;
   font-size: large;
   width: 150px;
+  height: 50px;
   font-size: 25px;
 }
 
@@ -2214,3 +2215,4 @@ a:hover.back-to-top {
 audio.audio-player {
     margin: 0em 1.5em;
 }
+
