@@ -7,12 +7,15 @@ class Actor extends Component {
 		super(props);
 		this.handleChange = this.handleChange.bind(this);
 		this.audioRequest = this.audioRequest.bind(this);
+		this.handleCheck = this.handleCheck.bind(this);
 	}
         state = {
-        	actors: this.props.data,
+        	actors: this.props.data.actors,
         	active: 0,
         	textVal : "",
-        	audioUrl:""
+        	audioUrl:"",
+			voices:this.props.data.voices,
+			checkedElement:""
         }
 		
 		
@@ -22,26 +25,27 @@ class Actor extends Component {
 		 audioRequest(){
         	const data = {
         		textScript: this.state.textVal,
-        		speakerId:0,
+        		speakerId:this.state.checkedElement,
         		speed:0
         	};
         	axios.post(
         		"api/v1.0/audio",data)
         		.then(({data})=>{
-        			console.log(data);
+        			// console.log(data);
         			this.setState({audioUrl:data.audioUrl});
 					
         		});	
 				
 			
         }
+		handleCheck(){
+			this.setState({checkedElement:event.target.value})		
+	}
 		
         render() {
-        	console.log(this.state.audioUrl);
-        	const { actors } = this.state;
-        	
-
-			
+        	// console.log(this.state.audioUrl);
+        	const { actors ,voices} = this.state;
+        	// console.log(this.state.checkedElement);
         	return (
         		<div>
         			<h3>Select Actor</h3>
@@ -54,11 +58,19 @@ class Actor extends Component {
 							
         				</p>
         			))}
+					
 					</div>
-        				{/* <img src={actors[0].thumbnail} width="10%" height="10%"/>
-        				{actors[0].name}
-        				<img src={actors[1].thumbnail} width="12%" height="12%"/>
-        				{actors[1].name} */}
+					<div style={{display:"flex",flexDirection:"column"}}>
+					{voices.map((item,index)=>{
+						return(
+							<label key={index} htmlFor = {item.Voice}>
+								{item.Voice}
+								<input name="voice"  value={item.Voice} type = "radio"  onClick ={this.handleCheck}/>
+							</label>
+						)
+					}
+					)}
+					</div>
         			<div className="script-input">
         				<h3>Script</h3>
         				<textarea
