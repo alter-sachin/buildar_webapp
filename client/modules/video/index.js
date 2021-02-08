@@ -37,22 +37,22 @@ class Video extends Component {
     			<div>
     				<div className="container">
     					<div className="row">
-    						<div className="title col-sm">
-    							<button type="button" className="btn btn-link video-title">
+    						<div className="title col-md-6 col-lg-6">
+    							<h4>
                             Video Title
-    							</button>
+    							</h4>
     						</div>
-    						<div className="col-sm">
+    						<div className="col-md-6 col-lg-6">
     							<button type="button" className="btn create-video">
                             Create Video
     							</button>
     						</div>
     					</div>
     					<div className="row">
-    						<div className="col-sm">
+    						<div className="col-md-6 col-lg-6">
     							<Actor data = {this.state.actors} />
     						</div>
-    						<div className="col-sm">
+    						<div className="col-md-6 col-lg-6">
     							<Videoplayer />
     						</div>
     					</div>

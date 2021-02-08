@@ -44,42 +44,35 @@ class Actor extends Component {
 			
         	return (
         		<div>
-        			<h3>Select Actor</h3>
-        			<div className="actor-list" style={{display:"flex",flexDirection:"row",alignItems:"center"}}>
+        			<h4>Select Actor</h4>
+        			<div className="actor-list">
         			{actors.map((actor)=>(
-        				<p  key={actor.name} style={{display:"flex", flexDirection:"column", padding:"20px"}}>
+        				<p  className="actor" key={actor.name}>
         					<img src={actor.thumbnail} style={{height:"100px"}}/>
-        					
 							{actor.name}
-							
         				</p>
         			))}
 					</div>
-        				{/* <img src={actors[0].thumbnail} width="10%" height="10%"/>
-        				{actors[0].name}
-        				<img src={actors[1].thumbnail} width="12%" height="12%"/>
-        				{actors[1].name} */}
         			<div className="script-input">
-        				<h3>Script</h3>
+        				<h4>Script</h4>
         				<textarea
         					className="text-area"
         					placeholder="Insert script here"
-        					rows="8"
-        					cols="45"
+        					rows="4"
+        					cols="50"
         					value = {this.state.textVal}
         					onChange = {this.handleChange}
         				/>
         			</div>
-        			<br />
+                    <div className="audio-listen">
         			<button type="button" className="btn btn-secondary listen-button"
 					 onClick = {this.audioRequest}>
-					
                     Listen
         			</button>
-					
         			<audio className="audio-player" controls>
         				{this.state.audioUrl==="" ? "Nothing to play yet": <source src = {this.state.audioUrl} type="audio/wav"/>}
         			</audio>
+                    </div>
         		</div>
         	);
         }
