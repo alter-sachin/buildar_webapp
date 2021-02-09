@@ -2181,11 +2181,12 @@ a:hover.back-to-top {
   background-color: black;
   font-size: large;
   width: 150px;
+  height: 50px;
   font-size: 25px;
 }
 
 .script-input {
-  margin-top: 30px;
+  margin-top: .5em;
 }
 
 .header-buttons {
@@ -2194,4 +2195,24 @@ a:hover.back-to-top {
 
 .actor-list {
   margin: 0px auto;
+  display:flex;
+  flex-direction:row;
+  align-items:center;
 }
+
+.actor {
+	display:flex;
+	flex-direction:column;
+	padding-right:.5em;
+}
+
+.audio-listen {
+	display: flex;
+	flex-direction: row;
+}
+
+
+audio.audio-player {
+    margin: 0em 1.5em;
+}
+
