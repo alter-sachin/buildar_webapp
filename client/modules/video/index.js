@@ -47,7 +47,7 @@ class Video extends Component {
 			return (
 				<div>
 					<div className="container">
-						<div className="row">
+						<div className="row top-buttons">
 							<div className="title col-md-6 col-lg-6">
 								<EdiText
 									type="text"

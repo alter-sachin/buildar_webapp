@@ -24,28 +24,31 @@ class Actor extends Component {
 	handleChange() {
 		this.setState({ textVal: event.target.value });
 	}
-	audioRequest() {
-		const data = {
-			textScript: this.state.textVal,
-			speakerId: "Indian English Female Voice 1",
-			speed: 0
-		};
-		axios.post(
-			"api/v1.0/audio", data)
-			.then(({ data }) => {
-				console.log(data);
-				this.setState({
-					audioUrl: data.audioUrl
-				});
-			});
-	}
+
 	startTimer() {
 		this.setState({
 			isClicked: true
 		})
 	}
+	audioRequest() {
+		this.startTimer()
+		const data = {
+			speakerId: "Indian English Female Voice 1",
+			textScript: this.state.textVal,
+			speed: 0
+		};
+		axios.post(
+			"api/v1.0/audio", data)
+			.then(({ data }) => {
+				this.setState({
+					audioUrl: data.audioUrl,
+					isClicked: !this.state.isClicked
+				});
+			});
+	}
 	renderTime = ({ remainingTime }) => {
-		if (remainingTime === 0) {
+		if (!this.state.audioUrl === "") {
+			console.log(this.state.audioUrl);
 			return <div className="timer">Done!!</div>;
 		}
 
@@ -85,7 +88,9 @@ class Actor extends Component {
 				</div>
 				<div className="audio-listen">
 					<button type="button" className="btn btn-secondary listen-button"
-						onClick={this.audioRequest, this.startTimer}>
+						onClick={
+							this.audioRequest
+						}>
 						Listen
         			</button>
 					<audio className="audio-player" controls>
@@ -96,7 +101,7 @@ class Actor extends Component {
 							isPlaying={this.state.isClicked}
 							duration={10}
 							colors={[["#004777", 0.33], ["#F7B801", 0.33], ["#A30000"]]}
-							onComplete={() => [false, 1000]}
+							// onComplete={() => [false, 1000]}
 							strokeWidth={8}
 							size={75}
 						>
