@@ -26,7 +26,7 @@ class Actor extends Component {
 	audioRequest() {
 		const data = {
 			textScript: this.state.textVal,
-			speakerId: 0,
+			speakerId: "Indian English Female Voice 1",
 			speed: 0
 		};
 		axios.post(
