@@ -15,7 +15,8 @@ class Actor extends Component {
 		actors: this.props.data,
 		active: 0,
 		textVal: "",
-		audioUrl: ""
+		audioUrl: "",
+		isClicked: false
 	}
 
 
@@ -32,11 +33,11 @@ class Actor extends Component {
 			"api/v1.0/audio", data)
 			.then(({ data }) => {
 				console.log(data);
-				this.setState({ audioUrl: data.audioUrl });
-
+				this.setState({
+					audioUrl: data.audioUrl,
+					isClicked: true
+				});
 			});
-
-
 	}
 	renderTime = ({ remainingTime }) => {
 		if (remainingTime === 0) {
@@ -90,7 +91,7 @@ class Actor extends Component {
 					</audio>
 					<div className="timer-wrapper">
 						<CountdownCircleTimer
-							isPlaying
+							isPlaying={this.isClicked}
 							duration={10}
 							colors={[["#004777", 0.33], ["#F7B801", 0.33], ["#A30000"]]}
 							onComplete={() => [false, 1000]}
