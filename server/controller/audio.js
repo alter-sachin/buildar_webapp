@@ -42,10 +42,8 @@ module.exports= function(router){
 		
 			request.post(
 				{
-					url: "http://35.232.47.147:8008/audio"
-					,
+					url: "http://35.232.47.147:8008/audio",
 					json: audioInputs,
-
 					headers:{
 						"Content-type":"application/json"
 					}

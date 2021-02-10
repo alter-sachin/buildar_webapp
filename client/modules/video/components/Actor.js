@@ -17,7 +17,9 @@ class Actor extends Component {
 		active: 0,
 		textVal: "",
 		audioUrl: "",
-		isClicked: false
+		audioReceived:false,
+		isClicked: false,
+		key:0
 	}
 
 
@@ -27,11 +29,14 @@ class Actor extends Component {
 
 	startTimer() {
 		this.setState({
-			isClicked: true
+			isClicked: true,
 		})
+
+
 	}
 	audioRequest() {
 		this.startTimer()
+
 		const data = {
 			speakerId: "Indian English Female Voice 1",
 			textScript: this.state.textVal,
@@ -42,14 +47,22 @@ class Actor extends Component {
 			.then(({ data }) => {
 				this.setState({
 					audioUrl: data.audioUrl,
-					isClicked: !this.state.isClicked
+					isClicked: false,
+					audioReceived:true
 				});
+				this.setState({key: this.state.key + 1}, () => {
+        			console.log(this.state.key)
+    			});
 			});
 	}
 	renderTime = ({ remainingTime }) => {
-		if (!this.state.audioUrl === "") {
+		if (this.state.audioUrl !== "" && this.state.isClicked==false) {
 			console.log(this.state.audioUrl);
 			return <div className="timer">Done!!</div>;
+		}
+
+		if (this.state.audioUrl !== "" && this.state.isClicked==true) {
+			this.state.key = this.state.key + 1;
 		}
 
 		return (
@@ -94,17 +107,17 @@ class Actor extends Component {
 						Listen
         			</button>
 					<audio className="audio-player" controls>
-						{this.state.audioUrl === "" ? "Nothing to play yet" : <source src={this.state.audioUrl} type="audio/wav" />}
+						{(this.state.audioUrl === "" || this.state.audioReceived === false) ? "Nothing to play yet" : <source src={this.state.audioUrl} type="audio/wav" />}
 					</audio>
 					<div className="timer-wrapper">
 						<CountdownCircleTimer
+							key ={this.state.key}
 							isPlaying={this.state.isClicked}
 							duration={10}
 							colors={[["#004777", 0.33], ["#F7B801", 0.33], ["#A30000"]]}
-							// onComplete={() => [false, 1000]}
+							onComplete={() => [true, 0]}
 							strokeWidth={8}
-							size={75}
-						>
+							size={75}>
 							{this.renderTime}
 						</CountdownCircleTimer>
 					</div>
