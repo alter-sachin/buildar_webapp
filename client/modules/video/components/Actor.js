@@ -11,7 +11,7 @@ class Actor extends Component {
 		this.handleChange = this.handleChange.bind(this);
 		this.handleCheck = this.handleCheck.bind(this);
 		this.audioRequest = this.audioRequest.bind(this);
-		this.startTimer = this.startTimer.bind(this);
+    this.startTimer = this.startTimer.bind(this);
 	}
 	state = {
 		actors: this.props.data.actors,
@@ -123,6 +123,7 @@ class Actor extends Component {
 							this.audioRequest
 						}>
 						Listen
+
         			</button>
 					<AudioPlayer className="audio-player" audioUrl={this.state.audioUrl} />
 					<div className="timer-wrapper">

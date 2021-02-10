@@ -19,6 +19,7 @@ const Authentication = AsyncComponent(() => import("./modules/authentication"));
 const Overview = AsyncComponent(() => import("./modules/overview"));
 const Profile = AsyncComponent(() => import("./modules/profile"));
 const Video  = AsyncComponent(()=> import ("./modules/video"));
+const MyVideo = AsyncComponent(()=> import ("./modules/myVideos"));
 const Billing = AsyncComponent(() => import("./modules/billing"));
 const Settings = AsyncComponent(() => import("./modules/settings"));
 const MissingPath = AsyncComponent(() => import("common/components/MissingPath"));
@@ -133,6 +134,17 @@ class Router extends Component {
 							render={() => (
 								<DefaultLayout key="/video">
 									<Video />
+								</DefaultLayout>
+							)}
+						/>
+						<ProtectedRoute
+							exact
+							path="/myvideos"
+							hasAnyRole={[ROLE_TYPE.OWNER, ROLE_TYPE.ADMINISTRATOR, ROLE_TYPE.FINANCE]}
+							user={user}
+							render={() => (
+								<DefaultLayout key="/myvideos">
+									<MyVideo />
 								</DefaultLayout>
 							)}
 						/>
