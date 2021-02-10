@@ -2,18 +2,21 @@ import React, { Component } from "react";
 import axios from "axios";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import { size } from "underscore";
-
+import AudioPlayer from "./AudioPlayer"
 
 class Actor extends Component {
 
 	constructor(props) {
 		super(props);
 		this.handleChange = this.handleChange.bind(this);
+		this.handleCheck = this.handleCheck.bind(this);
 		this.audioRequest = this.audioRequest.bind(this);
 		this.startTimer = this.startTimer.bind(this);
 	}
 	state = {
-		actors: this.props.data,
+		actors: this.props.data.actors,
+		voices: this.props.data.voices,
+		checkedElement:"",
 		active: 0,
 		textVal: "",
 		audioUrl: "",
@@ -26,12 +29,16 @@ class Actor extends Component {
 	handleChange() {
 		this.setState({ textVal: event.target.value });
 	}
+    handleCheck(){
+	this.setState({checkedElement:event.target.value});		
+	}
 
 	startTimer() {
 		this.setState({
 			isClicked: true,
 		})
-
+		/*console.log(this.state.voices);
+*/
 
 	}
 	audioRequest() {
@@ -76,7 +83,7 @@ class Actor extends Component {
 
 	render() {
 		console.log(this.state.audioUrl);
-		const { actors } = this.state;
+		const { actors ,voices} = this.state;
 		return (
 			<div>
 				<h4>Select Actor</h4>
@@ -88,6 +95,17 @@ class Actor extends Component {
 						</p>
 					))}
 				</div>
+				<div style={{display:"flex",flexDirection:"column"}}>
+        				{voices.map((item,index)=>{
+        					return(
+        						<label key={index} htmlFor = {item.Voice}>
+        							{item.Voice}
+        							<input name="voice"  value={item.Voice} type = "radio"  onClick ={this.handleCheck}/>
+        						</label>
+        					);
+        				}
+        				)}
+        		</div>
 				<div className="script-input">
 					<h4>Script</h4>
 					<textarea
@@ -106,9 +124,7 @@ class Actor extends Component {
 						}>
 						Listen
         			</button>
-					<audio className="audio-player" controls>
-						{(this.state.audioUrl === "" || this.state.audioReceived === false) ? "Nothing to play yet" : <source src={this.state.audioUrl} type="audio/wav" />}
-					</audio>
+					<AudioPlayer className="audio-player" audioUrl={this.state.audioUrl} />
 					<div className="timer-wrapper">
 						<CountdownCircleTimer
 							key ={this.state.key}
