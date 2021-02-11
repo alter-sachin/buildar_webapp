@@ -12,7 +12,7 @@ class Actor extends Component {
 		this.handleChange = this.handleChange.bind(this);
 		this.handleCheck = this.handleCheck.bind(this);
 		this.audioRequest = this.audioRequest.bind(this);
-    this.startTimer = this.startTimer.bind(this);
+		this.startTimer = this.startTimer.bind(this);
 	}
 	state = {
 		actors: this.props.data.actors,
@@ -63,7 +63,6 @@ class Actor extends Component {
 	}
 	renderTime = ({ remainingTime }) => {
 		if (this.state.audioUrl !== "" && this.state.isClicked == false) {
-			console.log(this.state.audioUrl);
 			return <div className="timer">Done!!</div>;
 		}
 
@@ -82,7 +81,6 @@ class Actor extends Component {
 
 	render() {
 		const { actors, voices } = this.state;
-		// console.log(voices);
 		// For dropdown component, it requires to have the input in such form
 		let voiceArray = voices.map((item) => {
 			return { label: item.Voice, value: item.Voice }
