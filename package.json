@@ -119,6 +119,7 @@
 		"react-router": "^5.2.0",
 		"react-router-dom": "^5.2.0",
 		"react-script-loader-hoc": "^1.2.2",
+		"react-select": "^4.1.0",
 		"react-stripe-elements": "^3.0.0",
 		"react-tooltip": "^3.10.0",
 		"redis": "^2.8.0",

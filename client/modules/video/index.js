@@ -10,7 +10,7 @@ class Video extends Component {
 	state = {
 		loading: true,
 		actors: [],
-		voices:[],
+		voices: [],
 		videoTitle: ""
 	}
 	componentDidMount() {
@@ -25,19 +25,19 @@ class Video extends Component {
 				}
 				//console.log(this.state.actors);
 			});
-			axios
-				.get("http://35.232.47.147:8008/audio")
-				.then(({data})=>{
-					if(data){
-						// console.log(data)
-						this.setState({
-							loading:false,
-							voices:data
-						})
-						/*console.log("voice");
-						console.log(this.state.voices);	*/
-					}
-				});
+		axios
+			.get("http://35.232.47.147:8008/audio")
+			.then(({ data }) => {
+				if (data) {
+					// console.log(data)
+					this.setState({
+						loading: false,
+						voices: data
+					})
+					/*console.log("voice");
+					console.log(this.state.voices);	*/
+				}
+			});
 
 	}
 	//   const [editing, setEditing] = useState(false);
@@ -56,9 +56,7 @@ class Video extends Component {
 			);
 		}
 		else {
-			const {actors,voices} = this.state;
-			console.log("what");	
-			console.log(this.state.voices);	
+			const { actors, voices } = this.state;
 			return (
 				<div>
 					<div className="container">
@@ -78,7 +76,7 @@ class Video extends Component {
 						</div>
 						<div className="row">
 							<div className="col-md-6 col-lg-6">
-								<Actor data = {{actors:actors, voices:voices}}/>
+								<Actor data={{ actors: actors, voices: voices }} />
 							</div>
 							<div className="col-md-6 col-lg-6">
 								<Videoplayer />

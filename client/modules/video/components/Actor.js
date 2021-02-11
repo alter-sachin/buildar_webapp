@@ -3,6 +3,7 @@ import axios from "axios";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import { size } from "underscore";
 import AudioPlayer from "./AudioPlayer"
+import Select from "react-select"
 
 class Actor extends Component {
 
@@ -16,36 +17,34 @@ class Actor extends Component {
 	state = {
 		actors: this.props.data.actors,
 		voices: this.props.data.voices,
-		checkedElement:"",
+		selectedElement: "",
 		active: 0,
 		textVal: "",
 		audioUrl: "",
-		audioReceived:false,
+		audioReceived: false,
 		isClicked: false,
-		key:0
+		key: 0
 	}
 
 
 	handleChange() {
 		this.setState({ textVal: event.target.value });
 	}
-    handleCheck(){
-	this.setState({checkedElement:event.target.value});		
+	handleCheck(selectedElement) {
+		this.setState({ selectedElement: selectedElement });
 	}
 
 	startTimer() {
 		this.setState({
 			isClicked: true,
 		})
-		/*console.log(this.state.voices);
-*/
 
 	}
 	audioRequest() {
 		this.startTimer()
 
 		const data = {
-			speakerId: "Indian English Female Voice 1",
+			speakerId: this.state.selectedElement.value,
 			textScript: this.state.textVal,
 			speed: 0
 		};
@@ -55,20 +54,20 @@ class Actor extends Component {
 				this.setState({
 					audioUrl: data.audioUrl,
 					isClicked: false,
-					audioReceived:true
+					audioReceived: true
 				});
-				this.setState({key: this.state.key + 1}, () => {
-        			console.log(this.state.key)
-    			});
+				this.setState({ key: this.state.key + 1 }, () => {
+					console.log(this.state.key)
+				});
 			});
 	}
 	renderTime = ({ remainingTime }) => {
-		if (this.state.audioUrl !== "" && this.state.isClicked==false) {
+		if (this.state.audioUrl !== "" && this.state.isClicked == false) {
 			console.log(this.state.audioUrl);
 			return <div className="timer">Done!!</div>;
 		}
 
-		if (this.state.audioUrl !== "" && this.state.isClicked==true) {
+		if (this.state.audioUrl !== "" && this.state.isClicked == true) {
 			this.state.key = this.state.key + 1;
 		}
 
@@ -82,8 +81,12 @@ class Actor extends Component {
 	};
 
 	render() {
-		console.log(this.state.audioUrl);
-		const { actors ,voices} = this.state;
+		const { actors, voices } = this.state;
+		// console.log(voices);
+		// For dropdown component, it requires to have the input in such form
+		let voiceArray = voices.map((item) => {
+			return { label: item.Voice, value: item.Voice }
+		})
 		return (
 			<div>
 				<h4>Select Actor</h4>
@@ -95,17 +98,15 @@ class Actor extends Component {
 						</p>
 					))}
 				</div>
-				<div style={{display:"flex",flexDirection:"column"}}>
-        				{voices.map((item,index)=>{
-        					return(
-        						<label key={index} htmlFor = {item.Voice}>
-        							{item.Voice}
-        							<input name="voice"  value={item.Voice} type = "radio"  onClick ={this.handleCheck}/>
-        						</label>
-        					);
-        				}
-        				)}
-        		</div>
+				<div style={{ display: "flex", flexDirection: "column" }}>
+					<Select
+						defaultValue={voiceArray[0]}
+						label="Single select"
+						options={voiceArray}
+						value={this.state.selectedElement}
+						onChange={this.handleCheck}
+					/>
+				</div>
 				<div className="script-input">
 					<h4>Script</h4>
 					<textarea
@@ -128,7 +129,7 @@ class Actor extends Component {
 					<AudioPlayer className="audio-player" audioUrl={this.state.audioUrl} />
 					<div className="timer-wrapper">
 						<CountdownCircleTimer
-							key ={this.state.key}
+							key={this.state.key}
 							isPlaying={this.state.isClicked}
 							duration={10}
 							colors={[["#004777", 0.33], ["#F7B801", 0.33], ["#A30000"]]}
