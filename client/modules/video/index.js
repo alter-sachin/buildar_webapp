@@ -1,17 +1,20 @@
 import React, { Component } from "react";
 import Actor from "./components/Actor";
-import Videoplayer from "./components/Videoplayer";
 import axios from "axios";
 import EdiText from 'react-editext'
 
 
 class Video extends Component {
 
-	state = {
-		loading: true,
-		actors: [],
-		voices: [],
-		videoTitle: ""
+	constructor(props) {
+		super(props)
+
+		this.state = {
+			loading: true,
+			actors: [],
+			voices: [],
+			videoTitle: ""
+		}
 	}
 	componentDidMount() {
 		axios
@@ -49,6 +52,7 @@ class Video extends Component {
 		})
 	}
 
+
 	render() {
 		if (this.state.loading) {
 			return (
@@ -68,20 +72,19 @@ class Video extends Component {
 									onSave={this.handleSave}
 								/>
 							</div>
-							<div className="col-md-6 col-lg-6">
-								<button type="button" className="btn create-video">
+							{/* <div className="col-md-6 col-lg-6">
+								<button type="button" className="btn create-video" onClick={this.videoRequest}>
 									Create Video
     							</button>
-							</div>
+							</div> */}
 						</div>
 						<div className="row">
-							<div className="col-md-6 col-lg-6">
-								<Actor data={{ actors: actors, voices: voices }} />
-							</div>
-							<div className="col-md-6 col-lg-6">
-								<Videoplayer />
-							</div>
+							{/* <div className="col-md-6 col-lg-6"> */}
+							<Actor data={{ actors: actors, voices: voices }} />
 						</div>
+						{/* <div className="col-md-6 col-lg-6"> */}
+						{/* </div> */}
+						{/* </div> */}
 					</div>
 				</div>
 			);
