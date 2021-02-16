@@ -16,13 +16,13 @@ import {
 } from "../orchestrator/video";
 
 
-module.exports = function(router) {
+module.exports = function (router) {
 	router.get("/api/v1.0/video",
 		restrict({
 			registered: false,
 			unregistered: true
 		}),
-		function(req, res, next) {
+		function (req, res, next) {
 
 			const authenticatedUser = {
 				userId: 1,
@@ -53,7 +53,7 @@ module.exports = function(router) {
 			unregistered: true
 
 		}),
-		function(req, res, next) {
+		function (req, res, next) {
 
 			//  console.log(req.body.title);
 			// const browserLng = browserResponseLng(req);
@@ -65,23 +65,25 @@ module.exports = function(router) {
 				textScript: req.body.textScript,
 				userId_FK: req.body.userId
 			};
-			const videoInputs={actorId:req.body.actorId,
-			audioUrl:req.body.audioUrl};
+			const videoInputs = {
+				actorId: req.body.actorId,
+				audioUrl: req.body.audioUrl
+			};
 			request.post(
 				{
-					url: "http://17cd090c2ffc.ngrok.io/video",
+					url: "",
 					json: videoInputs,
 					headers: {
 						"Content-type": "application/json"
 					}
 				},
 				(error, { body }) => {
-					if(error){
+					if (error) {
 						console.error(error)
 					}
-					 console.log(body);
+					console.log(body);
 					requestProperties.videoURL = body.videoUrl;
-					
+
 					createVideo(requestProperties, null, null)
 						.then(
 							result => {
@@ -92,7 +94,7 @@ module.exports = function(router) {
 								return res.send(error);
 							}
 						);
-					
+
 
 				}
 			);
@@ -104,7 +106,7 @@ module.exports = function(router) {
 			unregistered: true
 
 		}),
-		function(req, res, next) {
+		function (req, res, next) {
 
 			// console.log(req.body)
 			const browserLng = browserResponseLng(req);
@@ -116,12 +118,12 @@ module.exports = function(router) {
 			deleteVideo(requestProperties, null, browserLng)
 				.then(
 					result => {
-						 if(result===1){
+						if (result === 1) {
 							return res.status(200).send(`Video Deleted with id ${requestProperties.videoId}`);
-						 }
-						 else{
-							 return res.status(200).send("Video data does not exist in database.");
-						 }
+						}
+						else {
+							return res.status(200).send("Video data does not exist in database.");
+						}
 					},
 					error => {
 						return res.send(error);

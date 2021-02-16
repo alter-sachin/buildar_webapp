@@ -1,12 +1,18 @@
 import React, { Component } from 'react'
+import ReactPlayer from "react-player"
 
 class Videoplayer extends Component {
     render() {
+        const { videoUrl } = this.props
+        // console.log(videoUrl);
         return (
             <div>
-                <video height="300px" width="480px" controls>
-                    <source src="" />
-                </video>
+                <ReactPlayer
+                    url={videoUrl}
+                    height="300px"
+                    width="500px"
+                    controls={true}
+                />
             </div>
         )
     }

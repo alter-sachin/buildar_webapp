@@ -1,29 +1,29 @@
-module.exports=(sequelize, DataTypes)=>{
+module.exports = (sequelize, DataTypes) => {
 	const Actor = sequelize.define(
 		"actor",
 		{
-			id:{
-				type:DataTypes.INTEGER(11).UNSIGNED,
-				allowNull:false,
-				autoIncrement:true,
-				primaryKey:true,
-				field:"id"
+			id: {
+				type: DataTypes.INTEGER(11).UNSIGNED,
+				allowNull: false,
+				autoIncrement: true,
+				primaryKey: true,
+				field: "id"
 			},
-			actordId:{
-				type:DataTypes.INTEGER(11),
-				allowNull:true,
-				field:"actorId"
+			actorId: {
+				type: DataTypes.INTEGER(11),
+				allowNull: true,
+				field: "actorId"
 			},
-			name:{
-				type:DataTypes.STRING(20),
-				unique:true,
-				allowNull:true,
-				field:"name"
+			name: {
+				type: DataTypes.STRING(20),
+				unique: true,
+				allowNull: true,
+				field: "name"
 			},
-			thumbnail:{
-				type:DataTypes.STRING(255),
-				allowNull:true,
-				field:"thumbnail"
+			thumbnail: {
+				type: DataTypes.STRING(255),
+				allowNull: true,
+				field: "thumbnail"
 			},
 			createdAt: {
 				type: DataTypes.DATE,
@@ -35,13 +35,13 @@ module.exports=(sequelize, DataTypes)=>{
 				allowNull: true,
 				field: "updatedAt"
 			},
-            
+
 
 		},
 		{
-			tableName:"actor"
+			tableName: "actor"
 		}
-        
+
 	);
 	return Actor;
 };
