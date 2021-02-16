@@ -11,7 +11,7 @@ class Navbar extends Component {
       <div>
         <nav className="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top" style={{ backgroundColor: "#726bfa" }}>
           <div className="container">
-            <a className="navbar-brand logo-image" href="index.html"><img src="images/Logo_BuildAR..png" alt="alternative" style={{ height: "10%", width: "10%" }} /></a>
+            <a className="navbar-brand logo-image" href="index.html"><img src="images/Logo_BuildAR..png" alt="alternative" style={{ height: "70%", width: "70%" }} /></a>
             {/* Mobile Menu Toggle Button */}
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-awesome fas fa-bars" />
@@ -51,11 +51,11 @@ class Navbar extends Component {
                   </div>
                 </li>
                 <li className="nav-item">
-                  <Link to="/signin" className="nav-link page-scroll" >Signin</Link>
+                  <Link to="/signin" className="nav-link page-scroll" >Sign in</Link>
                 </li>
               </ul>
               <span className="nav-item">
-                <Link to="/register" className="btn-outline-sm">Signup</Link>
+                <Link to="/register" className="btn-outline-sm">Sign up</Link>
               </span>
             </div>
           </div> {/* end of container */}
