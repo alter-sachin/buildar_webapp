@@ -13,17 +13,17 @@ class Homepage extends Component {
 	render() {
 
 		return (
-			
+
 			<Fragment>
-			
+
 				<Navbar />
 				<Hero />
-				<Description/>
-				<Details/>
-				<Newsletter/>
-				<Footer/>
+				<Description />
+				<Details />
+				<Newsletter />
+				<Footer />
 			</Fragment>
-			
+
 		);
 	}
 }

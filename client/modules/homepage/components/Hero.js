@@ -25,7 +25,7 @@ class Hero extends Component {
               <div className="row">
                 {/* <div className="text-container"> */}
                 <div className="col-lg ">
-                  <p className="p-large">Type a script, Choose A Model. Your Video Is Created.<br />Create Thousands of Videos without hiring actors.<br />Directors or filmCrew</p>
+                  <p className="p-large">Type a Script, Choose a Model. Your Video Is Created.<br />Create Thousands of Videos Without Hiring Actors,<br />Directors or Filmcrew</p>
                 </div>
                 <div className="col-lg">
                   <div className="img-wrapper">
