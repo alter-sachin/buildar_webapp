@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Accordion from 'react-bootstrap/Accordion'
 
 class Hero extends Component {
   render() {
@@ -12,10 +13,10 @@ class Hero extends Component {
               <h2 className="text-header">Create Videos From Text
                      <br />In Few Minutes
                      <br />In 30 Plus Languages.
-                  </h2>
+              </h2>
               <form className="header-form">
-                <div class="form-group">
-                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"></input>
+                <div className="form-group">
+                  <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"></input>
                 </div>
                 <a className="btn-solid-lg page-scroll" href="#getstarted">GET STARTED</a>
               </form>
@@ -24,17 +25,17 @@ class Hero extends Component {
             <div className="container">
               <div className="row">
                 {/* <div className="text-container"> */}
-                <div className="col-lg ">
+                <div className="col-lg-6 col-sm-6 col-md-6">
                   <p className="p-large">Type a Script, Choose a Model. Your Video Is Created.<br />Create Thousands of Videos Without Hiring Actors,<br />Directors or Filmcrew</p>
                 </div>
-                <div className="col-lg">
+                <div className="col-lg-6 col-sm-6 col-md-6">
                   <div className="img-wrapper">
                     <div className="w-embed">
                       <video autoPlay playsInline height={930} width={900} loop muted poster="https://www.buildar.in/assets/videos/home.mp4" style={{ height: 'auto', maxWidth: '90%', marginTop: '1.5rem' }}>
                         <source src="https://www.buildar.in/assets/videos/home.mp4" type="video/webm" />
                         <source src="https://www.buildar.in/assets/videos/home.mp4" type="video/mp4" />
                                 Sorry, your browser doesn’t support embedded videos.
-                              </video>
+                      </video>
                     </div>
                     {/*  <img class="img-fluid" src="images/header-software-app.png" alt="alternative"> */}
                   </div> {/* end of img-wrapper */}

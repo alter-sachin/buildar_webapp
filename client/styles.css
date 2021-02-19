@@ -136,6 +136,10 @@ a.white {
 	color: #fff;
 }
 
+section {
+    display: block;
+}
+
 .decorative-line {
 	display: block;
 	width: 5rem;
@@ -741,7 +745,7 @@ input[type='checkbox'] {
 
 .navbar-custom .dropdown-item:hover {
 	background-color: white;
-	color: #fff;
+	text-decoration: underline;
 	font-family: Arial, Helvetica, sans-serif;
 	opacity: 1;
 }
@@ -772,7 +776,7 @@ input[type='checkbox'] {
 .navbar-custom .navbar-toggler {
 	padding: 0;
 	border: none;
-	color: #fff;
+	color: white;
 	font-size: 2rem;
 }
 
@@ -800,8 +804,7 @@ input[type='checkbox'] {
 .header {
 	background-color: white;
 	color: black;
-	height: 75em;
-	margin-bottom: 5em;
+	height: 70%;
 }
 
 #header > div > div > div > div.col-lg-7.col-xl-6 > div > h2{
@@ -810,7 +813,7 @@ input[type='checkbox'] {
 
 
 .header .header-content {
-	padding-top: 8rem;
+	padding-top: 1em;
 	padding-bottom: 4rem;
 	text-align: center;
 }
@@ -821,9 +824,19 @@ input[type='checkbox'] {
 	font-weight: bolder;
 }
 
+.header .header-form{
+	display: flex;
+	flex-direction: column;
+}
+
 .header .header-form a{
+	margin: auto;
 	font-size: larger;
 	font-weight: 700;
+}
+
+.header .header-from .from-group{
+	margin: auto;
 }
 
 .header h1 {
@@ -833,17 +846,17 @@ input[type='checkbox'] {
 	line-height: 3rem;
 }
 
-.flex-column{
+.header .flex-column{
 	display: flex;
 	align-items: center;
-	height: 30em;
+	height: 25em;
 	text-align: center;
 }
 
 .header .text-header{
 	color: black;
 	margin-top: 2%;
-	font-size: 60px;
+	font-size: 3em;
 	line-height: 1em;
 	font-weight: 900;
 	font-family: Arial, Helvetica, sans-serif;
@@ -852,27 +865,44 @@ input[type='checkbox'] {
 
 .header col-lg{
 	width: 4em;
+	margin: 0 auto;
+}
+
+@media screen and (max-width: 480px) {
+    .col-lg{
+      display: inline-block;
+      width: 100%;
+    }
 }
 
 .header .p-large {
-	font-size: 50px;
+	font-size: 3vw;
 	font-family: Arial, Helvetica, sans-serif;
 	font-weight: 800;
-	margin-top: 0.5em;
 	line-height: 1.15em;
 	width: 10em;
-	margin-bottom: 2rem;
+	margin: auto;
 	color: black;
+}
+
+@media only screen and (max-width: 700px) {
+  .header .text-header{
+	  font-size:2em;
+  }
+  .header .p-large{
+	  font-size:2em;
+  }
 }
 
 .header .btn-solid-lg {
 	margin-right: 0.5rem;
-	margin-bottom: 1.125rem;
+	margin-bottom: 1.125vw;
 	margin-left: 0.5rem;
 	border-color: black;
 	background-color: white;
 	color: black;
 }
+
 
 .header .btn-solid-lg:hover {
 	background-color: black;
@@ -880,10 +910,11 @@ input[type='checkbox'] {
 }
 
 .header .form-control{
-	width: 30em;
+	width: 50vw;
 }
 
 .header .btn-outline-lg {
+	width: 3vw;
 	border-color: #f3f7fd;
 	color: #f3f7fd;
 }
@@ -894,8 +925,9 @@ input[type='checkbox'] {
 }
 
 .header video{
-	height: 4em;
-	margin-left: 2em;
+	height: auto;
+	margin: auto;
+	max-width: 100%;
 	width: 300%;
 	border-radius: 10px;
 }
@@ -906,6 +938,17 @@ input[type='checkbox'] {
 	height: 2.25rem;
 }
 
+/* @media screen and (min-width: 601px) {
+  h2.text-header{
+    font-size: 80px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  h2.text-header{
+    font-size: 30px;
+  }
+} */
 
 /*************************/
 /*     05. Customers     */
@@ -984,6 +1027,18 @@ input[type='checkbox'] {
 	padding: 0;
 }
 
+.cards-1 .mb-0 button{
+	padding: 1em;
+}
+
+.cards-1 .flex-container{
+	display:flex;
+	flex-direction: column;
+}
+
+#accordion{
+	margin: auto;
+}
 
 /************************/
 /*     07. Features     */
@@ -2077,7 +2132,7 @@ a:hover.back-to-top {
 
 /* Min-width width 1200px */
 @media (min-width: 1200px) {
-	
+
 	/* General Styles */
 	.h2-heading {
 		width: 50%;
@@ -2087,7 +2142,7 @@ a:hover.back-to-top {
 
 	/* Header */
 	.header .header-content {
-		padding-top: 11rem;
+		padding-top: 3rem;
 		padding-bottom: 5rem;
 	}
 
@@ -2109,7 +2164,7 @@ a:hover.back-to-top {
 		height: 9.375rem;
 	}
 	/* end of header */
-	
+
 
 	/* Customer */
 	.slider-1 .slider-container {

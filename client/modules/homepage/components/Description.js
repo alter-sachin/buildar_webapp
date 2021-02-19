@@ -17,6 +17,78 @@ class Description extends Component {
             </div>
           </div>
           <div className="row">
+            <div className="flex-container">
+              <div id="accordion">
+                <div className="card">
+                  <div className="card-header" id="headingOne">
+                    <h5 className="mb-0">
+                      <button className="btn btn-dark" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Personalised Videos for Customers.
+          </button>
+                    </h5>
+                  </div>
+                  <div id="collapseOne" className="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                    <div className="card-body">
+                      Every User is different,
+                      target them at the right channel at the right time based on their behavior and likings
+                      With A Video.
+        </div>
+                  </div>
+                </div>
+                <div className="card">
+                  <div className="card-header" id="headingTwo">
+                    <h5 className="mb-0">
+                      <button className="btn btn-dark collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                        Save Time and Money.
+          </button>
+                    </h5>
+                  </div>
+                  <div id="collapseTwo" className="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
+                    <div className="card-body">
+                      Videos take time to create. Infact weeks!
+                      Now do so in just minutes.
+        </div>
+                  </div>
+                </div>
+                <div className="card">
+                  <div className="card-header" id="headingThree">
+                    <h5 className="mb-0">
+                      <button className="btn btn-dark collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                        API driven Videos.
+          </button>
+                    </h5>
+                  </div>
+                  <div id="collapseThree" className="collapse show" aria-labelledby="headingThree" data-parent="#accordion">
+                    <div className="card-body">
+                      Integrate with our API and create Videos at scale.
+                      Connect with your CRM,
+                      Database and design scripts that convert.
+        </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          {/* <div className="row">
+            <div className="accordion" id="myAccordion">
+              <div className="panel">
+                <button type="button" className="btn btn-danger" data-toggle="collapse" data-target="#collapsible-1" data-parent="#myAccordion">Question 1?</button><br />
+                <div id="collapsible-1" className="collapse">
+                  <p>1 Etiam posuere quam ac quam. Maecenas aliquet accumsan leo. Nullam dapibus fermentum ipsum. Etiam quis quam. Integer lacinia. Nulla est.</p>
+                </div>
+                <button type="button" className="btn btn-danger" data-toggle="collapse" data-target="#collapsible-2" data-parent="#myAccordion">Question 2?</button><br />
+                <div id="collapsible-2" className="collapse">
+                  <p>2 Etiam posuere quam ac quam. Maecenas aliquet accumsan leo. Nullam dapibus fermentum ipsum. Etiam quis quam. Integer lacinia. Nulla est.</p>
+                </div>
+                <button type="button" className="btn btn-danger" data-toggle="collapse" data-target="#collapsible-3" data-parent="#myAccordion">Question 3?</button><br />
+                <div id="collapsible-3" className="collapse">
+                  <p>3 Etiam posuere quam ac quam. Maecenas aliquet accumsan leo. Nullam dapibus fermentum ipsum. Etiam quis quam. Integer lacinia. Nulla est.</p>
+                </div>
+              </div>
+            </div>
+          </div> */}
+          {/* <div className="row">
             <div className="description-row">
               <h2>Create Videos from Text in 30+ Languages in a few Clicks</h2>
               <h3>Your personal brand ambassadors available 24*7</h3>
@@ -34,7 +106,7 @@ class Description extends Component {
                 <p>Integrate with our API and create Videos at scale.<br /> Connect with your CRM,<br />Database and design scripts that convert.</p>
               </div>
             </div>
-          </div>
+          </div> */}
           <div className="row">
             <div className="col-lg-12">
               {/* <div className="above-heading">AI Videos</div> */}
@@ -85,7 +157,7 @@ class Description extends Component {
             </div> {/* end of col */}
           </div> {/* end of row */}
         </div> {/* end of container */}
-      </div>
+      </div >
     )
   }
 }
