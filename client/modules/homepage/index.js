@@ -21,10 +21,10 @@ class Homepage extends Component {
 
 				<Navbar />
 				<Hero />
-				<Sticky />
 				<Socialproof />
+				<Valueprop />
+				<Sticky />
 				<Accordion />
-				{/* <Valueprop /> */}
 				<Details />
 				<Newsletter />
 				<Footer />

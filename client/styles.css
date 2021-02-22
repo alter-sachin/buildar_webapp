@@ -269,6 +269,14 @@ section {
 	transition: all 0.2s ease;
 }
 
+.text-container{
+	text-align: center;
+    padding: 1rem 0rem;
+}
+
+
+
+
 /* IE10+ hack to solve lower label text position compared to the rest of the browsers */
 @media screen and (-ms-high-contrast: active), screen and (-ms-high-contrast: none) {  
 	.label-control {
@@ -668,11 +676,6 @@ input[type='checkbox'] {
 }
 
 
-.navbar-custom .navbar-brand.logo-image img {
-    width: 1.4375rem;
-	height: 1.75rem;
-}
-
 .navbar-brand{
 	width: 10%;
 }
@@ -816,8 +819,7 @@ input[type='checkbox'] {
 
 
 .header .header-content {
-	padding-top: 1em;
-	padding-bottom: 4rem;
+	padding-top: 7rem;
 	text-align: center;
 }
 
@@ -898,6 +900,10 @@ input[type='checkbox'] {
     color: black;
 }
 
+.p-sticky{
+	width:33rem;
+}
+
 @media only screen and (max-width: 700px) {
   .header .text-header{
 	  font-size:2em;
@@ -905,6 +911,9 @@ input[type='checkbox'] {
   .header .p-large{
 	  font-size:2em;
   }
+  .p-sticky{
+	width:20rem;
+}
 }
 
 .header .btn-solid-lg {
@@ -951,15 +960,16 @@ input[type='checkbox'] {
 	height: 2.25rem;
 }
 
-/* @media screen and (min-width: 601px) {
-  h2.text-header{
-    font-size: 80px;
+
+@media screen and (min-width: 800px) {
+ .w-embed-sm{
+    display:none;
   }
 }
 
-@media screen and (max-width: 600px) {
-  h2.text-header{
-    font-size: 30px;
+@media screen and (max-width: 800px) {
+  .sticky-element{
+    display: none;
   }
 } */
 
@@ -968,7 +978,6 @@ input[type='checkbox'] {
 /*************************/
 
 .sticky{
-  height: 120em;
   background-color: oldlace;
 }
 
@@ -994,7 +1003,7 @@ input[type='checkbox'] {
 
 .sticky li{
 	margin-top: 5em;
-	height: 80%;
+	height: 50%;
 	text-align: left;
 }
 
@@ -1004,7 +1013,7 @@ input[type='checkbox'] {
 }
 
 .sticky li p{
-	font-size: 1.3rem;
+	font-size: 1.2rem;
 }
 
 .sticky .flex-container{
@@ -1129,8 +1138,7 @@ input[type='checkbox'] {
   display: flex;
   flex-direction: row;
   text-align: center;
-  background: rgb(255,37,5);
-  background: linear-gradient(0deg, rgba(255,37,5,1) 0%, rgba(255,59,0,1) 39%, rgba(248,126,4,1) 100%);
+  background: oldlace;
   height: 40vw;
 }
 
@@ -1157,9 +1165,7 @@ input[type='checkbox'] {
 }
 
 @media (max-width: 800px) {
-  .accordion h2{
-	  font-size: smaller;
-  }
+
   .accordion .flex-container {
     flex-direction: column;
 	align-items: center;
@@ -2167,6 +2173,7 @@ a:hover.back-to-top {
 		text-align: left;
 	}
 
+
 	.header .text-container {
 		margin-top: 4rem;
 		margin-bottom: 0;
@@ -2360,8 +2367,7 @@ a:hover.back-to-top {
 
 	/* Header */
 	.header .header-content {
-		padding-top: 3rem;
-		padding-bottom: 5rem;
+		padding-top: 8rem;
 	}
 
 	.header .text-container {

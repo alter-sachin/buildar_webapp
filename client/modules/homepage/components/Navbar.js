@@ -9,9 +9,9 @@ class Navbar extends Component {
   render() {
     return (
       <div>
-        <nav className="navbar navbar-expand-lg navbar-custom fixed-top" style={{ backgroundColor: "white" }}>
-          <div className="container">
-            <a className="navbar-brand logo-image" href="index.html"><img src="images/Logo_BuildAR.png" alt="alternative" style={{ height: "70%", width: "70%" }} /></a>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+        <nav className="navbar navbar-expand-md navbar-custom fixed-top" style={{ backgroundColor: "white" }}>
+            <a className="navbar-brand logo-image" href="index.html"><img src="images/Logo_BuildAR.png" alt="alternative"/></a>
             {/* Mobile Menu Toggle Button */}
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-awesome fas fa-bars" />
@@ -58,7 +58,6 @@ class Navbar extends Component {
                 <Link to="/register" className="btn-outline-sm">Sign up</Link>
               </span>
             </div>
-          </div>
         </nav>
       </div>
     );
