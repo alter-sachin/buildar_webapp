@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Accordion from 'react-bootstrap/Accordion'
+//import Accordion from 'react-bootstrap/Accordion'
 
 class Hero extends Component {
   render() {
@@ -8,25 +8,18 @@ class Hero extends Component {
       <div>
         <header id="header" className="header">
           <div className="header-content">
-            <div className="d-flex flex-column">
-              {/* <div className="row"> */}
-              <h2 className="text-header">Create Videos From Text
-                     <br />In Few Minutes
-                     <br />In 30 Plus Languages.
-              </h2>
-              <form className="header-form">
+            <div className="container">
+              <div className="row">
+                {/* <div className="text-container"> */}
+                <div className="col-lg-6 col-sm-6 col-md-6">
+                  <p className="p-large">Create Videos from Text.<br/>In 30+ Languages<br/> In Seconds.<br/></p>
+                  <p className="p-small">Create Thousands of Videos Without Hiring Actors,<br />Directors or Filmcrew</p>
+                   <form className="header-form">
                 <div className="form-group">
                   <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"></input>
                 </div>
                 <a className="btn-solid-lg page-scroll" href="#getstarted">GET STARTED</a>
               </form>
-            </div> {/* end of container */}
-
-            <div className="container">
-              <div className="row">
-                {/* <div className="text-container"> */}
-                <div className="col-lg-6 col-sm-6 col-md-6">
-                  <p className="p-large">Type a Script, Choose a Model. Your Video Is Created.<br />Create Thousands of Videos Without Hiring Actors,<br />Directors or Filmcrew</p>
                 </div>
                 <div className="col-lg-6 col-sm-6 col-md-6">
                   <div className="img-wrapper">
