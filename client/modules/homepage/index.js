@@ -8,6 +8,8 @@ import Socialproof from "./components/Socialproof";
 import Details from "./components/Details";
 import Footer from "./components/Footer";
 import Newsletter from "./components/Newsletter";
+import Accordion from "./components/Accordion.js";
+import Sticky from "./components/Sticky.js"
 
 
 class Homepage extends Component {
@@ -19,8 +21,10 @@ class Homepage extends Component {
 
 				<Navbar />
 				<Hero />
+				<Sticky />
 				<Socialproof />
-				<Valueprop />
+				<Accordion />
+				{/* <Valueprop /> */}
 				<Details />
 				<Newsletter />
 				<Footer />
