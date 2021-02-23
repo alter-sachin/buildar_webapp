@@ -4,25 +4,39 @@ const Accordion = () => {
 
     const data = [
         {
+            "id": 1,
             "title": "Sales",
-            "description": "Make your sales video driven"
+            "description": "Make your sales video driven",
+            url: "https://www.buildar.in/assets/videos/home.mp4"
         },
         {
+            "id": 2,
             "title": "Marketing",
-            "description": "Personalised messages sent at the right channel"
+            "description": "Personalised messages sent at the right channel",
+            url: "https://www.buildar.in/assets/videos/home.mp4"
         },
         {
+            "id": 3,
             "title": "Chatbots",
-            "description": "We remember faces more than just words on a screen"
+            "description": "We remember faces more than just words on a screen",
+            url: "https://www.buildar.in/assets/videos/home.mp4"
         },
     ]
     let indexPlus;
 
     const [active, setActive] = useState(0);
+    const [videoUrl, setVideoUrl] = useState("https://www.buildar.in/assets/videos/home.mp4")
 
-    const eventHandler = (e, index) => {
+    function toggle(id) {
+        document.getElementById("source").src = data[id - 1].url
+        document.getElementById("videoPlayer").load();
+    }
+
+    const eventHandler = (e, index, url, id) => {
         e.preventDefault();
         setActive(index);
+        setVideoUrl(url)
+        toggle(id)
     }
 
     const indexCount = (index) => {
@@ -37,9 +51,9 @@ const Accordion = () => {
                 <div className="flex-item-left">
                     <div className="img-wrapper">
                         <div className="w-embed">
-                            <video autoPlay playsInline height={930} width={900} loop muted poster="https://www.buildar.in/assets/videos/home.mp4" style={{ height: 'auto', maxWidth: '90%', marginTop: '1.5rem' }}>
-                                <source src="https://www.buildar.in/assets/videos/home.mp4" type="video/webm" />
-                                <source src="https://www.buildar.in/assets/videos/home.mp4" type="video/mp4" />
+                            <video id="videoPlayer" autoPlay playsInline height={930} width={900} loop muted poster="https://www.buildar.in/assets/videos/home.mp4" style={{ height: 'auto', maxWidth: '90%', marginTop: '1.5rem', borderRadius: '10px' }}>
+                                <source id="source" src={videoUrl} type="video/webm" />
+                                <source id="source" src={videoUrl} type="video/mp4" />
                                 Sorry, your browser doesn’t support embedded videos.
                       </video>
                         </div>
@@ -52,7 +66,7 @@ const Accordion = () => {
                             <div key={index}>
                                 <h3>
                                     <button
-                                        onClick={(e) => eventHandler(e, index)}
+                                        onClick={(e) => eventHandler(e, index, tab.url, tab.id)}
                                         className={active === index ? 'active' : 'inactive', "btn btn-dark"}
                                         aria-expanded={active === index ? 'true' : 'false'}
                                         aria-controls={'sect-' + indexCount(index)}

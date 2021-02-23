@@ -13,7 +13,6 @@ class Details extends Component {
                 <p>Share your face picture and connect personally with your customer. Make your personal brand stand out</p>
                 <ul className="list-unstyled li-space-lg">
                   <li className="media">
-                    <i className="fas fa-square" />
                     <div className="media-body">Understand customers and meet their requirements</div>
                   </li>
                 </ul>

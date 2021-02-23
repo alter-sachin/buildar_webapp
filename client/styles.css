@@ -1003,7 +1003,7 @@ input[type='checkbox'] {
 
 .sticky li{
 	margin-top: 5em;
-	height: 50%;
+	height: 60%;
 	text-align: left;
 }
 
@@ -1021,6 +1021,7 @@ input[type='checkbox'] {
   flex-direction: row-reverse;
   text-align: center;
   height: 110em;
+  background-color: oldlace;
 }
 
 @media (max-width: 1000px){
@@ -1147,7 +1148,7 @@ input[type='checkbox'] {
   flex: 60%;
 }
 
-.accordion video{
+.accordion .video-player{
 	border-radius: 10px;
 }
 
@@ -1166,22 +1167,23 @@ input[type='checkbox'] {
 
 @media (max-width: 800px) {
 
+	.accordion{
+		height: 45rem;
+	}
   .accordion .flex-container {
     flex-direction: column;
 	align-items: center;
-	height: 50em;
-  }
-  .accordion{
-	  height: 50em;
+	height: 40em;
   }
   .accordion .flex-container .flex-item-left{
 	  flex: 5%;
+	  margin-bottom: -5em;
   }
   .accordion .flex-container .flex-item-right{
 	  margin-top: 0;
 	  width: 100%;
 	  align-items: left;
-	  margin-right: 3em;
+	  margin-right: 4em;
   }
 }
 
@@ -1199,13 +1201,13 @@ input[type='checkbox'] {
 }
 
 .accordion button.active {
-  background-color: #dfbd85;
+  background-color: black;
   color: #ffffff;
   border: #dfbd85 solid 1px;
 }
 
 .accordion button:hover {
-    background-color: #dfbd85;
+    background-color: black;
 }
 .accordion .title-wrapper {
   display: block;
@@ -1467,6 +1469,11 @@ input[type='checkbox'] {
 	margin-left: 0.625rem;
 }
 
+@media (max-width:800px){
+	.basic-1{
+		padding-top: 1rem;
+	}
+}
 
 /*********************/
 /*     10. Video     */
