@@ -26,19 +26,27 @@ const Sticky = () => {
         return elementBottom > viewportTop && elementTop < viewportBottom;
     };
 
+    var isActive = true
     function toggle(id) {
         document.getElementById("source").src = data[id - 1].url
         document.getElementById("sticky-player").load();
+        if (id === 1 || id === 3) {
+            isActive = false
+        }
+        else if (id === 2) {
+            isActive = true
+        }
+        console.log(`Active ${isActive} , id ${id}`);
     }
 
     $(window).scroll(function () {
-        if ($('#view1').isInViewport()) {
-            // toggle(1)
-        } else if ($('#view2').isInViewport()) {
-            // toggle(2)
+        if ($('#view1').isInViewport() && isActive) {
+            toggle(1)
+        } else if ($('#view2').isInViewport() && !isActive) {
+            toggle(2)
         }
-        else if ($('#view3').isInViewport()) {
-            // toggle(3)
+        else if ($('#view3').isInViewport() && isActive) {
+            toggle(3)
         }
     });
     return (
@@ -69,27 +77,84 @@ const Sticky = () => {
                 </div>
                 <div className="flex-container-left">
                     <ul className="sticky-list">
-                        <li >
-                            <h3 id="view1">Personalised Videos for Your Customers.</h3>
-                            <p>Every User is different,target them at the right<br />
+                        <li className="sticky-one">
+                            <h3 >Personalised Videos for Your Customers.</h3>
+                            <p id="view1">Every User is different,target them at the right<br />
                                    channel at the right time based on their behavior<br />
                                    And likings. With A VIdeo.
                             </p>
+                            <div className="mobile-player">
+                                <div className="w-embed">
+                                    <video
+                                        id="sticky-player"
+                                        autoPlay
+                                        playsInline
+                                        height={930}
+                                        width={900}
+                                        loop
+                                        muted
+                                        poster="https://www.buildar.in/assets/videos/home.mp4"
+                                        style={{ height: 'auto', maxWidth: '90%', marginTop: '1.5rem' }}
+                                    >
+                                        <source id="source" src="https://www.buildar.in/assets/videos/home.mp4" type="video/webm" />
+                                        <source id="source" src="https://www.buildar.in/assets/videos/home.mp4" type="video/mp4" />
+                                            Sorry, your browser doesn’t support embedded videos.
+                                    </video>
+                                </div>
+                            </div>
                         </li>
-                        <li >
-                            <h3 id="view2">Save Time and Money.</h3>
-                            <p>
+                        <li className="sticky-two">
+                            <h3 >Save Time and Money.</h3>
+                            <p id="view2">
                                 Videos take time to create. Infact weeks!<br />
                                     Now do so in just minutes.
                             </p>
+                            <div className="mobile-player">
+                                <div className="w-embed">
+                                    <video
+                                        id="sticky-player"
+                                        autoPlay
+                                        playsInline
+                                        height={930}
+                                        width={900}
+                                        loop
+                                        muted
+                                        poster="https://www.buildar.in/assets/videos/home.mp4"
+                                        style={{ height: 'auto', maxWidth: '90%', marginTop: '1.5rem' }}
+                                    >
+                                        <source id="source" src="https://www.buildar.in/assets/videos/home.mp4" type="video/webm" />
+                                        <source id="source" src="https://www.buildar.in/assets/videos/home.mp4" type="video/mp4" />
+                                            Sorry, your browser doesn’t support embedded videos.
+                                    </video>
+                                </div>
+                            </div>
                         </li>
-                        <li>
-                            <h3 id="view3">API driven Videos.</h3>
-                            <p>
+                        <li className="sticky-three">
+                            <h3 >API driven Videos.</h3>
+                            <p id="view3">
                                 Integrate with our API and create<br />
                                     Videos at scale. Connect with your CRM,<br />
                                     Database and design scripts that convert.
                             </p>
+                            <div className="mobile-player">
+                                <div className="w-embed">
+                                    <video
+                                        id="sticky-player"
+                                        autoPlay
+                                        playsInline
+                                        height={930}
+                                        width={900}
+                                        loop
+                                        muted
+                                        poster="https://www.buildar.in/assets/videos/home.mp4"
+                                        style={{ height: 'auto', maxWidth: '90%', marginTop: '1.5rem' }}
+                                    >
+                                        <source id="source" src="https://www.buildar.in/assets/videos/home.mp4" type="video/webm" />
+                                        <source id="source" src="https://www.buildar.in/assets/videos/home.mp4" type="video/mp4" />
+                                            Sorry, your browser doesn’t support embedded videos.
+                                    </video>
+                                </div>
+                            </div>
                         </li>
                     </ul>
                 </div>

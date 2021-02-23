@@ -997,14 +997,28 @@ input[type='checkbox'] {
 	border-radius: 10px;
 }
 
+.sticky .mobile-player{
+	display: none;
+}
+
 .sticky .sticky-list{
 	height: 50em;
 }
 
 .sticky li{
-	margin-top: 5em;
-	height: 60%;
+	margin-top: 10em;
+	margin-bottom: 30em;
 	text-align: left;
+}
+
+.sticky .sticky-one{
+	margin-top: 2em;
+	margin-bottom: 40em;
+}
+
+.sticky .sticky-three{
+	margin-top: 40em;
+	margin-bottom: 2em;
 }
 
 .sticky li h3{
@@ -1027,7 +1041,26 @@ input[type='checkbox'] {
 @media (max-width: 1000px){
 	.sticky .flex-container{
 		flex-direction: column;
+		height: 85em;
 	}
+	.sticky .flex-container-right{
+		display: none;
+	}
+	.sticky .mobile-player{
+		display:block;
+	}
+
+	.sticky .sticky-one{
+		margin-bottom: 20em;
+	}
+	.sticky .sticky-two{
+		margin-top: 0em;
+		margin-bottom: 15em;
+	}
+	.sticky .sticky-three{
+		margin-top: 5em;
+	}
+
 	.sticky li{
 		height: 20%;
 	}
