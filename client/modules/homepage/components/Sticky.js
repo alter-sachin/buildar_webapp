@@ -36,7 +36,7 @@ const Sticky = () => {
         else if (id === 2) {
             isActive = true
         }
-        console.log(`Active ${isActive} , id ${id}`);
+        // console.log(`Active ${isActive} , id ${id}`);
     }
 
     $(window).scroll(function () {

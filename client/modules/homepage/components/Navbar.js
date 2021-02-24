@@ -60,7 +60,7 @@ class NavBar extends Component {
             </span>
           </div>
         </nav> */}
-        <Navbar className="sticky-nav" bg="light" expand="lg" sticky="top">
+        <Navbar className="sticky-nav" bg="white" expand="lg" sticky="top">
           <Navbar.Brand href="index.html"><img src="images/Logo_BuildAR.png" alt="alternative" /></Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">

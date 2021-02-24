@@ -5,7 +5,6 @@ import Hero from "./components/Hero.js";
 import Customers from "./components/Customers.js";
 import Valueprop from "./components/Valueprop";
 import Socialproof from "./components/Socialproof";
-import Details from "./components/Details";
 import Footer from "./components/Footer";
 import Newsletter from "./components/Newsletter";
 import Accordion from "./components/Accordion.js";
@@ -25,7 +24,6 @@ class Homepage extends Component {
 				<Valueprop />
 				<Sticky />
 				<Accordion />
-				<Details />
 				<Newsletter />
 				<Footer />
 			</Fragment>

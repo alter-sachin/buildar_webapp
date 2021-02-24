@@ -4,6 +4,9 @@ class Newsletter extends Component {
   render() {
     return (
       <div className="form">
+        <div className="btn-case-studies">
+          <a className="btn-solid-reg page-scroll" href="#casestudies">Read Case Studies</a>
+        </div>
         <div className="container">
           <div className="row">
             <div className="col-lg-12">
