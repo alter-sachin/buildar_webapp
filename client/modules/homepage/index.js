@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 
-import Navbar from "./components/Navbar.js";
+import NavBar from "./components/Navbar.js";
 import Hero from "./components/Hero.js";
 import Customers from "./components/Customers.js";
 import Valueprop from "./components/Valueprop";
@@ -19,7 +19,7 @@ class Homepage extends Component {
 
 			<Fragment>
 
-				<Navbar />
+				<NavBar />
 				<Hero />
 				<Socialproof />
 				<Valueprop />
