@@ -11,21 +11,23 @@ Table Of Contents:
 02. Preloader
 03. Navigation
 04. Header
-05. Customers
-06. Description
-07. Features
-08. Features Lightboxes
-09. Details
-10. Video
-11. Pricing
-12. Testimonials
-13. Newsletter
-14. Footer
-15. Copyright
-16. Back To Top Button
-17. Extra Pages
-18. Sign Up and Log In Pages
-19. Media Queries
+05. Sticky
+06. Customers
+07. Description
+08. Accordion
+09. Features
+10. Features Lightboxes
+11. Details
+12. Video
+13. Pricing
+14. Testimonials
+15. Newsletter
+16. Footer
+17. Copyright
+18. Back To Top Button
+19. Extra Pages
+20. Sign Up and Log In Pages
+21. Media Queries
 ******************************************/
 
 /*****************************************
@@ -44,6 +46,7 @@ body,
 html {
     width: 100%;
 	height: 100%;
+ 	scroll-behavior: smooth;
 }
 
 body, p {
@@ -96,7 +99,7 @@ h6 {
 }
 
 .above-heading {
-	color: #5f4dee;
+	color: white;
 	font: 700 0.75rem/0.875rem "Open Sans", sans-serif;
 	text-align: center;
 }
@@ -136,6 +139,10 @@ a.white {
 	color: #fff;
 }
 
+section {
+    display: block;
+}
+
 .decorative-line {
 	display: block;
 	width: 5rem;
@@ -151,18 +158,18 @@ a.white {
 .btn-solid-reg {
 	display: inline-block;
 	padding: 1.1875rem 2.125rem 1.1875rem 2.125rem;
-	border: 0.125rem solid #5f4dee;
+	border: 0.125rem solid black;
 	border-radius: 2rem;
-	background-color: #5f4dee;
-	color: #fff;
+	background-color: white;
+	color: black;
 	font: 700 0.875rem/0 "Open Sans", sans-serif;
 	text-decoration: none;
 	transition: all 0.2s;
 }
 
 .btn-solid-reg:hover {
-	background-color: transparent;
-	color: #5f4dee;
+	background-color: black;
+	color: white;
 	text-decoration: none;
 }
 
@@ -261,6 +268,14 @@ a.white {
 	cursor: text;
 	transition: all 0.2s ease;
 }
+
+.text-container{
+	text-align: center;
+    padding: 1rem 0rem;
+}
+
+
+
 
 /* IE10+ hack to solve lower label text position compared to the rest of the browsers */
 @media screen and (-ms-high-contrast: active), screen and (-ms-high-contrast: none) {  
@@ -648,11 +663,21 @@ input[type='checkbox'] {
 /**************************/
 /*     03. Navigation     */
 /**************************/
-
-.navbar-custom {
-	background-color: #5f4dee;
+.sticky-nav{
+	position: fixed;
+	background-color: white;
+	width: 100%;
+	padding-top: 1em;
+	padding-bottom: 0em;
+	top: 0;
+}
+a{
+	text-decoration: none;
+}
+/*.navbar-custom {
+	background-color: black;
 	box-shadow: 0 0.0625rem 0.375rem 0 rgba(0, 0, 0, 0.1);
-	font: 600 0.875rem/0.875rem "Open Sans", sans-serif;
+	font: 500 0.875rem/0.875rem "Open Sans", sans-serif;
 	transition: all 0.2s;
 	height: 7em;
 }
@@ -661,9 +686,9 @@ input[type='checkbox'] {
 	max-width: 87.5rem;
 }
 
-.navbar-custom .navbar-brand.logo-image img {
-    width: 4.4375rem;
-	height: 1.75rem;
+
+.navbar-brand{
+	width: 10%;
 }
 
 .navbar-custom .navbar-brand.logo-text {
@@ -679,34 +704,51 @@ input[type='checkbox'] {
 
 .navbar-custom .nav-item .nav-link {
 	padding: 0.625rem 0.75rem 0.625rem 0.75rem;
-	color: #f7f5f5;
+	color: black;
 	opacity: 0.8;
 	text-decoration: none;
-	font-size:17px;
+	font-size: 18px;
 	font-family: Arial, Helvetica, sans-serif;
 	font-weight: bolder;
 	transition: all 0.2s ease;
-}
+} */
 
-.navbar-custom .btn-outline-sm{
+.sticky-nav .btn{
+	border-radius: 10px;
 	font-family: Arial, Helvetica, sans-serif;
 	font-weight: bolder;
+	margin: 0 0.5em;
 	font-size: 17px;
 }
-
-.navbar-custom .nav-item .nav-link:hover,
-.navbar-custom .nav-item .nav-link.active {
-	color: #fff;
-	opacity: 1;
+.sticky-nav .nav-sign-in{
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: 700;
+	margin: 0 0.5em;
 }
+.sticky-nav .nav-dropdown-item{
+	color: black;
+}
+
+.sticky-nav .basic-nav-dropdown{
+	margin: 0 0.5em;
+	color: black;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: 700;
+}
+
+/* .navbar-custom .nav-item .nav-link:hover,
+.navbar-custom .nav-item .nav-link.active {
+	color: black;
+	opacity: 1;
+} */
 
 /* Dropdown Menu */
-.navbar-custom .dropdown:hover > .dropdown-menu {
-	display: block; /* this makes the dropdown menu stay open while hovering it */
+/* .navbar-custom .dropdown:hover > .dropdown-menu {
+	display: block; this makes the dropdown menu stay open while hovering it
 	min-width: auto;
-	animation: fadeDropdown 0.2s; /* required for the fade animation */
-}
-
+	animation: fadeDropdown 0.2s; required for the fade animation
+} */
+/* 
 @keyframes fadeDropdown {
     0% {
         opacity: 0;
@@ -715,29 +757,29 @@ input[type='checkbox'] {
     100% {
         opacity: 1;
     }
-}
+} */
 
-.navbar-custom .dropdown-toggle:focus { /* removes dropdown outline on focus */
+/* .navbar-custom .dropdown-toggle:focus { removes dropdown outline on focus
 	outline: 0;
-}
+} */
 
-.navbar-custom .dropdown-menu {
+/* .navbar-custom .dropdown-menu {
 	margin-top: 0;
 	border: none;
 	border-radius: 0.25rem;
-	background-color: #5f4dee;
-}
+	background-color: white;
+} */
 
-.navbar-custom .dropdown-item {
-	color: #f7f5f5;
+/* .navbar-custom .dropdown-item {
+	color: black;
 	opacity: 0.8;
 	font: 700 0.875rem/0.875rem "Open Sans", sans-serif;
 	text-decoration: none;
 }
 
 .navbar-custom .dropdown-item:hover {
-	background-color: #5f4dee;
-	color: #fff;
+	background-color: white;
+	text-decoration: underline;
 	font-family: Arial, Helvetica, sans-serif;
 	opacity: 1;
 }
@@ -749,26 +791,26 @@ input[type='checkbox'] {
 	border: none;
 	background-color: #c4d8dc;
 	opacity: 0.2;
-}
+} */
 /* end of dropdown menu */
 
-.navbar-custom .nav-item .btn-outline-sm {
+/* .navbar-custom .nav-item .btn-outline-sm {
 	margin-top: 0.25rem;
 	margin-bottom: 1.375rem;
 	margin-left: 0.5rem;
-	border: 0.125rem solid #fff;
-	color: #fff;
+	border: 0.125rem solid black;
+	color: black;
 }
 
 .navbar-custom .nav-item .btn-outline-sm:hover {
-	background-color: #fff;
-	color: #5f4dee;
+	background-color: black;
+	color: white;
 }
 
 .navbar-custom .navbar-toggler {
 	padding: 0;
 	border: none;
-	color: #fff;
+	color: white;
 	font-size: 2rem;
 }
 
@@ -787,14 +829,16 @@ input[type='checkbox'] {
 .navbar-custom button[aria-expanded='true'] .navbar-toggler-awesome.fas.fa-times{
 	display: inline-block;
 	margin-right: 0.125rem;
-}
+} */
 
 
 /*********************/
 /*    04. Header     */
 /*********************/
 .header {
-	background-color: #726bfa;
+	background-color: white;
+	color: black;
+	height: 70%;
 }
 
 #header > div > div > div > div.col-lg-7.col-xl-6 > div > h2{
@@ -803,8 +847,7 @@ input[type='checkbox'] {
 
 
 .header .header-content {
-	padding-top: 8rem;
-	padding-bottom: 4rem;
+	padding-top: 7rem;
 	text-align: center;
 }
 
@@ -814,6 +857,21 @@ input[type='checkbox'] {
 	font-weight: bolder;
 }
 
+.header .header-form{
+	display: flex;
+	flex-direction: column;
+}
+
+.header .header-form a{
+	margin: auto;
+	font-size: larger;
+	font-weight: 700;
+}
+
+.header .header-from .from-group{
+	margin: auto;
+}
+
 .header h1 {
 	margin-bottom: 1rem;
 	color: #fff;
@@ -821,45 +879,107 @@ input[type='checkbox'] {
 	line-height: 3rem;
 }
 
+.header .flex-column{
+	display: flex;
+	align-items: center;
+	height: 25em;
+	text-align: center;
+}
+
 .header .text-header{
-	font-size: 35px;
+	color: black;
+	margin-top: 2%;
+	font-size: 3em;
+	line-height: 1em;
 	font-weight: 900;
 	font-family: Arial, Helvetica, sans-serif;
+	margin-bottom: 4%;
+}
+
+.header col-lg{
+	width: 4em;
+	margin: 0 auto;
+}
+
+@media screen and (max-width: 480px) {
+    .col-lg{
+      display: inline-block;
+      width: 100%;
+    }
 }
 
 .header .p-large {
-	font-size: 20px;
-	font-family: Arial, Helvetica, sans-serif;
-	margin-bottom: 2rem;
-	color: #f3f7fd;
+	font-size: 2.2rem;
+    font-family: Helvetica, sans-serif;
+    line-height: 1.15em;
+    /* width: 10em; */
+    margin: auto;
+    font-weight: 700;
+    color: black;
+}
+
+.header .p-small {
+	font-size: 1.2rem;
+    font-family: Helvetica, sans-serif;
+    line-height: 1.15em;
+    /* width: 10em; */
+    margin: 1em auto;
+    font-weight: 300;
+    color: black;
+}
+
+.p-sticky{
+	width:33rem;
+}
+
+@media only screen and (max-width: 700px) {
+  .header .text-header{
+	  font-size:2em;
+  }
+  .header .p-large{
+	  font-size:2em;
+  }
+  .p-sticky{
+	width:20rem;
+}
 }
 
 .header .btn-solid-lg {
 	margin-right: 0.5rem;
-	margin-bottom: 1.125rem;
+	margin-bottom: 1.125vw;
 	margin-left: 0.5rem;
-	border-color: #f3f7fd;
-	background-color: #f3f7fd;
-	color: #5f4dee;
+	border-color: black;
+	background-color: white;
+	color: black;
 }
+
 
 .header .btn-solid-lg:hover {
-	background: transparent;
-	color: #f3f7fd;
+	background-color: black;
+	color: white;
 }
-
+/*
 .header .form-control{
-	width: 30em;
-}
+	width: 50vw;
+}*/
 
 .header .btn-outline-lg {
+	width: 3vw;
 	border-color: #f3f7fd;
 	color: #f3f7fd;
 }
 
 .header .btn-outline-lg:hover {
 	background-color: #f3f7fd;
-	color: #5f4dee;
+	color: white;
+}
+
+.header video{
+	height: auto;
+	margin: auto;
+	max-width: 100%;
+	width: 300%;
+	border-radius: 10px;
 }
 
 .header-frame {
@@ -868,6 +988,111 @@ input[type='checkbox'] {
 	height: 2.25rem;
 }
 
+
+@media screen and (min-width: 800px) {
+ .w-embed-sm{
+    display:none;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .sticky-element{
+    display: none;
+  }
+} */
+
+/*************************/
+/*     05. Sticky*/
+/*************************/
+
+.sticky{
+  background-color: oldlace;
+}
+
+.sticky div.sticky-element{
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  padding-top: 4em;
+  font-size: 20px;
+}
+
+.sticky .flex-container-left{
+	padding: 10px;
+}
+
+.sticky video{
+	border-radius: 10px;
+}
+
+.sticky .mobile-player{
+	display: none;
+}
+
+.sticky .sticky-list{
+	height: 50em;
+}
+
+.sticky li{
+	margin-top: 10em;
+	margin-bottom: 30em;
+	text-align: left;
+}
+
+.sticky .sticky-one{
+	margin-top: 2em;
+	margin-bottom: 40em;
+}
+
+.sticky .sticky-three{
+	margin-top: 40em;
+	margin-bottom: 2em;
+}
+
+.sticky li h3{
+	font-size: 1.7rem;
+	font-weight: 800;
+}
+
+.sticky li p{
+	font-size: 1.2rem;
+}
+
+.sticky .flex-container{
+  display: flex;
+  flex-direction: row-reverse;
+  text-align: center;
+  height: 110em;
+  background-color: oldlace;
+}
+
+@media (max-width: 1000px){
+	.sticky .flex-container{
+		flex-direction: column;
+		height: 85em;
+	}
+	.sticky .flex-container-right{
+		display: none;
+	}
+	.sticky .mobile-player{
+		display:block;
+	}
+
+	.sticky .sticky-one{
+		margin-bottom: 20em;
+	}
+	.sticky .sticky-two{
+		margin-top: 0em;
+		margin-bottom: 15em;
+	}
+	.sticky .sticky-three{
+		margin-top: 5em;
+	}
+
+	.sticky li{
+		height: 20%;
+	}
+}
 
 /*************************/
 /*     05. Customers     */
@@ -886,18 +1111,45 @@ input[type='checkbox'] {
 /*     06. Description     */
 /***************************/
 .cards-1 {
-	padding-top: 3.25rem;
-	padding-bottom: 3rem;
+	padding-top: 2.25rem;
+	padding-bottom: 1rem;
 	text-align: center;
+}
+
+.cards-1 .trusted-by-row{
+	display: flex;
+  	flex-wrap: wrap;
+	margin-top: 2em;
+	margin-bottom: 1em;
+  	padding: 0 4px;
+}
+
+.cards-1 .trusted-by-header{
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bolder;
+	margin-top: 1em;
+	margin-left: 1em;
+	margin-right: 1em;
+}
+
+.cards-1 .trusted-logo{
+	margin-left: 1em;
+	margin-right: 1em;
 }
 
 .cards-1 .h2-heading {
 	margin-bottom: 3.5rem;
 }
 
+.cards-1 .description-row{
+	margin-top:5%;
+	text-align: left;
+}
+
 .cards-1 .card {
 	max-width: 21rem;
 	margin-right: auto;
+	margin-top: 2em;
 	margin-bottom: 3.5rem;
 	margin-left: auto;
 	padding: 0;
@@ -919,6 +1171,161 @@ input[type='checkbox'] {
 	padding: 0;
 }
 
+.cards-1 .mb-0 button{
+	padding: 1em;
+}
+
+.cards-1 .flex-container{
+	display:flex;
+	flex-direction: column;
+}
+
+
+/************************/
+/*     07. Accordion*/
+/************************/
+
+.accordion{
+	margin-top: 5em;
+	width: 100%;
+	height: 40vw;
+}
+
+.accordion h2{
+	text-align: center;
+	font-weight: 800;
+}
+
+.accordion .flex-container{
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  background: oldlace;
+  height: 40vw;
+}
+
+.accordion .flex-container .flex-item-left {
+  padding: 10px;
+  flex: 60%;
+}
+
+.accordion .video-player{
+	border-radius: 10px;
+}
+
+.accordion .flex-container .flex-item-right {
+  width: 40%;
+  align-items: center;
+  margin-top: 3em;
+  flex: 10%;
+}
+
+@media (max-width: 1000px){
+	.accordion .flex-item-right{
+		margin-right: 5em;
+	}
+}
+
+@media (max-width: 800px) {
+
+	.accordion{
+		height: 45rem;
+	}
+  .accordion .flex-container {
+    flex-direction: column;
+	align-items: center;
+	height: 40em;
+  }
+  .accordion .flex-container .flex-item-left{
+	  flex: 5%;
+	  margin-bottom: -5em;
+  }
+  .accordion .flex-container .flex-item-right{
+	  margin-top: 0;
+	  width: 100%;
+	  align-items: left;
+	  margin-right: 4em;
+  }
+}
+
+.accordion form{
+	/* margin-left: 20em; */
+	width: 30em;
+	padding-top: 2em;
+}
+
+.accordion button{
+	width: 20em;
+	font-weight: 800;
+	border-radius: 5px;
+	text-align: left;
+}
+
+.accordion button.active {
+  background-color: black;
+  color: #ffffff;
+  border: #dfbd85 solid 1px;
+}
+
+.accordion button:hover {
+    background-color: black;
+}
+.accordion .title-wrapper {
+  display: block;
+  position: relative;
+  width: 100%;
+
+}
+
+.accordion .minus {
+  /* content: url('../distribution/images/line.svg'); */
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  right: 0;
+}
+
+.accordion .plus {
+  /* content: url('../distribution/images/plus.svg'); */
+  width: 24px;
+  height: 24px;
+  transform: rotate(90deg);
+  transition-timing-function: ease-in;
+  transition: all 1s;
+  position: absolute;
+  right: 0;
+}
+
+.accordion .panel-close {
+  background: #e0e0e0;
+  box-sizing: border-box;
+  padding: 0.5rem 1rem 0 1rem;
+  opacity:0;
+  width:50%;
+  height:0;
+  overflow: hidden;
+  transition-timing-function: ease-out;
+  transition: all 1s;
+}
+
+.accordion .panel-open {
+  overflow: hidden;
+  background: #e0e0e0;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-sizing: border-box;
+  border-radius: 1rem;
+  opacity:1;
+  margin-left: 6em;
+  width:60%;
+  height: auto;
+  transition-timing-function: ease-in;
+  transition: all 1s;
+}
+
+.accordion .panel p {
+  margin: 0;
+}
 
 /************************/
 /*     07. Features     */
@@ -1098,9 +1505,9 @@ input[type='checkbox'] {
 
 
 /***********************/
-/*     09. Details     */
+/*     09. Newsletter*/
 /***********************/
-.basic-1 {
+/* .basic-1 {
 	padding-top: 7.5rem;
 	padding-bottom: 8rem;
 }
@@ -1123,6 +1530,11 @@ input[type='checkbox'] {
 	margin-left: 0.625rem;
 }
 
+@media (max-width:800px){
+	.basic-1{
+		padding-top: 1rem;
+	}
+} */
 
 /*********************/
 /*     10. Video     */
@@ -1382,6 +1794,18 @@ input[type='checkbox'] {
 	padding-bottom: 6rem;
 }
 
+.form .btn-case-studies{
+	text-align: center;
+}
+
+.form .btn-solid-reg:hover{
+	transform: scale(1.1);
+}
+
+.form .container{
+	margin-top: 2em;
+}
+
 .form .text-container {
 	margin-bottom: 3.5rem;
 	padding: 3.5rem 1rem 2.5rem 1rem;
@@ -1429,13 +1853,13 @@ input[type='checkbox'] {
 /**********************/
 .footer-frame {
 	width: 100%;
-	height: 1.5rem;
 }
 
 .footer {
+	height: 20em;
 	padding-top: 3rem;
 	padding-bottom: 0.5rem;
-	background-color: #5f4dee;
+	background-color: black;
 }
 
 .footer .footer-col {
@@ -1472,9 +1896,26 @@ input[type='checkbox'] {
 	margin-left: 0.625rem;
 }
 
-.footer .footer-col.last .list-unstyled .fas.fa-globe {
-	margin-left: 1rem;
+.footer .footer-col.last .list-unstyled .fas.fa-envelope{
 	margin-right: 0.625rem;
+}
+.footer .footer-col.last .list-unstyled .fas.fa-globe {
+	margin-right: 0.625rem;
+}
+
+@media (max-width:992px){
+	.footer{
+		height: 25em;
+	}
+}
+
+@media (max-width:768px){
+	.footer{
+		height: 35em;
+	}
+	.footer .col-md-2{
+		flex: 50%;
+	}
 }
 
 
@@ -1829,6 +2270,7 @@ a:hover.back-to-top {
 		text-align: left;
 	}
 
+
 	.header .text-container {
 		margin-top: 4rem;
 		margin-bottom: 0;
@@ -2012,7 +2454,7 @@ a:hover.back-to-top {
 
 /* Min-width width 1200px */
 @media (min-width: 1200px) {
-	
+
 	/* General Styles */
 	.h2-heading {
 		width: 50%;
@@ -2022,8 +2464,7 @@ a:hover.back-to-top {
 
 	/* Header */
 	.header .header-content {
-		padding-top: 11rem;
-		padding-bottom: 5rem;
+		padding-top: 8rem;
 	}
 
 	.header .text-container {
@@ -2044,7 +2485,7 @@ a:hover.back-to-top {
 		height: 9.375rem;
 	}
 	/* end of header */
-	
+
 
 	/* Customer */
 	.slider-1 .slider-container {
@@ -2130,7 +2571,7 @@ a:hover.back-to-top {
 		padding-bottom: 5.5rem;
 	}
 
-	.form h2 {
+	.form h2 ,	.form h4 {
 		margin-right: 12rem;
 		margin-left: 12rem;
 	}
