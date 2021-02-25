@@ -105,6 +105,29 @@ class Register extends Component {
 		}
 	}
 
+	dataCopy() {
+		document.secondaryForm.emailAddress.value = document.primaryForm.email.value
+	}
+	toggleSecondarySignUp() {
+		var secondarySignUp = document.getElementById("secondary-signup");
+		var primarySignUp = document.getElementById("primary-signup")
+		var warning = document.getElementById("email-empty-warning")
+		var emailInput = document.getElementById('email-input')
+		var emailButton = document.getElementById('email-submit-button')
+		if (secondarySignUp.style.display === "none" && document.primaryForm.email.value !== "") {
+			this.dataCopy()
+			primarySignUp.style.display = "none"
+			secondarySignUp.style.display = "block";
+		} else {
+			warning.style.display = "block"
+			emailInput.style.borderColor = "red"
+			emailInput.style.borderWidth = "3px"
+			emailButton.style.marginLeft = "2em"
+		}
+	}
+	handleClick() {
+		this.toggleSecondarySignUp()
+	}
 	render() {
 		const { firstName, lastName, emailAddress, password, workspaceURL, privacyConsent, visible, loading, serverError, validationErrors } = this.state;
 		return (
@@ -121,24 +144,25 @@ class Register extends Component {
 				<div className="form-container col-xs-12 col-md-6 col-lg-5 d-flex flex-column hidden-md-down">
 					{visible && (
 						<div id="register">
-							<div className="p-3 p-sm-5 alignment vertical justify-content-center">
-								<div className="google-auth-signup">
-									<h2>Sign up for BuildAR</h2>
-									<form className="auth-form">
-										<button className="btn btn-light">Sign up with Google</button>
+							<div className="p-3 p-sm-5 alignment vertical justify-content-center" >
+								<div className="google-auth-signup" id="primary-signup">
+									<h2 className="google-auth-header">Sign up for BuildAR</h2>
+									<form className="auth-form" action="google/signin" method="get">
+										<button type="button" className="btn btn-light"><link />Sign up with Google</button>
 									</form>
 									<div className="secondary-signup-separator">
 										<hr />
-										<span color="grey" font-weight="bold">or</span>
+										<span color="grey" fontWeight="bold">or</span>
 										<hr />
 									</div>
-									<form className="secondary-signup">
-										<input type="text" placeholder="Enter your email to continue" />
-										<button className="btn btn-primary go-to-signup-two">Create Free Account</button>
+									<form name="primaryForm" className="primary-email-signup">
+										<input id="email-input" className="form-control rounded-0" name="email" type="text" placeholder="Enter your email to continue" />
+										<span id="email-empty-warning" style={{ display: "none", fontSize: "1em" }} color="red">The above field cannot be left empty.</span>
+										<button id="email-submit-button" type="button" className="btn btn-primary go-to-signup-two" onClick={() => this.handleClick()}>Create Free Account</button>
 									</form>
 
 								</div>
-								<form className="register-2 w-100">
+								<form name="secondaryForm" className="register-2 w-100" id="secondary-signup" style={{ display: "none" }}>
 									<div className="w-100 text-center mb-4">
 										<span className="logo">
 											<img src={require("distribution/images/Logo_BuildAR.png")} />
@@ -180,6 +204,7 @@ class Register extends Component {
 										label={t("label.emailAddress")}
 										name={"emailAddress"}
 										id={"email-input"}
+										defaultValue={this.emailAddress}
 										value={emailAddress}
 										type={"textField"}
 										ariaLabel={"emailAddress"}

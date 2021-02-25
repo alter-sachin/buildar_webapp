@@ -1069,7 +1069,35 @@ a{
 @media (max-width: 1000px){
 	.sticky .flex-container{
 		flex-direction: column;
-		height: 85em;
+		height: 140em;
+	}
+	.sticky .flex-container-right{
+		display: none;
+	}
+	.sticky .mobile-player{
+		display:block;
+	}
+
+	.sticky .sticky-one{
+		margin-bottom: 10em;
+	}
+	.sticky .sticky-two{
+		margin-top: 2em;
+		margin-bottom: 10em;
+	}
+	.sticky .sticky-three{
+		margin-top: 5em;
+	}
+
+	/* .sticky li{
+		height: 20%;
+	} */
+}
+
+@media (max-width: 600px){
+	.sticky .flex-container{
+		flex-direction: column;
+		height: 90em;
 	}
 	.sticky .flex-container-right{
 		display: none;
@@ -1093,7 +1121,6 @@ a{
 		height: 20%;
 	}
 }
-
 /*************************/
 /*     05. Customers     */
 /*************************/
@@ -2091,16 +2118,58 @@ a:hover.back-to-top {
 }
 
 .google-auth-signup{
+	display: flex;
+	flex-direction: column;
 	height: 100%;
-	align-items: center;
 }
 
-.google-auth-signup .auth-form{
-	align-items: center;
+.google-auth-header{
+	margin-bottom: 1em;
 }
 
-.register-2{
-	display: none;
+.auth-form{
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.auth-form button{
+	border: solid black 1px;
+}
+
+.primary-email-signup{
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.primary-email-signup button{
+	margin-top: 1em;
+}
+
+.google-auth-signup form{
+	align-items: center;
+}
+.secondary-signup-separator {
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.secondary-signup-separator::before,
+.secondary-signup-separator::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #000;
+}
+
+.secondary-signup-separator:not(:empty)::before {
+  margin-right: .25em;
+}
+
+.secondary-signup-separator:not(:empty)::after {
+  margin-left: .25em;
+}
+#secondary-signup{
+	display: inline-block;
 }
 
 

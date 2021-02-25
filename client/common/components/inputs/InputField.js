@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 class InputField extends React.Component {
 	render() {
-		const { name, value, onChange, label, id, type, ariaLabel, smallText, placeholder, required, disabled, error } = this.props;
+		const { name, value, onChange, label, id, type, ariaLabel, smallText, placeholder, required, disabled, error, defaultValue } = this.props;
 
 		return (
 			<div className="form-group">
@@ -17,6 +17,7 @@ class InputField extends React.Component {
 						name={name}
 						value={value}
 						type={type}
+						defaultValue={defaultValue}
 						className={"form-control rounded-0"}
 						id={id}
 						aria-describedby={ariaLabel}
