@@ -122,10 +122,26 @@ class Register extends Component {
 					{visible && (
 						<div id="register">
 							<div className="p-3 p-sm-5 alignment vertical justify-content-center">
-								<form className="w-100">
+								<div className="google-auth-signup">
+									<h2>Sign up for BuildAR</h2>
+									<form className="auth-form">
+										<button className="btn btn-light">Sign up with Google</button>
+									</form>
+									<div className="secondary-signup-separator">
+										<hr />
+										<span color="grey" font-weight="bold">or</span>
+										<hr />
+									</div>
+									<form className="secondary-signup">
+										<input type="text" placeholder="Enter your email to continue" />
+										<button className="btn btn-primary go-to-signup-two">Create Free Account</button>
+									</form>
+
+								</div>
+								<form className="register-2 w-100">
 									<div className="w-100 text-center mb-4">
 										<span className="logo">
-											<img src={require("distribution/images/logo_dark.svg")} />
+											<img src={require("distribution/images/Logo_BuildAR.png")} />
 										</span>
 									</div>
 									<div className="w-100 mb-3">

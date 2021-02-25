@@ -2086,6 +2086,23 @@ a:hover.back-to-top {
 	text-align: left;
 }
 
+#register{
+	height: 100%;
+}
+
+.google-auth-signup{
+	height: 100%;
+	align-items: center;
+}
+
+.google-auth-signup .auth-form{
+	align-items: center;
+}
+
+.register-2{
+	display: none;
+}
+
 
 /*****************************/
 /*     19. Media Queries     */

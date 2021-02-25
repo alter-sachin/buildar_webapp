@@ -18,7 +18,7 @@ class Hero extends Component {
                     <div className="form-group">
                       <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"></input>
                     </div>
-                    <a className="btn-solid-lg page-scroll" href="#getstarted">GET STARTED</a>
+                    <a className="btn-solid-lg page-scroll" href="/register">GET STARTED</a>
                   </form>
                 </div>
                 <div className="col-lg-6 col-sm-6 col-md-6">
