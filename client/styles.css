@@ -2148,6 +2148,11 @@ a:hover.back-to-top {
 .google-auth-signup form{
 	align-items: center;
 }
+
+.go-to-signup-two{
+	margin-left: 0.125em;
+}
+
 .secondary-signup-separator {
   display: flex;
   align-items: center;

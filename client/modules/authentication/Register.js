@@ -112,7 +112,7 @@ class Register extends Component {
 		var secondarySignUp = document.getElementById("secondary-signup");
 		var primarySignUp = document.getElementById("primary-signup")
 		var warning = document.getElementById("email-empty-warning")
-		var emailInput = document.getElementById('email-input')
+		var emailInput = document.getElementById('first-email-input')
 		var emailButton = document.getElementById('email-submit-button')
 		if (secondarySignUp.style.display === "none" && document.primaryForm.email.value !== "") {
 			this.dataCopy()
@@ -120,6 +120,7 @@ class Register extends Component {
 			secondarySignUp.style.display = "block";
 		} else {
 			warning.style.display = "block"
+			warning.style.transition = "1s"
 			emailInput.style.borderColor = "red"
 			emailInput.style.borderWidth = "3px"
 			emailButton.style.marginLeft = "2em"
@@ -147,8 +148,11 @@ class Register extends Component {
 							<div className="p-3 p-sm-5 alignment vertical justify-content-center" >
 								<div className="google-auth-signup" id="primary-signup">
 									<h2 className="google-auth-header">Sign up for BuildAR</h2>
-									<form className="auth-form" action="google/signin" method="get">
-										<button type="button" className="btn btn-light"><link />Sign up with Google</button>
+									<form className="auth-form" action="api/v1.0/authentication/google" method="get">
+										<button type="submit" className="btn btn-light">
+											<img width="20px" style={{ marginBottom: "3px", marginRight: "1em" }} alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
+										 	Sign up with Google
+										</button>
 									</form>
 									<div className="secondary-signup-separator">
 										<hr />
@@ -156,8 +160,8 @@ class Register extends Component {
 										<hr />
 									</div>
 									<form name="primaryForm" className="primary-email-signup">
-										<input id="email-input" className="form-control rounded-0" name="email" type="text" placeholder="Enter your email to continue" />
-										<span id="email-empty-warning" style={{ display: "none", fontSize: "1em" }} color="red">The above field cannot be left empty.</span>
+										<input id="first-email-input" className="form-control rounded-lg" name="email" type="text" placeholder="Enter your email to continue" />
+										<span id="email-empty-warning" style={{ display: "none", fontSize: "1em", color: "red" }} color="red">The above field cannot be left empty.</span>
 										<button id="email-submit-button" type="button" className="btn btn-primary go-to-signup-two" onClick={() => this.handleClick()}>Create Free Account</button>
 									</form>
 
