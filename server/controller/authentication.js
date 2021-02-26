@@ -20,6 +20,9 @@ import {
 	verifyUserEmail
 } from "../orchestrator/authentication";
 
+require('../services/passport')
+let passport = require("passport")
+
 module.exports = function (router) {
 	// Validate Workspace URL
 	router.get("/api/v1.0/authentication/validate-workspace-url", restrict({ registered: true, unregistered: true }), function (req, res, next) {
@@ -84,6 +87,13 @@ module.exports = function (router) {
 			}
 		);
 	});
+
+	router.get("/api/v1.0/authentication/google", restrict({ unregistered: true, registerd: false }), passport.authenticate('google', { scope: ['profile', 'email'] }))
+
+	router.get("", restrict({ unregistered: true, registerd: false }), passport.authenticate('google', { failureRedirect: '/signin' }), (req, res) => {
+		console.log("Logged In");
+		// res.send('Logged In')
+	})
 
 	// Login to user account
 	router.post("/api/v1.0/authentication/login", restrict({ unregistered: true, registered: true }), function (req, res, next) {

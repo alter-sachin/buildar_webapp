@@ -15,10 +15,7 @@ class Hero extends Component {
                   <p className="p-large">Create Videos from Text.<br />In 30+ Languages<br /> In Seconds.<br /></p>
                   <p className="p-small">Create Thousands of Videos Without Hiring Actors,Directors or Filmcrew</p>
                   <form className="header-form">
-                    <div className="form-group">
-                      <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"></input>
-                    </div>
-                    <a className="btn-solid-lg page-scroll" href="/register">GET STARTED</a>
+                    <a className="btn-solid-lg btn-solid-reg page-scroll" href="/register">GET STARTED</a>
                   </form>
                 </div>
                 <div className="col-lg-6 col-sm-6 col-md-6">

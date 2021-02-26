@@ -11,9 +11,10 @@ let LocalStrategy = require("passport-local").Strategy;
 let JwtStrategy = require("passport-jwt").Strategy;
 let ExtractJwt = require("passport-jwt").ExtractJwt;
 let config = require("../../config");
-
+let GoogleStrategy = require('passport-google-oauth20').Strategy;
 function initialize(app) {
 	app.use(passport.initialize());
+
 
 	// Local Authentication Strategy (Workspace Name, Username & Password)
 	passport.use(
@@ -23,7 +24,7 @@ function initialize(app) {
 				passwordField: "password",
 				passReqToCallback: true
 			},
-			function(req, u, p, done) {
+			function (req, u, p, done) {
 				if (req.body == null) {
 					return done(null, false);
 				} else {
@@ -46,7 +47,7 @@ function initialize(app) {
 				jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme("jwt"),
 				secretOrKey: config.authentication.jwtSecret
 			},
-			function(payload, done) {
+			function (payload, done) {
 				if (payload == null) {
 					return done(null, false);
 				} else {
@@ -62,9 +63,21 @@ function initialize(app) {
 		)
 	);
 
-	passport.serializeUser(function(user, done) {
+	passport.serializeUser(function (user, done) {
 		done(null, user.userId);
 	});
+
+	passport.use(new GoogleStrategy({
+		clientID: '976971922840-p9eobg6v863nppicf7vsatfup1q82qjt.apps.googleusercontent.com',
+		clientSecret: '-Xwi9od0l9INQAa2y3ClbQGK',
+		callbackURL: "http://localhost:3000"
+	},
+		function (accessToken, refreshToken, profile, cb) {
+			// Register user here
+			console.log(profile);
+			cb(err, profile)
+		}
+	));
 }
 
 async function LocalStrategyLoadUser(workspaceURL, emailAddress, password) {

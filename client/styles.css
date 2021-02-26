@@ -1825,7 +1825,7 @@ a{
 	text-align: center;
 }
 
-.form .btn-solid-reg:hover{
+.btn-solid-reg:hover{
 	transform: scale(1.1);
 }
 

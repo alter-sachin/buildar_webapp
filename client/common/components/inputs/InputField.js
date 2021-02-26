@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { propTypes } from "react-bootstrap/esm/Image";
 
 class InputField extends React.Component {
 	render() {
@@ -41,6 +42,7 @@ InputField.propTypes = {
 	name: PropTypes.string,
 	value: PropTypes.string,
 	onChange: PropTypes.func,
+	defaultValue: propTypes.func,
 	label: PropTypes.string,
 	id: PropTypes.string,
 	type: PropTypes.string,

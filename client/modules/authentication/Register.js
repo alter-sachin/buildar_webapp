@@ -209,7 +209,7 @@ class Register extends Component {
 										name={"emailAddress"}
 										id={"email-input"}
 										defaultValue={this.emailAddress}
-										value={emailAddress}
+										value={this.emailAddress}
 										type={"textField"}
 										ariaLabel={"emailAddress"}
 										onChange={this.changeField}
