@@ -90,9 +90,9 @@ module.exports = function (router) {
 
 	router.get("/api/v1.0/authentication/google", restrict({ unregistered: true, registerd: false }), passport.authenticate('google', { scope: ['profile', 'email'] }))
 
-	router.get("", restrict({ unregistered: true, registerd: false }), passport.authenticate('google', { failureRedirect: '/signin' }), (req, res) => {
-		console.log("Logged In");
-		// res.send('Logged In')
+	router.get("/", restrict({ unregistered: true, registerd: false }), passport.authenticate('google', { failureRedirect: '/register' }), (req, res) => {
+		// console.log("Logged In");
+		res.redirect("/")
 	})
 
 	// Login to user account

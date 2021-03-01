@@ -75,11 +75,61 @@ function initialize(app) {
 		function (accessToken, refreshToken, profile, cb) {
 			// Register user here
 			console.log(profile);
-			cb(err, profile)
+			// cb(err, profilel)
+			let workspaceNumber = Math.floor((Math.random() * 10000) + 1)
+			let workspaceName = profile.name.givenName
+			let workspaceUrl = workspaceName + workspaceUrl
+			googleStrategyCreateUser(profile, workspaceUrl)
 		}
 	));
 }
 
+
+async function googleStrategyCreateUser(profile, workspaceURL) {
+
+	// console.log("signed in");
+	const client = await models().client.findOne({ where: { workspaceURL: workspaceURL, active: true } }, { transaction: transaction });
+
+	if (client !== null) {
+		throw new ServerResponseError(403, t("validation.clientInvalidProperties", { lng: browserLng }), { workspaceURL: [t("validation.registeredWorkspaceURL", { lng: browserLng })] });
+	}
+
+	const clientObject = {
+		name: workspaceURL,
+		workspaceURL: workspaceURL,
+		subscriptionId: SUBSCRIPTION_TYPE.TRIAL,
+	};
+
+	// Calculate start time of new client account
+	const startDate = moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
+
+	// Add time to clientObject
+	clientObject.subscriptionStartDate = startDate;
+
+	// If stripe enabled we need to create a trial end time
+	if (config.stripe.enabled) {
+		const endDate = moment(startDate, "YYYY-MM-DD HH:mm:ss").add(BILLING_CYCLE.TRIAL, "days");
+		// Add subscription end date to the client object
+		clientObject.subscriptionEndDate = endDate;
+	}
+
+	// Save client object to database
+	const clientInstance = await models().client.create(clientObject, { transaction: transaction });
+
+	// Encrypt and salt user password
+	const password = await bcrypt.hash(profile.id, 10);
+
+	const userInstance = await models().user.create(
+		{
+			firstName: profile.name.givenName,
+			lastName: profile.name.familyName,
+			clientId: clientInstance.get("id"),
+			emailAddress: profile.emails[0].value,
+			password: password,
+		},
+		{ transaction: transaction }
+	);
+}
 async function LocalStrategyLoadUser(workspaceURL, emailAddress, password) {
 	// Load a client using a workspaceURL
 	const client = await models().client.findOne({ where: { workspaceURL: workspaceURL, active: true } });
