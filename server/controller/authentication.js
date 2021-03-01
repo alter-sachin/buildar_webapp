@@ -88,10 +88,10 @@ module.exports = function (router) {
 		);
 	});
 
-	router.get("/api/v1.0/authentication/google", restrict({ unregistered: true, registerd: false }), passport.authenticate("google", { scope: ["profile", "email"] }));
+	router.get("/api/v1.0/authentication/google", restrict({ unregistered: true, registered: false }), passport.authenticate("google", { scope: ["profile", "email"] }));
 
-	router.get("/api/v1.0/google/callback", restrict({ unregistered: true, registerd: false }), passport.authenticate("google", { failureRedirect: "/register" }), (req, res) => {
-		// console.log("Logged In");
+	router.get("/api/v1.0/google/callback", restrict({ unregistered: true, registered: false }), passport.authenticate("google", { failureRedirect: "/register" }), (req, res) => {
+		console.log("inside stuff");
 		res.redirect("/signin");
 	});
 
