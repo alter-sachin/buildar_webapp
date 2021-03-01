@@ -1,9 +1,14 @@
-import { models } from "services/sequelize";
+import { database,models } from "services/sequelize";
 import redis from "services/redis";
 import jwt from "jsonwebtoken";
 import moment from "moment";
 import bcrypt from "bcrypt";
 import { variableExists } from "shared/utilities/filters";
+import { ServerResponseError } from "utilities/errors/serverResponseError";
+import { t } from "shared/translations/i18n";
+import { SUBSCRIPTION_TYPE, ROLE_TYPE, EMAIL_TYPE, BILLING_CYCLE } from "shared/constants";
+import { sendEmail } from "services/nodemailer";
+import generateUserEmailValidationCode from "../orchestrator/authentication";
 
 let uuidv1 = require("uuid/v1");
 let passport = require("passport");
@@ -11,7 +16,7 @@ let LocalStrategy = require("passport-local").Strategy;
 let JwtStrategy = require("passport-jwt").Strategy;
 let ExtractJwt = require("passport-jwt").ExtractJwt;
 let config = require("../../config");
-let GoogleStrategy = require('passport-google-oauth20').Strategy;
+let GoogleStrategy = require("passport-google-oauth20").Strategy;
 function initialize(app) {
 	app.use(passport.initialize());
 
@@ -24,7 +29,7 @@ function initialize(app) {
 				passwordField: "password",
 				passReqToCallback: true
 			},
-			function (req, u, p, done) {
+			function(req, u, p, done) {
 				if (req.body == null) {
 					return done(null, false);
 				} else {
@@ -47,7 +52,7 @@ function initialize(app) {
 				jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme("jwt"),
 				secretOrKey: config.authentication.jwtSecret
 			},
-			function (payload, done) {
+			function(payload, done) {
 				if (payload == null) {
 					return done(null, false);
 				} else {
@@ -63,72 +68,111 @@ function initialize(app) {
 		)
 	);
 
-	passport.serializeUser(function (user, done) {
+	passport.serializeUser(function(user, done) {
 		done(null, user.userId);
 	});
-
+	passport.deserializeUser(function(user,done){
+		done(null,user.userId);
+	});
+	
 	passport.use(new GoogleStrategy({
-		clientID: '976971922840-p9eobg6v863nppicf7vsatfup1q82qjt.apps.googleusercontent.com',
-		clientSecret: '-Xwi9od0l9INQAa2y3ClbQGK',
-		callbackURL: "http://localhost:3000"
+		clientID: "976971922840-p9eobg6v863nppicf7vsatfup1q82qjt.apps.googleusercontent.com",
+		clientSecret: "-Xwi9od0l9INQAa2y3ClbQGK",
+		callbackURL: "http://localhost:3000/api/v1.0/google/callback"
 	},
-		function (accessToken, refreshToken, profile, cb) {
-			// Register user here
-			console.log(profile);
-			// cb(err, profilel)
-			let workspaceNumber = Math.floor((Math.random() * 10000) + 1)
-			let workspaceName = profile.name.givenName
-			let workspaceUrl = workspaceName + workspaceUrl
-			googleStrategyCreateUser(profile, workspaceUrl)
-		}
+	function(accessToken, refreshToken, profile, cb) {
+		// Register user here
+		console.log("yessir");
+		console.log(profile);
+		cb(null,profile);
+		// // cb(err, profilel)
+		// let workspaceNumber = Math.floor((Math.random() * 10000) + 1);
+		// let workspaceName = profile.name.givenName;
+		// let workspaceUrl = workspaceName + workspaceUrl;
+		// googleStrategyCreateUser(profile, workspaceUrl);
+	}
 	));
 }
 
-
 async function googleStrategyCreateUser(profile, workspaceURL) {
+	return database().transaction(async function(transaction){
+		try{
+			const client = await models().client.findOne({ where: { workspaceURL: workspaceURL, active: true } }, { transaction: transaction });
 
+			if (client !== null) {
+				throw new ServerResponseError(403, t("validation.clientInvalidProperties", { lng: browserLng }), { workspaceURL: [t("validation.registeredWorkspaceURL", { lng: browserLng })] });
+			}
+		
+			const clientObject = {
+				name: workspaceURL,
+				workspaceURL: workspaceURL,
+				subscriptionId: SUBSCRIPTION_TYPE.TRIAL,
+			};
+		
+			// Calculate start time of new client account
+			const startDate = moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
+		
+			// Add time to clientObject
+			clientObject.subscriptionStartDate = startDate;
+		
+			// If stripe enabled we need to create a trial end time
+			if (config.stripe.enabled) {
+				const endDate = moment(startDate, "YYYY-MM-DD HH:mm:ss").add(BILLING_CYCLE.TRIAL, "days");
+				// Add subscription end date to the client object
+				clientObject.subscriptionEndDate = endDate;
+			}
+		
+			// Save client object to database
+			const clientInstance = await models().client.create(clientObject, { transaction: transaction });
+		
+			// Encrypt and salt user password
+			const password = await bcrypt.hash(profile.id, 10);
+		
+			const userInstance = await models().user.create(
+				{
+					firstName: profile.name.givenName,
+					lastName: profile.name.familyName,
+					clientId: clientInstance.get("id"),
+					emailAddress: profile.emails[0].value,
+					password: password,
+				},
+				{ transaction: transaction }
+			);
+			await models().userRoles.create(
+				{
+					userId:userInstance.get("id"),
+					roleId:ROLE_TYPE.OWNER,
+					active:true
+				},
+				{transaction:transaction}
+			);
+			const validationCode = await generateUserEmailValidationCode(userInstance.get("id"), clientInstance.get("id"), transaction);
+
+			// Build email params object
+			const emailParams = {
+				firstName: userInstance.get("firstName"),
+				workspaceName: clientInstance.get("workspaceName"),
+				workspaceURL: `${config.build.protocol}://${clientInstance.get("workspaceURL")}.${config.build.domainPath}/`,
+				validationLink: `${config.build.protocol}://${clientInstance.get("workspaceURL")}.${config.build.domainPath}/verify#code=${validationCode}`
+			};
+
+			// Send welcome email to user
+			sendEmail(EMAIL_TYPE.CLIENT_WELCOME, userInstance.get("language"), userInstance.get("emailAddress"), emailParams, clientInstance.get("id"), userInstance.get("id"));
+
+			// Create a response object
+			const response = { status: 200, message: t("label.success", { lng: browserLng }) };
+
+			// Return the response object
+			return response;
+		}
+		
+	
+		catch(error){
+			throw error;
+		}
+	
 	// console.log("signed in");
-	const client = await models().client.findOne({ where: { workspaceURL: workspaceURL, active: true } }, { transaction: transaction });
-
-	if (client !== null) {
-		throw new ServerResponseError(403, t("validation.clientInvalidProperties", { lng: browserLng }), { workspaceURL: [t("validation.registeredWorkspaceURL", { lng: browserLng })] });
-	}
-
-	const clientObject = {
-		name: workspaceURL,
-		workspaceURL: workspaceURL,
-		subscriptionId: SUBSCRIPTION_TYPE.TRIAL,
-	};
-
-	// Calculate start time of new client account
-	const startDate = moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
-
-	// Add time to clientObject
-	clientObject.subscriptionStartDate = startDate;
-
-	// If stripe enabled we need to create a trial end time
-	if (config.stripe.enabled) {
-		const endDate = moment(startDate, "YYYY-MM-DD HH:mm:ss").add(BILLING_CYCLE.TRIAL, "days");
-		// Add subscription end date to the client object
-		clientObject.subscriptionEndDate = endDate;
-	}
-
-	// Save client object to database
-	const clientInstance = await models().client.create(clientObject, { transaction: transaction });
-
-	// Encrypt and salt user password
-	const password = await bcrypt.hash(profile.id, 10);
-
-	const userInstance = await models().user.create(
-		{
-			firstName: profile.name.givenName,
-			lastName: profile.name.familyName,
-			clientId: clientInstance.get("id"),
-			emailAddress: profile.emails[0].value,
-			password: password,
-		},
-		{ transaction: transaction }
-	);
+	});
 }
 async function LocalStrategyLoadUser(workspaceURL, emailAddress, password) {
 	// Load a client using a workspaceURL
