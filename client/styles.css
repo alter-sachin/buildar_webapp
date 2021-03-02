@@ -2788,6 +2788,7 @@ audio.react-audio-player {
 .myvideo{
 	display: flex;
 	flex-direction: row;
+	padding-bottom: 3em;
 }
 
 .myvideo-header h1{
@@ -2804,4 +2805,18 @@ audio.react-audio-player {
 .myvideo-card p{
 	font-family: Arial, Helvetica, sans-serif;
 	font-weight: 700;
+}
+
+.myvideo-card-menu{
+	margin-bottom: 1em;
+}
+
+#dropdown-basic::after{
+	display: none;
+}
+
+@media (max-width:575px){
+	.myvideo{
+		text-align: center;
+	}
 }
