@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
 			},
 			googleId: {
 				type: DataTypes.INTEGER(11).UNSIGNED,
-				defaultValue: "",
+				defaultValue: 0,
 				field: "googleId"
 			},
 			firstName: {

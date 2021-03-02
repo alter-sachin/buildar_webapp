@@ -346,6 +346,7 @@ CREATE TABLE `user` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `firstName` varchar(255) NOT NULL DEFAULT '',
   `lastName` varchar(255) NOT NULL DEFAULT '',
+  `googleId` int(11) unsigned NOT NULL DEFAULT '0',
   `profilePhoto` varchar(255) DEFAULT NULL,
   `clientId` int(11) unsigned NOT NULL,
   `emailAddress` varchar(255) NOT NULL DEFAULT '',
