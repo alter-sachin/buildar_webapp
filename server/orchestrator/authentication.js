@@ -111,6 +111,7 @@ export async function generateUserEmailValidationCode(userId, clientId, transact
 	return code;
 }
 
+
 // Register new Client
 export function registerNewClient(requestProperties, authenticatedUser, browserLng) {
 	return database().transaction(async function (transaction) {
@@ -201,6 +202,11 @@ export function registerNewClient(requestProperties, authenticatedUser, browserL
 	});
 }
 
+
+
+
+
+
 // Authenticate User with security token
 export function authenticateWithJWTStrategy(req, res, next, browserLng) {
 	return passport.perform().authenticate("jwt", { session: false }, function (error, user) {
@@ -268,6 +274,8 @@ export function authenticateWithLocalStrategy(req, res, next, browserLng) {
 		}
 		// Authenticate user with strategy
 		req.logIn(user, function (error) {
+			console.log("this is in login");
+			console.log(user);
 			if (error) {
 				return res
 					.status(403)

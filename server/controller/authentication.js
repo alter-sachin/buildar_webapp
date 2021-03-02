@@ -21,6 +21,7 @@ import {
 } from "../orchestrator/authentication";
 
 require("../services/passport");
+require("../services/googleAuth");
 const passport = require("passport");
 
 module.exports = function (router) {
@@ -90,9 +91,66 @@ module.exports = function (router) {
 
 	router.get("/api/v1.0/authentication/google", restrict({ unregistered: true, registered: false }), passport.authenticate("google", { scope: ["profile", "email"] }));
 
-	router.get("/api/v1.0/google/callback", restrict({ unregistered: true, registered: false }), passport.authenticate("google", { failureRedirect: "/register" }), (req, res) => {
-		console.log("inside stuff");
-		res.redirect("/signin");
+	router.get("/api/v1.0/google/callback", restrict({ unregistered: true, registered: false }), passport.authenticate("google", { failureRedirect: "/register" }), (req, res,next) => {
+		console.log("before request");
+		console.log(req);
+		const workspace_url = "truepeople"
+		const language_fill = "en";
+		const requestProperties = {
+			workspaceURL: workspace_url,
+			firstName: req.user.name.givenName,
+			lastName: req.user.name.givenName,
+			emailAddress: req.user._json.email,
+			password: req.user.id,
+			privacyConsent: true,
+			language: language_fill
+		};
+
+		// Load browser language from header
+		const browserLng = browserResponseLng(req);
+		// Validate properties in received object
+		const valid = validate(requestProperties, register());
+		if (valid != null) {
+			const errorMsg = new ServerResponseError(403, t("validation.clientInvalidProperties", { lng: browserLng }), valid);
+			return next(errorMsg);
+		}
+
+
+			const obj1 ={
+				body:{
+				workspaceURL:workspace_url,
+				emailAddress:  req.user._json.email,
+				password: req.user.id				}
+				
+			}
+
+		Object.assign(req,obj1);
+			
+		
+		/*req.append()
+		
+			body:{
+				workspaceURL:workspace_url,
+				emailAddress: req.user._json.email,
+				password: req.user.id
+			}*/
+		
+
+		// Register new client and return response
+		registerNewClient(requestProperties, null, browserLng).then(
+			result => {
+				console.log("succesful");
+				console.log(req);
+				authenticateWithLocalStrategy(req, res, next, browserLng);
+				//res.redirect("http://news1.localhost:3000/");
+				return res.status(200).send(result);
+			},
+			error => {
+				return next(error);
+			}
+		);
+
+		
 	});
 
 	// Login to user account

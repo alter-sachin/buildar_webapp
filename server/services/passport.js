@@ -27,6 +27,8 @@ function initialize(app) {
 				if (req.body == null) {
 					return done(null, false);
 				} else {
+					console.log("passport local",req.body);
+
 					LocalStrategyLoadUser(req.body.workspaceURL, req.body.emailAddress, req.body.password)
 						.then(result => {
 							return done(null, result);
@@ -38,6 +40,8 @@ function initialize(app) {
 			}
 		)
 	);
+
+
 
 	// JSON Web Token Authentication Strategy
 	passport.use(
