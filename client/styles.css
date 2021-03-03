@@ -39,6 +39,7 @@ Colors:
 - Body text - dark gray #555
 ******************************************/
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
 
 /******************************/
 /*     01. General Styles     */
@@ -2787,32 +2788,38 @@ audio.react-audio-player {
 /*****************************/
 .myvideo{
 	display: flex;
-	flex-direction: row;
+	align-items: center;
+	flex-direction: column;
 	padding-bottom: 3em;
 }
 
 .myvideo-header h1{
 	align-items:left;
 	text-align: left;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: 'Roboto', sans-serif;
 	font-weight: 700;
 }
 
-.myvideo-card h4{
-	font-family: Arial, Helvetica, sans-serif;
-	font-weight: 700;
+.myvideo-container{
+	align-items: center;
 }
+
 .myvideo-card p{
-	font-family: Arial, Helvetica, sans-serif;
+	margin-top: 1em;
+	margin-right: 2em;
+	font-family: 'Roboto', sans-serif;
 	font-weight: 700;
 }
 
 .myvideo-card{
+	height: 100%;
+	padding-bottom: 1.5em;
 	text-align: right;
 }
 
 .myvideo-card-item{
-	border: solid 2px #bfbaba;
+	width: 85%;
+	border: solid 1px #dcdcdc;
 	border-radius: 5px;
 	margin-bottom: 1em;
 	-webkit-transition: border-color 0.5s ease;
@@ -2823,21 +2830,26 @@ audio.react-audio-player {
 }
 
 .myvideo-card-item:hover{
-	border: solid 2px blue;
+	transition: 0.25s ease-in-out;
+	/* border: solid 2px blue; */
+	box-shadow:0 0 0 2px blue;
 }
 
 .myvideo-buttons{
+	width: 95%;
 	text-align: right;
 	margin-bottom: 1em;
 }
 
 .myvideo-buttons a{
+	font-family: "Roboto", Arial, Helvetica, sans-serif;
+	align-items: center;
 	font-weight: 700;
 	font-size: 1em;
 }
 
-.myvideo-card video{
-	min-width: 100%;
+.myvideo-card img{
+	min-width: 99.99%;
 	height: auto;
 }
 
@@ -2845,11 +2857,32 @@ audio.react-audio-player {
 	margin-bottom: 1em;
 }
 
-/* #myvideo-card-menu-dropdown button{
+
+.myvideo-time p{
+	font-family: "Roboto", Arial, Helvetica, sans-serif;
+	text-align: left;
+	color: grey;
+	font-size: 12px;
+	margin-bottom: 0em;
+	font-weight: 400;
+	margin-left: 1em;
+}
+
+.myvideo i#myvideo-footer-icons{
 	display: none;
-} */
+	float: right;
+}
+
+.myvideo-card-item:hover i#myvideo-footer-icons{
+	display: block;
+}
+
+#myvideo-card-menu-dropdown button{
+	visibility: none;
+}
 
 .myvideo-card-item:hover #dropwdown-basic{
+	visibility: visible;
 	display:flex;
 }
 
@@ -2866,5 +2899,8 @@ audio.react-audio-player {
 @media (max-width:767px){
 	.myvideo-card{
 		width: 100%;
+	}
+	.myvideo-buttons a{
+		margin-right:3em;
 	}
 }

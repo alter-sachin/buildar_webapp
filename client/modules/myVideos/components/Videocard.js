@@ -9,12 +9,13 @@ class Videocard extends Component {
         this.state = {
             title: "",
             description: "",
-            url: ""
+            url: "",
+            timeCreated: ""
         }
     }
 
     render() {
-        const { title, description, url } = this.props
+        const { title, description, url, timeCreated } = this.props
         return (
             <div className="myvideo-card-item">
                 <div style={{ cursor: "pointer" }} className="myvideo-card">
@@ -30,10 +31,17 @@ class Videocard extends Component {
                             </Dropdown.Menu>
                         </Dropdown>
                     </div>
-                    <video className="myvideo-vid" controls width="300" height="240">
-                        <source src={url} />
-                    </video>
-                    <h4>{title}</h4>
+                    <a href="/video">
+                        <img className="myvideo-thumbnail" src="images/Logo_BuildAR.png" />
+                    </a>
+                    <p>{title}</p>
+                </div>
+                <div className="myvideo-time">
+                    <p>
+                        {timeCreated}
+                        <i id="myvideo-footer-icons" class="far fa-star"></i>
+                        <i id="myvideo-footer-icons" class="fas fa-link"></i>
+                    </p>
                 </div>
             </div>
         )

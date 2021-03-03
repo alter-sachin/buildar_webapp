@@ -1,8 +1,6 @@
 import axios from "axios";
 import React, { Component } from "react";
-import { Col, Container, Row } from "react-bootstrap";
 import Videocard from "./components/Videocard";
-import Footer from "../homepage/components/Footer"
 class MyVideo extends Component {
 
 	state = {
@@ -33,66 +31,72 @@ class MyVideo extends Component {
 					id: "1",
 					title: "Video 1",
 					description: "first vid",
-					url: "https://www.buildar.in/assets/videos/home.mp4"
+					url: "https://www.buildar.in/assets/videos/home.mp4",
+					timeCreated: "3 hours ago"
 				},
 				{
 					id: "2",
 					title: "Video 2",
 					description: "second vid",
-					url: "https://www.buildar.in/assets/videos/home.mp4"
+					url: "https://www.buildar.in/assets/videos/home.mp4",
+					timeCreated: "3 hours ago"
 				},
 				{
 					id: "3",
 					title: "Video 3",
 					description: "third vid",
-					url: "https://www.buildar.in/assets/videos/home.mp4"
+					url: "https://www.buildar.in/assets/videos/home.mp4",
+					timeCreated: "3 hours ago"
 				},
 				{
 					id: "4",
 					title: "Video 4",
 					description: "fourth vid",
-					url: "https://www.buildar.in/assets/videos/home.mp4"
+					url: "https://www.buildar.in/assets/videos/home.mp4",
+					timeCreated: "3 hours ago"
 				},
 				{
 					id: "5",
 					title: "Video 5",
 					description: "fifth vid",
-					url: "https://www.buildar.in/assets/videos/home.mp4"
+					url: "https://www.buildar.in/assets/videos/home.mp4",
+					timeCreated: "3 hours ago"
 				},
 				{
 					id: "6",
 					title: "Video 6",
 					description: "sixth vid",
-					url: "https://www.buildar.in/assets/videos/home.mp4"
+					url: "https://www.buildar.in/assets/videos/home.mp4",
+					timeCreated: "3 hours ago"
 				}
 			]
-			// const {videoList} = this.state; 
+			// const {videoList} = this.state;
 			return (
-				<div>
+				<div className="myvideo">
 					<h1 className="myvideo-header">My Videos</h1>
-					<div className="myvideo flex-container" >
-						<Container>
+					<div className="flex-container" >
+						<div className="container myvideo-container">
 							<div className="myvideo-buttons">
-								<a href="/video" type="button" className="btn btn-warning">New Video</a>
+								<a href="/createvideo" type="button" className="btn btn-warning">New Video</a>
 							</div>
-							<Row>
+							<div className="row">
 								{videoList.map((video, index) => {
 									return (
-										<Col lg={true} md={true} sm={true} sm={4} className="myvideo-card">
+										<div className="col-md-6 col-lg-4 col-sm-12 myvideo-card">
 											<Videocard
 												key={index}
 												title={video.title}
 												description={video.description}
 												url={video.url}
+												timeCreated={video.timeCreated}
 											/>
-										</Col>
+										</div>
 									);
 								}
 								)}
-							</Row>
-						</Container>
+							</div>
+						</div>
 					</div>
-					<Footer />
 				</div>
 			);
 

@@ -18,7 +18,8 @@ const Homepage = AsyncComponent(() => import("./modules/homepage"));
 const Authentication = AsyncComponent(() => import("./modules/authentication"));
 const Overview = AsyncComponent(() => import("./modules/overview"));
 const Profile = AsyncComponent(() => import("./modules/profile"));
-const Video = AsyncComponent(() => import("./modules/video"));
+const CreateVideo = AsyncComponent(() => import("./modules/createvideo"));
+const Video = AsyncComponent(() => import("./modules/video"))
 const MyVideo = AsyncComponent(() => import("./modules/Myvideos"));
 const Billing = AsyncComponent(() => import("./modules/billing"));
 const Settings = AsyncComponent(() => import("./modules/settings"));
@@ -123,6 +124,17 @@ class Router extends Component {
 							render={() => (
 								<DefaultLayout key="/profile">
 									<Profile />
+								</DefaultLayout>
+							)}
+						/>
+						<ProtectedRoute
+							exact
+							path="/createvideo"
+							hasAnyRole={[ROLE_TYPE.OWNER, ROLE_TYPE.ADMINISTRATOR, ROLE_TYPE.FINANCE]}
+							user={user}
+							render={() => (
+								<DefaultLayout key="/createvideo">
+									<CreateVideo />
 								</DefaultLayout>
 							)}
 						/>
