@@ -33,37 +33,37 @@ class MyVideo extends Component {
 					id: "1",
 					title: "Video 1",
 					description: "first vid",
-					url: "https://www.youtube.com/watch?v=yXWfy1CXuNk"
+					url: "https://www.buildar.in/assets/videos/home.mp4"
 				},
 				{
 					id: "2",
 					title: "Video 2",
 					description: "second vid",
-					url: "https://www.youtube.com/watch?v=yXWfy1CXuNk"
+					url: "https://www.buildar.in/assets/videos/home.mp4"
 				},
 				{
 					id: "3",
 					title: "Video 3",
 					description: "third vid",
-					url: "https://www.youtube.com/watch?v=yXWfy1CXuNk"
+					url: "https://www.buildar.in/assets/videos/home.mp4"
 				},
 				{
 					id: "4",
 					title: "Video 4",
 					description: "fourth vid",
-					url: "https://www.youtube.com/watch?v=yXWfy1CXuNk"
+					url: "https://www.buildar.in/assets/videos/home.mp4"
 				},
 				{
 					id: "5",
 					title: "Video 5",
 					description: "fifth vid",
-					url: "https://www.youtube.com/watch?v=yXWfy1CXuNk"
+					url: "https://www.buildar.in/assets/videos/home.mp4"
 				},
 				{
 					id: "6",
 					title: "Video 6",
 					description: "sixth vid",
-					url: "https://www.youtube.com/watch?v=yXWfy1CXuNk"
+					url: "https://www.buildar.in/assets/videos/home.mp4"
 				}
 			]
 			// const {videoList} = this.state; 
@@ -72,10 +72,13 @@ class MyVideo extends Component {
 					<h1 className="myvideo-header">My Videos</h1>
 					<div className="myvideo flex-container" >
 						<Container>
+							<div className="myvideo-buttons">
+								<a href="/video" type="button" className="btn btn-warning">New Video</a>
+							</div>
 							<Row>
 								{videoList.map((video, index) => {
 									return (
-										<Col lg={true} md={true} sm={4} className="myvideo-card">
+										<Col lg={true} md={true} sm={true} sm={4} className="myvideo-card">
 											<Videocard
 												key={index}
 												title={video.title}

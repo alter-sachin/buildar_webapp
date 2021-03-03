@@ -2798,7 +2798,7 @@ audio.react-audio-player {
 	font-weight: 700;
 }
 
-.myvideo-card h2{
+.myvideo-card h4{
 	font-family: Arial, Helvetica, sans-serif;
 	font-weight: 700;
 }
@@ -2807,8 +2807,50 @@ audio.react-audio-player {
 	font-weight: 700;
 }
 
+.myvideo-card{
+	text-align: right;
+}
+
+.myvideo-card-item{
+	border: solid 2px #bfbaba;
+	border-radius: 5px;
+	margin-bottom: 1em;
+	-webkit-transition: border-color 0.5s ease;
+         -moz-transition: border-color 1s ease;
+           -o-transition: border-color 1s ease;
+          -ms-transition: border-color 1s ease;
+              transition: border-color 1s ease;
+}
+
+.myvideo-card-item:hover{
+	border: solid 2px blue;
+}
+
+.myvideo-buttons{
+	text-align: right;
+	margin-bottom: 1em;
+}
+
+.myvideo-buttons a{
+	font-weight: 700;
+	font-size: 1em;
+}
+
+.myvideo-card video{
+	min-width: 100%;
+	height: auto;
+}
+
 .myvideo-card-menu{
 	margin-bottom: 1em;
+}
+
+/* #myvideo-card-menu-dropdown button{
+	display: none;
+} */
+
+.myvideo-card-item:hover #dropwdown-basic{
+	display:flex;
 }
 
 #dropdown-basic::after{
@@ -2818,5 +2860,11 @@ audio.react-audio-player {
 @media (max-width:575px){
 	.myvideo{
 		text-align: center;
+	}
+}
+
+@media (max-width:767px){
+	.myvideo-card{
+		width: 100%;
 	}
 }

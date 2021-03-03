@@ -17,11 +17,9 @@ class Videocard extends Component {
         const { title, description, url } = this.props
         return (
             <div className="myvideo-card-item">
-                <h2>{title}</h2>
-                <p>{description}</p>
-                <div className="myvideo-card">
+                <div style={{ cursor: "pointer" }} className="myvideo-card">
                     <div className="myvideo-card-menu">
-                        <Dropdown>
+                        <Dropdown id="myvideo-card-menu-dropdown">
                             <Dropdown.Toggle variant="secondary" id="dropdown-basic">
                                 <i className="fa fa-bars"></i>
                             </Dropdown.Toggle>
@@ -35,6 +33,7 @@ class Videocard extends Component {
                     <video className="myvideo-vid" controls width="300" height="240">
                         <source src={url} />
                     </video>
+                    <h4>{title}</h4>
                 </div>
             </div>
         )
