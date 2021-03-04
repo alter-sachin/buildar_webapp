@@ -1667,6 +1667,68 @@ a{
 	margin-bottom: 1rem;
 }
 
+.individual-video .react-player-col{
+	margin-bottom: 2em;
+}
+
+.individual-video .react-player video{
+	border-radius: 5px;
+}
+
+.react-player > div {
+  position: absolute;
+}
+
+.individual-video textarea{
+	border: solid 1px transparent;
+}
+
+.individual-video textarea:hover{
+	border: solid 1px;
+}
+
+.individual-video textarea:focus{
+	border: solid blue;
+	transition: 0.125s ease-in;
+}
+
+.individual-video p{
+	float: left;
+	font-size: large;
+	font-family: 'Roboto', Arial, Helvetica, sans-serif;
+}
+
+.individual-video .container{
+	min-width: 90%;
+	display: flex;
+	text-align: center;
+	flex-direction: column;
+	margin: auto;
+	justify-content: center;
+}
+
+.individual-video .video-title-edit{
+	font-family: 'Roboto', Arial, Helvetica, sans-serif;
+	text-align: left;
+   	border: 1px solid transparent;
+}
+
+.individual-video .video-title-edit:hover{
+	border: solid 1px grey;
+	border-radius: 5px;
+}
+.individual-video .video-title:focus{
+	border-color: blue;
+}
+
+@media (max-width:500px){
+	.individual-video{
+		margin-top: 3vw;
+	}
+	.individual-video textarea{
+		height: 15em;
+	}
+}
 
 /***********************/
 /*     11. Pricing     */
