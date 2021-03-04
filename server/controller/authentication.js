@@ -159,7 +159,8 @@ module.exports = function(router) {
 
 	router.post("/api/v1.0/authentication/google", async(req,res,next)=>{
 		const {token} = req.body;
-		console.log(req.body);
+		//hey I am printing body here
+		console.log("hey I am prinitng",req.body);
 		const ticket = await client.verifyIdToken({
 			idToken:token,
 			audience:process.env.CLIENT_ID
@@ -167,17 +168,17 @@ module.exports = function(router) {
 		const { given_name,family_name, email, picture, locale } = ticket.getPayload();
 		console.log(ticket.getPayload());
 		
-		const workspace_url ="mat12345";
+		const workspace_url ="mathew123hi";
 			
 		const requestProperties = {
 			body:{
 				workspaceURL: workspace_url,
 				firstName: given_name,
-				lastName: family_name,
+				lastName: given_name,
 				emailAddress: email,
 				password: email+"buildArSecret",
 				privacyConsent: true,
-				language:locale,
+				language:"en",
 				profilePhoto:picture,
 			}
 		};
@@ -195,12 +196,12 @@ module.exports = function(router) {
 				if(result!=="user exists"){
 					console.log("result status is:",result.status);
 					console.log(result);
-					return res.status(200).send(result);
+					return res.status(200).send(requestProperties.body);
 				}
 				else{
 					req.body = requestProperties.body;
-					authenticateWithLocalStrategy(requestProperties, res, next, browserLng);
-					 
+					//authenticateWithLocalStrategy(requestProperties, res, next, browserLng);
+					return res.status(200).send(req.body); 
 				}
 				
 			},

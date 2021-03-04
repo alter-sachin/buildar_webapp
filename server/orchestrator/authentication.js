@@ -119,9 +119,9 @@ export function registerNewClient(requestProperties, authenticatedUser, browserL
 			const user = await models().user.findOne({where:{emailAddress:requestProperties.body.emailAddress, active:true}},{transaction:transaction});
 			
 			//Send response if user already exists for a emailAddress
-			if(user!=null){
+			/*if(user!=null){
 				return ("user exists");
-			}
+			}*/
 
 			// Check if client already exists for workspaceURL
 			const client = await models().client.findOne({ where: { workspaceURL: requestProperties.body.workspaceURL, active: true } }, { transaction: transaction });

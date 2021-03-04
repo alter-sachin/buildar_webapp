@@ -7,10 +7,12 @@ import { Helmet } from "react-helmet";
 import validate from "shared/validation/validate";
 import { t, l, activeLanguage } from "shared/translations/i18n";
 import { extractSubdomain } from "shared/utilities/domains";
-
+import { REDUX_STATE } from "shared/constants";
 import { registerClient, REGISTER_REJECTED } from "common/store/reducers/authentication.js";
 import { register } from "shared/validation/authentication";
-
+import { AUTHENTICATION, LOGIN_REJECTED, validateWorkspaceURL, VALIDATE_WORKSPACE_URL_REJECTED, loginUser, loadUser, LOAD_USER_REJECTED } from "common/store/reducers/authentication.js";
+import { login, workspaceURL } from "shared/validation/authentication";
+import { changeLanguage } from "common/store/reducers/language.js";
 import ServerError from "common/components/ServerError";
 import InputField from "common/components/inputs/InputField";
 import Checkbox from "common/components/inputs/Checkbox";
@@ -18,6 +20,13 @@ import WorkspaceURLField from "common/components/inputs/WorkspaceURLField";
 import LanguageSwitcher from "./components/LanguageSwitcher";
 import axios from "axios";
 import { GoogleLogin} from "react-google-login";
+
+import Alert from "common/components/Alert";
+import { clientStyling } from "./components/ClientStyling";
+import WorkspaceURL from "./components/WorkspaceURL";
+import SignInForm from "./components/SignInForm";
+import Loading from "common/components/Loading";
+import { setGAUser } from "common/components/GoogleAnalytics";
 
 const clientId = "976971922840-p9eobg6v863nppicf7vsatfup1q82qjt.apps.googleusercontent.com";
 
@@ -37,13 +46,18 @@ class Register extends Component {
 			visible: false,
 			validationErrors: null,
 			serverError: null,
-			newLoading:false
+			newLoading:false,
+			loginPending:false,
+			keepSignedIn: false,
+			redirectPending: false,
 		};
 
 		this.register = this.register.bind(this);
 		this.changeField = this.changeField.bind(this);
 		this.handleChecked = this.handleChecked.bind(this);
 		this.googleAuthenticate = this.googleAuthenticate.bind(this);
+		this.handleLogin = this.handleLogin.bind(this);
+		this.changeSubdomain = this.changeSubdomain.bind(this);
 		// this.googleLogin = this.googleLogin.bind(this);
 	}
 
@@ -145,9 +159,7 @@ class Register extends Component {
 	handleClick() {
 		this.toggleSecondarySignUp();
 	}
-	render() {
-		const { firstName, lastName, emailAddress, password, workspaceURL, privacyConsent, visible, loading, serverError, validationErrors } = this.state;
-		const handleLogin = async googleData =>{
+	async handleLogin(googleData){
 			const res = await fetch("api/v1.0/authentication/google", {
 				method : "POST",
 				body : JSON.stringify({
@@ -159,6 +171,98 @@ class Register extends Component {
 			});
 			const data = await res.json();
 			console.log("this is from frontend:", data);
+			this.login(data);
+		}
+
+	login(data) {
+		//evt.preventDefault(); // Prevent page refresh
+		console.log("I am inside login");
+		console.log(data.emailAddress);
+		this.setState({ loginPending: true, validationErrors: null, serverError: null });
+		const user = {
+			workspaceURL: data.workspaceURL,
+			emailAddress: data.emailAddress,
+			password: data.password,
+			keepSignedIn: true
+		};
+
+		// Validate input parameters
+		const valid = validate(user, login());
+		if (valid != null) {
+			this.setState({
+				loginPending: false,
+				validationErrors: valid
+			});
+		} else {
+			this.props.loginUser(user).then(result => {
+				if (result.type === LOGIN_REJECTED) {
+					clearToken(); // Clear security token if login rejected
+					fetch.clearSecurityToken(); // Clear token in fetch header
+					this.setState({
+						loginPending: false,
+						serverError: result.payload
+					});
+				} else {
+					this.props.loadUser().then(result => {
+						if (result.type === LOAD_USER_REJECTED) {
+							this.setState({
+								loginPending: false,
+								serverError: result.payload
+							});
+
+							return;
+						}
+
+						// Set Google Analytics User
+						setGAUser(result.payload.userId);
+
+						// Load client specific default language
+						const lng = result.payload.language;
+						this.changeSubdomain();
+						if (variableExists(lng) && activeLanguage() !== lng) {
+							this.props.changeLanguage(lng);
+						}
+					});
+				}
+			});
+		}
+	}
+
+	changeSubdomain() {
+		//evt.preventDefault(); // Prevent page refresh
+
+		this.setState({ redirectPending: true, validationErrors: null, serverError: null });
+		// Fetch subdomain from state
+		const subdomain = {
+			workspaceURL: this.state.workspaceURL
+		};
+
+		// Validate input parameters
+		const valid = validate(subdomain, workspaceURL());
+		if (valid != null) {
+			this.setState({
+				redirectPending: false,
+				validationErrors: valid
+			});
+		} else {
+			const url = `${BUILD_PROTOCOL}://${subdomain.workspaceURL}.${BUILD_DOMAINPATH}/signin`;
+			window.location.replace(url);
+		}
+	}
+
+
+	render() {
+		const { loginPending,keepSignIn,redirectPending,firstName, lastName, emailAddress, password,privacyConsent,loading,visible,validationErrors,serverError, workspaceURL,newLoading } = this.state;
+		const { workspaceURLStatus, logInStatus, clientStyle, userToken, userKeepSignedIn, history } = this.props;
+
+		const workspaceURLPending = workspaceURLStatus == null || workspaceURLStatus == REDUX_STATE.PENDING;
+
+		// Handle client specific page styling
+		const style = clientStyling(this.props.workspaceURLStatus, this.props.clientStyle);
+
+		// Store security token on sign in success
+		if (logInStatus == REDUX_STATE.FULFILLED && userToken != null) {
+			saveToken(userToken, userKeepSignedIn);
 		}
 		return (
 			<Fragment>
@@ -189,8 +293,8 @@ class Register extends Component {
 										<GoogleLogin
 											clientId={clientId}
 											buttonText = "Signup"
-											onSuccess = {handleLogin}
-											onFailure = {handleLogin}
+											onSuccess = {this.handleLogin}
+											onFailure = {this.handleLogin}
 											cookiePolicy = {"single_host_origin"}
 											style = {{marginTop:"100px"}}
 											isSignedIn = {true}
@@ -323,16 +427,36 @@ class Register extends Component {
 }
 
 Register.propTypes = {
-	registerClient: PropTypes.func
+	registerClient: PropTypes.func,
+	history: PropTypes.object,
+	workspaceURLStatus: PropTypes.string,
+	logInStatus: PropTypes.string,
+	clientStyle: PropTypes.object,
+	loginUser: PropTypes.func,
+	loadUser: PropTypes.func,
+	validateWorkspaceURL: PropTypes.func,
+	userToken: PropTypes.string,
+	userKeepSignedIn: PropTypes.bool,
+	changeLanguage: PropTypes.func
 };
 
 function mapStateToProps(state) {
-	return {};
+	return {
+		workspaceURLStatus: state.getIn([AUTHENTICATION, "workspaceURL", "status"]),
+		logInStatus: state.getIn([AUTHENTICATION, "userLogin", "status"]),
+		clientStyle: state.getIn([AUTHENTICATION, "workspaceURL", "payload"]),
+		userToken: state.getIn([AUTHENTICATION, "userLogin", "status", "payload", "token"]),
+		userKeepSignedIn: state.getIn([AUTHENTICATION, "userLogin", "status", "payload", "keepSignedIn"])
+	};
 }
 
 function mapDispatchToProps(dispatch) {
 	return {
-		registerClient: bindActionCreators(registerClient, dispatch)
+		registerClient: bindActionCreators(registerClient, dispatch),
+		loginUser: bindActionCreators(loginUser, dispatch),
+		loadUser: bindActionCreators(loadUser, dispatch),
+		validateWorkspaceURL: bindActionCreators(validateWorkspaceURL, dispatch),
+		changeLanguage: bindActionCreators(changeLanguage, dispatch)
 	};
 }
 
