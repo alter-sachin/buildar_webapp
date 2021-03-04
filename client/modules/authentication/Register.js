@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import validate from "shared/validation/validate";
 import { t, l, activeLanguage } from "shared/translations/i18n";
@@ -16,6 +16,11 @@ import InputField from "common/components/inputs/InputField";
 import Checkbox from "common/components/inputs/Checkbox";
 import WorkspaceURLField from "common/components/inputs/WorkspaceURLField";
 import LanguageSwitcher from "./components/LanguageSwitcher";
+import axios from "axios";
+import { GoogleLogin} from "react-google-login";
+
+const clientId = "976971922840-p9eobg6v863nppicf7vsatfup1q82qjt.apps.googleusercontent.com";
+
 
 class Register extends Component {
 	constructor(props) {
@@ -31,12 +36,15 @@ class Register extends Component {
 			loading: false,
 			visible: false,
 			validationErrors: null,
-			serverError: null
+			serverError: null,
+			newLoading:false
 		};
 
 		this.register = this.register.bind(this);
 		this.changeField = this.changeField.bind(this);
 		this.handleChecked = this.handleChecked.bind(this);
+		this.googleAuthenticate = this.googleAuthenticate.bind(this);
+		// this.googleLogin = this.googleLogin.bind(this);
 	}
 
 	componentDidMount() {
@@ -59,6 +67,14 @@ class Register extends Component {
 	handleChecked(evt) {
 		this.setState({ [evt.target.name]: !this.state.privacyConsent });
 	}
+	googleAuthenticate(){
+		axios.get("/api/v1.0/authentication/google")
+			.then(({data})=>{
+				console.log("this is data",data);
+			});
+	}
+
+	
 
 	register(evt) {
 		evt.preventDefault(); // Prevent page refresh
@@ -106,31 +122,44 @@ class Register extends Component {
 	}
 
 	dataCopy() {
-		document.secondaryForm.emailAddress.value = document.primaryForm.email.value
+		document.secondaryForm.emailAddress.value = document.primaryForm.email.value;
 	}
 	toggleSecondarySignUp() {
 		var secondarySignUp = document.getElementById("secondary-signup");
-		var primarySignUp = document.getElementById("primary-signup")
-		var warning = document.getElementById("email-empty-warning")
-		var emailInput = document.getElementById('first-email-input')
-		var emailButton = document.getElementById('email-submit-button')
+		var primarySignUp = document.getElementById("primary-signup");
+		var warning = document.getElementById("email-empty-warning");
+		var emailInput = document.getElementById("first-email-input");
+		var emailButton = document.getElementById("email-submit-button");
 		if (secondarySignUp.style.display === "none" && document.primaryForm.email.value !== "") {
-			this.dataCopy()
-			primarySignUp.style.display = "none"
+			this.dataCopy();
+			primarySignUp.style.display = "none";
 			secondarySignUp.style.display = "block";
 		} else {
-			warning.style.display = "block"
-			warning.style.transition = "1s"
-			emailInput.style.borderColor = "red"
-			emailInput.style.borderWidth = "3px"
-			emailButton.style.marginLeft = "2em"
+			warning.style.display = "block";
+			warning.style.transition = "1s";
+			emailInput.style.borderColor = "red";
+			emailInput.style.borderWidth = "3px";
+			emailButton.style.marginLeft = "2em";
 		}
 	}
 	handleClick() {
-		this.toggleSecondarySignUp()
+		this.toggleSecondarySignUp();
 	}
 	render() {
 		const { firstName, lastName, emailAddress, password, workspaceURL, privacyConsent, visible, loading, serverError, validationErrors } = this.state;
+		const handleLogin = async googleData =>{
+			const res = await fetch("api/v1.0/authentication/google", {
+				method : "POST",
+				body : JSON.stringify({
+					token:googleData.tokenId
+				}),
+				headers:{
+					"Content-type":"application/json"
+				}
+			});
+			const data = await res.json();
+			console.log("this is from frontend:", data);
+		}
 		return (
 			<Fragment>
 				<Helmet
@@ -148,12 +177,28 @@ class Register extends Component {
 							<div className="p-3 p-sm-5 alignment vertical justify-content-center" >
 								<div className="google-auth-signup" id="primary-signup">
 									<h2 className="google-auth-header">Sign up for BuildAR</h2>
-									<form className="auth-form" action="api/v1.0/authentication/google" method="get">
-										<button type="submit" className="btn btn-light">
+								
+									{/* <div className="auth-form">
+										<button className="btn btn-light" onClick={this.googleAuthenticate}>
 											<img width="20px" style={{ marginBottom: "3px", marginRight: "1em" }} alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
 										 	Sign up with Google
+											
 										</button>
-									</form>
+									</div> */}
+									<div>
+										<GoogleLogin
+											clientId={clientId}
+											buttonText = "Signup"
+											onSuccess = {handleLogin}
+											onFailure = {handleLogin}
+											cookiePolicy = {"single_host_origin"}
+											style = {{marginTop:"100px"}}
+											isSignedIn = {true}
+										/>
+			
+										
+									</div>
+										
 									<div className="secondary-signup-separator">
 										<hr />
 										<span color="grey" fontWeight="bold">or</span>

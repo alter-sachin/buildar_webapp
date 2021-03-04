@@ -5,6 +5,7 @@ import { ServerResponseError } from "utilities/errors/serverResponseError";
 import restrict from "utilities/restrictRoutes";
 import browserResponseLng from "utilities/browserResponseLng";
 import { variableExists } from "shared/utilities/filters";
+
 import {
 	validateWorkspaceURL,
 	registerNewClient,
@@ -23,10 +24,13 @@ import {
 require("../services/passport");
 require("../services/googleAuth");
 const passport = require("passport");
+const {OAuth2Client} = require("google-auth-library");
+const client = new OAuth2Client(process.env.clientId);
+require("dotenv").config();
 
-module.exports = function (router) {
+module.exports = function(router) {
 	// Validate Workspace URL
-	router.get("/api/v1.0/authentication/validate-workspace-url", restrict({ registered: true, unregistered: true }), function (req, res, next) {
+	router.get("/api/v1.0/authentication/validate-workspace-url", restrict({ registered: true, unregistered: true }), function(req, res, next) {
 		// Get workspaceURL name from header
 		const workspaceURL = req.headers["workspaceurl"] ? req.headers["workspaceurl"] : "";
 
@@ -56,7 +60,7 @@ module.exports = function (router) {
 	});
 
 	// Register New Client Account
-	router.post("/api/v1.0/authentication/register", restrict({ unregistered: true }), function (req, res, next) {
+	router.post("/api/v1.0/authentication/register", restrict({ unregistered: true }), function(req, res, next) {
 		// Store received object properties
 		const requestProperties = {
 			workspaceURL: req.body.workspaceURL,
@@ -89,68 +93,122 @@ module.exports = function (router) {
 		);
 	});
 
-	router.get("/api/v1.0/authentication/google", restrict({ unregistered: true, registered: false }), passport.authenticate("google", { scope: ["profile", "email"] }));
+	// router.get("/api/v1.0/authentication/google", restrict({ unregistered: true, registered: false }), passport.authenticate("google", { scope: ["profile", "email"] }));
 
-	router.get("/api/v1.0/google/callback", restrict({ unregistered: true, registered: false }), passport.authenticate("google", { failureRedirect: "/register" }), (req, res,next) => {
-		console.log("before request");
-		console.log(req);
-		const workspace_url = "truepeople"
-		const language_fill = "en";
+	// router.get("/api/v1.0/google/callback", restrict({ unregistered: true, registered: false }), passport.authenticate("google", { failureRedirect: "/register" }), (req, res,next) => {
+	// 	console.log("before request");
+	// 	console.log(req)
+	// 	const workspace_url = "truepeople"
+	// 	const language_fill = "en";
+	// 	const requestProperties = {
+	// 		workspaceURL: workspace_url,
+	// 		firstName: req.user.name.givenName,
+	// 		lastName: req.user.name.givenName,
+	// 		emailAddress: req.user._json.email,
+	// 		password: req.user.id,
+	// 		privacyConsent: true,
+	// 		language: language_fill
+	// 	};
+
+	// 	// Load browser language from header
+	// 	const browserLng = browserResponseLng(req);
+	// 	// Validate properties in received object
+	// 	const valid = validate(requestProperties, register());
+	// 	if (valid != null) {
+	// 		const errorMsg = new ServerResponseError(403, t("validation.clientInvalidProperties", { lng: browserLng }), valid);
+	// 		return next(errorMsg);
+	// 	}
+
+
+	// 		const obj1 ={
+	// 			body:{
+	// 			workspaceURL:workspace_url,
+	// 			emailAddress:  req.user._json.email,
+	// 			password: req.user.id				}
+				
+	// 		}
+
+	// 	Object.assign(req,obj1);
+			
+		
+	// 	/*req.append()
+		
+	// 		body:{
+	// 			workspaceURL:workspace_url,
+	// 			emailAddress: req.user._json.email,
+	// 			password: req.user.id
+	// 		}*/
+		
+
+	// 	// Register new client and return response
+	// 	registerNewClient(requestProperties, null, browserLng).then(
+	// 		result => {
+	// 			console.log("succesful");
+	// 			console.log(req);
+	// 			authenticateWithLocalStrategy(req, res, next, browserLng);
+	// 			//res.redirect("http://news1.localhost:3000/");
+	// 			return res.status(200).send(result);
+	// 		},
+	// 		error => {
+	// 			return next(error);
+	// 		}
+	// 	);
+
+		
+	// });
+
+	router.post("/api/v1.0/authentication/google", async(req,res,next)=>{
+		const {token} = req.body;
+		console.log(req.body);
+		const ticket = await client.verifyIdToken({
+			idToken:token,
+			audience:process.env.CLIENT_ID
+		});
+		const { given_name,family_name, email, picture, locale } = ticket.getPayload();
+		console.log(ticket.getPayload());
+		
+		const workspace_url ="mat12345";
+			
 		const requestProperties = {
-			workspaceURL: workspace_url,
-			firstName: req.user.name.givenName,
-			lastName: req.user.name.givenName,
-			emailAddress: req.user._json.email,
-			password: req.user.id,
-			privacyConsent: true,
-			language: language_fill
+			body:{
+				workspaceURL: workspace_url,
+				firstName: given_name,
+				lastName: family_name,
+				emailAddress: email,
+				password: email+"buildArSecret",
+				privacyConsent: true,
+				language:locale,
+				profilePhoto:picture,
+			}
 		};
-
-		// Load browser language from header
+			//Load browser language from header
 		const browserLng = browserResponseLng(req);
 		// Validate properties in received object
-		const valid = validate(requestProperties, register());
+		const valid = validate(requestProperties.body, register());
 		if (valid != null) {
 			const errorMsg = new ServerResponseError(403, t("validation.clientInvalidProperties", { lng: browserLng }), valid);
 			return next(errorMsg);
 		}
-
-
-			const obj1 ={
-				body:{
-				workspaceURL:workspace_url,
-				emailAddress:  req.user._json.email,
-				password: req.user.id				}
-				
-			}
-
-		Object.assign(req,obj1);
-			
-		
-		/*req.append()
-		
-			body:{
-				workspaceURL:workspace_url,
-				emailAddress: req.user._json.email,
-				password: req.user.id
-			}*/
-		
-
 		// Register new client and return response
 		registerNewClient(requestProperties, null, browserLng).then(
-			result => {
-				console.log("succesful");
-				console.log(req);
-				authenticateWithLocalStrategy(req, res, next, browserLng);
-				//res.redirect("http://news1.localhost:3000/");
-				return res.status(200).send(result);
+			result=> {
+				if(result!=="user exists"){
+					console.log("result status is:",result.status);
+					console.log(result);
+					return res.status(200).send(result);
+				}
+				else{
+					req.body = requestProperties.body;
+					authenticateWithLocalStrategy(requestProperties, res, next, browserLng);
+					 
+				}
+				
 			},
 			error => {
+				console.log("error");
 				return next(error);
 			}
 		);
-
-		
 	});
 
 	// Login to user account
@@ -184,7 +242,7 @@ module.exports = function (router) {
 	});
 
 	// Logout of user account
-	router.post("/api/v1.0/authentication/logout", restrict({ registered: true }), function (req, res, next) {
+	router.post("/api/v1.0/authentication/logout", restrict({ registered: true }), function(req, res, next) {
 		// Load browser language from header
 		const browserLng = browserResponseLng(req);
 
@@ -202,7 +260,7 @@ module.exports = function (router) {
 	});
 
 	// Load user properties
-	router.get("/api/v1.0/authentication/load-user", restrict({ registered: true }), function (req, res, next) {
+	router.get("/api/v1.0/authentication/load-user", restrict({ registered: true }), function(req, res, next) {
 		// Load browser language from header
 		const browserLng = browserResponseLng(req);
 
@@ -220,7 +278,7 @@ module.exports = function (router) {
 	});
 
 	// Resend verify email address email
-	router.post("/api/v1.0/authentication/resend-verify-email", restrict({ registered: true }), function (req, res, next) {
+	router.post("/api/v1.0/authentication/resend-verify-email", restrict({ registered: true }), function(req, res, next) {
 		// Load browser language from header
 		const browserLng = browserResponseLng(req);
 
@@ -246,7 +304,7 @@ module.exports = function (router) {
 	});
 
 	// Forgot account details password request
-	router.post("/api/v1.0/authentication/forgot-account-details", restrict({ unregistered: true }), function (req, res, next) {
+	router.post("/api/v1.0/authentication/forgot-account-details", restrict({ unregistered: true }), function(req, res, next) {
 		// Authenticate with user properties sent in body
 		const requestProperties = {
 			emailAddress: req.body.emailAddress
@@ -298,7 +356,7 @@ module.exports = function (router) {
 	});
 
 	// Confirm a supplied reset password code is valid
-	router.get("/api/v1.0/authentication/validate-reset-password-code", restrict({ unregistered: true }), function (req, res, next) {
+	router.get("/api/v1.0/authentication/validate-reset-password-code", restrict({ unregistered: true }), function(req, res, next) {
 		// Get reset password code and workspaceURL from header
 		const resetCode = req.headers["code"] ? req.headers["code"] : "";
 		const workspaceURL = req.headers["workspaceurl"] ? req.headers["workspaceurl"] : "";
@@ -337,7 +395,7 @@ module.exports = function (router) {
 	});
 
 	// Reset user password
-	router.post("/api/v1.0/authentication/reset-password", restrict({ unregistered: true }), function (req, res, next) {
+	router.post("/api/v1.0/authentication/reset-password", restrict({ unregistered: true }), function(req, res, next) {
 		// Store received object properties
 		const requestProperties = {
 			password: req.body.password,
@@ -368,7 +426,7 @@ module.exports = function (router) {
 	});
 
 	// Verify User Email
-	router.post("/api/v1.0/authentication/verify-email", restrict({ registered: true, unregistered: true }), function (req, res, next) {
+	router.post("/api/v1.0/authentication/verify-email", restrict({ registered: true, unregistered: true }), function(req, res, next) {
 		// Store received object properties
 		const requestProperties = {
 			code: req.body.code,

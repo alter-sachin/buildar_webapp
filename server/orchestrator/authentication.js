@@ -111,26 +111,34 @@ export async function generateUserEmailValidationCode(userId, clientId, transact
 	return code;
 }
 
-
 // Register new Client
 export function registerNewClient(requestProperties, authenticatedUser, browserLng) {
 	return database().transaction(async function (transaction) {
 		try {
+
+			const user = await models().user.findOne({where:{emailAddress:requestProperties.body.emailAddress, active:true}},{transaction:transaction});
+			
+			//Send response if user already exists for a emailAddress
+			if(user!=null){
+				return ("user exists");
+			}
+
 			// Check if client already exists for workspaceURL
-			const client = await models().client.findOne({ where: { workspaceURL: requestProperties.workspaceURL, active: true } }, { transaction: transaction });
+			const client = await models().client.findOne({ where: { workspaceURL: requestProperties.body.workspaceURL, active: true } }, { transaction: transaction });
 
 			// Throw an error if a client already exists for a WorkspaceURL
 			if (client !== null) {
 				throw new ServerResponseError(403, t("validation.clientInvalidProperties", { lng: browserLng }), { workspaceURL: [t("validation.registeredWorkspaceURL", { lng: browserLng })] });
 			}
+			
 
 			// Load active language numerical value from constants object
-			const activeLanguage = Object.keys(LANGUAGE_CODES).find(key => LANGUAGE_CODES[key] === requestProperties.language);
+			const activeLanguage = Object.keys(LANGUAGE_CODES).find(key => LANGUAGE_CODES[key] === requestProperties.body.language);
 
 			// Create new client object
 			const clientObject = {
-				name: requestProperties.workspaceURL,
-				workspaceURL: requestProperties.workspaceURL,
+				name: requestProperties.body.workspaceURL,
+				workspaceURL: requestProperties.body.workspaceURL,
 				subscriptionId: SUBSCRIPTION_TYPE.TRIAL,
 				defaultLanguage: activeLanguage
 			};
@@ -152,15 +160,16 @@ export function registerNewClient(requestProperties, authenticatedUser, browserL
 			const clientInstance = await models().client.create(clientObject, { transaction: transaction });
 
 			// Encrypt and salt user password
-			const password = await bcrypt.hash(requestProperties.password, 10);
+			const password = await bcrypt.hash(requestProperties.body.password, 10);
 
 			// Create new user and save to database
 			const userInstance = await models().user.create(
 				{
-					firstName: requestProperties.firstName,
-					lastName: requestProperties.lastName,
+					firstName: requestProperties.body.firstName,
+					lastName: requestProperties.body.lastName,
 					clientId: clientInstance.get("id"),
-					emailAddress: requestProperties.emailAddress,
+					emailAddress: requestProperties.body.emailAddress,
+					profilePhoto:requestProperties.body.profilePhoto,
 					password: password,
 					language: activeLanguage
 				},
@@ -201,11 +210,6 @@ export function registerNewClient(requestProperties, authenticatedUser, browserL
 		}
 	});
 }
-
-
-
-
-
 
 // Authenticate User with security token
 export function authenticateWithJWTStrategy(req, res, next, browserLng) {
@@ -262,7 +266,11 @@ export function authenticateWithJWTStrategy(req, res, next, browserLng) {
 		});
 	})(req, res, next);
 }
+//Authenticate using google authentication Strategy
 
+export function authenticateWithGoogleStrategy(req,res,next,browserLng){
+	
+}
 // Authenticate using Local authentication strategy
 export function authenticateWithLocalStrategy(req, res, next, browserLng) {
 	return passport.perform().authenticate("local", { session: false }, function (error, user) {
@@ -274,8 +282,6 @@ export function authenticateWithLocalStrategy(req, res, next, browserLng) {
 		}
 		// Authenticate user with strategy
 		req.logIn(user, function (error) {
-			console.log("this is in login");
-			console.log(user);
 			if (error) {
 				return res
 					.status(403)
