@@ -116,15 +116,15 @@ export function registerNewClient(requestProperties, authenticatedUser, browserL
 	return database().transaction(async function (transaction) {
 		try {
 
-			const user = await models().user.findOne({where:{emailAddress:requestProperties.body.emailAddress, active:true}},{transaction:transaction});
+			const user = await models().user.findOne({where:{emailAddress:requestProperties.emailAddress, active:true}},{transaction:transaction});
 			
 			//Send response if user already exists for a emailAddress
-			/*if(user!=null){
+			if(user!=null){
 				return ("user exists");
-			}*/
+			}
 
 			// Check if client already exists for workspaceURL
-			const client = await models().client.findOne({ where: { workspaceURL: requestProperties.body.workspaceURL, active: true } }, { transaction: transaction });
+			const client = await models().client.findOne({ where: { workspaceURL: requestProperties.workspaceURL, active: true } }, { transaction: transaction });
 
 			// Throw an error if a client already exists for a WorkspaceURL
 			if (client !== null) {
@@ -133,12 +133,12 @@ export function registerNewClient(requestProperties, authenticatedUser, browserL
 			
 
 			// Load active language numerical value from constants object
-			const activeLanguage = Object.keys(LANGUAGE_CODES).find(key => LANGUAGE_CODES[key] === requestProperties.body.language);
+			const activeLanguage = Object.keys(LANGUAGE_CODES).find(key => LANGUAGE_CODES[key] === requestProperties.language);
 
 			// Create new client object
 			const clientObject = {
-				name: requestProperties.body.workspaceURL,
-				workspaceURL: requestProperties.body.workspaceURL,
+				name: requestProperties.workspaceURL,
+				workspaceURL: requestProperties.workspaceURL,
 				subscriptionId: SUBSCRIPTION_TYPE.TRIAL,
 				defaultLanguage: activeLanguage
 			};
@@ -160,16 +160,16 @@ export function registerNewClient(requestProperties, authenticatedUser, browserL
 			const clientInstance = await models().client.create(clientObject, { transaction: transaction });
 
 			// Encrypt and salt user password
-			const password = await bcrypt.hash(requestProperties.body.password, 10);
+			const password = await bcrypt.hash(requestProperties.password, 10);
 
 			// Create new user and save to database
 			const userInstance = await models().user.create(
 				{
-					firstName: requestProperties.body.firstName,
-					lastName: requestProperties.body.lastName,
+					firstName: requestProperties.firstName,
+					lastName: requestProperties.lastName,
 					clientId: clientInstance.get("id"),
-					emailAddress: requestProperties.body.emailAddress,
-					profilePhoto:requestProperties.body.profilePhoto,
+					emailAddress: requestProperties.emailAddress,
+					profilePhoto:requestProperties.profilePhoto,
 					password: password,
 					language: activeLanguage
 				},

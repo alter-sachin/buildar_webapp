@@ -168,24 +168,24 @@ module.exports = function(router) {
 		const { given_name,family_name, email, picture, locale } = ticket.getPayload();
 		console.log(ticket.getPayload());
 		
-		const workspace_url ="mathew123hi";
+		const workspace_url ="mathew123h1";
 			
 		const requestProperties = {
-			body:{
-				workspaceURL: workspace_url,
-				firstName: given_name,
-				lastName: given_name,
-				emailAddress: email,
-				password: email+"buildArSecret",
-				privacyConsent: true,
-				language:"en",
-				profilePhoto:picture,
-			}
+			
+			workspaceURL: workspace_url,
+			firstName: given_name,
+			lastName: given_name,
+			emailAddress: email,
+			password: email+"buildArSecret",
+			privacyConsent: true,
+			language:"en",
+			profilePhoto:picture,
+			
 		};
 			//Load browser language from header
 		const browserLng = browserResponseLng(req);
 		// Validate properties in received object
-		const valid = validate(requestProperties.body, register());
+		const valid = validate(requestProperties, register());
 		if (valid != null) {
 			const errorMsg = new ServerResponseError(403, t("validation.clientInvalidProperties", { lng: browserLng }), valid);
 			return next(errorMsg);
@@ -194,19 +194,19 @@ module.exports = function(router) {
 		registerNewClient(requestProperties, null, browserLng).then(
 			result=> {
 				if(result!=="user exists"){
-					console.log("result status is:",result.status);
-					console.log(result);
-					return res.status(200).send(requestProperties.body);
+					// console.log("result status is:",result.status);
+					// console.log(result);
+					return res.status(200).send(requestProperties);
 				}
 				else{
-					req.body = requestProperties.body;
+					
 					//authenticateWithLocalStrategy(requestProperties, res, next, browserLng);
-					return res.status(200).send(req.body); 
+					return res.status(200).send(requestProperties); 
 				}
 				
 			},
 			error => {
-				console.log("error");
+				// console.log("error");
 				return next(error);
 			}
 		);

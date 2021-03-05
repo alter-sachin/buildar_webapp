@@ -8,10 +8,10 @@ import validate from "shared/validation/validate";
 import { t, l, activeLanguage } from "shared/translations/i18n";
 import { extractSubdomain } from "shared/utilities/domains";
 import { REDUX_STATE } from "shared/constants";
-import { registerClient, REGISTER_REJECTED } from "common/store/reducers/authentication.js";
-import { register } from "shared/validation/authentication";
-import { AUTHENTICATION, LOGIN_REJECTED, validateWorkspaceURL, VALIDATE_WORKSPACE_URL_REJECTED, loginUser, loadUser, LOAD_USER_REJECTED } from "common/store/reducers/authentication.js";
-import { login, workspaceURL } from "shared/validation/authentication";
+import { registerClient, REGISTER_REJECTED , AUTHENTICATION, LOGIN_REJECTED, validateWorkspaceURL, VALIDATE_WORKSPACE_URL_REJECTED, loginUser, loadUser, LOAD_USER_REJECTED } from "common/store/reducers/authentication.js";
+import { register , login, workspaceURL } from "shared/validation/authentication";
+
+
 import { changeLanguage } from "common/store/reducers/language.js";
 import ServerError from "common/components/ServerError";
 import InputField from "common/components/inputs/InputField";
@@ -50,6 +50,7 @@ class Register extends Component {
 			loginPending:false,
 			keepSignedIn: false,
 			redirectPending: false,
+		
 		};
 
 		this.register = this.register.bind(this);
@@ -70,8 +71,11 @@ class Register extends Component {
 		} else {
 			this.setState({ visible: true });
 		}
-	}
+		
+		
+		
 
+	}
 	changeField(evt) {
 		this.setState({
 			[evt.target.name]: evt.target.value
@@ -81,13 +85,7 @@ class Register extends Component {
 	handleChecked(evt) {
 		this.setState({ [evt.target.name]: !this.state.privacyConsent });
 	}
-	googleAuthenticate(){
-		axios.get("/api/v1.0/authentication/google")
-			.then(({data})=>{
-				console.log("this is data",data);
-			});
-	}
-
+	
 	
 
 	register(evt) {
@@ -160,24 +158,24 @@ class Register extends Component {
 		this.toggleSecondarySignUp();
 	}
 	async handleLogin(googleData){
-			const res = await fetch("api/v1.0/authentication/google", {
-				method : "POST",
-				body : JSON.stringify({
-					token:googleData.tokenId
-				}),
-				headers:{
-					"Content-type":"application/json"
-				}
-			});
-			const data = await res.json();
-			console.log("this is from frontend:", data);
-			this.login(data);
-		}
+		const res = await fetch("api/v1.0/authentication/google", {
+			method : "POST",
+			body : JSON.stringify({
+				token:googleData.tokenId
+			}),
+			headers:{
+				"Content-type":"application/json"
+			}
+		});
+		const data = await res.json();
+		console.log("this is from frontend:", data);
+		this.login(data);
+	}
 
 	login(data) {
 		//evt.preventDefault(); // Prevent page refresh
-		console.log("I am inside login");
-		console.log(data.emailAddress);
+		// console.log("I am inside login");
+		// console.log(data.emailAddress);
 		this.setState({ loginPending: true, validationErrors: null, serverError: null });
 		const user = {
 			workspaceURL: data.workspaceURL,
@@ -227,7 +225,19 @@ class Register extends Component {
 			});
 		}
 	}
-
+	static getDerivedStateFromProps(nextProps, prevState) {
+		if (nextProps.workspaceURLStatus === prevState.workspaceURLStatus) {
+			return null;
+		}
+		// Store subdomain in state if valid
+		if (nextProps.workspaceURLStatus === REDUX_STATE.FULFILLED) {
+			const subdomain = extractSubdomain(window.location.href);
+			return {
+				workspaceURL: subdomain
+			};
+		}
+		return null;
+	}
 	changeSubdomain() {
 		//evt.preventDefault(); // Prevent page refresh
 
@@ -252,6 +262,8 @@ class Register extends Component {
 
 
 	render() {
+		
+	
 		const { loginPending,keepSignIn,redirectPending,firstName, lastName, emailAddress, password,privacyConsent,loading,visible,validationErrors,serverError, workspaceURL,newLoading } = this.state;
 		const { workspaceURLStatus, logInStatus, clientStyle, userToken, userKeepSignedIn, history } = this.props;
 
@@ -265,6 +277,7 @@ class Register extends Component {
 			saveToken(userToken, userKeepSignedIn);
 		}
 		return (
+		
 			<Fragment>
 				<Helmet
 					title={t("headers.register.title")}
@@ -282,13 +295,7 @@ class Register extends Component {
 								<div className="google-auth-signup" id="primary-signup">
 									<h2 className="google-auth-header">Sign up for BuildAR</h2>
 								
-									{/* <div className="auth-form">
-										<button className="btn btn-light" onClick={this.googleAuthenticate}>
-											<img width="20px" style={{ marginBottom: "3px", marginRight: "1em" }} alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
-										 	Sign up with Google
-											
-										</button>
-									</div> */}
+								
 									<div>
 										<GoogleLogin
 											clientId={clientId}
@@ -297,10 +304,8 @@ class Register extends Component {
 											onFailure = {this.handleLogin}
 											cookiePolicy = {"single_host_origin"}
 											style = {{marginTop:"100px"}}
-											isSignedIn = {true}
-										/>
-			
-										
+						
+										/>							
 									</div>
 										
 									<div className="secondary-signup-separator">
@@ -425,6 +430,7 @@ class Register extends Component {
 		);
 	}
 }
+
 
 Register.propTypes = {
 	registerClient: PropTypes.func,
