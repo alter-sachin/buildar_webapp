@@ -1683,6 +1683,10 @@ a{
   position: absolute;
 }
 
+
+.individual-video{
+	padding:1em 0em;
+}
 .individual-video textarea{
 	border: solid 1px transparent;
 }
@@ -1700,6 +1704,7 @@ a{
 	float: left;
 	font-size: large;
 	font-family: 'Roboto', Arial, Helvetica, sans-serif;
+	margin-left: .33em;
 }
 
 .individual-video .container{
@@ -1723,6 +1728,15 @@ a{
 }
 .individual-video .video-title:focus{
 	border-color: blue;
+}
+
+.single-video {
+    margin: auto;
+}
+
+
+.video-description{
+	padding: 0em 10%;
 }
 
 @media (max-width:500px){
