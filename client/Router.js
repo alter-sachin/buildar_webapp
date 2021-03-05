@@ -20,7 +20,7 @@ const Overview = AsyncComponent(() => import("./modules/overview"));
 const Profile = AsyncComponent(() => import("./modules/profile"));
 const CreateVideo = AsyncComponent(() => import("./modules/createvideo"));
 const Video = AsyncComponent(() => import("./modules/video"))
-const MyVideo = AsyncComponent(() => import("./modules/Myvideos"));
+const MyVideo = AsyncComponent(() => import("./modules/myvideos"));
 const Billing = AsyncComponent(() => import("./modules/billing"));
 const Settings = AsyncComponent(() => import("./modules/settings"));
 const MissingPath = AsyncComponent(() => import("common/components/MissingPath"));

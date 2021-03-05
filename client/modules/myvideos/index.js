@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { Component } from "react";
 import Videocard from "./components/Videocard";
+
 class MyVideo extends Component {
 
 	state = {
@@ -73,16 +74,16 @@ class MyVideo extends Component {
 			// const {videoList} = this.state;
 			return (
 				<div className="myvideo">
-					<h1 className="myvideo-header">My Videos</h1>
-					<div className="flex-container" >
+						
 						<div className="container myvideo-container">
 							<div className="myvideo-buttons">
-								<a href="/createvideo" type="button" className="btn btn-warning">New Video</a>
+								<h1 className="myvideo-header">My Videos</h1>
+								<a href="/createvideo" type="button" className="btn ">New Video</a>
 							</div>
 							<div className="row">
 								{videoList.map((video, index) => {
 									return (
-										<div className="col-md-6 col-lg-4 col-sm-12 myvideo-card">
+										<div className="col-md-4 col-lg-3 col-sm-12 myvideo-card">
 											<Videocard
 												key={index}
 												title={video.title}
@@ -96,7 +97,6 @@ class MyVideo extends Component {
 								)}
 							</div>
 						</div>
-					</div>
 				</div>
 			);
 
