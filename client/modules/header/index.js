@@ -84,7 +84,7 @@ class Header extends Component {
 
 		return (
 			<div className="sticky-top">
-				<nav className="navbar navbar-expand-md bg-primary navbar-dark px-2 py-0">
+				<nav className="navbar navbar-expand-md bg-light navbar-dark px-2 py-0">
 					<NavLogo />
 					<ul className="navbar-nav bd-navbar-nav flex-row ml-auto d-flex order-md-1">
 						<HideComponent user={user} disabled={!billingEnabled} hasAnyRole={[ROLE_TYPE.OWNER, ROLE_TYPE.FINANCE]}>

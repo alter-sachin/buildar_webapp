@@ -715,6 +715,10 @@ a{
 	transition: all 0.2s ease;
 } */
 
+.nav-link {
+	color:#000!important;
+}
+
 .sticky-nav .btn{
 	border-radius: 10px;
 	font-family: Arial, Helvetica, sans-serif;
@@ -2850,9 +2854,8 @@ audio.react-audio-player {
 /*****************************/
 .myvideo{
 	display: flex;
-	/*align-items: center;*/
 	flex-direction: column;
-	padding-bottom: 3em;
+	padding: 1em 0em;
 }
 
 .myvideo-header{
