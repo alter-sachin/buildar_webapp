@@ -71,24 +71,24 @@ class SideBar extends Component {
             <div>
                 <div className="w3-sidebar w3-bar-block w3-card w3-animate-left" style={{ display: "none" }} id="mySidebar">
                     <button className="w3-bar-item w3-button w3-large"
-                        onClick={this.w3_close}><AiIcons.AiOutlineClose/></button>
+                        onClick={this.w3_close}><AiIcons.AiOutlineClose /></button>
                     <div className="navigation_logoSection">
                         <div className="navigation_symbol">
                             <span id="small_symbol"></span>
                         </div>
                     </div>
                     <a href="#" className="w3-bar-item w3-button"><span id="text"><strong>Videos</strong></span></a>
-                    <a href="#" className="w3-bar-item w3-button">
+                    <a href="/createvideo" className="w3-bar-item w3-button">
                         <span id="icon">
-                            <AiIcons.AiOutlineVideoCameraAdd/>
+                            <AiIcons.AiOutlineVideoCameraAdd />
                         </span>
                         <span id="text">
                             Create Video
                         </span>
                     </a>
-                    <a href="#" className="w3-bar-item w3-button">
+                    <a href="/myvideos" className="w3-bar-item w3-button">
                         <span id="icon">
-                            <AiIcons.AiOutlineOrderedList/>
+                            <AiIcons.AiOutlineOrderedList />
                         </span>
                         <span id="text">
                             My Videos
@@ -96,17 +96,17 @@ class SideBar extends Component {
                     </a>
                     <div className="bottom_menu">
                         <a href="#" className="w3-bar-item w3-button"><span id="text"><strong>Settings</strong></span></a>
-                        <a href="#" className="w3-bar-item w3-button">
+                        <a href="/profile" className="w3-bar-item w3-button">
                             <span id="icon">
-                                <CgIcons.CgProfile/>
+                                <CgIcons.CgProfile />
                             </span>
                             <span id="text">
                                 Profile
                             </span>
                         </a>
-                        <a href="#" className="w3-bar-item w3-button">
+                        <a href="/billing" className="w3-bar-item w3-button">
                             <span id="icon">
-                                <FaIcons.FaFileInvoiceDollar/>
+                                <FaIcons.FaFileInvoiceDollar />
                             </span>
                             <span id="text">
                                 Billing
@@ -115,8 +115,8 @@ class SideBar extends Component {
                     </div>
                     <div className="bottom_button">
                         <button>
-                        <span id="inviteicon"><AiIcons.AiOutlineUsergroupAdd/></span>
-                        <span id="invite">Invite Users</span>
+                            <span id="inviteicon"><AiIcons.AiOutlineUsergroupAdd /></span>
+                            <span id="invite">Invite Users</span>
                         </button>
                     </div>
                 </div>
