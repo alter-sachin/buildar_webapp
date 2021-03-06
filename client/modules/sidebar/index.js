@@ -71,7 +71,7 @@ class SideBar extends Component {
             <div>
                 <div className="w3-sidebar w3-bar-block w3-card w3-animate-left" style={{ display: "none" }} id="mySidebar">
                     <button className="w3-bar-item w3-button w3-large"
-                        onClick={this.w3_close}>Close &times;</button>
+                        onClick={this.w3_close}><AiIcons.AiOutlineClose/></button>
                     <div className="navigation_logoSection">
                         <div className="navigation_symbol">
                             <span id="small_symbol"></span>

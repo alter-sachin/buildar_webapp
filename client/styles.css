@@ -3090,3 +3090,7 @@ audio.react-audio-player {
     align-items: center;
     background-color: #f45f3c;
 }
+
+button.w3-bar-item.w3-button.w3-large {
+    text-align: right;
+}
