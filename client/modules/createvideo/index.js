@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import Actor from "./components/Actor";
 import axios from "axios";
 import EdiText from 'react-editext'
-
+import SideBar from "../sidebar";
+import * as AiIcons from 'react-icons/ai';
 
 class CreateVideo extends Component {
 
@@ -15,6 +16,7 @@ class CreateVideo extends Component {
 			voices: [],
 			videoTitle: ""
 		}
+		this.w3_open = this.w3_open.bind(this);
 	}
 	componentDidMount() {
 		axios
@@ -23,7 +25,9 @@ class CreateVideo extends Component {
 				if (data) {
 
 					this.setState({
-						actors: data
+						actors: data,
+						loading:false
+
 					});
 				}
 				//console.log(this.state.actors);
@@ -42,6 +46,12 @@ class CreateVideo extends Component {
 				}
 			});
 
+	}
+		w3_open = () => {
+		document.getElementById("main").style.marginLeft = "15%";
+		document.getElementById("mySidebar").style.width = "15%";
+		document.getElementById("mySidebar").style.display = "block";
+		document.getElementById("openNav").style.visibility = 'hidden';
 	}
 	//   const [editing, setEditing] = useState(false);
 	// 	const [value, setValue] = useState('Create Video')
@@ -63,28 +73,29 @@ class CreateVideo extends Component {
 			const { actors, voices } = this.state;
 			return (
 				<div>
-					<div className="container">
-						<div className="row top-buttons">
-							<div className="title col-md-6 col-lg-6">
-								<EdiText
-									type="text"
-									value={"Create Video"}
+					<SideBar/>
+					<div id="main">
+					<button id="openNav" className="w3-button w3-xlarge" onClick={this.w3_open}>&#9776;</button>
+					<div class="topnav">
+					  <span id="editable">
+					  <EdiText
+									type="textarea"
+									value={"Video Title"}
 									onSave={this.handleSave}
-								/>
-							</div>
-							{/* <div className="col-md-6 col-lg-6">
-								<button type="button" className="btn create-video" onClick={this.videoRequest}>
-									Create Video
-    							</button>
-							</div> */}
-						</div>
-						<div className="row">
-							{/* <div className="col-md-6 col-lg-6"> */}
+									saveButtonContent="Done"
+									cancelButtonContent={<AiIcons.AiOutlineClose />}
+									editButtonContent="Edit"
+									hideIcons={true}
+
+									/></span>
+					  <div class="topnav-right">
+					    <button onClick={this.cancelRequest} id="cancel">Cancel</button>
+					    <button onClick={this.videoRequest} id="create_video">Create Video</button>
+					  </div>
+					</div>
+					<div className="col-md-12 col-lg-12">
 							<Actor data={{ actors: actors, voices: voices }} />
 						</div>
-						{/* <div className="col-md-6 col-lg-6"> */}
-						{/* </div> */}
-						{/* </div> */}
 					</div>
 				</div>
 			);

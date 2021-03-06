@@ -2802,14 +2802,88 @@ a:hover.back-to-top {
   width: 200px;
 }
 
-.create-video {
-  background-color: #ff4500;
+.cancel-video{
+	display: inline-block;
+    vertical-align: top;
+	background-color: #f45f3c;
   color: white;
-  font-size: large;
   font-weight: 600;
-  width: 10em;
   margin-bottom: 20px;
   margin-left: 10em;
+}
+
+.create-video {
+  display: inline-block;
+  vertical-align: top;
+  background-color: #f45f3c;
+  color: white;
+  font-weight: 600;
+  margin-bottom: 20px;
+  margin-left: 10em;
+}
+
+/* Add a black background color to the top navigation */
+.topnav {
+    background-color: #fafafa;
+    overflow: hidden;
+}
+
+/* Style the links inside the navigation bar */
+.topnav #editable {
+  float: left;
+  color: #000000;
+  text-align: center;
+  padding: 0em 5%;
+  text-decoration: none;
+  font-size: 1.5em;
+  font-family: "Open Sans", sans-serif
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Add a color to the active/current link */
+.topnav a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+/* Right-aligned section inside the top navigation */
+.topnav-right {
+  float: right;
+}
+.topnav-right button{
+	padding: 0.75em;
+  	font-weight: 600;
+  	border-radius: .5em;
+  	border:0em;
+}
+
+.topnav-right #cancel{
+	color:white;
+	background-color: gray;
+	margin: 0em 2em;
+
+}
+.topnav-right #create_video{
+	color:white;
+	background-color: #f45f3c;
+	margin-right: 2em;
+
+}
+
+.topnav-right #create_video:hover{
+	color:white;
+	background-color: #d73b1e;
+
+}
+
+.col-md-6.col-lg-6.left_side {
+    margin-left: 3%;
+    margin-top: 2%;
 }
 
 .video-title {

@@ -133,9 +133,9 @@ class Router extends Component {
 							hasAnyRole={[ROLE_TYPE.OWNER, ROLE_TYPE.ADMINISTRATOR, ROLE_TYPE.FINANCE]}
 							user={user}
 							render={() => (
-								<DefaultLayout key="/createvideo">
+								<EmptyLayout key="/createvideo">
 									<CreateVideo />
-								</DefaultLayout>
+								</EmptyLayout>
 							)}
 						/>
 						<ProtectedRoute

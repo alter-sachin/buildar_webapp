@@ -110,9 +110,8 @@ class Actor extends Component {
 		})
 		return (
 			<div>
-				<div className="container">
-					<div className="row">
-						<div className="col-md-6 col-lg-6">
+				
+						<div className="col-md-6 col-lg-6 left_side">
 							<h4>Select Actor</h4>
 							<div className="actor-list">
 								{actors.map((actor) => (
@@ -164,14 +163,9 @@ class Actor extends Component {
 								</div>
 							</div>
 						</div>
-						<div className="col-md-6 col-lg-6 ">
-							<button type="button" className="btn create-video" onClick={this.videoRequest}>
-								Create Video
-    						</button>
+						<div className="col-md-6 col-lg-6 right_side">
 							<Videoplayer videoUrl={this.state.videoUrl} />
 						</div>
-					</div>
-				</div>
 			</div >
 		);
 	}
