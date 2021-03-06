@@ -39,8 +39,8 @@ class Videocard extends Component {
                 <div className="myvideo-time">
                     <p>
                         {timeCreated}
-                        <i id="myvideo-footer-icons" class="far fa-star"></i>
-                        <i id="myvideo-footer-icons" class="fas fa-link"></i>
+                        <i id="myvideo-footer-icons" className="far fa-star"></i>
+                        <i id="myvideo-footer-icons" className="fas fa-link"></i>
                     </p>
                 </div>
             </div>
