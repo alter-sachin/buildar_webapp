@@ -11,7 +11,6 @@ class MyVideo extends Component {
 			videoList: [],
 			loading: true
 		}
-		this.w3_close = this.w3_close.bind(this);
 		this.w3_open = this.w3_open.bind(this);
 	}
 	componentDidMount() {
@@ -29,12 +28,6 @@ class MyVideo extends Component {
 		document.getElementById("openNav").style.visibility = 'hidden';
 	}
 
-	w3_close = () => {
-		document.getElementById("main").style.marginLeft = "0%";
-		document.getElementById("mySidebar").style.display = "none";
-		document.getElementById("openNav").style.display = "inline-block";
-		document.getElementById("openNav").style.visibility = 'visible';
-	}
 	render() {
 
 		if (this.state.loading) {
