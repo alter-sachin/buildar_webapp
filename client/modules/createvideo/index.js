@@ -84,7 +84,7 @@ class CreateVideo extends Component {
 									onSave={this.handleSave}
 									saveButtonContent="Done"
 									cancelButtonContent={<AiIcons.AiOutlineClose />}
-									editButtonContent="Edit"
+									editButtonContent={<AiIcons.AiFillEdit />}
 									hideIcons={true}
 
 									/></span>
