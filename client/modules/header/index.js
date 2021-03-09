@@ -96,6 +96,7 @@ class Header extends Component {
 							{user.get("subscriptionActive") && (
 								<Fragment>
 									<NavDropdownLink title={t("label.profile")} route={"/profile"} />
+									<NavDropdownLink title={t("My Videos")} route={"/myvideos"} />
 									<HideComponent disabled={!billingEnabled}>
 										<NavDropdownLink
 											title={t("label.billing")}
@@ -124,7 +125,8 @@ class Header extends Component {
 							<div className={`collapse navbar-collapse ${menuVisible ? "show" : ""}`}>
 								<div className="navbar-nav-scroll">
 									<ul className="navbar-nav bd-navbar-nav flex-md-row">
-										<NavMenuLink title={t("label.overview")} route={"/"} isExact={true} />
+										<NavMenuLink title={t("label.overview")} route={"/overview"} isExact={true} />
+										<NavMenuLink title={t("My Videos")} route={"/myvideos"} isExact={true} />
 										<NavMenuLink title={t("label.profile")} route={"/profile"} isExact={false} />
 										<HideComponent user={user} disabled={!billingEnabled} hasAnyRole={[ROLE_TYPE.OWNER, ROLE_TYPE.FINANCE]}>
 											<NavMenuLink title={t("label.billing")} route={"/billing"} isExact={true} />

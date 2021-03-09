@@ -26,7 +26,6 @@ class CreateVideo extends Component {
 
 					this.setState({
 						actors: data,
-						loading:false
 
 					});
 				}
@@ -76,7 +75,7 @@ class CreateVideo extends Component {
 					<SideBar/>
 					<div id="main">
 					<button id="openNav" className="w3-button w3-xlarge" onClick={this.w3_open}>&#9776;</button>
-					<div class="topnav">
+					<div className="topnav">
 					  <span id="editable">
 					  <EdiText
 									type="textarea"
