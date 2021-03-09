@@ -122,7 +122,7 @@ class Actor extends Component {
 							</p>
 						))}
 					</div>
-					<div style={{ display: "flex", flexDirection: "column" }}>
+					<div className="actor-select" style={{ display: "flex", flexDirection: "column" }}>
 						<Select
 							defaultValue={voiceArray[0]}
 							label="Single select"

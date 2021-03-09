@@ -2926,6 +2926,10 @@ a:hover.back-to-top {
 	font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
 
+.actor-select{
+	width: 20em;
+}
+
 .actor img{
 	border-radius: 5px;
 	border: solid transparent;
