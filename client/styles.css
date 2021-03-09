@@ -3016,6 +3016,7 @@ audio.react-audio-player {
 	background-color:#d73b1e;
 	border-color:#d73b1e;
 	color:white;
+	transition: 0.25s ease-in;
 }
 
 .myvideo .row {
@@ -3076,10 +3077,12 @@ audio.react-audio-player {
 
 .myvideo #myvideo-footer-icons:hover .tooltiptext {
 	display: block;
+	transition: 0.25s ease-in;
 }
 
 .myvideo-card-item:hover #myvideo-footer-icons{
 	display: block;
+	transition: 0.25s ease-in;
 }
 
 #myvideo-card-menu-dropdown button{
@@ -3091,7 +3094,7 @@ audio.react-audio-player {
 
 .myvideo-card-item:hover #dropdown-basic{
 	visibility: visible;
-	
+	transition: 0.25s ease-in;
 }
 
 #myvideo-card-menu-dropdown button:hover{
@@ -3100,8 +3103,6 @@ audio.react-audio-player {
     background-color: #e2e1e1;
     border-color: #e2e1e1; 
 }
-
-
 
 #dropdown-basic::after{
 	display: none;

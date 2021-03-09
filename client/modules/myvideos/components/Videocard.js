@@ -35,23 +35,23 @@ class Videocard extends Component {
 					<a href="/video">
 						<img className="myvideo-thumbnail" src="images/Logo_BuildAR.png" />
 					</a>
-					<p className="myvideo-title" contentEditable="true">{title}</p>
+					<p className="myvideo-title"> {title}</p>
 				</div>
 				<div className="myvideo-time">
 					<p>
 						{timeCreated}
 						<div id="myvideo-footer-icons">
-							<button className="btn btn-sm">
+							<label className="btn btn-sm">
 								<AiIcons.AiOutlineStar size={20} />
-							</button>
+							</label>
 							<span className="tooltiptext">Add to favourites</span>
 						</div>
 						<div id="myvideo-footer-icons">
-							<button
+							<label
 								className="btn btn-sm"
 								onClick={() => navigator.clipboard.writeText({ url })}>
 								<AiIcons.AiOutlineLink size={20} />
-							</button>
+							</label>
 							<span className="tooltiptext">Copy link</span>
 						</div>
 					</p>
