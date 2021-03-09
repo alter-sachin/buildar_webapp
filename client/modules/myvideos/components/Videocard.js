@@ -18,7 +18,7 @@ class Videocard extends Component {
         const { title, description, url, timeCreated } = this.props
         return (
             <div className="myvideo-card-item">
-                <div style={{ cursor: "pointer" }} className="myvideo-card">
+                <div className="myvideo-card">
                     <div className="myvideo-card-menu">
                         <Dropdown id="myvideo-card-menu-dropdown">
                             <Dropdown.Toggle variant="secondary" id="dropdown-basic">
