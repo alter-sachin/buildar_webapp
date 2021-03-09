@@ -56,7 +56,7 @@ class Register extends Component {
 		this.register = this.register.bind(this);
 		this.changeField = this.changeField.bind(this);
 		this.handleChecked = this.handleChecked.bind(this);
-		this.googleAuthenticate = this.googleAuthenticate.bind(this);
+		// this.googleAuthenticate = this.googleAuthenticate.bind(this);
 		this.handleLogin = this.handleLogin.bind(this);
 		this.changeSubdomain = this.changeSubdomain.bind(this);
 		// this.googleLogin = this.googleLogin.bind(this);
