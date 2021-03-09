@@ -2958,11 +2958,15 @@ audio.react-audio-player {
 
 .myvideo-card p{
 	margin-top: 1em;
-	margin-right: 2em;
+	margin-right: 1em;
 	font-family: 'Roboto', sans-serif;
 	font-weight: 700;
 	text-align: left;
-    padding: 0em 1em;
+    padding: 0em 0.5em;
+}
+
+.myvideo-card .myvideo-title{
+	margin-left: 0.5em;
 }
 
 .myvideo-card{
@@ -2987,6 +2991,11 @@ audio.react-audio-player {
 	box-shadow:0 0 0 2px blue;
 }
 
+
+.myvideo-card-item:hover .myvideo-thumbnail{
+	filter: brightness(0.8);
+	transition: 0.125s ease-in;
+}
 
 .myvideo-buttons{
 	text-align: right;
@@ -3013,7 +3022,6 @@ audio.react-audio-player {
 	padding-top: 1em;
 }
 
-
 .myvideo-card img{
 	min-width: 99.99%;
 	height: auto;
@@ -3023,10 +3031,6 @@ audio.react-audio-player {
 	margin-bottom: 1em;
 }
 
-.myvideo-thumbnail:hover{
-	opacity: 0.5;
-	transition: 0.125s ease-in;
-}
 
 .myvideo-time p{
 	font-family: "Roboto", Arial, Helvetica, sans-serif;
@@ -3038,12 +3042,12 @@ audio.react-audio-player {
 
 }
 
-.myvideo i#myvideo-footer-icons{
+.myvideo #myvideo-footer-icons{
 	display: none;
 	float: right;
 }
 
-.myvideo-card-item:hover i#myvideo-footer-icons{
+.myvideo-card-item:hover #myvideo-footer-icons{
 	display: block;
 }
 
