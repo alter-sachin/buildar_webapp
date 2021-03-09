@@ -3031,6 +3031,9 @@ audio.react-audio-player {
 	margin-bottom: 1em;
 }
 
+.myvideo-card-menu .dropdown-menu{
+	border-radius: 10px !important;
+}
 
 .myvideo-time p{
 	font-family: "Roboto", Arial, Helvetica, sans-serif;
@@ -3039,12 +3042,40 @@ audio.react-audio-player {
 	font-size: 12px;
 	font-weight: 500;
 	padding :0em 1.25em;
+	padding-right: 0em;
 
 }
 
 .myvideo #myvideo-footer-icons{
 	display: none;
 	float: right;
+	padding-left: 0.25em;
+	padding-right: 0em;
+}
+
+
+.myvideo #myvideo-footer-icons .btn-sm{
+	size: 1em;
+	align-items: center;
+	width: 0.5em;
+}
+
+.myvideo #myvideo-footer-icons .tooltiptext {
+	display: none;
+  	width: 10em;
+  	background-color: black;
+  	color: #fff;
+  	text-align: center;
+  	border-radius: 6px;
+  	padding: 5px 0;
+
+  	/* Position the tooltip */
+  	position: absolute;
+  	z-index: 1;
+}
+
+.myvideo #myvideo-footer-icons:hover .tooltiptext {
+	display: block;
 }
 
 .myvideo-card-item:hover #myvideo-footer-icons{

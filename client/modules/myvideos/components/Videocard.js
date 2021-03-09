@@ -40,8 +40,20 @@ class Videocard extends Component {
 				<div className="myvideo-time">
 					<p>
 						{timeCreated}
-						<div id="myvideo-footer-icons"><AiIcons.AiOutlineStar /></div>
-						<div id="myvideo-footer-icons"><AiIcons.AiOutlineLink /></div>
+						<div id="myvideo-footer-icons">
+							<button className="btn btn-sm">
+								<AiIcons.AiOutlineStar size={20} />
+							</button>
+							<span className="tooltiptext">Add to favourites</span>
+						</div>
+						<div id="myvideo-footer-icons">
+							<button
+								className="btn btn-sm"
+								onClick={() => navigator.clipboard.writeText({ url })}>
+								<AiIcons.AiOutlineLink size={20} />
+							</button>
+							<span className="tooltiptext">Copy link</span>
+						</div>
 					</p>
 				</div>
 			</div>
