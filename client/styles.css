@@ -2922,6 +2922,17 @@ a:hover.back-to-top {
 	display:flex;
 	flex-direction:column;
 	padding-right:.5em;
+	font-weight: 500;
+	font-family: 'Roboto', Arial, Helvetica, sans-serif;
+}
+
+.actor img{
+	border-radius: 5px;
+	border: solid transparent;
+}
+
+.actor img:active, .actor img:focus{
+	transition: 0.25s ease-in;
 }
 
 .audio-listen {

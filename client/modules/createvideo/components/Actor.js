@@ -75,9 +75,10 @@ class Actor extends Component {
 		const data = {
 			actorId: this.state.actorId,
 			audioUrl: this.state.audioUrl,
+			category: "social"
 		}
 		axios.post(
-			"http://2cdbca99f991.ngrok.io/video", data)
+			"http://c320417a9649.ngrok.io/video", data)
 			.then(({ data }) => {
 				this.setState({
 					videoUrl: data.videoUrl
@@ -110,62 +111,62 @@ class Actor extends Component {
 		})
 		return (
 			<div>
-				
-						<div className="col-md-6 col-lg-6 left_side">
-							<h4>Select Actor</h4>
-							<div className="actor-list">
-								{actors.map((actor) => (
-									<p className="actor" key={actor.name} onClick={() => this.selectActor(actor.actorId)}>
-										<img src={actor.thumbnail} style={{ height: "100px" }} />
-										{actor.name}
-									</p>
-								))}
-							</div>
-							<div style={{ display: "flex", flexDirection: "column" }}>
-								<Select
-									defaultValue={voiceArray[0]}
-									label="Single select"
-									options={voiceArray}
-									value={this.state.selectedElement}
-									onChange={this.handleCheck}
-								/>
-							</div>
-							<div className="script-input">
-								<h4>Script</h4>
-								<textarea
-									className="text-area"
-									placeholder="Insert script here"
-									rows="4"
-									cols="50"
-									value={this.state.textVal}
-									onChange={this.handleChange}
-								/>
-							</div>
-							<div className="audio-listen">
-								<button type="button" className="btn btn-secondary listen-button"
-									onClick={
-										this.audioRequest
-									}>
-									Listen
+
+				<div className="col-md-12 col-lg-6 left_side">
+					<h4>Select Actor</h4>
+					<div className="actor-list">
+						{actors.map((actor) => (
+							<p className="actor" key={actor.name} onClick={() => this.selectActor(actor.actorId)}>
+								<img src={actor.thumbnail} tabIndex="1" style={{ height: "100px" }} />
+								{actor.name}
+							</p>
+						))}
+					</div>
+					<div style={{ display: "flex", flexDirection: "column" }}>
+						<Select
+							defaultValue={voiceArray[0]}
+							label="Single select"
+							options={voiceArray}
+							value={this.state.selectedElement}
+							onChange={this.handleCheck}
+						/>
+					</div>
+					<div className="script-input">
+						<h4>Script</h4>
+						<textarea
+							className="text-area"
+							placeholder="Insert script here"
+							rows="4"
+							cols="50"
+							value={this.state.textVal}
+							onChange={this.handleChange}
+						/>
+					</div>
+					<div className="audio-listen">
+						<button type="button" className="btn btn-secondary listen-button"
+							onClick={
+								this.audioRequest
+							}>
+							Listen
         					</button>
-								<AudioPlayer className="audio-player" audioUrl={this.state.audioUrl} />
-								<div className="timer-wrapper">
-									<CountdownCircleTimer
-										key={this.state.key}
-										isPlaying={this.state.isClicked}
-										duration={10}
-										colors={[["#004777", 0.33], ["#F7B801", 0.33], ["#A30000"]]}
-										onComplete={() => [true, 0]}
-										strokeWidth={8}
-										size={75}>
-										{this.renderTime}
-									</CountdownCircleTimer>
-								</div>
-							</div>
+						<AudioPlayer className="audio-player" audioUrl={this.state.audioUrl} />
+						<div className="timer-wrapper">
+							<CountdownCircleTimer
+								key={this.state.key}
+								isPlaying={this.state.isClicked}
+								duration={10}
+								colors={[["#004777", 0.33], ["#F7B801", 0.33], ["#A30000"]]}
+								onComplete={() => [true, 0]}
+								strokeWidth={8}
+								size={75}>
+								{this.renderTime}
+							</CountdownCircleTimer>
 						</div>
-						<div className="col-md-6 col-lg-6 right_side">
-							<Videoplayer videoUrl={this.state.videoUrl} />
-						</div>
+					</div>
+				</div>
+				<div className="col-md-6 col-lg-6 right_side">
+					<Videoplayer videoUrl={this.state.videoUrl} />
+				</div>
 			</div >
 		);
 	}

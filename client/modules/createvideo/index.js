@@ -46,7 +46,7 @@ class CreateVideo extends Component {
 			});
 
 	}
-		w3_open = () => {
+	w3_open = () => {
 		document.getElementById("main").style.marginLeft = "15%";
 		document.getElementById("mySidebar").style.width = "15%";
 		document.getElementById("mySidebar").style.display = "block";
@@ -72,12 +72,12 @@ class CreateVideo extends Component {
 			const { actors, voices } = this.state;
 			return (
 				<div>
-					<SideBar/>
+					<SideBar />
 					<div id="main">
-					<button id="openNav" className="w3-button w3-xlarge" onClick={this.w3_open}>&#9776;</button>
-					<div className="topnav">
-					  <span id="editable">
-					  <EdiText
+						<button id="openNav" className="w3-button w3-xlarge" onClick={this.w3_open}>&#9776;</button>
+						<div className="topnav">
+							<span id="editable">
+								<EdiText
 									type="textarea"
 									value={"Video Title"}
 									onSave={this.handleSave}
@@ -86,13 +86,13 @@ class CreateVideo extends Component {
 									editButtonContent={<AiIcons.AiFillEdit />}
 									hideIcons={true}
 
-									/></span>
-					  <div class="topnav-right">
-					    <button onClick={this.cancelRequest} id="cancel">Cancel</button>
-					    <button onClick={this.videoRequest} id="create_video">Create Video</button>
-					  </div>
-					</div>
-					<div className="col-md-12 col-lg-12">
+								/></span>
+							<div className="topnav-right">
+								<button onClick={this.cancelRequest} id="cancel">Cancel</button>
+								<button onClick={this.videoRequest} id="create_video">Create Video</button>
+							</div>
+						</div>
+						<div className="col-md-12 col-lg-12">
 							<Actor data={{ actors: actors, voices: voices }} />
 						</div>
 					</div>
