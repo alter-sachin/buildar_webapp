@@ -17,7 +17,7 @@ class Videocard extends Component {
 
 
 	render() {
-		const { id, title, description, url, timeCreated } = this.props;
+		const { id, index, title, description, url, timeCreated } = this.props;
 		return (
 			<div className="myvideo-card-item">
 				<div className="myvideo-card">
@@ -28,8 +28,8 @@ class Videocard extends Component {
 							</Dropdown.Toggle>
 							<Dropdown.Menu>
 								<Dropdown.Item href="">Edit</Dropdown.Item>
-								<Dropdown.Item href="" onClick={() => this.props.deleteHandler(id)}>Delete</Dropdown.Item>
-								<Dropdown.Item href="" onClick={() => this.props.duplicateHandler(id)}>Duplicate</Dropdown.Item>
+								<Dropdown.Item href="" onClick={() => this.props.deleteHandler(index)}>Delete</Dropdown.Item>
+								<Dropdown.Item href="" onClick={() => this.props.duplicateHandler(index)}>Duplicate</Dropdown.Item>
 							</Dropdown.Menu>
 						</Dropdown>
 					</div>

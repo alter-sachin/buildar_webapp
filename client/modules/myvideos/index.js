@@ -78,8 +78,13 @@ class MyVideo extends Component {
 		// this.setState((prevState) => ({
 		// 	videoList: [...prevState.videoList.slice(0, index), ...prevState.videoList.slice(index + 1)]
 		// }))
+		// this.setState({
+		// 	videoList: this.state.videoList.filter(item => item.id != index)
+		// })
+		let newVideoList = this.state.videoList
+		newVideoList.splice(index, 1)
 		this.setState({
-			videoList: this.state.videoList.filter(item => item.id != index)
+			videoList: newVideoList
 		})
 	}
 
@@ -118,6 +123,7 @@ class MyVideo extends Component {
 											<div key={index} className="col-md-4 col-lg-3 col-sm-12 myvideo-card">
 												<Videocard
 													key={index}
+													index={index}
 													id={video.id}
 													title={video.title}
 													description={video.description}
