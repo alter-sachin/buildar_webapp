@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import Actor from "./components/Actor";
 import axios from "axios";
-import EdiText from 'react-editext'
+
 import SideBar from "../sidebar";
-import * as AiIcons from 'react-icons/ai';
+
 
 
 class CreateVideo extends Component {
@@ -17,7 +17,7 @@ class CreateVideo extends Component {
 			voices: [],
 			
 		}
-		this.w3_open = this.w3_open.bind(this);
+		
 	}
 	componentDidMount() {
 		axios
@@ -47,20 +47,11 @@ class CreateVideo extends Component {
 			});
 
 	}
-	w3_open = () => {
-		document.getElementById("main").style.marginLeft = "15%";
-		document.getElementById("mySidebar").style.width = "15%";
-		document.getElementById("mySidebar").style.display = "block";
-		document.getElementById("openNav").style.visibility = 'hidden';
-	}
+	
 	//   const [editing, setEditing] = useState(false);
 	// 	const [value, setValue] = useState('Create Video')
 
-	handleSave = (val) => {
-		this.setState({
-			videoTitle: val
-		})
-	}
+	
 
 	render() {
 		if (this.state.loading) {

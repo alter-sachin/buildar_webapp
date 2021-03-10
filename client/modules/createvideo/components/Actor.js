@@ -16,8 +16,10 @@ class Actor extends Component {
 		this.handleCheck = this.handleCheck.bind(this);
 		this.audioRequest = this.audioRequest.bind(this);
 		this.videoRequest = this.videoRequest.bind(this);
+		this.saveVideo = this.saveVideo.bind(this);
 		this.startTimer = this.startTimer.bind(this);
 		this.selectActor = this.selectActor.bind(this);
+		this.w3_open = this.w3_open.bind(this);
 	}
 	state = {
 		actors: this.props.data.actors,
@@ -127,6 +129,19 @@ class Actor extends Component {
 				})
 			})
 	}
+
+	saveVideo(){
+
+	}
+
+	w3_open = () => {
+		document.getElementById("main").style.marginLeft = "15%";
+		document.getElementById("mySidebar").style.width = "15%";
+		document.getElementById("mySidebar").style.display = "block";
+		document.getElementById("openNav").style.visibility = 'hidden';
+	}
+
+
 	renderTime = ({ remainingTime }) => {
 		if (this.state.audioUrl !== "" && this.state.isClicked == false) {
 			return <div className="timer">Done!!</div>;
@@ -167,6 +182,7 @@ class Actor extends Component {
 								<div className="topnav-right">
 									<button onClick={this.cancelRequest} id="cancel">Cancel</button>
 									<button onClick={this.videoRequest} id="create_video">Create Video</button>
+									<button onClick={this.saveVideo} id="save_video">Save Video</button>
 								</div>
 			</div>
 			<div className="col-md-12 col-lg-12 left_right">
