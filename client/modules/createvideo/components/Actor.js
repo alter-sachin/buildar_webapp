@@ -4,7 +4,9 @@ import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import { size } from "underscore";
 import AudioPlayer from "./AudioPlayer"
 import Videoplayer from "./Videoplayer";
-import Select from "react-select"
+import Select from "react-select";
+import EdiText from 'react-editext'
+import * as AiIcons from 'react-icons/ai';
 
 class Actor extends Component {
 
@@ -20,15 +22,18 @@ class Actor extends Component {
 	state = {
 		actors: this.props.data.actors,
 		actorId: "",
+		gender: "",
 		voices: this.props.data.voices,
+		voiceArray:[],
 		selectedElement: "",
 		active: 0,
 		textVal: "",
 		audioUrl: "",
-		videoUrl: "",
+		videoUrl: "https://buildar.in/vid/1614581284.455946.mp4",
 		audioReceived: false,
 		isClicked: false,
-		key: 0
+		key: 0,
+		videoTitle: ""
 	}
 
 
@@ -38,10 +43,39 @@ class Actor extends Component {
 	handleCheck(selectedElement) {
 		this.setState({ selectedElement: selectedElement });
 	}
-	selectActor(actorId) {
+	selectActor(actorId,gender) {
 		this.setState({
-			actorId: actorId
+			actorId: actorId,
+			gender: gender
 		})
+		var voiceA = []
+		if(gender === "male"){
+
+			this.state.voices.map((item) => {
+
+				if(item.Gender==="Male"){
+					
+					voiceA.push({label: item.Voice, value: item.Voice}) 	
+				}
+			})
+			this.setState({
+			voiceArray:voiceA
+		})
+		}
+		else{
+			this.state.voices.map((item) => {
+				console.log(item.Gender);
+				if(item.Gender==="Female"){
+					voiceA.push({ label: item.Voice, value: item.Voice })	
+				}
+			})
+			this.setState({
+			voiceArray:voiceA
+		})
+		}
+		
+		
+
 	}
 
 	startTimer() {
@@ -71,14 +105,22 @@ class Actor extends Component {
 				});
 			});
 	}
+
+	handleSave = (val) => {
+		this.setState({
+			videoTitle: val
+		})
+	}
+
 	videoRequest() {
 		const data = {
 			actorId: this.state.actorId,
 			audioUrl: this.state.audioUrl,
-			category: "social"
+			category: "start"
 		}
+		console.log(data);
 		axios.post(
-			"http://c320417a9649.ngrok.io/video", data)
+			"http://59448eaa5131.ngrok.io/video", data)
 			.then(({ data }) => {
 				this.setState({
 					videoUrl: data.videoUrl
@@ -105,68 +147,90 @@ class Actor extends Component {
 
 	render() {
 		const { actors, voices } = this.state;
-		// For dropdown component, it requires to have the input in such form
-		let voiceArray = voices.map((item) => {
-			return { label: item.Voice, value: item.Voice }
-		})
+
 		return (
 			<div>
+			<button id="openNav" className="w3-button w3-xlarge" onClick={this.w3_open}>&#9776;</button>
+						<div className="topnav">
+									<span id="editable">
+										<EdiText
+											type="textarea"
+											value={"Video Title"}
+											onSave={this.handleSave}
+											saveButtonContent="Done"
+											cancelButtonContent={<AiIcons.AiOutlineClose />}
+											editButtonContent={<AiIcons.AiFillEdit />}
+											hideIcons={true}
 
-				<div className="col-md-12 col-lg-6 left_side">
-					<h4>Select Actor</h4>
-					<div className="actor-list">
-						{actors.map((actor) => (
-							<p className="actor" key={actor.name} onClick={() => this.selectActor(actor.actorId)}>
-								<img src={actor.thumbnail} tabIndex="1" style={{ height: "100px" }} />
-								{actor.name}
-							</p>
-						))}
-					</div>
-					<div className="actor-select" style={{ display: "flex", flexDirection: "column" }}>
-						<Select
-							defaultValue={voiceArray[0]}
-							label="Single select"
-							options={voiceArray}
-							value={this.state.selectedElement}
-							onChange={this.handleCheck}
-						/>
-					</div>
-					<div className="script-input">
-						<h4>Script</h4>
-						<textarea
-							className="text-area"
-							placeholder="Insert script here"
-							rows="4"
-							cols="50"
-							value={this.state.textVal}
-							onChange={this.handleChange}
-						/>
-					</div>
-					<div className="audio-listen">
-						<button type="button" className="btn btn-secondary listen-button"
-							onClick={
-								this.audioRequest
-							}>
-							Listen
-        					</button>
-						<AudioPlayer className="audio-player" audioUrl={this.state.audioUrl} />
-						<div className="timer-wrapper">
-							<CountdownCircleTimer
-								key={this.state.key}
-								isPlaying={this.state.isClicked}
-								duration={10}
-								colors={[["#004777", 0.33], ["#F7B801", 0.33], ["#A30000"]]}
-								onComplete={() => [true, 0]}
-								strokeWidth={8}
-								size={75}>
-								{this.renderTime}
-							</CountdownCircleTimer>
+										/>
+									</span>
+								<div className="topnav-right">
+									<button onClick={this.cancelRequest} id="cancel">Cancel</button>
+									<button onClick={this.videoRequest} id="create_video">Create Video</button>
+								</div>
+			</div>
+			<div className="col-md-12 col-lg-12 left_right">
+				<div className="container">
+				<div className="row">
+
+					<div className="col-md-6 col-lg-6 left_side">
+						<h4>Select Actor</h4>
+						<div className="actor-list">
+							{actors.map((actor) => (
+								<p className="actor" key={actor.name} onClick={() => this.selectActor(actor.actorId,actor.gender)}>
+									<img src={actor.thumbnail} tabIndex="1" style={{ height: "100px" }} />
+									{actor.name}
+								</p>
+							))}
+						</div>
+						<div className="actor-select" style={{ display: "flex", flexDirection: "column" }}>
+							<Select
+								defaultValue={this.state.voiceArray[0]}
+								label="Single select"
+								options={this.state.voiceArray}
+								value={this.state.selectedElement}
+								onChange={this.handleCheck}
+							/>
+						</div>
+						<div className="script-input">
+							<h4>Script</h4>
+							<textarea
+								className="text-area"
+								placeholder="Insert script here"
+								rows="4"
+								cols="50"
+								value={this.state.textVal}
+								onChange={this.handleChange}
+							/>
+						</div>
+						<div className="audio-listen">
+							<button type="button" className="btn btn-secondary listen-button"
+								onClick={
+									this.audioRequest
+								}>
+								Listen
+	        					</button>
+							<AudioPlayer className="audio-player" audioUrl={this.state.audioUrl} />
+							<div className="timer-wrapper">
+								<CountdownCircleTimer
+									key={this.state.key}
+									isPlaying={this.state.isClicked}
+									duration={10}
+									colors={[["#004777", 0.33], ["#F7B801", 0.33], ["#A30000"]]}
+									onComplete={() => [true, 0]}
+									strokeWidth={8}
+									size={75}>
+									{this.renderTime}
+								</CountdownCircleTimer>
+							</div>
 						</div>
 					</div>
+					<div className="col-md-6 col-lg-6 right_side">
+						<Videoplayer videoUrl={this.state.videoUrl} />
+					</div>
 				</div>
-				<div className="col-md-6 col-lg-6 right_side">
-					<Videoplayer videoUrl={this.state.videoUrl} />
 				</div>
+			</div>
 			</div >
 		);
 	}

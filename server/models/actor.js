@@ -20,6 +20,12 @@ module.exports = (sequelize, DataTypes) => {
 				allowNull: true,
 				field: "name"
 			},
+			gender: {
+				type: DataTypes.STRING(20),
+				unique: false,
+				allowNull: false,
+				field: "gender"
+			},
 			thumbnail: {
 				type: DataTypes.STRING(255),
 				allowNull: true,

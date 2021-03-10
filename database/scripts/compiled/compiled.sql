@@ -438,6 +438,8 @@ CREATE TABLE `video` (
   FOREIGN KEY (userId_FK) REFERENCES user(id)
   )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+INSERT INTO `video`(title,videoURL,userId_FK)  VALUES ("first video", "https://buildar.in/vid/1608145790.3917465.mp4",1);
+INSERT INTO `video`(title,videoURL,userId_FK) VALUES ("second video", "https://buildar.in/vid/1608145897.1907487.mp4",1);
 
 CREATE TABLE `actor`(
  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -445,10 +447,12 @@ CREATE TABLE `actor`(
       `createdAt` datetime DEFAULT NULL,
   `updatedAt` datetime DEFAULT NULL,
   `name` varchar(300) DEFAULT NULL,
+  `gender` varchar(300) DEFAULT NULL,
   `thumbnail` varchar(255) DEFAULT NULL,
   PRIMARY KEY(`id`)
   )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO `actor`(id,actorId,name,thumbnail) VALUES (1,1,'Sophie','https://ml8ygptwlcsq.i.optimole.com/fMKjlhs.f8AX~1c8f3/w:600/h:600/q:auto/https://www.unite.ai/wp-content/uploads/2020/10/600px-Woman_1.jpg');
+INSERT INTO `actor`(id,actorId,name,gender,thumbnail) VALUES (1,0,'Sophie','female','https://buildar.in/actors/actor0.png');
 
-INSERT INTO `actor`(id,actorId,name,thumbnail) VALUES (2,2,'Carmen','https://buildar.in/actor2.png');
+INSERT INTO `actor`(id,actorId,name,gender,thumbnail) VALUES (2,1,'James','male','https://buildar.in/actors/actor1.jpeg');
+INSERT INTO `actor`(id,actorId,name,gender,thumbnail) VALUES (3,2,'Carmen','female','https://buildar.in/actors/actor2.jpeg');

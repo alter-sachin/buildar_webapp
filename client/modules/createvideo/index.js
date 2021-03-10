@@ -5,6 +5,7 @@ import EdiText from 'react-editext'
 import SideBar from "../sidebar";
 import * as AiIcons from 'react-icons/ai';
 
+
 class CreateVideo extends Component {
 
 	constructor(props) {
@@ -14,7 +15,7 @@ class CreateVideo extends Component {
 			loading: true,
 			actors: [],
 			voices: [],
-			videoTitle: ""
+			
 		}
 		this.w3_open = this.w3_open.bind(this);
 	}
@@ -61,7 +62,6 @@ class CreateVideo extends Component {
 		})
 	}
 
-
 	render() {
 		if (this.state.loading) {
 			return (
@@ -74,36 +74,7 @@ class CreateVideo extends Component {
 				<div>
 					<SideBar />
 					<div id="main">
-						<button id="openNav" className="w3-button w3-xlarge" onClick={this.w3_open}>&#9776;</button>
-						<div className="topnav container-fluid">
-							<div className="row">
-								<div className="col-lg-8 col-md-12 col-sm-12">
-									<span id="editable">
-										<EdiText
-											type="textarea"
-											value={"Video Title"}
-											onSave={this.handleSave}
-											saveButtonContent="Done"
-											cancelButtonContent={<AiIcons.AiOutlineClose />}
-											editButtonContent={<AiIcons.AiFillEdit />}
-											hideIcons={true}
-
-										/>
-									</span>
-								</div>
-								<div className="topnav-right col-lg-4">
-									<div className="container-fluid">
-										<div className="row">
-											<div className="col-lg-6 col-md-4 col-sm-4 col-xs-4"><button onClick={this.cancelRequest} id="cancel">Cancel</button></div>
-											<div className="col-lg-6 col-md-6 col-sm-4 col-xs-4"><button onClick={this.videoRequest} id="create_video">Create Video</button></div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div className="col-md-12 col-lg-12">
 							<Actor data={{ actors: actors, voices: voices }} />
-						</div>
 					</div>
 				</div>
 			);
