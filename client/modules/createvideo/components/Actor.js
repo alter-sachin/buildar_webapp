@@ -26,7 +26,7 @@ class Actor extends Component {
 		actorId: "",
 		gender: "",
 		voices: this.props.data.voices,
-		voiceArray:[],
+		voiceArray: [],
 		selectedElement: "",
 		active: 0,
 		textVal: "",
@@ -45,38 +45,37 @@ class Actor extends Component {
 	handleCheck(selectedElement) {
 		this.setState({ selectedElement: selectedElement });
 	}
-	selectActor(actorId,gender) {
+	selectActor(actorId, gender) {
 		this.setState({
 			actorId: actorId,
 			gender: gender
 		})
 		var voiceA = []
-		if(gender === "male"){
+		if (gender === "male") {
 
 			this.state.voices.map((item) => {
 
-				if(item.Gender==="Male"){
-					
-					voiceA.push({label: item.Voice, value: item.Voice}) 	
+				if (item.Gender === "Male") {
+
+					voiceA.push({ label: item.Voice, value: item.Voice })
 				}
 			})
 			this.setState({
-			voiceArray:voiceA
-		})
+				voiceArray: voiceA
+			})
 		}
-		else{
+		else {
 			this.state.voices.map((item) => {
-				console.log(item.Gender);
-				if(item.Gender==="Female"){
-					voiceA.push({ label: item.Voice, value: item.Voice })	
+				if (item.Gender === "Female") {
+					voiceA.push({ label: item.Voice, value: item.Voice })
 				}
 			})
 			this.setState({
-			voiceArray:voiceA
-		})
+				voiceArray: voiceA
+			})
 		}
-		
-		
+
+
 
 	}
 
@@ -120,7 +119,6 @@ class Actor extends Component {
 			audioUrl: this.state.audioUrl,
 			category: "start"
 		}
-		console.log(data);
 		axios.post(
 			"http://59448eaa5131.ngrok.io/video", data)
 			.then(({ data }) => {
@@ -130,7 +128,7 @@ class Actor extends Component {
 			})
 	}
 
-	saveVideo(){
+	saveVideo() {
 
 	}
 
@@ -165,88 +163,88 @@ class Actor extends Component {
 
 		return (
 			<div>
-			<button id="openNav" className="w3-button w3-xlarge" onClick={this.w3_open}>&#9776;</button>
-						<div className="topnav">
-									<span id="editable">
-										<EdiText
-											type="textarea"
-											value={"Video Title"}
-											onSave={this.handleSave}
-											saveButtonContent="Done"
-											cancelButtonContent={<AiIcons.AiOutlineClose />}
-											editButtonContent={<AiIcons.AiFillEdit />}
-											hideIcons={true}
+				<button id="openNav" className="w3-button w3-xlarge" onClick={this.w3_open}>&#9776;</button>
+				<div className="topnav">
+					<span id="editable">
+						<EdiText
+							type="textarea"
+							value={"Video Title"}
+							onSave={this.handleSave}
+							saveButtonContent="Done"
+							cancelButtonContent={<AiIcons.AiOutlineClose />}
+							editButtonContent={<AiIcons.AiFillEdit />}
+							hideIcons={true}
 
-										/>
-									</span>
-								<div className="topnav-right">
-									<button onClick={this.cancelRequest} id="cancel">Cancel</button>
-									<button onClick={this.videoRequest} id="create_video">Create Video</button>
-									<button onClick={this.saveVideo} id="save_video">Save Video</button>
+						/>
+					</span>
+					<div className="topnav-right">
+						<a type="button" href="/myvideos" className="btn btn-link" id="cancel">Cancel</a>
+						<button onClick={this.videoRequest} id="create_video">Create Video</button>
+						<button className="btn btn-success" onClick={this.saveVideo} id="save_video">Save Video</button>
+					</div>
+				</div>
+				<div className="col-md-12 col-lg-12 left_right">
+					<div className="container">
+						<div className="row">
+
+							<div className="col-md-6 col-lg-6 left_side">
+								<h4>Select Actor</h4>
+								<div className="actor-list">
+									{actors.map((actor) => (
+										<p className="actor" key={actor.name} onClick={() => this.selectActor(actor.actorId, actor.gender)}>
+											<img src={actor.thumbnail} tabIndex="1" style={{ height: "100px" }} />
+											{actor.name}
+										</p>
+									))}
 								</div>
-			</div>
-			<div className="col-md-12 col-lg-12 left_right">
-				<div className="container">
-				<div className="row">
-
-					<div className="col-md-6 col-lg-6 left_side">
-						<h4>Select Actor</h4>
-						<div className="actor-list">
-							{actors.map((actor) => (
-								<p className="actor" key={actor.name} onClick={() => this.selectActor(actor.actorId,actor.gender)}>
-									<img src={actor.thumbnail} tabIndex="1" style={{ height: "100px" }} />
-									{actor.name}
-								</p>
-							))}
-						</div>
-						<div className="actor-select" style={{ display: "flex", flexDirection: "column" }}>
-							<Select
-								defaultValue={this.state.voiceArray[0]}
-								label="Single select"
-								options={this.state.voiceArray}
-								value={this.state.selectedElement}
-								onChange={this.handleCheck}
-							/>
-						</div>
-						<div className="script-input">
-							<h4>Script</h4>
-							<textarea
-								className="text-area"
-								placeholder="Insert script here"
-								rows="4"
-								cols="50"
-								value={this.state.textVal}
-								onChange={this.handleChange}
-							/>
-						</div>
-						<div className="audio-listen">
-							<button type="button" className="btn btn-secondary listen-button"
-								onClick={
-									this.audioRequest
-								}>
-								Listen
+								<div className="actor-select" style={{ display: "flex", flexDirection: "column" }}>
+									<Select
+										defaultValue={this.state.voiceArray[0]}
+										label="Single select"
+										options={this.state.voiceArray}
+										value={this.state.selectedElement}
+										onChange={this.handleCheck}
+									/>
+								</div>
+								<div className="script-input">
+									<h4>Script</h4>
+									<textarea
+										className="text-area"
+										placeholder="Insert script here"
+										rows="4"
+										cols="50"
+										value={this.state.textVal}
+										onChange={this.handleChange}
+									/>
+								</div>
+								<div className="audio-listen">
+									<button type="button" className="btn btn-secondary listen-button"
+										onClick={
+											this.audioRequest
+										}>
+										Listen
 	        					</button>
-							<AudioPlayer className="audio-player" audioUrl={this.state.audioUrl} />
-							<div className="timer-wrapper">
-								<CountdownCircleTimer
-									key={this.state.key}
-									isPlaying={this.state.isClicked}
-									duration={10}
-									colors={[["#004777", 0.33], ["#F7B801", 0.33], ["#A30000"]]}
-									onComplete={() => [true, 0]}
-									strokeWidth={8}
-									size={75}>
-									{this.renderTime}
-								</CountdownCircleTimer>
+									<AudioPlayer className="audio-player" audioUrl={this.state.audioUrl} />
+									<div className="timer-wrapper">
+										<CountdownCircleTimer
+											key={this.state.key}
+											isPlaying={this.state.isClicked}
+											duration={10}
+											colors={[["#004777", 0.33], ["#F7B801", 0.33], ["#A30000"]]}
+											onComplete={() => [true, 0]}
+											strokeWidth={8}
+											size={75}>
+											{this.renderTime}
+										</CountdownCircleTimer>
+									</div>
+								</div>
+							</div>
+							<div className="col-md-6 col-lg-6 right_side">
+								<Videoplayer videoUrl={this.state.videoUrl} />
 							</div>
 						</div>
 					</div>
-					<div className="col-md-6 col-lg-6 right_side">
-						<Videoplayer videoUrl={this.state.videoUrl} />
-					</div>
 				</div>
-				</div>
-			</div>
 			</div >
 		);
 	}

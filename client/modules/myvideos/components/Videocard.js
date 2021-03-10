@@ -40,7 +40,7 @@ class Videocard extends Component {
 				</div>
 				<div className="myvideo-time">
 					<p>
-						{timeCreated}
+						{timeCreated ? timeCreated : "NA"}
 						<div id="myvideo-footer-icons">
 							<label className="btn btn-sm">
 								<AiIcons.AiOutlineStar size={20} />

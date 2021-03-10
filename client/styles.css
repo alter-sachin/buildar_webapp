@@ -2854,6 +2854,7 @@ a:hover.back-to-top {
 /* Right-aligned section inside the top navigation */
 .topnav-right {
   float: right;
+  margin: 0 1em;
 }
 .topnav-right button{
 	padding: 0.75em;
@@ -2865,20 +2866,29 @@ a:hover.back-to-top {
 .topnav-right #cancel{
 	color:white;
 	background-color: gray;
+	font-size: 16px;
+	border-radius: 7px;
 	margin: 0em 2em;
-
+	text-decoration: none;
+	padding: 0.75em;
+  	font-weight: 600;
+  	border-radius: .5em;
+  	border:0em;
 }
+
+.topnav-right #cancel:hover{
+	background-color: darkgray;
+}
+
 .topnav-right #create_video{
 	color:white;
 	background-color: #f45f3c;
 	margin-right: 2em;
-
 }
 
 .topnav-right #create_video:hover{
 	color:white;
 	background-color: #d73b1e;
-
 }
 
 .left_right {
@@ -2904,6 +2914,10 @@ a:hover.back-to-top {
 
 .script-input {
   margin-top: .5em;
+}
+
+.script-input textarea{
+	border-radius: 5px;
 }
 
 .header-buttons {
