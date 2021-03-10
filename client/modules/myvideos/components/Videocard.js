@@ -27,7 +27,7 @@ class Videocard extends Component {
 								<i className="fa fa-bars"></i>
 							</Dropdown.Toggle>
 							<Dropdown.Menu>
-								<Dropdown.Item href="">Edit</Dropdown.Item>
+								<Dropdown.Item href="/video" >Edit</Dropdown.Item>
 								<Dropdown.Item href="" onClick={() => this.props.deleteHandler(index)}>Delete</Dropdown.Item>
 								<Dropdown.Item href="" onClick={() => this.props.duplicateHandler(index)}>Duplicate</Dropdown.Item>
 							</Dropdown.Menu>

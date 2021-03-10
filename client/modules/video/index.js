@@ -1,71 +1,102 @@
-import React, { Component } from 'react'
-import ReactPlayer from 'react-player'
+import React, { Component } from "react";
+import ReactPlayer from "react-player";
 import SideBar from "../sidebar";
 
 
 
 class Video extends Component {
-    constructor(props) {
-        super(props)
+	constructor(props) {
+		super(props);
 
-        this.state = {
-        }
+	
+		this.w3_open = this.w3_open.bind(this);
+		this.handleChange = this.handleChange.bind(this);
+        this.handleTitle = this.handleTitle.bind(this);
 
-        this.w3_open = this.w3_open.bind(this);
+	}
+    state = {
+    	videoUrl:"https://buildar.in/vid/1608145790.3917465.mp4",
+    	userId:1,
+    	description:"",
+        title:""
+    };
+
+    componentDidMount(){
+    	// axios.get("/api/v1.0/Video",
+    	// (({data})=>{
+
+    	// })
+
+    }
+    handleChange() {
+    	this.setState({ description: event.target.value });
+    }
+
+   
+
+    handleTitle(){
+        var h1Text = document.querySelector(".video-title-edit").textContent;
+        this.setState({title:h1Text});
     }
     
     w3_open = () => {
-        document.getElementById("main").style.marginLeft = "20%";
-        document.getElementById("mySidebar").style.width = "15%";
-        document.getElementById("mySidebar").style.display = "block";
-        document.getElementById("openNav").style.visibility = 'hidden';
+    	document.getElementById("main").style.marginLeft = "20%";
+    	document.getElementById("mySidebar").style.width = "15%";
+    	document.getElementById("mySidebar").style.display = "block";
+    	document.getElementById("openNav").style.visibility = "hidden";
     }
 
     render() {
-        let url = "https://www.buildar.in/assets/videos/home.mp4"
-        return (
-            <div>
-            <SideBar/>
-            <div id="main">
-            <button id="openNav" className="w3-button w3-xlarge" onClick={this.w3_open}>&#9776;</button>
-            <div className="individual-video">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-lg-12 col-sm-12 col-md-12 react-player-col">
-                            <ReactPlayer
-                                config={{ file: { attributes: { controlsList: 'nodownload' } } }}
-                                // Disable right click
-                                onContextMenu={e => e.preventDefault()}
-                                className="react-player single-video"
-                                url={url}
-                                width="80%"
-                                controls
-                            />
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-lg-12 col-md-12 col-sm-12 video-description">
-                            <h1 className="video-title-edit" contentEditable="true">Title</h1>
-                            <p>Nishant</p>
-                            <form>
-                                <div className="form-group">
-                                    <textarea
-                                        tabindex="0"
-                                        className="form-control"
-                                        id="exampleFormControlTextarea1"
-                                        rows="3"
-                                        placeholder="Add description..">
-                                    </textarea>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div>
-            </div>
-        )
+    	// console.log(this.state.description);
+        // console.log(this.state.title);
+    	return (
+    		<div>
+    			<SideBar/>
+    			<div id="main">
+    				<button id="openNav" className="w3-button w3-xlarge" onClick={this.w3_open}>&#9776;</button>
+    				<div className="individual-video">
+    					<div className="container">
+    						<div className="row">
+    							<div className="col-lg-12 col-sm-12 col-md-12 react-player-col">
+    								<ReactPlayer
+    									config={{ file: { attributes: { controlsList: "nodownload" } } }}
+    									// Disable right click
+    									onContextMenu={e => e.preventDefault()}
+    									className="react-player single-video"
+    									url={this.state.videoUrl}
+    									width="80%"
+    									controls
+    								/>
+    							</div>
+    						</div>
+    						<div className="row">
+    							<div className="col-lg-12 col-md-12 col-sm-12 video-description">
+                                      
+    		 						<h1 className="video-title-edit" contentEditable="true"  onMouseOut={this.handleTitle}  placeholder="Enter Title">Title</h1>
+    								
+
+    								<form>
+    									<div className="form-group">
+    										<textarea
+    											tabIndex="0"
+    											className="form-control"
+    											id="exampleFormControlTextarea1"
+    											rows="3"
+                                   
+    											value={this.state.description}
+    											onChange={this.handleChange}
+    											placeholder="Add description..">
+    										</textarea>
+    									</div>
+    								</form>
+    							</div>
+    						</div>
+    					</div>
+    				</div>
+    			</div>
+    		</div>
+    	);
     }
 }
 
-export default Video
+export default Video;

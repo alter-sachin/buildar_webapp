@@ -120,7 +120,7 @@ class Actor extends Component {
 			category: "start"
 		}
 		axios.post(
-			"http://59448eaa5131.ngrok.io/video", data)
+			"http://2b45e4331719.ngrok.io/video", data)
 			.then(({ data }) => {
 				this.setState({
 					videoUrl: data.videoUrl
