@@ -1,7 +1,11 @@
 import { fromJS } from "immutable";
 import { REDUX_STATE } from "shared/constants";
 
-import {loadActor,loadPersonalVideo,createPersonalVideo,deletePersonalVideo} from "client/api/video.js";
+import {loadActor,
+	loadPersonalVideo,
+	createPersonalVideo,
+	deletePersonalVideo} from "client/api/video.js";
+	
 import { UPDATE_PROFILE_PENDING } from "./profile";
 
 export const VIDEO = "video";
@@ -38,7 +42,7 @@ export default function video(state = DEFAULT_STATE, action){
     
 		case LOAD_VIDEO_REJECTED:
 			return state.set(
-				"loadProfile",
+				"loadVideo",
 				fromJS({
 					status:REDUX_STATE.REJECTED,
 					payload:{},
@@ -102,6 +106,8 @@ export default function video(state = DEFAULT_STATE, action){
 					error:action.payload
 				})
 			);
+		default:
+			return state;
 	}
 } 
 

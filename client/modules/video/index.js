@@ -2,7 +2,14 @@ import React, { Component } from "react";
 import ReactPlayer from "react-player";
 import SideBar from "../sidebar";
 
+import PropTypes from "prop-types";
+import { Helmet } from "react-helmet";
+import { Route, withRouter } from "react-router-dom";
+// Import Redux Store
+import store, { injectReducer } from "common/store/store";
+import video, { VIDEO } from "common/store/reducers/video.js";
 
+import User from "common/components/User";
 
 class Video extends Component {
 	constructor(props) {
@@ -47,6 +54,8 @@ class Video extends Component {
     }
 
     render() {
+
+         const { user, history } = this.props;
     	// console.log(this.state.description);
         // console.log(this.state.title);
     	return (
@@ -57,6 +66,7 @@ class Video extends Component {
     				<div className="individual-video">
     					<div className="container">
     						<div className="row">
+                                <span>{user.get("id")} {user.get("firstName")} {user.get("firstName")} {user.get("emailAddress")}</span>
     							<div className="col-lg-12 col-sm-12 col-md-12 react-player-col">
     								<ReactPlayer
     									config={{ file: { attributes: { controlsList: "nodownload" } } }}
@@ -99,4 +109,12 @@ class Video extends Component {
     }
 }
 
-export default Video;
+// Inject Profile Reducer
+injectReducer(store, VIDEO, video);
+
+Video.propTypes = {
+    history: PropTypes.object,
+    user: PropTypes.object
+};
+
+export default withRouter(User(Video));

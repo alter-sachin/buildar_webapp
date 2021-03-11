@@ -138,7 +138,13 @@ class Actor extends Component {
 	}
 
 	saveVideo() {
-
+		axios.post(
+			"/api/v1.0/video", data)
+			.then(({ data }) => {
+				this.setState({
+					videoUrl: data.videoUrl
+				})
+			})
 	}
 
 	w3_open = () => {
