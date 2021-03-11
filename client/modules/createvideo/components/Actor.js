@@ -17,7 +17,8 @@ class Actor extends Component {
 		this.audioRequest = this.audioRequest.bind(this);
 		this.videoRequest = this.videoRequest.bind(this);
 		this.saveVideo = this.saveVideo.bind(this);
-		this.startTimer = this.startTimer.bind(this);
+		this.startAudioTimer = this.startAudioTimer.bind(this);
+		this.startVideoTimer = this.startVideoTimer.bind(this);
 		this.selectActor = this.selectActor.bind(this);
 		this.w3_open = this.w3_open.bind(this);
 	}
@@ -33,7 +34,8 @@ class Actor extends Component {
 		audioUrl: "",
 		videoUrl: "https://buildar.in/vid/1614581284.455946.mp4",
 		audioReceived: false,
-		isClicked: false,
+		isAudioClicked: false,
+		isVideoClicked: false,
 		key: 0,
 		videoTitle: ""
 	}
@@ -79,14 +81,20 @@ class Actor extends Component {
 
 	}
 
-	startTimer() {
+	startVideoTimer() {
 		this.setState({
-			isClicked: true,
+			isVideoClicked: true,
+		})
+
+	}
+	startAudioTimer() {
+		this.setState({
+			isAudioClicked: true,
 		})
 
 	}
 	audioRequest() {
-		this.startTimer()
+		this.startAudioTimer()
 
 		const data = {
 			speakerId: this.state.selectedElement.value,
@@ -98,7 +106,7 @@ class Actor extends Component {
 			.then(({ data }) => {
 				this.setState({
 					audioUrl: data.audioUrl,
-					isClicked: false,
+					isAudioClicked: false,
 					audioReceived: true
 				});
 				this.setState({ key: this.state.key + 1 }, () => {
@@ -114,6 +122,7 @@ class Actor extends Component {
 	}
 
 	videoRequest() {
+		this.startVideoTimer()
 		const data = {
 			actorId: this.state.actorId,
 			audioUrl: this.state.audioUrl,
@@ -140,12 +149,29 @@ class Actor extends Component {
 	}
 
 
-	renderTime = ({ remainingTime }) => {
-		if (this.state.audioUrl !== "" && this.state.isClicked == false) {
+	renderVideoTime = ({ remainingTime }) => {
+		if ((this.state.videoUrl !== "" || this.state.videoUrl !== "https://buildar.in/vid/1614581284.455946.mp4") && this.state.isVideoClicked == false) {
 			return <div className="timer">Done!!</div>;
 		}
 
-		if (this.state.audioUrl !== "" && this.state.isClicked == true) {
+		if (this.state.videoUrl !== "" && this.state.isVideoClicked == true) {
+			this.state.key = this.state.key + 1;
+		}
+
+		return (
+			<div className="timer">
+				{/* <div className="text">Remaining</div> */}
+				<div className="value">{remainingTime}</div>
+				{/* <div className="text">seconds</div> */}
+			</div>
+		);
+	};
+	renderAudioTime = ({ remainingTime }) => {
+		if (this.state.audioUrl !== "" && this.state.isAudioClicked == false) {
+			return <div className="timer">Done!!</div>;
+		}
+
+		if (this.state.audioUrl !== "" && this.state.isAudioClicked == true) {
 			this.state.key = this.state.key + 1;
 		}
 
@@ -228,19 +254,31 @@ class Actor extends Component {
 									<div className="timer-wrapper">
 										<CountdownCircleTimer
 											key={this.state.key}
-											isPlaying={this.state.isClicked}
+											isPlaying={this.state.isAudioClicked}
 											duration={10}
 											colors={[["#004777", 0.33], ["#F7B801", 0.33], ["#A30000"]]}
 											onComplete={() => [true, 0]}
 											strokeWidth={8}
 											size={75}>
-											{this.renderTime}
+											{this.renderAudioTime}
 										</CountdownCircleTimer>
 									</div>
 								</div>
 							</div>
 							<div className="col-md-6 col-lg-6 right_side">
 								<Videoplayer videoUrl={this.state.videoUrl} />
+								<div className="timer-wrapper">
+									<CountdownCircleTimer
+										key={this.state.key}
+										isPlaying={this.state.isVideoClicked}
+										duration={20}
+										colors={[["#004777", 0.33], ["#F7B801", 0.33], ["#A30000"]]}
+										onComplete={() => [true, 0]}
+										strokeWidth={8}
+										size={75}>
+										{this.renderVideoTime}
+									</CountdownCircleTimer>
+								</div>
 							</div>
 						</div>
 					</div>
