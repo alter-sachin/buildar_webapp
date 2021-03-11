@@ -8,7 +8,7 @@ import { Route, withRouter } from "react-router-dom";
 // Import Redux Store
 import store, { injectReducer } from "common/store/store";
 import video, { VIDEO } from "common/store/reducers/video.js";
-
+import axios from "axios";
 import User from "common/components/User";
 
 class Video extends Component {
@@ -25,14 +25,30 @@ class Video extends Component {
     	videoUrl:"https://buildar.in/vid/1608145790.3917465.mp4",
     	userId:1,
     	description:"",
-        title:""
+        title:"",
+        loading:true
     };
 
     componentDidMount(){
-    	// axios.get("/api/v1.0/Video",
-    	// (({data})=>{
-
-    	// })
+    /*const _this = this;*/
+        const { user, history } = this.props;
+        let user_id = user.get("userId");
+        let video_id = 15
+        var userData = {
+            params: {
+              ID: user_id
+            }
+        }
+        //console.log("xxxx",userData);
+        axios
+            .get("api/v1.0/video/"+video_id,userData)
+            .then(({ data }) => {
+                console.log("this is videolist",data[0]);
+                this.setState({ videoUrl: data[0].videoURL,
+                 description:data[0].description,
+                 title:data[0].title,
+                 loading: false });
+            });
 
     }
     handleChange() {
@@ -66,7 +82,6 @@ class Video extends Component {
     				<div className="individual-video">
     					<div className="container">
     						<div className="row">
-                                <span>{user.get("id")} {user.get("firstName")} {user.get("firstName")} {user.get("emailAddress")}</span>
     							<div className="col-lg-12 col-sm-12 col-md-12 react-player-col">
     								<ReactPlayer
     									config={{ file: { attributes: { controlsList: "nodownload" } } }}
@@ -82,7 +97,7 @@ class Video extends Component {
     						<div className="row">
     							<div className="col-lg-12 col-md-12 col-sm-12 video-description">
                                       
-    		 						<h1 className="video-title-edit" contentEditable="true"  onMouseOut={this.handleTitle}  placeholder="Enter Title">Title</h1>
+    		 						<h1 className="video-title-edit" contentEditable="true"  onMouseOut={this.handleTitle}  placeholder="Enter Title">{this.state.title}</h1>
     								
 
     								<form>

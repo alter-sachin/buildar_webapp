@@ -1,7 +1,7 @@
 import fetch from "common/fetch";
 
 export function loadPersonalVideo(){
-	return fetch.perform("/api/v1.0/video",{
+	return fetch.perform("/api/v1.0/videos",{
 		method:"GET",
 		
 	});

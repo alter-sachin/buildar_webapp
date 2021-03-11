@@ -9,7 +9,8 @@ import { updateUserProfile, verifyEmail, changeSavedLanguage, changeUserPassword
 
 import {
 	createVideo,
-	loadVideo,
+	loadVideos,
+	loadSingleVideo,
 	deleteVideo
 } from "../orchestrator/video";
 
@@ -17,7 +18,7 @@ const request = require("request");
 
 
 module.exports = function(router) {
-	router.get("/api/v1.0/video",
+	router.get("/api/v1.0/videos",
 		restrict({
 			registered: false,
 			unregistered: true
@@ -29,7 +30,7 @@ module.exports = function(router) {
 
 			};
 
-			loadVideo(null, authenticatedUser, null)
+			loadVideos(null, authenticatedUser, null)
 				.then(
 					result => {
 
@@ -44,6 +45,38 @@ module.exports = function(router) {
 				);
 
 		});
+
+		router.get("/api/v1.0/video/:id",
+		restrict({
+			registered: false,
+			unregistered: true
+		}),
+		function(req, res, next) {
+			console.log("inside controller",req.query.ID,req.params.id);
+			const authenticatedUser = {
+				userId: req.query.ID,
+				videoId: req.params.id
+			};
+
+			loadSingleVideo(null, authenticatedUser, null)
+				.then(
+					result => {
+
+						// eslint-disable-next-line no-console
+						//console.log("video is returned?",result);
+						return res.status(200).send(result);
+
+					},
+					error => {
+						return next(error);
+					}
+				);
+
+		});
+
+
+
+
 
 
 

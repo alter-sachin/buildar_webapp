@@ -8,6 +8,7 @@ class Videocard extends Component {
 		super(props);
 
 		this.state = {
+			id:"",
 			title: "",
 			description: "",
 			url: "",

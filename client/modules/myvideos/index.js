@@ -38,7 +38,7 @@ class MyVideo extends Component {
 		}
 		//console.log("xxxx",userData);
 		axios
-			.get("api/v1.0/video",userData)
+			.get("api/v1.0/videos",userData)
 			.then(({ data }) => {
 				//console.log("this is videolist",data);
 				this.setState({ videoList: data, loading: false });
