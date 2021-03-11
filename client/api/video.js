@@ -19,6 +19,8 @@ export function createPersonalVideo(body){
 		
 	});
 }
+
+
 export function deletePersonalVideo(body){
 	return fetch.perform("/api/v1.0/video",{
 		method:"PATCH",

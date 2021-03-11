@@ -56,6 +56,26 @@ class Video extends Component {
     	this.setState({ description: event.target.value });
     }
 
+    updateVideoRequest(){
+        const { user, history } = this.props;
+        let user_id = user.get("userId");
+        var videoData = {
+            params: {
+              ID: user_id,
+              videoId : this.state.videoId,
+              title:this.state.title,
+              description:this.state.description
+            }
+        }
+        //console.log("xxxx",userData);
+        axios
+            .post("api/v1.0/video/"+video_id,videoData)
+            .then(({ data }) => {
+               window.location = "/myvideos";
+            });
+
+    }
+
    
 
     handleTitle(){
@@ -96,7 +116,7 @@ class Video extends Component {
     							</div>
     						</div>
     						<div className="row">
-    							<div className="col-lg-12 col-md-12 col-sm-12 video-description">
+    							<div className="col-lg-9 col-md-9 col-sm-9 video-description">
                                       
     		 						<h1 className="video-title-edit" contentEditable="true"  onMouseOut={this.handleTitle}  placeholder="Enter Title">{this.state.title}</h1>
     								
@@ -116,6 +136,9 @@ class Video extends Component {
     									</div>
     								</form>
     							</div>
+                                <div className="col-lg-2 col-md-2 col-sm-2 video-description">
+                                    <button id="update_button" onClick={this.updateVideoRequest} id="update_video">Update</button>
+                                </div>
     						</div>
     					</div>
     				</div>

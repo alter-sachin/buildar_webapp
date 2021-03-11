@@ -11,7 +11,8 @@ import {
 	createVideo,
 	loadVideos,
 	loadSingleVideo,
-	deleteVideo
+	deleteVideo,
+	updateSingleVideo
 } from "../orchestrator/video";
 
 const request = require("request");
@@ -112,6 +113,37 @@ module.exports = function(router) {
 					}
 				);
 		});
+
+	router.post("/api/v1.0/video/:id",
+		restrict({
+			registered: false,
+			unregistered: true
+
+		}),
+		function(req, res, next) {
+			console.log("inside controller",req.query.ID,req.params.id);
+			//  console.log(req.body.title);
+			// const browserLng = browserResponseLng(req);
+			const requestProperties = {
+				title: req.query.title,
+				description: req.query.description,
+				userId_FK: req.query.userId_FK
+			};
+			
+					
+
+			updateSingleVideo(requestProperties, null, null)
+				.then(
+					result => {
+						// console.log(result);
+						return res.send(result);
+					},
+					error => {
+						return res.send(error);
+					}
+				);
+		});
+
 
 	router.patch("/api/v1.0/video",
 		restrict({

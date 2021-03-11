@@ -46,6 +46,36 @@ export function loadSingleVideo(requestProperties, authenticatedUser, browserLng
 }
 
 
+export function updateSingleVideo(requestProperties, authenticatedUser, browserLng) {
+	return database().transaction(async function(transaction) {
+		try {
+			// Load client for authenticated user
+			//const user = await models().user.findOne({ where: { id: authenticatedUser.userId, active: true } });
+			//  console.log(user);	
+			const videoId = authenticatedUser.videoId;
+			//const video = await models().video.findAll({ where: { userId_FK: user.id } });
+			const singleVideo = await models().video.findAll({ where: { [Op.and]: [
+		      { userId_FK: user.id },
+		      { id: authenticatedUser.videoId }] } });
+			if(!singleVideo){
+				 throw Error('Video not updated. id');
+			}
+
+			singleVideo.title = authenticatedUser.title;
+			singleVideo.description = authenticatedUser.description;
+			await singleVideo.save();
+			return singleVideo;
+		}
+		catch (error) {
+			console.error(error);
+		}
+
+	});
+}
+
+
+
+
 
 export function createVideo(requestProperties, authenticatedUser, browserLng) {
 	return database().transaction(async function (transaction) {
