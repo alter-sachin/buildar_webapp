@@ -24,6 +24,7 @@ class Video extends Component {
     state = {
     	videoUrl:"https://buildar.in/vid/1608145790.3917465.mp4",
     	userId:1,
+        videoId:this.props.id,
     	description:"",
         title:"",
         loading:true
@@ -33,7 +34,7 @@ class Video extends Component {
     /*const _this = this;*/
         const { user, history } = this.props;
         let user_id = user.get("userId");
-        let video_id = 15
+        let video_id = this.props.location.param1;
         var userData = {
             params: {
               ID: user_id
