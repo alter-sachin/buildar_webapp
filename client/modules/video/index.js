@@ -66,7 +66,7 @@ class Video extends Component {
     				<div className="individual-video">
     					<div className="container">
     						<div className="row">
-                                <span>{user.get("id")} {user.get("firstName")} {user.get("firstName")} {user.get("emailAddress")}</span>
+                                
     							<div className="col-lg-12 col-sm-12 col-md-12 react-player-col">
     								<ReactPlayer
     									config={{ file: { attributes: { controlsList: "nodownload" } } }}

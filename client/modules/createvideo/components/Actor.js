@@ -8,6 +8,16 @@ import Select from "react-select";
 import EdiText from 'react-editext'
 import * as AiIcons from 'react-icons/ai';
 
+import PropTypes from "prop-types";
+import { Helmet } from "react-helmet";
+import { Route, withRouter } from "react-router-dom";
+// Import Redux Store
+import store, { injectReducer } from "common/store/store";
+import video, { VIDEO } from "common/store/reducers/video.js";
+
+import User from "common/components/User";
+
+
 class Actor extends Component {
 
 	constructor(props) {
@@ -138,6 +148,13 @@ class Actor extends Component {
 	}
 
 	saveVideo() {
+		const data = {
+			title:this.state.title,
+			description:body.description,
+			thumbnail:body.thumbnail,
+			textScript:body.textScript,
+			userId_FK:body.userId
+		}
 		axios.post(
 			"/api/v1.0/video", data)
 			.then(({ data }) => {
@@ -191,6 +208,7 @@ class Actor extends Component {
 	};
 
 	render() {
+		const { user, history } = this.props;
 		const { actors, voices } = this.state;
 
 		return (
@@ -221,6 +239,7 @@ class Actor extends Component {
 
 							<div className="col-md-6 col-lg-6 left_side">
 								<h4>Select Actor</h4>
+								<span>{user.get("id")} {user.get("firstName")} {user.get("firstName")} {user.get("emailAddress")}</span>
 								<div className="actor-list">
 									{actors.map((actor) => (
 										<p className="actor" key={actor.name} onClick={() => this.selectActor(actor.actorId, actor.gender)}>
@@ -295,4 +314,12 @@ class Actor extends Component {
 
 }
 
-export default Actor;
+// Inject Profile Reducer
+injectReducer(store, VIDEO, video);
+
+Actor.propTypes = {
+    history: PropTypes.object,
+    user: PropTypes.object
+};
+
+export default withRouter(User(Actor));
