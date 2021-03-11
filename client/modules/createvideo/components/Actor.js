@@ -26,10 +26,11 @@ class Actor extends Component {
 		this.handleCheck = this.handleCheck.bind(this);
 		this.audioRequest = this.audioRequest.bind(this);
 		this.videoRequest = this.videoRequest.bind(this);
-		this.saveVideo = this.saveVideo.bind(this);
 		this.startAudioTimer = this.startAudioTimer.bind(this);
 		this.startVideoTimer = this.startVideoTimer.bind(this);
+		this.handleSave = this.handleSave.bind(this);
 		this.selectActor = this.selectActor.bind(this);
+		this.saveVideo = this.saveVideo.bind(this);
 		this.w3_open = this.w3_open.bind(this);
 	}
 	state = {
@@ -125,10 +126,9 @@ class Actor extends Component {
 			});
 	}
 
-	handleSave = (val) => {
-		this.setState({
-			videoTitle: val
-		})
+	handleSave() {
+		var h1Text = document.querySelector(".video-title-edit").textContent;
+        this.setState({videoTitle:h1Text});
 	}
 
 	videoRequest() {
@@ -139,30 +139,30 @@ class Actor extends Component {
 			category: "start"
 		}
 		axios.post(
-			"http://2b45e4331719.ngrok.io/video", data)
+			"http://fcbbd04a559e.ngrok.io/video", data)
 			.then(({ data }) => {
 				this.setState({
 					videoUrl: data.videoUrl
-				})
+				});
 			})
 	}
-
 	saveVideo() {
 		const data = {
-			title:this.state.title,
-			description:body.description,
-			thumbnail:body.thumbnail,
-			textScript:body.textScript,
-			userId_FK:body.userId
+			title: this.state.videoTitle,
+			description:"this is first video",
+			thumbnail:"",
+			textScript:this.state.textVal,
+			videoUrl:this.state.videoUrl,
+			userId_FK:this.props.user.get("userId")
 		}
 		axios.post(
 			"/api/v1.0/video", data)
 			.then(({ data }) => {
-				this.setState({
-					videoUrl: data.videoUrl
-				})
+				console.log(data);
 			})
 	}
+
+	
 
 	w3_open = () => {
 		document.getElementById("main").style.marginLeft = "15%";
@@ -210,22 +210,19 @@ class Actor extends Component {
 	render() {
 		const { user, history } = this.props;
 		const { actors, voices } = this.state;
+		console.log(this.state.textVal);
+		console.log(this.state.videoTitle);
+
+		
 
 		return (
 			<div>
 				<button id="openNav" className="w3-button w3-xlarge" onClick={this.w3_open}>&#9776;</button>
 				<div className="topnav">
 					<span id="editable">
-						<EdiText
-							type="textarea"
-							value={"Video Title"}
-							onSave={this.handleSave}
-							saveButtonContent="Done"
-							cancelButtonContent={<AiIcons.AiOutlineClose />}
-							editButtonContent={<AiIcons.AiFillEdit />}
-							hideIcons={true}
+					<h1 className="video-title-edit" contentEditable="true"  onMouseOut={this.handleSave}  placeholder="Enter Title">Click here to enter Title</h1>
 
-						/>
+					
 					</span>
 					<div className="topnav-right">
 						<a type="button" href="/myvideos" className="btn btn-link" id="cancel">Cancel</a>
@@ -239,7 +236,7 @@ class Actor extends Component {
 
 							<div className="col-md-6 col-lg-6 left_side">
 								<h4>Select Actor</h4>
-								<span>{user.get("id")} {user.get("firstName")} {user.get("firstName")} {user.get("emailAddress")}</span>
+								<span>{user.get("userId")} {user.get("firstName")} {user.get("firstName")} {user.get("emailAddress")}</span>
 								<div className="actor-list">
 									{actors.map((actor) => (
 										<p className="actor" key={actor.name} onClick={() => this.selectActor(actor.actorId, actor.gender)}>

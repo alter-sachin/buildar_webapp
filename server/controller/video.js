@@ -7,22 +7,22 @@ import validate from "shared/validation/validate";
 import { t } from "shared/translations/i18n";
 import { updateUserProfile, verifyEmail, changeSavedLanguage, changeUserPassword } from "shared/validation/profile";
 
-const request = require("request");
-
 import {
 	createVideo,
 	loadVideo,
 	deleteVideo
 } from "../orchestrator/video";
 
+const request = require("request");
 
-module.exports = function (router) {
+
+module.exports = function(router) {
 	router.get("/api/v1.0/video",
 		restrict({
 			registered: false,
 			unregistered: true
 		}),
-		function (req, res, next) {
+		function(req, res, next) {
 
 			const authenticatedUser = {
 				userId: 1,
@@ -53,7 +53,7 @@ module.exports = function (router) {
 			unregistered: true
 
 		}),
-		function (req, res, next) {
+		function(req, res, next) {
 
 			//  console.log(req.body.title);
 			// const browserLng = browserResponseLng(req);
@@ -61,43 +61,23 @@ module.exports = function (router) {
 				title: req.body.title,
 				description: req.body.description,
 				thumbnail: req.body.thumbnail,
-				videoURL: "",
+				videoURL: req.body.videoUrl,
 				textScript: req.body.textScript,
-				userId_FK: req.body.userId
+				userId_FK: req.body.userId_FK
 			};
-			const videoInputs = {
-				actorId: req.body.actorId,
-				audioUrl: req.body.audioUrl
-			};
-			request.post(
-				{
-					url: "",
-					json: videoInputs,
-					headers: {
-						"Content-type": "application/json"
+			
+					
+
+			createVideo(requestProperties, null, null)
+				.then(
+					result => {
+						// console.log(result);
+						return res.send(result);
+					},
+					error => {
+						return res.send(error);
 					}
-				},
-				(error, { body }) => {
-					if (error) {
-						console.error(error)
-					}
-					console.log(body);
-					requestProperties.videoURL = body.videoUrl;
-
-					createVideo(requestProperties, null, null)
-						.then(
-							result => {
-								// console.log(result);
-								return res.send(result);
-							},
-							error => {
-								return res.send(error);
-							}
-						);
-
-
-				}
-			);
+				);
 		});
 
 	router.patch("/api/v1.0/video",
@@ -106,7 +86,7 @@ module.exports = function (router) {
 			unregistered: true
 
 		}),
-		function (req, res, next) {
+		function(req, res, next) {
 
 			// console.log(req.body)
 			const browserLng = browserResponseLng(req);

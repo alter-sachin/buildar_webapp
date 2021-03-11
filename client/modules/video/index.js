@@ -66,13 +66,13 @@ class Video extends Component {
     				<div className="individual-video">
     					<div className="container">
     						<div className="row">
-                                
+                                <span>{user.get("id")} {user.get("firstName")} {user.get("firstName")} {user.get("emailAddress")}</span>
     							<div className="col-lg-12 col-sm-12 col-md-12 react-player-col">
     								<ReactPlayer
     									config={{ file: { attributes: { controlsList: "nodownload" } } }}
     									// Disable right click
     									onContextMenu={e => e.preventDefault()}
-    									className="react-player single-video"
+    									className="react-dplayer single-video"
     									url={this.state.videoUrl}
     									width="80%"
     									controls
