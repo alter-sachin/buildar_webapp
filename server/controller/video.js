@@ -23,9 +23,9 @@ module.exports = function(router) {
 			unregistered: true
 		}),
 		function(req, res, next) {
-
+			console.log("inside controller",req.query.ID);
 			const authenticatedUser = {
-				userId: 1,
+				userId: req.query.ID,
 
 			};
 

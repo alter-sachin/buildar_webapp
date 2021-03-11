@@ -2,7 +2,16 @@ import axios from "axios";
 import React, { Component } from "react";
 import SideBar from "../sidebar";
 import Videocard from "./components/Videocard";
-import User from "../../common/components/User";
+
+
+import PropTypes from "prop-types";
+import { Helmet } from "react-helmet";
+import { Route, withRouter } from "react-router-dom";
+// Import Redux Store
+import store, { injectReducer } from "common/store/store";
+import video, { VIDEO } from "common/store/reducers/video.js";
+
+import User from "common/components/User";
 
 
 class MyVideo extends Component {
@@ -18,10 +27,20 @@ class MyVideo extends Component {
 		this.duplicateVideo = this.duplicateVideo.bind(this)
 	}
 	componentDidMount() {
+		/*const _this = this;*/
+		const { user, history } = this.props;
+		let user_id = user.get("userId");
+
+		var userData = {
+		    params: {
+		      ID: user_id
+		    }
+		}
+		//console.log("xxxx",userData);
 		axios
-			.get("api/v1.0/video")
+			.get("api/v1.0/video",userData)
 			.then(({ data }) => {
-				console.log("this is videolist",data);
+				//console.log("this is videolist",data);
 				this.setState({ videoList: data, loading: false });
 			});
 	}
@@ -80,7 +99,7 @@ class MyVideo extends Component {
 	}
 
 	render() {
-
+		const { user, history } = this.props;
 		if (this.state.loading) {
 			return (
 				<div>
@@ -138,4 +157,12 @@ class MyVideo extends Component {
 	}
 }
 
-export default MyVideo;
+// Inject Profile Reducer
+injectReducer(store, VIDEO, video);
+
+MyVideo.propTypes = {
+    history: PropTypes.object,
+    user: PropTypes.object
+};
+
+export default withRouter(User(MyVideo));
