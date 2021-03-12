@@ -108,7 +108,8 @@ class MyVideo extends Component {
 			);
 		}
 		else {
-			const videos = this.state.videoList
+			
+			var videos = this.state.videoList;
 			return (
 				<div>
 					<SideBar />
@@ -130,7 +131,7 @@ class MyVideo extends Component {
 													id={video.id}
 													title={video.title}
 													description={video.description}
-													url={video.url}
+													url={video.videoURL}
 													timeCreated={video.timeCreated}
 													deleteHandler={()=>{
 														this.deleteVideo(index,video.id)
