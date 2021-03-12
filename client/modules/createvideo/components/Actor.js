@@ -229,7 +229,7 @@ class Actor extends Component {
 			<div>
 				<button id="openNav" className="w3-button w3-xlarge" onClick={this.w3_open}>&#9776;</button>
 				<div className="topnav">
-					<a type="button" href="/myvideos" className="btn btn-link" id="cancel">Go Back</a>
+					{/* <a type="button" href="/myvideos" className="btn btn-link" id="cancel">Go Back</a> */}
 					<span id="editable">
 						<h1 className="video-title-edit" contentEditable="true" onMouseOut={this.handleSave} placeholder="Enter Title">Click here to enter Title</h1>
 					</span>
@@ -259,7 +259,7 @@ class Actor extends Component {
 								<div className="actor-list">
 									{actors.map((actor) => (
 										<p className="actor" id="actor-select" key={actor.name} onClick={() => this.selectActor(actor.actorId, actor.gender)}>
-											<img id="actor-image" src={actor.thumbnail} style={{ height: "100px" }} />
+											<img id="actor-image" tabIndex="0" src={actor.thumbnail} style={{ height: "100px" }} />
 											{actor.name}
 										</p>
 									))}
