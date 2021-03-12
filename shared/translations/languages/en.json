@@ -95,7 +95,7 @@
 			"existingAccount": "Already have an account?",
 			"noReset": "Don't need to reset your password?",
 			"policyAgreement": "By registering an account, you agree to the following",
-			"privacyConsent": "I consent to the collection and storage of my information to handle the processing and operation of my account.",
+			"privacyConsent": "I agree to BuildAR's Terms And Conditions",
 			"forgotAccountDetails": {
 				"header": "Can't remember your workspace name, or password?",
 				"headerPasswordOnly": "Can't remember your password?",

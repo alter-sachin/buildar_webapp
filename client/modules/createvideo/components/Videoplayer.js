@@ -9,8 +9,8 @@ class Videoplayer extends Component {
             <div>
                 <ReactPlayer
                     url={videoUrl}
-                    height="300px"
-                    width="500px"
+                    height=""
+                    width=""
                     controls={true}
                 />
             </div>

@@ -223,32 +223,32 @@ class Actor extends Component {
 		return (
 			<div>
 				<button id="openNav" className="w3-button w3-xlarge" onClick={this.w3_open}>&#9776;</button>
-				<div className="topnav">
-					{/* <a type="button" href="/myvideos" className="btn btn-link" id="cancel">Go Back</a> */}
-					<span id="editable">
-						<h1 className="video-title-edit" contentEditable="true" onMouseOut={this.handleSave} placeholder="Enter Title">Click here to enter Title</h1>
-					</span>
-					<div className="d-flex topnav-right">
-						<div id="video-timer-wrapper">
-							<CountdownCircleTimer
-								key={this.state.key}
-								isPlaying={this.state.isVideoClicked}
-								duration={20}
-								colors={[["#004777", 0.33], ["#F7B801", 0.33], ["#A30000"]]}
-								onComplete={() => [true, 0]}
-								strokeWidth={5}
-								size={50}>
-								{this.renderVideoTime}
-							</CountdownCircleTimer>
-						</div>
-						<button onClick={this.videoRequest} id="create_video">Create Video</button>
-						<button className="btn btn-success" onClick={this.saveVideo} id="save_video" disabled>Save Video</button>
-					</div>
-				</div>
+				
 				<div className="col-md-12 col-lg-12 left_right">
 					<div className="container">
 						<div className="row">
-
+							<div className="col-md-12 col-sm-12 col-lg-12 topnav">
+								{/* <a type="button" href="/myvideos" className="btn btn-link" id="cancel">Go Back</a> */}
+								<span id="editable">
+									<h1 className="video-title-edit" contentEditable="true" onMouseOut={this.handleSave} placeholder="Enter Title">Video Title</h1>
+								</span>
+								<div className="d-flex topnav-right">
+									<div id="video-timer-wrapper">
+										<CountdownCircleTimer
+											key={this.state.key}
+											isPlaying={this.state.isVideoClicked}
+											duration={20}
+											colors={[["#004777", 0.33], ["#F7B801", 0.33], ["#A30000"]]}
+											onComplete={() => [true, 0]}
+											strokeWidth={5}
+											size={50}>
+											{this.renderVideoTime}
+										</CountdownCircleTimer>
+									</div>
+									<button onClick={this.videoRequest} id="create_video">Create Video</button>
+									<button className="btn btn-success" onClick={this.saveVideo} id="save_video" disabled>Save Video</button>
+								</div>
+							</div>
 							<div className="col-md-6 col-lg-6 left_side">
 								<h4>Select Actor</h4>
 								<div className="actor-list">

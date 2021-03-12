@@ -142,12 +142,15 @@ class Register extends Component {
 						}
 					]}
 				/>
-				<div className="form-container col-xs-12 col-md-6 col-lg-5 d-flex flex-column hidden-md-down">
+				<div className="form-container col-xs-12 col-md-6 col-lg-6 d-flex flex-column hidden-md-down">
 					{visible && (
 						<div id="register">
 							<div className="p-3 p-sm-5 alignment vertical justify-content-center" >
+							
 								<div className="google-auth-signup" id="primary-signup">
-									<h2 className="google-auth-header">Sign up for BuildAR</h2>
+									<h2 className="google-auth-header">Sign up for <span className="logo">
+											<img src={require("distribution/images/Logo_BuildAR.png")} />
+										</span></h2>
 									<form className="auth-form" action="api/v1.0/authentication/google" method="get">
 										<button type="submit" className="btn btn-light">
 											<img width="20px" style={{ marginBottom: "3px", marginRight: "1em" }} alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
@@ -176,7 +179,9 @@ class Register extends Component {
 										<span className="h3"> {t("action.register")} </span>{" "}
 									</div>
 									<ServerError error={serverError} />
+									<WorkspaceURLField label={t("label.workspaceName")} value={workspaceURL} onChange={this.changeField} disabled={loading} error={validationErrors} />
 									<div className="form-row">
+
 										<div className="col">
 											<InputField
 												label={t("label.firstName")}
@@ -227,23 +232,10 @@ class Register extends Component {
 										disabled={loading}
 										error={validationErrors}
 									/>
-									<WorkspaceURLField label={t("label.workspaceName")} value={workspaceURL} onChange={this.changeField} disabled={loading} error={validationErrors} />
+									
 									<div>
 										<div>
-											<span>
-												<small>
-													{t("components.authentication.policyAgreement")}:<br />
-													{t("numbers.1")}){" "}
-													<a href={l("termsAndConditions")} target="_blank" rel="noopener noreferrer">
-														{t("label.termsAndConditions")}
-													</a>{" "}
-													{t("numbers.2")}){" "}
-													<a href={l("privacyPolicy")} target="_blank" rel="noopener noreferrer">
-														{t("label.privacyPolicy")}
-													</a>
-													<br />
-												</small>
-											</span>
+										
 										</div>
 										<br />
 										<div>
@@ -271,7 +263,7 @@ class Register extends Component {
 						</div>
 					)}
 				</div>
-				<div className="background-container col-md-6 col-lg-7" />
+				<div className="background-container col-md-6 col-lg-6" />
 			</Fragment>
 		);
 	}
