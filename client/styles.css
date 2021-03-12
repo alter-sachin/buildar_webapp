@@ -3024,6 +3024,12 @@ audio.react-audio-player {
 	box-shadow: none;
 }
 
+span#voice_speed,span#voice_list{
+	padding-top: .03em;
+}
+
+
+
 /*****************************/
 /*     21. Myvideos*/
 /*****************************/

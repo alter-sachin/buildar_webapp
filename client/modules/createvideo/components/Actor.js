@@ -11,6 +11,8 @@ import store, { injectReducer } from "common/store/store";
 import video, { VIDEO } from "common/store/reducers/video.js";
 
 import User from "common/components/User";
+import NumericStepInput from "react-number-steps-input-component";
+
 
 
 class Actor extends Component {
@@ -18,6 +20,7 @@ class Actor extends Component {
 	constructor(props) {
 		super(props);
 		this.handleChange = this.handleChange.bind(this);
+		this.handleVoiceSpeedChange = this.handleVoiceSpeedChange.bind(this);
 		this.handleCheck = this.handleCheck.bind(this);
 		this.audioRequest = this.audioRequest.bind(this);
 		this.videoRequest = this.videoRequest.bind(this);
@@ -44,12 +47,17 @@ class Actor extends Component {
 		isAudioClicked: false,
 		isVideoClicked: false,
 		key: 0,
-		videoTitle: ""
+		videoTitle: "",
+		voiceSpeed: 1
 	}
 
 
 	handleChange() {
 		this.setState({ textVal: event.target.value });
+	}
+
+	handleVoiceSpeedChange() {
+		this.setState({ voiceSpeed: event.target.value });
 	}
 	handleCheck(selectedElement) {
 		this.setState({ selectedElement: selectedElement });
@@ -109,7 +117,7 @@ class Actor extends Component {
 		const data = {
 			speakerId: this.state.selectedElement.value,
 			textScript: this.state.textVal,
-			speed: 0
+			speed: this.state.voiceSpeed
 		};
 		axios.post(
 			"api/v1.0/audio", data)
@@ -263,6 +271,7 @@ class Actor extends Component {
 									))}
 								</div>
 								<div className="actor-select" style={{ display: "flex", flexDirection: "column" }}>
+									<span id="voice_list">Speed</span>
 									<Select
 										defaultValue={this.state.voiceArray[0]}
 										label="Single select"
@@ -270,13 +279,24 @@ class Actor extends Component {
 										value={this.state.selectedElement}
 										onChange={this.handleCheck}
 									/>
+									<span id="voice_speed">Speed</span>
+									<input
+					                type='number'
+					                step="0.05"
+					                min='0.5'
+					                max='1.5'
+					                className='form-control'
+					                value={this.state.voiceSpeed}
+					                onChange= {this.handleVoiceSpeedChange}
+					              />
+									
 								</div>
 								<div className="script-input">
 									<h4>Script</h4>
 									<textarea
 										className="text-area"
 										placeholder="Insert script here"
-										rows="4"
+										rows="3"
 										cols="50"
 										value={this.state.textVal}
 										onChange={this.handleChange}
