@@ -1,15 +1,10 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
-import { size } from "underscore";
 import AudioPlayer from "./AudioPlayer"
 import Videoplayer from "./Videoplayer";
 import Select from "react-select";
-import EdiText from 'react-editext'
-import * as AiIcons from 'react-icons/ai';
-
 import PropTypes from "prop-types";
-import { Helmet } from "react-helmet";
 import { Route, withRouter } from "react-router-dom";
 // Import Redux Store
 import store, { injectReducer } from "common/store/store";
@@ -257,9 +252,12 @@ class Actor extends Component {
 							<div className="col-md-6 col-lg-6 left_side">
 								<h4>Select Actor</h4>
 								<div className="actor-list">
-									{actors.map((actor) => (
+									{actors.map((actor, index) => (
 										<p className="actor" id="actor-select" key={actor.name} onClick={() => this.selectActor(actor.actorId, actor.gender)}>
-											<img id="actor-image" tabIndex="0" src={actor.thumbnail} style={{ height: "100px" }} />
+											<input type="radio" id={index} name="radio" />
+											<label for={index}>
+												<img id="actor-image" src={actor.thumbnail} style={{ height: "100px" }} />
+											</label>
 											{actor.name}
 										</p>
 									))}

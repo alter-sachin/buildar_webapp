@@ -2964,16 +2964,27 @@ a:hover.back-to-top {
 	width: 20em;
 }
 
+.actor-list input{
+    display: none;
+}
+
 .actor img{
 	border-radius: 5px;
 	border:3px solid transparent;
 }
 
-.actor-img:focus{
-	border: 3px solid blue;
-	transition: 0.25s ease-in;
+label img{
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    position: relative;
+    border: 3px solid transparent;
 }
 
+input:checked + label img{
+    border: 3px solid blue;
+	transition: 0.25s ease-in;
+}
 .audio-listen {
 	display: flex;
 	flex-direction: row;
