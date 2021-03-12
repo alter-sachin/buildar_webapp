@@ -2854,7 +2854,7 @@ a:hover.back-to-top {
 /* Right-aligned section inside the top navigation */
 .topnav-right {
   float: right;
-  margin: 0 1em;
+  margin: 0 5em;
 }
 .topnav-right button{
 	padding: 0.75em;
@@ -2863,7 +2863,7 @@ a:hover.back-to-top {
   	border:0em;
 }
 
-.topnav-right #cancel{
+.topnav #cancel{
 	color:white;
 	background-color: gray;
 	font-size: 16px;
@@ -2889,6 +2889,10 @@ a:hover.back-to-top {
 .topnav-right #create_video:hover{
 	color:white;
 	background-color: #d73b1e;
+}
+
+.topnav-right #save_video{
+	font-size: 16px;
 }
 
 #update_video{
@@ -2962,10 +2966,11 @@ a:hover.back-to-top {
 
 .actor img{
 	border-radius: 5px;
-	border: solid transparent;
+	border:3px solid transparent;
 }
 
-.actor img:active, .actor img:focus{
+.actor-img:focus{
+	border: 3px solid blue;
 	transition: 0.25s ease-in;
 }
 
@@ -2980,7 +2985,19 @@ audio.react-audio-player {
 	width: 15em;
 }
 
+#audio-timer-wrapper{
+	display: none;
+}
 
+#video-timer-wrapper{
+	margin: 0 1em;
+	display: none;
+}
+
+#save_video:focus{
+	outline: none !important;
+	box-shadow: none;
+}
 
 /*****************************/
 /*     21. Myvideos*/
