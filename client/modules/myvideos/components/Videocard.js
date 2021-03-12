@@ -15,10 +15,24 @@ class Videocard extends Component {
 			title: this.props.title,
 			description: this.props.description,
 			url: this.props.url,
-			timeCreated: this.props.timeCreated
+			timeCreated: this.props.timeCreated,
+			isLinkCopied: false
 		};
+		this.resetMessage = this.resetMessage.bind(this)
 	}
 
+	copyLink(url) {
+		navigator.clipboard.writeText(url)
+		this.setState({
+			isLinkCopied: true
+		})
+	}
+
+	resetMessage() {
+		this.setState({
+			isLinkCopied: false
+		})
+	}
 
 	render() {
 		const { id, index, title, description, url, timeCreated } = this.props;
@@ -30,6 +44,7 @@ class Videocard extends Component {
 		// link to the "location"
 		// see (https://reacttraining.com/react-router/web/api/location)
 
+		const isLinkCopied = this.state.isLinkCopied
 		return (
 			// your route setup
 
@@ -52,7 +67,7 @@ class Videocard extends Component {
 					</Link>
 					<p className="myvideo-title"> {title}</p>
 				</div>
-				<div className="myvideo-time">
+				<div onMouseOut={this.resetMessage} className="myvideo-time">
 					<p>
 						{timeCreated ? timeCreated : "NA"}
 						{/* <div id="myvideo-footer-icons">
@@ -64,10 +79,13 @@ class Videocard extends Component {
 						<div id="myvideo-footer-icons">
 							<label
 								className="btn btn-sm"
-								onClick={() => navigator.clipboard.writeText(url)}>
+								onClick={() => this.copyLink(url)}
+							>
 								<AiIcons.AiOutlineLink size={20} />
 							</label>
-							<span className="tooltiptext">Copy link</span>
+							<span className="tooltiptext">
+								{isLinkCopied ? 'Link Copied' : 'Copy Link'}
+							</span>
 						</div>
 					</p>
 				</div>
