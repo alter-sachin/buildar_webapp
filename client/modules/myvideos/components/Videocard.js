@@ -11,11 +11,11 @@ class Videocard extends Component {
 		super(props);
 
 		this.state = {
-			id:"",
-			title: "",
-			description: "",
-			url: "",
-			timeCreated: ""
+			id:this.props.id,
+			title: this.props.title,
+			description: this.props.description,
+			url: this.props.url,
+			timeCreated: this.props.timeCreated
 		};
 	}
 
@@ -41,14 +41,15 @@ class Videocard extends Component {
 								<i className="fa fa-bars"></i>
 							</Dropdown.Toggle>
 							<Dropdown.Menu>
-								<Dropdown.Item><Link to={newTo}>Edit</Link></Dropdown.Item>								<Dropdown.Item href="" onClick={() => this.props.deleteHandler(index)}>Delete</Dropdown.Item>
+								<Dropdown.Item><Link to={newTo}>Edit</Link></Dropdown.Item>								
+								<Dropdown.Item href="" onClick={() => this.props.deleteHandler(index)}>Delete</Dropdown.Item>
 								<Dropdown.Item href="" onClick={() => this.props.duplicateHandler(index)}>Duplicate</Dropdown.Item>
 							</Dropdown.Menu>
 						</Dropdown>
 					</div>
-					<a href="/video">
+					<Link to={newTo}>
 						<img className="myvideo-thumbnail" src="images/Logo_BuildAR.png" />
-					</a>
+					</Link>
 					<p className="myvideo-title"> {title}</p>
 				</div>
 				<div className="myvideo-time">
@@ -63,7 +64,7 @@ class Videocard extends Component {
 						<div id="myvideo-footer-icons">
 							<label
 								className="btn btn-sm"
-								onClick={() => navigator.clipboard.writeText({ url })}>
+								onClick={() => navigator.clipboard.writeText( url )}>
 								<AiIcons.AiOutlineLink size={20} />
 							</label>
 							<span className="tooltiptext">Copy link</span>
