@@ -257,7 +257,6 @@ class Register extends Component {
 									<div className="mt-4">
 										{t("components.authentication.existingAccount")} <Link to={{ pathname: "/signin" }}>{t("action.signIn")}</Link>
 									</div>
-									<LanguageSwitcher />
 								</form>
 							</div>
 						</div>
