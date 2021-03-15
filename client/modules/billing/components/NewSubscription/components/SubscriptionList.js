@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import moment from "moment";
 import Switch from "rc-switch";
+import SideBar from "../../../../sidebar"
 
 import { parameterIsSafe } from "shared/utilities/filters";
 import { SUBSCRIPTION_TYPE, PAYMENT_INTERVALS } from "shared/constants";
@@ -10,6 +11,11 @@ import { t } from "shared/translations/i18n";
 import User from "common/components/User";
 
 class SubscriptionList extends Component {
+	constructor(props) {
+		super(props)
+		this.w3_open = this.w3_open.bind(this);
+	}
+
 	trialDays() {
 		let trialDaysLeft = 0;
 		if (this.props.user.get("subscriptionId") == SUBSCRIPTION_TYPE.TRIAL) {
@@ -34,6 +40,12 @@ class SubscriptionList extends Component {
 		return null;
 	}
 
+	w3_open = () => {
+		// document.getElementById("main").style.marginLeft = "20%";
+		document.getElementById("mySidebar").style.width = "15%";
+		document.getElementById("mySidebar").style.display = "block";
+		document.getElementById("openNav").style.visibility = 'hidden';
+	}
 	render() {
 		const { user, interval, changeInterval, selectPlan, loading } = this.props;
 
@@ -49,6 +61,8 @@ class SubscriptionList extends Component {
 
 		return (
 			<Fragment>
+				<SideBar />
+				<button id="openNav" className="w3-button w3-xlarge" onClick={this.w3_open}>&#9776;</button>
 				<div className="container py-3">
 					<div className="pricing-header px-3 py-4 pt-md-5 pb-md-5 mx-auto text-center">
 						<h1>

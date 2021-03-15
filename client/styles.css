@@ -3313,3 +3313,10 @@ span#voice_speed,span#voice_list{
 button.w3-bar-item.w3-button.w3-large {
     text-align: right;
 }
+
+
+/* Billing */
+
+.rounded-0{
+	border-radius: 5px !important;
+}
