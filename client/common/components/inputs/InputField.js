@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { propTypes } from "react-bootstrap/esm/Image";
 
 class InputField extends React.Component {
 	render() {
-		const { name, value, onChange, label, id, type, ariaLabel, smallText, placeholder, required, disabled, error } = this.props;
+		const { name, value, onChange, label, id, type, ariaLabel, smallText, placeholder, required, disabled, error, defaultValue } = this.props;
 
 		return (
 			<div className="form-group">
@@ -17,6 +18,7 @@ class InputField extends React.Component {
 						name={name}
 						value={value}
 						type={type}
+						defaultValue={defaultValue}
 						className={"form-control rounded-0"}
 						id={id}
 						aria-describedby={ariaLabel}
@@ -40,6 +42,7 @@ InputField.propTypes = {
 	name: PropTypes.string,
 	value: PropTypes.string,
 	onChange: PropTypes.func,
+	defaultValue: propTypes.func,
 	label: PropTypes.string,
 	id: PropTypes.string,
 	type: PropTypes.string,

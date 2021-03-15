@@ -15,11 +15,11 @@ import { FEATURES, SUBSCRIPTION_TYPE, ROLE_TYPE, EMAIL_TYPE, BILLING_CYCLE, LANG
 
 // Validate Workspace URL and retrieve client styling (if feature exists)
 export function validateWorkspaceURL(requestProperties, authenticatedUser, browserLng) {
-	return database().transaction(async function(transaction) {
+	return database().transaction(async function (transaction) {
 		try {
 			// Load a client using a workspaceURL
 			const client = await models().client.findOne({ where: { workspaceURL: requestProperties.workspaceURL, active: true } }, { transaction: transaction });
-			
+
 			// Throw an error if the client was not returned for the WorkspaceURL
 			if (client === null || client.get("workspaceURL") === null || client.get("workspaceURL") !== requestProperties.workspaceURL) {
 				throw new ServerResponseError(403, t("validation.clientInvalidProperties", { lng: browserLng }), { workspaceURL: [t("validation.emptyWorkspaceURL", { lng: browserLng })] });
@@ -113,8 +113,16 @@ export async function generateUserEmailValidationCode(userId, clientId, transact
 
 // Register new Client
 export function registerNewClient(requestProperties, authenticatedUser, browserLng) {
-	return database().transaction(async function(transaction) {
+	return database().transaction(async function (transaction) {
 		try {
+
+			const user = await models().user.findOne({where:{emailAddress:requestProperties.emailAddress, active:true}},{transaction:transaction});
+			
+			//Send response if user already exists for a emailAddress
+			if(user!=null){
+				return ("user exists");
+			}
+
 			// Check if client already exists for workspaceURL
 			const client = await models().client.findOne({ where: { workspaceURL: requestProperties.workspaceURL, active: true } }, { transaction: transaction });
 
@@ -122,6 +130,7 @@ export function registerNewClient(requestProperties, authenticatedUser, browserL
 			if (client !== null) {
 				throw new ServerResponseError(403, t("validation.clientInvalidProperties", { lng: browserLng }), { workspaceURL: [t("validation.registeredWorkspaceURL", { lng: browserLng })] });
 			}
+			
 
 			// Load active language numerical value from constants object
 			const activeLanguage = Object.keys(LANGUAGE_CODES).find(key => LANGUAGE_CODES[key] === requestProperties.language);
@@ -160,6 +169,7 @@ export function registerNewClient(requestProperties, authenticatedUser, browserL
 					lastName: requestProperties.lastName,
 					clientId: clientInstance.get("id"),
 					emailAddress: requestProperties.emailAddress,
+					profilePhoto:requestProperties.profilePhoto,
 					password: password,
 					language: activeLanguage
 				},
@@ -203,7 +213,7 @@ export function registerNewClient(requestProperties, authenticatedUser, browserL
 
 // Authenticate User with security token
 export function authenticateWithJWTStrategy(req, res, next, browserLng) {
-	return passport.perform().authenticate("jwt", { session: false }, function(error, user) {
+	return passport.perform().authenticate("jwt", { session: false }, function (error, user) {
 		// Throw exception if loading passport strategy fails
 		if (error) {
 			return res
@@ -211,14 +221,14 @@ export function authenticateWithJWTStrategy(req, res, next, browserLng) {
 				.send(new ServerResponseError(403, t("validation.tokenInvalidOrExpired", { lng: browserLng }), { token: [t("validation.tokenInvalidOrExpired", { lng: browserLng })] }));
 		}
 		// Authenticate user with strategy
-		req.logIn(user, function(error) {
+		req.logIn(user, function (error) {
 			if (error) {
 				return res
 					.status(403)
 					.send(new ServerResponseError(403, t("validation.tokenInvalidOrExpired", { lng: browserLng }), { token: [t("validation.tokenInvalidOrExpired", { lng: browserLng })] }));
 			}
 			if (user) {
-				database().transaction(async function(transaction) {
+				database().transaction(async function (transaction) {
 					try {
 						// Get current server time
 						const currentTime = moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
@@ -256,10 +266,14 @@ export function authenticateWithJWTStrategy(req, res, next, browserLng) {
 		});
 	})(req, res, next);
 }
+//Authenticate using google authentication Strategy
 
+export function authenticateWithGoogleStrategy(req,res,next,browserLng){
+	
+}
 // Authenticate using Local authentication strategy
 export function authenticateWithLocalStrategy(req, res, next, browserLng) {
-	return passport.perform().authenticate("local", { session: false }, function(error, user) {
+	return passport.perform().authenticate("local", { session: false }, function (error, user) {
 		// Throw exception if loading passport strategy fails
 		if (error) {
 			return res
@@ -267,7 +281,7 @@ export function authenticateWithLocalStrategy(req, res, next, browserLng) {
 				.send(new ServerResponseError(403, t("validation.userInvalidProperties", { lng: browserLng }), { emailAddress: [t("validation.incorrectLoginDetailsSupplied", { lng: browserLng })] }));
 		}
 		// Authenticate user with strategy
-		req.logIn(user, function(error) {
+		req.logIn(user, function (error) {
 			if (error) {
 				return res
 					.status(403)
@@ -276,7 +290,7 @@ export function authenticateWithLocalStrategy(req, res, next, browserLng) {
 					);
 			}
 			if (user) {
-				database().transaction(async function(transaction) {
+				database().transaction(async function (transaction) {
 					try {
 						// Get current server time
 						const currentTime = moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
@@ -319,7 +333,7 @@ export function authenticateWithLocalStrategy(req, res, next, browserLng) {
 
 // Delete session
 export function deleteSession(requestProperties, authenticatedUser, browserLng) {
-	return database().transaction(async function(transaction) {
+	return database().transaction(async function (transaction) {
 		try {
 			// Delete session from redis db
 			await redis.delete(authenticatedUser.sessionId);
@@ -334,7 +348,7 @@ export function deleteSession(requestProperties, authenticatedUser, browserLng) 
 
 // Load properties for a user
 export function loadUserProperties(requestProperties, authenticatedUser, browserLng) {
-	return database().transaction(async function(transaction) {
+	return database().transaction(async function (transaction) {
 		try {
 			// Load client for authenticated user
 			const client = await models().client.findOne({ where: { id: authenticatedUser.clientId, workspaceURL: authenticatedUser.workspaceURL, active: true } }, { transaction: transaction });
@@ -472,7 +486,7 @@ export function loadUserProperties(requestProperties, authenticatedUser, browser
 
 // Resend verification email for validating email addresses
 export function resendVerifyEmail(requestProperties, authenticatedUser, browserLng) {
-	return database().transaction(async function(transaction) {
+	return database().transaction(async function (transaction) {
 		try {
 			if (authenticatedUser.userId === null || !Number.isInteger(authenticatedUser.userId)) {
 				throw new ServerResponseError(403, t("validation.invalidUserId", { lng: browserLng }), null);
@@ -547,7 +561,7 @@ export function resendVerifyEmail(requestProperties, authenticatedUser, browserL
 
 // Send email with password reset if user forgot their password but workspace name is provided
 export function forgotAccountPasswordEmail(requestProperties, authenticatedUser, browserLng) {
-	return database().transaction(async function(transaction) {
+	return database().transaction(async function (transaction) {
 		try {
 			// Load client object associated with the workspace name
 			const client = await models().client.findOne({ where: { workspaceURL: requestProperties.workspaceURL, active: true } }, { transaction: transaction });
@@ -625,7 +639,7 @@ export function forgotAccountPasswordEmail(requestProperties, authenticatedUser,
 
 // Send email with account details if user forgot their account or workspace url
 export function forgotAccountEmail(requestProperties, authenticatedUser, browserLng) {
-	return database().transaction(async function(transaction) {
+	return database().transaction(async function (transaction) {
 		try {
 			// Check if email sent in the last 5 minutes
 			const currentTime = new Date();
@@ -717,7 +731,7 @@ export function forgotAccountEmail(requestProperties, authenticatedUser, browser
 
 // Validate the reset code used to reset passwords
 export function validateResetPasswordCode(requestProperties, authenticatedUser, browserLng) {
-	return database().transaction(async function(transaction) {
+	return database().transaction(async function (transaction) {
 		try {
 			// Load client from workspace url
 			const client = await models().client.findOne({ where: { workspaceURL: requestProperties.workspaceURL, active: true } }, { transaction: transaction });
@@ -769,7 +783,7 @@ export function validateResetPasswordCode(requestProperties, authenticatedUser, 
 
 // Reset user password
 export function resetUserPassword(requestProperties, authenticatedUser, browserLng) {
-	return database().transaction(async function(transaction) {
+	return database().transaction(async function (transaction) {
 		try {
 			// Load client from workspace url
 			const client = await models().client.findOne({ where: { workspaceURL: requestProperties.workspaceURL, active: true } }, { transaction: transaction });
@@ -851,7 +865,7 @@ export function resetUserPassword(requestProperties, authenticatedUser, browserL
 
 // Verify User Email
 export function verifyUserEmail(requestProperties, authenticatedUser, browserLng) {
-	return database().transaction(async function(transaction) {
+	return database().transaction(async function (transaction) {
 		try {
 			// Load client from workspace url
 			const client = await models().client.findOne({ where: { workspaceURL: requestProperties.workspaceURL, active: true } }, { transaction: transaction });

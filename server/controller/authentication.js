@@ -5,6 +5,7 @@ import { ServerResponseError } from "utilities/errors/serverResponseError";
 import restrict from "utilities/restrictRoutes";
 import browserResponseLng from "utilities/browserResponseLng";
 import { variableExists } from "shared/utilities/filters";
+
 import {
 	validateWorkspaceURL,
 	registerNewClient,
@@ -19,6 +20,13 @@ import {
 	resetUserPassword,
 	verifyUserEmail
 } from "../orchestrator/authentication";
+
+require("../services/passport");
+require("../services/googleAuth");
+const passport = require("passport");
+const {OAuth2Client} = require("google-auth-library");
+const client = new OAuth2Client(process.env.clientId);
+require("dotenv").config();
 
 module.exports = function(router) {
 	// Validate Workspace URL
@@ -80,6 +88,125 @@ module.exports = function(router) {
 				return res.status(200).send(result);
 			},
 			error => {
+				return next(error);
+			}
+		);
+	});
+
+	// router.get("/api/v1.0/authentication/google", restrict({ unregistered: true, registered: false }), passport.authenticate("google", { scope: ["profile", "email"] }));
+
+	// router.get("/api/v1.0/google/callback", restrict({ unregistered: true, registered: false }), passport.authenticate("google", { failureRedirect: "/register" }), (req, res,next) => {
+	// 	console.log("before request");
+	// 	console.log(req)
+	// 	const workspace_url = "truepeople"
+	// 	const language_fill = "en";
+	// 	const requestProperties = {
+	// 		workspaceURL: workspace_url,
+	// 		firstName: req.user.name.givenName,
+	// 		lastName: req.user.name.givenName,
+	// 		emailAddress: req.user._json.email,
+	// 		password: req.user.id,
+	// 		privacyConsent: true,
+	// 		language: language_fill
+	// 	};
+
+	// 	// Load browser language from header
+	// 	const browserLng = browserResponseLng(req);
+	// 	// Validate properties in received object
+	// 	const valid = validate(requestProperties, register());
+	// 	if (valid != null) {
+	// 		const errorMsg = new ServerResponseError(403, t("validation.clientInvalidProperties", { lng: browserLng }), valid);
+	// 		return next(errorMsg);
+	// 	}
+
+
+	// 		const obj1 ={
+	// 			body:{
+	// 			workspaceURL:workspace_url,
+	// 			emailAddress:  req.user._json.email,
+	// 			password: req.user.id				}
+				
+	// 		}
+
+	// 	Object.assign(req,obj1);
+			
+		
+	// 	/*req.append()
+		
+	// 		body:{
+	// 			workspaceURL:workspace_url,
+	// 			emailAddress: req.user._json.email,
+	// 			password: req.user.id
+	// 		}*/
+		
+
+	// 	// Register new client and return response
+	// 	registerNewClient(requestProperties, null, browserLng).then(
+	// 		result => {
+	// 			console.log("succesful");
+	// 			console.log(req);
+	// 			authenticateWithLocalStrategy(req, res, next, browserLng);
+	// 			//res.redirect("http://news1.localhost:3000/");
+	// 			return res.status(200).send(result);
+	// 		},
+	// 		error => {
+	// 			return next(error);
+	// 		}
+	// 	);
+
+		
+	// });
+
+	router.post("/api/v1.0/authentication/google", async(req,res,next)=>{
+		const {token} = req.body;
+		//hey I am printing body here
+		console.log("hey I am prinitng",req.body);
+		const ticket = await client.verifyIdToken({
+			idToken:token,
+			audience:process.env.CLIENT_ID
+		});
+		const { given_name,family_name, email, picture, locale } = ticket.getPayload();
+		console.log(ticket.getPayload());
+		
+		const workspace_url ="mathew123h1";
+			
+		const requestProperties = {
+			
+			workspaceURL: workspace_url,
+			firstName: given_name,
+			lastName: given_name,
+			emailAddress: email,
+			password: email+"buildArSecret",
+			privacyConsent: true,
+			language:"en",
+			profilePhoto:picture,
+			
+		};
+			//Load browser language from header
+		const browserLng = browserResponseLng(req);
+		// Validate properties in received object
+		const valid = validate(requestProperties, register());
+		if (valid != null) {
+			const errorMsg = new ServerResponseError(403, t("validation.clientInvalidProperties", { lng: browserLng }), valid);
+			return next(errorMsg);
+		}
+		// Register new client and return response
+		registerNewClient(requestProperties, null, browserLng).then(
+			result=> {
+				if(result!=="user exists"){
+					// console.log("result status is:",result.status);
+					// console.log(result);
+					return res.status(200).send(requestProperties);
+				}
+				else{
+					
+					//authenticateWithLocalStrategy(requestProperties, res, next, browserLng);
+					return res.status(200).send(requestProperties); 
+				}
+				
+			},
+			error => {
+				// console.log("error");
 				return next(error);
 			}
 		);

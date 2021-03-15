@@ -123,13 +123,14 @@ app.use(function errorHandler(err, req, res, next) {
 
 		// Append error code to err object
 		err.uniqueErrorCode = code;
-
+		console.log(err)
 		// Report full trace to Papertrail
 		papertrail.logging() && papertrail.logging().error(err);
 
 		res.status(500).send({ status: 500, message: i18n.t("error.internalServerError", { code: code }) });
 	} else {
 		// Report basic error to Papertrail
+		console.log(response)
 		papertrail.logging() && papertrail.logging().error(response);
 
 		// Send response to client

@@ -1,5 +1,5 @@
-module.exports = (sequelize, DataTypes) =>{
-	const User =  sequelize.define(
+module.exports = (sequelize, DataTypes) => {
+	const User = sequelize.define(
 		"user",
 		{
 			id: {
@@ -8,6 +8,11 @@ module.exports = (sequelize, DataTypes) =>{
 				primaryKey: true,
 				autoIncrement: true,
 				field: "id"
+			},
+			googleId: {
+				type: DataTypes.INTEGER(11).UNSIGNED,
+				defaultValue: 0,
+				field: "googleId"
 			},
 			firstName: {
 				type: DataTypes.STRING(255),
@@ -97,10 +102,10 @@ module.exports = (sequelize, DataTypes) =>{
 		}
 	);
 
-	User.associate = function(models){
-		User.hasMany(models.video,{
+	User.associate = function (models) {
+		User.hasMany(models.video, {
 
-			foreignKey : "id"
+			foreignKey: "id"
 		});
 	};
 	return User;

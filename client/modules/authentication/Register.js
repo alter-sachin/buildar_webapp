@@ -2,20 +2,34 @@ import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import validate from "shared/validation/validate";
 import { t, l, activeLanguage } from "shared/translations/i18n";
 import { extractSubdomain } from "shared/utilities/domains";
+import { REDUX_STATE } from "shared/constants";
+import { registerClient, REGISTER_REJECTED , AUTHENTICATION, LOGIN_REJECTED, validateWorkspaceURL, VALIDATE_WORKSPACE_URL_REJECTED, loginUser, loadUser, LOAD_USER_REJECTED } from "common/store/reducers/authentication.js";
+import { register , login, workspaceURL } from "shared/validation/authentication";
 
-import { registerClient, REGISTER_REJECTED } from "common/store/reducers/authentication.js";
-import { register } from "shared/validation/authentication";
 
+import { changeLanguage } from "common/store/reducers/language.js";
 import ServerError from "common/components/ServerError";
 import InputField from "common/components/inputs/InputField";
 import Checkbox from "common/components/inputs/Checkbox";
 import WorkspaceURLField from "common/components/inputs/WorkspaceURLField";
 import LanguageSwitcher from "./components/LanguageSwitcher";
+import axios from "axios";
+import { GoogleLogin} from "react-google-login";
+
+import Alert from "common/components/Alert";
+import { clientStyling } from "./components/ClientStyling";
+import WorkspaceURL from "./components/WorkspaceURL";
+import SignInForm from "./components/SignInForm";
+import Loading from "common/components/Loading";
+import { setGAUser } from "common/components/GoogleAnalytics";
+
+const clientId = "976971922840-p9eobg6v863nppicf7vsatfup1q82qjt.apps.googleusercontent.com";
+
 
 class Register extends Component {
 	constructor(props) {
@@ -31,12 +45,21 @@ class Register extends Component {
 			loading: false,
 			visible: false,
 			validationErrors: null,
-			serverError: null
+			serverError: null,
+			newLoading:false,
+			loginPending:false,
+			keepSignedIn: false,
+			redirectPending: false,
+		
 		};
 
 		this.register = this.register.bind(this);
 		this.changeField = this.changeField.bind(this);
 		this.handleChecked = this.handleChecked.bind(this);
+		// this.googleAuthenticate = this.googleAuthenticate.bind(this);
+		this.handleLogin = this.handleLogin.bind(this);
+		this.changeSubdomain = this.changeSubdomain.bind(this);
+		// this.googleLogin = this.googleLogin.bind(this);
 	}
 
 	componentDidMount() {
@@ -48,8 +71,11 @@ class Register extends Component {
 		} else {
 			this.setState({ visible: true });
 		}
-	}
+		
+		
+		
 
+	}
 	changeField(evt) {
 		this.setState({
 			[evt.target.name]: evt.target.value
@@ -59,6 +85,8 @@ class Register extends Component {
 	handleChecked(evt) {
 		this.setState({ [evt.target.name]: !this.state.privacyConsent });
 	}
+	
+	
 
 	register(evt) {
 		evt.preventDefault(); // Prevent page refresh
@@ -105,9 +133,151 @@ class Register extends Component {
 		}
 	}
 
+	dataCopy() {
+		document.secondaryForm.emailAddress.value = document.primaryForm.email.value;
+	}
+	toggleSecondarySignUp() {
+		var secondarySignUp = document.getElementById("secondary-signup");
+		var primarySignUp = document.getElementById("primary-signup");
+		var warning = document.getElementById("email-empty-warning");
+		var emailInput = document.getElementById("first-email-input");
+		var emailButton = document.getElementById("email-submit-button");
+		if (secondarySignUp.style.display === "none" && document.primaryForm.email.value !== "") {
+			this.dataCopy();
+			primarySignUp.style.display = "none";
+			secondarySignUp.style.display = "block";
+		} else {
+			warning.style.display = "block";
+			warning.style.transition = "1s";
+			emailInput.style.borderColor = "red";
+			emailInput.style.borderWidth = "3px";
+			emailButton.style.marginLeft = "2em";
+		}
+	}
+	handleClick() {
+		this.toggleSecondarySignUp();
+	}
+	async handleLogin(googleData){
+		const res = await fetch("api/v1.0/authentication/google", {
+			method : "POST",
+			body : JSON.stringify({
+				token:googleData.tokenId
+			}),
+			headers:{
+				"Content-type":"application/json"
+			}
+		});
+		const data = await res.json();
+		console.log("this is from frontend:", data);
+		this.login(data);
+	}
+
+	login(data) {
+		//evt.preventDefault(); // Prevent page refresh
+		// console.log("I am inside login");
+		// console.log(data.emailAddress);
+		this.setState({ loginPending: true, validationErrors: null, serverError: null });
+		const user = {
+			workspaceURL: data.workspaceURL,
+			emailAddress: data.emailAddress,
+			password: data.password,
+			keepSignedIn: true
+		};
+
+		// Validate input parameters
+		const valid = validate(user, login());
+		if (valid != null) {
+			this.setState({
+				loginPending: false,
+				validationErrors: valid
+			});
+		} else {
+			this.props.loginUser(user).then(result => {
+				if (result.type === LOGIN_REJECTED) {
+					clearToken(); // Clear security token if login rejected
+					fetch.clearSecurityToken(); // Clear token in fetch header
+					this.setState({
+						loginPending: false,
+						serverError: result.payload
+					});
+				} else {
+					this.props.loadUser().then(result => {
+						if (result.type === LOAD_USER_REJECTED) {
+							this.setState({
+								loginPending: false,
+								serverError: result.payload
+							});
+
+							return;
+						}
+
+						// Set Google Analytics User
+						setGAUser(result.payload.userId);
+
+						// Load client specific default language
+						const lng = result.payload.language;
+						this.changeSubdomain();
+						if (variableExists(lng) && activeLanguage() !== lng) {
+							this.props.changeLanguage(lng);
+						}
+					});
+				}
+			});
+		}
+	}
+	static getDerivedStateFromProps(nextProps, prevState) {
+		if (nextProps.workspaceURLStatus === prevState.workspaceURLStatus) {
+			return null;
+		}
+		// Store subdomain in state if valid
+		if (nextProps.workspaceURLStatus === REDUX_STATE.FULFILLED) {
+			const subdomain = extractSubdomain(window.location.href);
+			return {
+				workspaceURL: subdomain
+			};
+		}
+		return null;
+	}
+	changeSubdomain() {
+		//evt.preventDefault(); // Prevent page refresh
+
+		this.setState({ redirectPending: true, validationErrors: null, serverError: null });
+		// Fetch subdomain from state
+		const subdomain = {
+			workspaceURL: this.state.workspaceURL
+		};
+
+		// Validate input parameters
+		const valid = validate(subdomain, workspaceURL());
+		if (valid != null) {
+			this.setState({
+				redirectPending: false,
+				validationErrors: valid
+			});
+		} else {
+			const url = `${BUILD_PROTOCOL}://${subdomain.workspaceURL}.${BUILD_DOMAINPATH}/signin`;
+			window.location.replace(url);
+		}
+	}
+
+
 	render() {
-		const { firstName, lastName, emailAddress, password, workspaceURL, privacyConsent, visible, loading, serverError, validationErrors } = this.state;
+		
+	
+		const { loginPending,keepSignIn,redirectPending,firstName, lastName, emailAddress, password,privacyConsent,loading,visible,validationErrors,serverError, workspaceURL,newLoading } = this.state;
+		const { workspaceURLStatus, logInStatus, clientStyle, userToken, userKeepSignedIn, history } = this.props;
+
+		const workspaceURLPending = workspaceURLStatus == null || workspaceURLStatus == REDUX_STATE.PENDING;
+
+		// Handle client specific page styling
+		const style = clientStyling(this.props.workspaceURLStatus, this.props.clientStyle);
+
+		// Store security token on sign in success
+		if (logInStatus == REDUX_STATE.FULFILLED && userToken != null) {
+			saveToken(userToken, userKeepSignedIn);
+		}
 		return (
+		
 			<Fragment>
 				<Helmet
 					title={t("headers.register.title")}
@@ -121,11 +291,39 @@ class Register extends Component {
 				<div className="form-container col-xs-12 col-md-6 col-lg-5 d-flex flex-column hidden-md-down">
 					{visible && (
 						<div id="register">
-							<div className="p-3 p-sm-5 alignment vertical justify-content-center">
-								<form className="w-100">
+							<div className="p-3 p-sm-5 alignment vertical justify-content-center" >
+								<div className="google-auth-signup" id="primary-signup">
+									<h2 className="google-auth-header">Sign up for BuildAR</h2>
+								
+								
+									<div>
+										<GoogleLogin
+											clientId={clientId}
+											buttonText = "Signup"
+											onSuccess = {this.handleLogin}
+											onFailure = {this.handleLogin}
+											cookiePolicy = {"single_host_origin"}
+											style = {{marginTop:"100px"}}
+						
+										/>							
+									</div>
+										
+									<div className="secondary-signup-separator">
+										<hr />
+										<span color="grey" fontWeight="bold">or</span>
+										<hr />
+									</div>
+									<form name="primaryForm" className="primary-email-signup">
+										<input id="first-email-input" className="form-control rounded-lg" name="email" type="text" placeholder="Enter your email to continue" />
+										<span id="email-empty-warning" style={{ display: "none", fontSize: "1em", color: "red" }} color="red">The above field cannot be left empty.</span>
+										<button id="email-submit-button" type="button" className="btn btn-primary go-to-signup-two" onClick={() => this.handleClick()}>Create Free Account</button>
+									</form>
+
+								</div>
+								<form name="secondaryForm" className="register-2 w-100" id="secondary-signup" style={{ display: "none" }}>
 									<div className="w-100 text-center mb-4">
 										<span className="logo">
-											<img src={require("distribution/images/logo_dark.svg")} />
+											<img src={require("distribution/images/Logo_BuildAR.png")} />
 										</span>
 									</div>
 									<div className="w-100 mb-3">
@@ -164,7 +362,8 @@ class Register extends Component {
 										label={t("label.emailAddress")}
 										name={"emailAddress"}
 										id={"email-input"}
-										value={emailAddress}
+										defaultValue={this.emailAddress}
+										value={this.emailAddress}
 										type={"textField"}
 										ariaLabel={"emailAddress"}
 										onChange={this.changeField}
@@ -232,17 +431,38 @@ class Register extends Component {
 	}
 }
 
+
 Register.propTypes = {
-	registerClient: PropTypes.func
+	registerClient: PropTypes.func,
+	history: PropTypes.object,
+	workspaceURLStatus: PropTypes.string,
+	logInStatus: PropTypes.string,
+	clientStyle: PropTypes.object,
+	loginUser: PropTypes.func,
+	loadUser: PropTypes.func,
+	validateWorkspaceURL: PropTypes.func,
+	userToken: PropTypes.string,
+	userKeepSignedIn: PropTypes.bool,
+	changeLanguage: PropTypes.func
 };
 
 function mapStateToProps(state) {
-	return {};
+	return {
+		workspaceURLStatus: state.getIn([AUTHENTICATION, "workspaceURL", "status"]),
+		logInStatus: state.getIn([AUTHENTICATION, "userLogin", "status"]),
+		clientStyle: state.getIn([AUTHENTICATION, "workspaceURL", "payload"]),
+		userToken: state.getIn([AUTHENTICATION, "userLogin", "status", "payload", "token"]),
+		userKeepSignedIn: state.getIn([AUTHENTICATION, "userLogin", "status", "payload", "keepSignedIn"])
+	};
 }
 
 function mapDispatchToProps(dispatch) {
 	return {
-		registerClient: bindActionCreators(registerClient, dispatch)
+		registerClient: bindActionCreators(registerClient, dispatch),
+		loginUser: bindActionCreators(loginUser, dispatch),
+		loadUser: bindActionCreators(loadUser, dispatch),
+		validateWorkspaceURL: bindActionCreators(validateWorkspaceURL, dispatch),
+		changeLanguage: bindActionCreators(changeLanguage, dispatch)
 	};
 }
 
