@@ -3317,13 +3317,23 @@ button.w3-bar-item.w3-button.w3-large {
 
 /* Billing */
 
+.py-3{
+	font-family: 'Roboto', Arial, Helvetica, sans-serif;
+}
+
 .rounded-0{
 	border-radius: 5px !important;
 	border: solid 2px lightgrey;
+	font-family: 'Roboto', Arial, Helvetica, sans-serif;
+	font-weight: 500;
 }
 
 .subscription-features{
 	text-align: center;
+}
+
+.subscription-features button{
+	font-weight: 600;
 }
 
 .rounded-0:hover{
