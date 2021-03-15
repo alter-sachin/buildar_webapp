@@ -52,19 +52,21 @@ export function updateSingleVideo(requestProperties, authenticatedUser, browserL
 			// Load client for authenticated user
 			//const user = await models().user.findOne({ where: { id: authenticatedUser.userId, active: true } });
 			//  console.log(user);	
-			const videoId = authenticatedUser.videoId;
+			console.log(requestProperties)
+			//const videoId = requestProperties.videoId;
+			//const user = requestProperties.userId_FK
 			//const video = await models().video.findAll({ where: { userId_FK: user.id } });
-			const singleVideo = await models().video.findAll({ where: { [Op.and]: [
-		      { userId_FK: user.id },
-		      { id: authenticatedUser.videoId }] } });
-			if(!singleVideo){
-				 throw Error('Video not updated. id');
-			}
+			let updateValues = {title:requestProperties.title,description:requestProperties.description};
 
-			singleVideo.title = authenticatedUser.title;
-			singleVideo.description = authenticatedUser.description;
-			await singleVideo.save();
-			return singleVideo;
+
+			models().video.update(updateValues,{ where: { [Op.and]: [
+		      { userId_FK: requestProperties.userId_FK },
+		      { id: requestProperties.videoId }] } }).then((result)=>{
+		      	console.log("rows?",result);
+		      });
+
+		
+			return res.send(200);
 		}
 		catch (error) {
 			console.error(error);

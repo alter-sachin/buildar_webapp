@@ -19,6 +19,7 @@ class Video extends Component {
 		this.w3_open = this.w3_open.bind(this);
 		this.handleChange = this.handleChange.bind(this);
         this.handleTitle = this.handleTitle.bind(this);
+        this.updateVideoRequest = this.updateVideoRequest.bind(this);
 
 	}
     state = {
@@ -34,6 +35,8 @@ class Video extends Component {
     /*const _this = this;*/
         const { user, history } = this.props;
         let user_id = user.get("userId");
+        this.state.userId = user_id;
+        console.log("updated",this.state.userId);
         let video_id = this.props.location.param1;
         var userData = {
             params: {
@@ -57,21 +60,22 @@ class Video extends Component {
     }
 
     updateVideoRequest(){
-        const { user, history } = this.props;
-        let user_id = user.get("userId");
+        console.log("news",this.state.userId);
+        let video_id = this.props.location.param1;
         var videoData = {
             params: {
-              ID: user_id,
-              videoId : this.state.videoId,
+              userId: this.state.userId,
+              videoId : video_id,
               title:this.state.title,
               description:this.state.description
             }
         }
-        //console.log("xxxx",userData);
+        console.log("xxxx",video_id);
         axios
             .post("api/v1.0/video/"+video_id,videoData)
             .then(({ data }) => {
-               window.location = "/myvideos";
+                console.log("videoishere",data);
+             /*  window.location = "/myvideos";*/
             });
 
     }

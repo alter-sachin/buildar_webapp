@@ -121,13 +121,15 @@ module.exports = function(router) {
 
 		}),
 		function(req, res, next) {
-			console.log("inside controller",req.query.ID,req.params.id);
+
+			console.log("userId,videoId",req.body.params.userId,req.params.id);
 			//  console.log(req.body.title);
 			// const browserLng = browserResponseLng(req);
 			const requestProperties = {
-				title: req.query.title,
-				description: req.query.description,
-				userId_FK: req.query.userId_FK
+				videoId: req.body.params.videoId,
+				title: req.body.params.title,
+				description: req.body.params.description,
+				userId_FK: req.body.params.userId
 			};
 			
 					

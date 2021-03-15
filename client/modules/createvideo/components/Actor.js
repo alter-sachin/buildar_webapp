@@ -236,7 +236,6 @@ class Actor extends Component {
 
 							<div className="col-md-6 col-lg-6 left_side">
 								<h4>Select Actor</h4>
-								<span>{user.get("userId")} {user.get("firstName")} {user.get("firstName")} {user.get("emailAddress")}</span>
 								<div className="actor-list">
 									{actors.map((actor) => (
 										<p className="actor" key={actor.name} onClick={() => this.selectActor(actor.actorId, actor.gender)}>

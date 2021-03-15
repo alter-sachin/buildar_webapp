@@ -108,7 +108,6 @@ class MyVideo extends Component {
 			);
 		}
 		else {
-			
 			var videos = this.state.videoList;
 			return (
 				<div>

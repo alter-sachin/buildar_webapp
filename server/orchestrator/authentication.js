@@ -115,6 +115,14 @@ export async function generateUserEmailValidationCode(userId, clientId, transact
 export function registerNewClient(requestProperties, authenticatedUser, browserLng) {
 	return database().transaction(async function (transaction) {
 		try {
+
+			const user = await models().user.findOne({where:{emailAddress:requestProperties.emailAddress, active:true}},{transaction:transaction});
+			
+			//Send response if user already exists for a emailAddress
+			if(user!=null){
+				return ("user exists");
+			}
+
 			// Check if client already exists for workspaceURL
 			const client = await models().client.findOne({ where: { workspaceURL: requestProperties.workspaceURL, active: true } }, { transaction: transaction });
 
@@ -122,6 +130,7 @@ export function registerNewClient(requestProperties, authenticatedUser, browserL
 			if (client !== null) {
 				throw new ServerResponseError(403, t("validation.clientInvalidProperties", { lng: browserLng }), { workspaceURL: [t("validation.registeredWorkspaceURL", { lng: browserLng })] });
 			}
+			
 
 			// Load active language numerical value from constants object
 			const activeLanguage = Object.keys(LANGUAGE_CODES).find(key => LANGUAGE_CODES[key] === requestProperties.language);
@@ -160,6 +169,7 @@ export function registerNewClient(requestProperties, authenticatedUser, browserL
 					lastName: requestProperties.lastName,
 					clientId: clientInstance.get("id"),
 					emailAddress: requestProperties.emailAddress,
+					profilePhoto:requestProperties.profilePhoto,
 					password: password,
 					language: activeLanguage
 				},
@@ -256,7 +266,11 @@ export function authenticateWithJWTStrategy(req, res, next, browserLng) {
 		});
 	})(req, res, next);
 }
+//Authenticate using google authentication Strategy
 
+export function authenticateWithGoogleStrategy(req,res,next,browserLng){
+	
+}
 // Authenticate using Local authentication strategy
 export function authenticateWithLocalStrategy(req, res, next, browserLng) {
 	return passport.perform().authenticate("local", { session: false }, function (error, user) {
