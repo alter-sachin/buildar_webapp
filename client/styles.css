@@ -726,6 +726,11 @@ a{
 	margin: 0 0.5em;
 	font-size: 17px;
 }
+.sticky-nav .nav-blog{
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: 700;
+	margin: 0 0.5em;
+}
 .sticky-nav .nav-sign-in{
 	font-family: Arial, Helvetica, sans-serif;
 	font-weight: 700;
@@ -3321,7 +3326,7 @@ button.w3-bar-item.w3-button.w3-large {
 	font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
 
-.rounded-0{
+.card .rounded-0{
 	border-radius: 5px !important;
 	border: solid 2px lightgrey;
 	font-family: 'Roboto', Arial, Helvetica, sans-serif;
@@ -3343,4 +3348,37 @@ button.w3-bar-item.w3-button.w3-large {
 
 .pricing-card-title{
 	transition: 1.125s ease-in;
+}
+
+/* BlogPage */
+.blog-header{
+	margin:2em;
+	text-align: center;
+}
+
+.blog-header h1{
+	font-family: 'Roboto', Arial, Helvetica, sans-serif;
+}
+
+.blog .card{
+	margin: 1em auto;
+}
+
+.blog .card .card-title {
+	font-size: 1.5em;
+	margin-top: 0.5em;
+	margin-left: 0.5em;
+	font-family: 'Roboto', Arial, Helvetica, sans-serif;
+}
+
+.blog a{
+	text-decoration: none;
+}
+
+.blog .blog-card .card{
+	border: solid 3px transparent;
+}
+.blog .blog-card .card:hover{
+	border: solid 3px blue;
+	transition: 0.25s ease-in-out;
 }
