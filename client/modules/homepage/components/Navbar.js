@@ -86,6 +86,7 @@ class NavBar extends Component {
                 <NavDropdown.Divider />
                 <NavDropdown.Item className="nav-dropdown-item" href="#developer">Developer API</NavDropdown.Item>
               </NavDropdown>
+              <Nav.Link className="nav-blog" href="/blogs">Blogs</Nav.Link>
               <Nav.Link className="nav-sign-in" href="/signin">Sign-In</Nav.Link>
               <Button className="btn btn-dark" href="/register">Sign-Up</Button>
             </Nav>

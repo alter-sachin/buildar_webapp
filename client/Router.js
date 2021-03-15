@@ -16,6 +16,7 @@ import EmptyLayout from "common/layouts/EmptyLayout";
 // Page Components
 const Homepage = AsyncComponent(() => import("./modules/homepage"));
 const Authentication = AsyncComponent(() => import("./modules/authentication"));
+const BlogPage = AsyncComponent(() => import("./modules/blogs"));
 const Overview = AsyncComponent(() => import("./modules/overview"));
 const Profile = AsyncComponent(() => import("./modules/profile"));
 const CreateVideo = AsyncComponent(() => import("./modules/createvideo"));
@@ -43,6 +44,17 @@ class Router extends Component {
 								<DefaultLayout key="/">
 									<Homepage />
 								</DefaultLayout>
+							)}
+						/>
+						<ProtectedRoute
+							exact
+							path="/blogs"
+							hasAnyRole={[ROLE_TYPE.UNREGISTERED]}
+							user={user}
+							render={() => (
+								<EmptyLayout key="/blogs">
+									<BlogPage />
+								</EmptyLayout>
 							)}
 						/>
 						<ProtectedRoute
