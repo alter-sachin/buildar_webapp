@@ -3114,6 +3114,39 @@ span#voice_speed,span#voice_list{
 	background-color:#d73b1e;
 	border-color:#d73b1e;
 	color:white;
+	transition: 0.125s ease-in;
+}
+.novideo-button a{
+	font-family: "Roboto", Arial, Helvetica, sans-serif;
+	align-items: center;
+	font-weight: 700;
+	font-size: 1em;
+	background-color:#f45f3c;
+	border-color:#f45f3c;
+	color:white;
+}
+
+.no-videos .card{
+	background-color: oldlace;
+}
+
+.no-videos .card-body{
+	margin: 10vw 15vw;
+}
+
+.no-videos .card .card-title{
+	font-family: 'Roboto', Arial, Helvetica, sans-serif;
+	font-size: larger;
+}
+
+.no-videos .card .card-text{
+	font-weight: 500;
+}
+
+.novideo-button a:hover{
+	background-color:#d73b1e;
+	border-color:#d73b1e;
+	color:white;
 	transition: 0.25s ease-in;
 }
 
@@ -3341,7 +3374,7 @@ button.w3-bar-item.w3-button.w3-large {
 	font-weight: 600;
 }
 
-.rounded-0:hover{
+.card-deck .rounded-0:hover{
 	border: solid 2px blue;
 	transition: 0.25s ease-in;
 }
