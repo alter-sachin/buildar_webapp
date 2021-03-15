@@ -3319,4 +3319,18 @@ button.w3-bar-item.w3-button.w3-large {
 
 .rounded-0{
 	border-radius: 5px !important;
+	border: solid 2px lightgrey;
+}
+
+.subscription-features{
+	text-align: center;
+}
+
+.rounded-0:hover{
+	border: solid 2px blue;
+	transition: 0.25s ease-in;
+}
+
+.pricing-card-title{
+	transition: 1.125s ease-in;
 }

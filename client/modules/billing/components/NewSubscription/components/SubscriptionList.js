@@ -4,6 +4,8 @@ import { withRouter } from "react-router-dom";
 import moment from "moment";
 import Switch from "rc-switch";
 import SideBar from "../../../../sidebar"
+import Card from "react-bootstrap/Card"
+import Button from 'react-bootstrap/Button'
 
 import { parameterIsSafe } from "shared/utilities/filters";
 import { SUBSCRIPTION_TYPE, PAYMENT_INTERVALS } from "shared/constants";
@@ -14,6 +16,7 @@ class SubscriptionList extends Component {
 	constructor(props) {
 		super(props)
 		this.w3_open = this.w3_open.bind(this);
+		this.w3_close = this.w3_close.bind(this);
 	}
 
 	trialDays() {
@@ -41,10 +44,16 @@ class SubscriptionList extends Component {
 	}
 
 	w3_open = () => {
-		// document.getElementById("main").style.marginLeft = "20%";
+		document.getElementById("main").style.marginLeft = "20%";
 		document.getElementById("mySidebar").style.width = "15%";
 		document.getElementById("mySidebar").style.display = "block";
 		document.getElementById("openNav").style.visibility = 'hidden';
+	}
+	w3_close = () => {
+		document.getElementById("main").style.marginLeft = "10%";
+		document.getElementById("mySidebar").style.display = "none";
+		document.getElementById("openNav").style.display = "inline-block";
+		document.getElementById("openNav").style.visibility = "visible";
 	}
 	render() {
 		const { user, interval, changeInterval, selectPlan, loading } = this.props;
@@ -63,98 +72,114 @@ class SubscriptionList extends Component {
 			<Fragment>
 				<SideBar />
 				<button id="openNav" className="w3-button w3-xlarge" onClick={this.w3_open}>&#9776;</button>
-				<div className="container py-3">
-					<div className="pricing-header px-3 py-4 pt-md-5 pb-md-5 mx-auto text-center">
-						<h1>
-							{subscriptionActive
-								? trialDaysLeft > 0
-									? t("components.billing.timeRemaining", { count: trialDaysLeft })
-									: t("components.billing.timeRemaining<1")
-								: t("components.billing.timeRemaining_expired")}
-						</h1>
-						<p className="lead">{subscriptionActive ? t("components.billing.selectPlan") : t("components.billing.selectPlan_expired")}</p>
-						<div className="mt-4">
-							<span className={interval === PAYMENT_INTERVALS.MONTH ? "font-weight-normal" : "font-weight-light"}>{t("label.monthly")}</span>
-							<Switch className="switch mx-4" checked={interval == PAYMENT_INTERVALS.YEAR ? true : false} onChange={changeInterval} />
-							<span className={interval === PAYMENT_INTERVALS.YEAR ? "text-success font-weight-normal" : "font-weight-light"}>
-								{t("label.yearly")} ({t("components.billing.save20%")})
+				<div id="main">
+					<div className="container py-3">
+						<div className="pricing-header px-3 py-4 pt-md-5 pb-md-5 mx-auto text-center">
+							<h1>
+								{subscriptionActive
+									? trialDaysLeft > 0
+										? t("components.billing.timeRemaining", { count: trialDaysLeft })
+										: t("components.billing.timeRemaining<1")
+									: t("components.billing.timeRemaining_expired")}
+							</h1>
+							<p className="lead">{subscriptionActive ? t("components.billing.selectPlan") : t("components.billing.selectPlan_expired")}</p>
+							<div className="mt-4">
+								<span className={interval === PAYMENT_INTERVALS.MONTH ? "font-weight-normal" : "font-weight-light"}>{t("label.monthly")}</span>
+								<Switch className="switch mx-4" checked={interval == PAYMENT_INTERVALS.YEAR ? true : false} onChange={changeInterval} />
+								<span className={interval === PAYMENT_INTERVALS.YEAR ? "text-success font-weight-normal" : "font-weight-light"}>
+									{t("label.yearly")} ({t("components.billing.save20%")})
 							</span>
-						</div>
-					</div>
-					{!emailVerified && <div className="text-danger text-center">{t("validation.verifyEmail")}</div>}
-					<div className="card-deck py-3 text-center">
-						<div className="card rounded-0">
-							<div className="card-header bg-white mt-1 border-bottom-0">
-								<h4 className="my-0 font-weight-normal">{t("components.billing.subscriptionType.2")}</h4>
-							</div>
-							<div className="card-body">
-								{!loading ? (
-									<h1 className="card-title pricing-card-title">
-										${this.selectPricing(pricingBox1Id)}
-										<small className="h5 text-muted"> / {interval === PAYMENT_INTERVALS.MONTH ? t("label.month") : t("label.year")}</small>
-									</h1>
-								) : (
-									<img src={require("distribution/images/loading_spinner_small.gif")} />
-								)}
-								<ul className="list-unstyled my-4">
-									<li>{t("components.billing.cardFeatures.cardOne.1")}</li>
-									<li>{t("components.billing.cardFeatures.cardOne.2")}</li>
-									<li>{t("components.billing.cardFeatures.cardOne.3")}</li>
-									<li>{t("components.billing.cardFeatures.cardOne.4")}</li>
-								</ul>
-								<button type="button" value={pricingBox1Id} className="btn btn-block btn-primary" onClick={selectPlan} disabled={loading || !emailVerified}>
-									{t("components.billing.chooseThisPlan")}
-								</button>
 							</div>
 						</div>
-						<div className="card rounded-0">
-							<div className="card-header bg-white mt-1 border-bottom-0">
-								<h4 className="my-0 font-weight-normal">{t("components.billing.subscriptionType.3")}</h4>
+						{!emailVerified && <div className="text-danger text-center">{t("validation.verifyEmail")}</div>}
+						<div className="card-deck py-3 text-center">
+							<div className="card rounded-0">
+								<div className="card-header bg-white mt-1 border-bottom-0">
+									<h4 className="my-0 font-weight-normal">{t("components.billing.subscriptionType.2")}</h4>
+								</div>
+								<div className="card-body">
+									{!loading ? (
+										<h1 className="card-title pricing-card-title">
+											${this.selectPricing(pricingBox1Id)}
+											<small className="h5 text-muted"> / {interval === PAYMENT_INTERVALS.MONTH ? t("label.month") : t("label.year")}</small>
+										</h1>
+									) : (
+										<h1><img src={require("distribution/images/loading_spinner_small.gif")} /></h1>
+									)}
+									<ul className="list-unstyled my-4">
+										<li>{t("components.billing.cardFeatures.cardOne.1")}</li>
+										<li>{t("components.billing.cardFeatures.cardOne.2")}</li>
+										<li>{t("components.billing.cardFeatures.cardOne.3")}</li>
+										<li>{t("components.billing.cardFeatures.cardOne.4")}</li>
+									</ul>
+									<button type="button" value={pricingBox1Id} className="btn btn-block btn-primary" onClick={selectPlan} disabled={loading || !emailVerified}>
+										{t("components.billing.chooseThisPlan")}
+									</button>
+								</div>
 							</div>
-							<div className="card-body">
-								{!loading ? (
-									<h1 className="card-title pricing-card-title">
-										${this.selectPricing(pricingBox2Id)}
-										<small className="h5 text-muted"> / {interval === PAYMENT_INTERVALS.MONTH ? t("label.month") : t("label.year")}</small>
-									</h1>
-								) : (
-									<img src={require("distribution/images/loading_spinner_small.gif")} />
-								)}
-								<ul className="list-unstyled my-4">
-									<li>{t("components.billing.cardFeatures.cardTwo.1")}</li>
-									<li>{t("components.billing.cardFeatures.cardTwo.2")}</li>
-									<li>{t("components.billing.cardFeatures.cardTwo.3")}</li>
-									<li>{t("components.billing.cardFeatures.cardTwo.4")}</li>
-								</ul>
-								<button type="button" value={pricingBox2Id} className="btn btn-block btn-primary" onClick={selectPlan} disabled={loading || !emailVerified}>
-									{t("components.billing.chooseThisPlan")}
-								</button>
+							<div className="card rounded-0">
+								<div className="card-header bg-white mt-1 border-bottom-0">
+									<h4 className="my-0 font-weight-normal">{t("components.billing.subscriptionType.3")}</h4>
+								</div>
+								<div className="card-body">
+									{!loading ? (
+										<h1 className="card-title pricing-card-title">
+											${this.selectPricing(pricingBox2Id)}
+											<small className="h5 text-muted"> / {interval === PAYMENT_INTERVALS.MONTH ? t("label.month") : t("label.year")}</small>
+										</h1>
+									) : (
+										<h1><img src={require("distribution/images/loading_spinner_small.gif")} /></h1>
+									)}
+									<ul className="list-unstyled my-4">
+										<li>{t("components.billing.cardFeatures.cardTwo.1")}</li>
+										<li>{t("components.billing.cardFeatures.cardTwo.2")}</li>
+										<li>{t("components.billing.cardFeatures.cardTwo.3")}</li>
+										<li>{t("components.billing.cardFeatures.cardTwo.4")}</li>
+									</ul>
+									<button type="button" value={pricingBox2Id} className="btn btn-block btn-primary" onClick={selectPlan} disabled={loading || !emailVerified}>
+										{t("components.billing.chooseThisPlan")}
+									</button>
+								</div>
+							</div>
+							<div className="card rounded-0">
+								<div className="card-header bg-white mt-1 border-bottom-0">
+									<h4 className="my-0 font-weight-normal">{t("components.billing.subscriptionType.4")}</h4>
+								</div>
+								<div className="card-body">
+									{!loading ? (
+										<h1 className="card-title pricing-card-title">
+											${this.selectPricing(pricingBox3Id)}
+											<small className="h5 text-muted"> / {interval === PAYMENT_INTERVALS.MONTH ? t("label.month") : t("label.year")}</small>
+										</h1>
+									) : (
+										<h1><img src={require("distribution/images/loading_spinner_small.gif")} /></h1>
+									)}
+									<ul className="list-unstyled my-4">
+										<li>{t("components.billing.cardFeatures.cardThree.1")}</li>
+										<li>{t("components.billing.cardFeatures.cardThree.2")}</li>
+										<li>{t("components.billing.cardFeatures.cardThree.3")}</li>
+										<li>{t("components.billing.cardFeatures.cardThree.4")}</li>
+									</ul>
+									<button type="button" value={pricingBox3Id} className="btn btn-block btn-primary" onClick={selectPlan} disabled={loading || !emailVerified}>
+										{t("components.billing.chooseThisPlan")}
+									</button>
+								</div>
 							</div>
 						</div>
-						<div className="card rounded-0">
-							<div className="card-header bg-white mt-1 border-bottom-0">
-								<h4 className="my-0 font-weight-normal">{t("components.billing.subscriptionType.4")}</h4>
-							</div>
-							<div className="card-body">
-								{!loading ? (
-									<h1 className="card-title pricing-card-title">
-										${this.selectPricing(pricingBox3Id)}
-										<small className="h5 text-muted"> / {interval === PAYMENT_INTERVALS.MONTH ? t("label.month") : t("label.year")}</small>
-									</h1>
-								) : (
-									<img src={require("distribution/images/loading_spinner_small.gif")} />
-								)}
-								<ul className="list-unstyled my-4">
-									<li>{t("components.billing.cardFeatures.cardThree.1")}</li>
-									<li>{t("components.billing.cardFeatures.cardThree.2")}</li>
-									<li>{t("components.billing.cardFeatures.cardThree.3")}</li>
-									<li>{t("components.billing.cardFeatures.cardThree.4")}</li>
-								</ul>
-								<button type="button" value={pricingBox3Id} className="btn btn-block btn-primary" onClick={selectPlan} disabled={loading || !emailVerified}>
-									{t("components.billing.chooseThisPlan")}
-								</button>
-							</div>
+						<div className="subscription-features">
+							<Button variant="link">See all features and benefits</Button>
 						</div>
+						<Card className="text-center">
+							<Card.Header>Featured</Card.Header>
+							<Card.Body>
+								<Card.Title>Special title treatment</Card.Title>
+								<Card.Text>
+									With supporting text below as a natural lead-in to additional content.
+    							</Card.Text>
+								<Button variant="primary">Go somewhere</Button>
+							</Card.Body>
+							<Card.Footer className="text-muted">2 days ago</Card.Footer>
+						</Card>
 					</div>
 				</div>
 			</Fragment>
