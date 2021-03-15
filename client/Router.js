@@ -111,9 +111,9 @@ class Router extends Component {
 							user={user}
 							disabled={!(STRIPE_ENABLED && (user && user.get("subscriptionEndDate") !== null))}
 							render={() => (
-								<DefaultLayout key="/billing">
+								<EmptyLayout key="/billing">
 									<Billing />
-								</DefaultLayout>
+								</EmptyLayout>
 							)}
 						/>
 						<ProtectedRoute
