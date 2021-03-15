@@ -104,7 +104,7 @@ module.exports = function(router) {
 		console.log(ticket.getPayload());
 		
 		var workspace_url = email.match(/^([^@]*)@/)[1];
-		console.log(workspace_url);
+		// console.log(workspace_url);
 		
 		const requestProperties = {
 			
