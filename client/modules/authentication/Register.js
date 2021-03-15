@@ -295,7 +295,6 @@ class Register extends Component {
 							<div className="p-3 p-sm-5 alignment vertical justify-content-center" >
 							
 								<div className="google-auth-signup" id="primary-signup">
-<<<<<<< HEAD
 									<h2 className="google-auth-header">Sign up for BuildAR</h2>
 								
 								
@@ -311,17 +310,6 @@ class Register extends Component {
 										/>							
 									</div>
 										
-=======
-									<h2 className="google-auth-header">Sign up for <span className="logo">
-											<img src={require("distribution/images/Logo_BuildAR.png")} />
-										</span></h2>
-									<form className="auth-form" action="api/v1.0/authentication/google" method="get">
-										<button type="submit" className="btn btn-light">
-											<img width="20px" style={{ marginBottom: "3px", marginRight: "1em" }} alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
-										 	Sign up with Google
-										</button>
-									</form>
->>>>>>> a4f5d516122edf692a8c46cd7b07e426ac7f1294
 									<div className="secondary-signup-separator">
 										<hr />
 										<span color="grey" fontWeight="bold">or</span>

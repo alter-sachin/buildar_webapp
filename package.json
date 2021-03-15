@@ -119,6 +119,7 @@
 		"react-icons": "^4.2.0",
 		"react-modal": "^3.8.1",
 		"react-notify-toast": "^0.5.0",
+		"react-number-steps-input-component": "^0.1.9",
 		"react-pace-progress": "^2.0.0",
 		"react-player": "^2.8.2",
 		"react-redux": "^7.0.3",
