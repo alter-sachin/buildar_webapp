@@ -3415,3 +3415,58 @@ button.w3-bar-item.w3-button.w3-large {
 	border: solid 3px blue;
 	transition: 0.25s ease-in-out;
 }
+
+
+/* Chatbot */
+.chatbot-head{
+	position: sticky;
+}
+
+.chatbot-head button{
+	text-align: center;
+	border-radius: 40px;
+	background-color: orangered;
+}
+
+.chatbot{
+	display: none;
+	position: relative;
+	transition: 1s ease-in-out;
+}
+
+.chatbot .wrapper{
+	position: relative;
+	align-items: center;
+	text-align: center;
+}
+
+.chatbot .container{
+	border: solid blue 3px;
+	display: flex;
+	flex-direction: column;
+}
+
+.chatbot video{
+	max-width: 50%;
+	outline: none;
+	border-radius: 25px;
+	position:relative;
+    z-index:0;
+}
+
+.chatbot .overlay {
+	bottom: 0;
+	font-family: 'Roboto', Arial, Helvetica, sans-serif;
+}
+
+.chatbot .overlay button{
+	font-size: 1.125em;
+}
+
+.chatbot .overlay a{
+	font-size: 1.125em;
+}
+
+.chatbot .overlay #overlay-articles{
+	display: none;
+}
