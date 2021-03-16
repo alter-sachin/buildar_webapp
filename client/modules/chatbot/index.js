@@ -23,11 +23,15 @@ class Bot extends Component {
         })
     }
     changeToNewsLetter() {
+        document.getElementById("overlay-intro").style.display = "none"
+        document.getElementById("overlay-email").style.display = "block"
         this.setState({
             url: "https://buildar.in/vid/1615801043.2547426.mp4"
         })
     }
     changeToTwitter() {
+        document.getElementById("overlay-intro").style.display = "none"
+        document.getElementById("overlay-twitter").style.display = "block"
         this.setState({
             url: "https://buildar.in/vid/1615801043.2547426.mp4"
         })
@@ -63,7 +67,7 @@ class Bot extends Component {
                                 height="960"
                                 width="540"
                                 controlsList="nodownload"
-                                onContextMenu={(e) => e.preventDefault()}
+                                // onContextMenu={(e) => e.preventDefault()}
                                 url={url}
                             />
                         </div>
@@ -77,6 +81,15 @@ class Bot extends Component {
                                 <a type="button" className="btn btn-primary btn-block" href="#">Fake News</a>
                                 <a type="button" className="btn btn-primary btn-block" href="#">How to meditate</a>
                                 <a type="button" className="btn btn-primary btn-block" href="#">Selling Startup</a>
+                            </div>
+                            <div id="overlay-email">
+                                <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"></input>
+                            </div>
+                            <div id="overlay-twitter">
+                                <button type="button" className="btn" href="#twitter">
+                                    Here's my Twitter
+                                    <i className="fa fa-twitter fa-10x" aria-hidden="true"></i>
+                                </button>
                             </div>
                         </div>
                     </div>
