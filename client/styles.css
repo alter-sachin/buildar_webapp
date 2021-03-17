@@ -3436,33 +3436,25 @@ button.w3-bar-item.w3-button.w3-large {
   	position: fixed;
   	bottom: 0;
   	right: 5px;
+	height: 70%;
 	max-height: 0%;
  	transition: 0.5s;
  	overflow: hidden;
  	background-color: #bd694d;
  	text-align: center;
+	border-radius: 10px;
 }
 
 #chat-bot.animate{
 	max-height: 100%;
 }
 
-.container #video-bot{
-	width: 150%;
-	margin-top: 0.5em;
-	position: relative;
-	align-items: center;
-	text-align: center;
+#chat-bot #video-bot video{
+	border-radius: 10px;
 }
 
-#chat-bot .container{
-	background-color: orange;
-	border-radius: 10px;
-	width: 50%;
-	display: flex;
-	margin-bottom: 1em;
-	align-items: center;
-	flex-direction: column;
+#chat-bot video{
+	min-width: 100%;
 }
 
 #chat-bot video::-webkit-media-controls-fullscreen-button {
@@ -3498,6 +3490,8 @@ button.w3-bar-item.w3-button.w3-large {
 
 #chat-bot .overlay button{
 	font-size: 1.125em;
+	display: block;
+	width: 100%;
 }
 
 #chat-bot .overlay a{
