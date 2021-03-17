@@ -29,8 +29,9 @@ function sendEmail(emailType, language, to, messageParams, clientId, userId) {
 	database().transaction(async function(transaction) {
 		try {
 			// Load email template
+			console.log("transaction",transaction);
 			const emailTemplate = await models().emailTemplates.findOne({ where: { type: emailType, language: language } }, { transaction: transaction });
-
+			console.log("email",emailTemplate);
 			// Throw an error if the email template does not exist
 			if (emailTemplate === null) {
 				throw new ServerResponseError(500, t("validation.emailTemplateNotFound"), null);

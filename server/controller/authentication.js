@@ -100,10 +100,14 @@ module.exports = function(router) {
 			idToken:token,
 			audience:process.env.CLIENT_ID
 		});
-		const { given_name,family_name, email, picture, locale } = ticket.getPayload();
+		let { given_name,family_name, email, picture, locale } = ticket.getPayload();
 		console.log(ticket.getPayload());
-		
+		console.log("result",family_name);
+		if(family_name===undefined){
+			family_name = "BuildAR";
+		}
 		var workspace_url = email.match(/^([^@]*)@/)[1];
+		var workspace_url = workspace_url.replace(/[!@.#$%^&*]/g, "");
 		// console.log(workspace_url);
 		
 		const requestProperties = {
@@ -114,7 +118,7 @@ module.exports = function(router) {
 			emailAddress: email,
 			password: email+"buildArSecret",
 			privacyConsent: true,
-			language:locale,
+			language:"en",//always do en
 			profilePhoto:picture,
 			
 		};

@@ -169,7 +169,7 @@ class Register extends Component {
 			}
 		});
 		const data = await res.json();
-		console.log("this is from frontend:", data);
+		//console.log("this is from frontend:", data);
 		this.login(data);
 	}
 
@@ -184,6 +184,9 @@ class Register extends Component {
 			password: data.password,
 			keepSignedIn: true
 		};
+		this.setState({
+			workspaceURL:data.workspaceURL
+		});
 
 		// Validate input parameters
 		const valid = validate(user, login());
@@ -209,7 +212,7 @@ class Register extends Component {
 								serverError: result.payload
 							});
 
-							return;
+							//return;
 						}
 
 						// Set Google Analytics User
@@ -241,14 +244,18 @@ class Register extends Component {
 	}
 	changeSubdomain() {
 		//evt.preventDefault(); // Prevent page refresh
-
+		console.log("did I get here?")
+		
 		this.setState({ redirectPending: true, validationErrors: null, serverError: null });
 		// Fetch subdomain from state
 		const subdomain = {
 			workspaceURL: this.state.workspaceURL
 		};
+		console.log("subdomain",subdomain);
+		const url = `${BUILD_PROTOCOL}://${BUILD_DOMAINPATH}/myvideos`;
+		window.location.replace(url);
 
-		// Validate input parameters
+		/*// Validate input parameters
 		const valid = validate(subdomain, workspaceURL());
 		if (valid != null) {
 			this.setState({
@@ -256,9 +263,9 @@ class Register extends Component {
 				validationErrors: valid
 			});
 		} else {
-			const url = `${BUILD_PROTOCOL}://${subdomain.workspaceURL}.${BUILD_DOMAINPATH}/signin`;
+			const url = `${BUILD_PROTOCOL}://${subdomain.workspaceURL}.${BUILD_DOMAINPATH}/myvideos`;
 			window.location.replace(url);
-		}
+		}*/
 	}
 
 
