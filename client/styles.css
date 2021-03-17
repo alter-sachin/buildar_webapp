@@ -3493,8 +3493,13 @@ button.w3-bar-item.w3-button.w3-large {
 	display: block;
 	width: 100%;
 }
-
 #chat-bot .overlay a{
+	font-size: 1.125em;
+	display: block;
+	width: 100%;
+}
+
+#chat-bot .overlay-articles a{
 	font-size: 1.125em;
 }
 
