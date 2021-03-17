@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import ReactPlayer from 'react-player'
 import Button from "react-bootstrap/Button"
 
-class Bot extends Component {
+class ChatBot extends Component {
     constructor(props) {
         super(props)
 
@@ -43,11 +43,14 @@ class Bot extends Component {
         if (bot.style.display === "none") {
             bot.style.display = "block"
             this.setState({
-                isHeadClicked: true
+                isHeadClicked: !this.state.isHeadClicked
             })
         }
         else {
             bot.style.display = "none"
+            this.setState({
+                isHeadClicked: !this.state.isHeadClicked
+            })
         }
     }
 
@@ -55,7 +58,7 @@ class Bot extends Component {
         const { url, isHeadClicked } = this.state
         return (
             <div id="main">
-                <div id="chat-bot" className="chatbot">
+                <div id="chat-bot" className="chatbot" style={{ display: "none" }}>
                     <div className="container">
                         {/* <div className="wrapper"> */}
                         <ReactPlayer
@@ -103,4 +106,4 @@ class Bot extends Component {
     }
 }
 
-export default Bot
+export default ChatBot

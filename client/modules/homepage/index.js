@@ -9,7 +9,7 @@ import Footer from "./components/Footer";
 import Newsletter from "./components/Newsletter";
 import Accordion from "./components/Accordion.js";
 import Sticky from "./components/Sticky.js"
-import Bot from "../chatbot/index.js";
+import ChatBot from "./components/Chatbot.js";
 
 
 class Homepage extends Component {
@@ -27,7 +27,7 @@ class Homepage extends Component {
 				<Accordion />
 				<Newsletter />
 				<Footer />
-				<Bot />
+				<ChatBot />
 			</Fragment>
 
 		);

@@ -3433,7 +3433,6 @@ button.w3-bar-item.w3-button.w3-large {
 
 
 #chat-bot{
-	display: none;
   	position: fixed;
   	bottom: 0;
   	right: 5px;;
