@@ -3435,10 +3435,17 @@ button.w3-bar-item.w3-button.w3-large {
 #chat-bot{
   	position: fixed;
   	bottom: 0;
-  	right: 5px;;
+  	right: 5px;
+	max-height: 0%;
+ 	transition: 0.5s;
+ 	overflow: hidden;
 }
 
-.chatbot #video-bot{
+#chat-bot.animate{
+	max-height: 100%;
+}
+
+.container #video-bot{
 	width: 150%;
 	margin-top: 0.5em;
 	position: relative;
@@ -3446,7 +3453,7 @@ button.w3-bar-item.w3-button.w3-large {
 	text-align: center;
 }
 
-.chatbot .container{
+#chat-bot .container{
 	background-color: orange;
 	border-radius: 10px;
 	width: 50%;
@@ -3456,20 +3463,20 @@ button.w3-bar-item.w3-button.w3-large {
 	flex-direction: column;
 }
 
-.chatbot video::-webkit-media-controls-fullscreen-button {
+#chat-bot video::-webkit-media-controls-fullscreen-button {
     display: none;
 }
 
-.chatbot video::-webkit-media-controls-timeline {
+#chat-bot video::-webkit-media-controls-timeline {
   	display:none
 }
-.chatbot video::-webkit-media-controls-current-time-display{
+#chat-bot video::-webkit-media-controls-current-time-display{
   	display:none
 }
-.chatbot video::-webkit-media-controls-time-remaining-display {
+#chat-bot video::-webkit-media-controls-time-remaining-display {
   	display:none
 }
-.chatbot video{
+#chat-bot video{
 	max-width: 50%;
 	outline: none;
 	border-radius: 25px;
@@ -3477,32 +3484,36 @@ button.w3-bar-item.w3-button.w3-large {
     z-index:0;
 }
 
-.chatbot .overlay {
+#chat-bot .overlay{
 	margin-bottom: 1em;
 	bottom: 0;
 	font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
 
-.chatbot .overlay button{
+#chat-bot.coolclass{
+	max-height: 100%;
+}
+
+#chat-bot .overlay button{
 	font-size: 1.125em;
 }
 
-.chatbot .overlay a{
+#chat-bot .overlay a{
 	font-size: 1.125em;
 }
 
-.chatbot .overlay #overlay-articles{
+#chat-bot .overlay #overlay-articles{
 	display: none;
 }
 
-.chatbot .overlay #overlay-email{
+#chat-bot .overlay #overlay-email{
 	display: none;
 }
 
-.chatbot .overlay #overlay-twitter{
+#chat-bot .overlay #overlay-twitter{
 	display: none;
 	text-align: center;
 }
-.chatbot .overlay #overlay-twitter button{
+#chat-bot .overlay #overlay-twitter button{
 	background-color: oldlace;
 }

@@ -8,7 +8,8 @@ class ChatBot extends Component {
 
         this.state = {
             url: "https://buildar.in/vid/1615800618.4738576.mp4",
-            isHeadClicked: false
+            isHeadClicked: false,
+            transitionClass: ''
         }
         this.changeToArticles = this.changeToArticles.bind(this)
         this.changeToNewsLetter = this.changeToNewsLetter.bind(this)
@@ -39,16 +40,15 @@ class ChatBot extends Component {
     }
 
     showBot() {
-        let bot = document.getElementById("chat-bot")
-        if (bot.style.display === "none") {
-            bot.style.display = "block"
+        if (this.state.transitionClass === '') {
             this.setState({
+                transitionClass: 'animate',
                 isHeadClicked: !this.state.isHeadClicked
             })
         }
         else {
-            bot.style.display = "none"
             this.setState({
+                transitionClass: '',
                 isHeadClicked: !this.state.isHeadClicked
             })
         }
@@ -58,7 +58,7 @@ class ChatBot extends Component {
         const { url, isHeadClicked } = this.state
         return (
             <div id="main">
-                <div id="chat-bot" className="chatbot" style={{ display: "none" }}>
+                <div id="chat-bot" className={this.state.transitionClass} >
                     <div className="container">
                         {/* <div className="wrapper"> */}
                         <ReactPlayer
@@ -73,7 +73,7 @@ class ChatBot extends Component {
                             url={url}
                         />
                         {/* </div> */}
-                        <div className="overlay">
+                        <div className="overlay" >
                             <div id="overlay-intro">
                                 <Button block variant="primary" onClick={this.changeToArticles}>Show me your best articles</Button>
                                 <Button block variant="primary" onClick={this.changeToNewsLetter}>Subscribe to my newsletter</Button>
