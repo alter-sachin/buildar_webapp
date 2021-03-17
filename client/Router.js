@@ -19,7 +19,6 @@ const Authentication = AsyncComponent(() => import("./modules/authentication"));
 const BlogPage = AsyncComponent(() => import("./modules/blogs"));
 const Overview = AsyncComponent(() => import("./modules/overview"));
 const Profile = AsyncComponent(() => import("./modules/profile"));
-const Bot = AsyncComponent(() => import("./modules/chatbot"))
 const CreateVideo = AsyncComponent(() => import("./modules/createvideo"));
 const Video = AsyncComponent(() => import("./modules/video"))
 const MyVideo = AsyncComponent(() => import("./modules/myvideos"));
@@ -45,17 +44,6 @@ class Router extends Component {
 								<DefaultLayout key="/">
 									<Homepage />
 								</DefaultLayout>
-							)}
-						/>
-						<ProtectedRoute
-							exact
-							path="/bot"
-							hasAnyRole={[ROLE_TYPE.UNREGISTERED]}
-							user={user}
-							render={() => (
-								<EmptyLayout key="/bot">
-									<Bot />
-								</EmptyLayout>
 							)}
 						/>
 						<ProtectedRoute
