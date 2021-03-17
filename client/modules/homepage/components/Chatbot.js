@@ -41,6 +41,7 @@ class ChatBot extends Component {
 
     showBot() {
         if (this.state.transitionClass === '') {
+            document.getElementById("chathead").style.display = "none"
             this.setState({
                 transitionClass: 'animate',
                 isHeadClicked: !this.state.isHeadClicked
@@ -58,18 +59,16 @@ class ChatBot extends Component {
         const { url, isHeadClicked } = this.state
         return (
             <div id="main">
-                <div id="chat-bot" className={this.state.transitionClass} >
-                    <div className="container">
-                        {/* <div className="wrapper"> */}
+                <div id="chat-bot" className={this.state.transitionClass}>
                         <ReactPlayer
                             id="video-bot"
                             className="videoInsert"
                             playing={isHeadClicked}
-                            controls
-                            height="960"
-                            width="540"
                             controlsList="nodownload"
+                            width="160px"
+                            height="90px"
                             // onContextMenu={(e) => e.preventDefault()}
+                           /* style={{width: "160px",height:"90px"}}*/
                             url={url}
                         />
                         {/* </div> */}
@@ -93,12 +92,20 @@ class ChatBot extends Component {
                                     <i className="fa fa-twitter fa-10x" aria-hidden="true">  </i>
                                 </button>
                             </div>
-                        </div>
                     </div>
                 </div>
                 <div id="chathead" className="chatbot-head">
                     <button type="button" className="btn" onClick={this.showBot}>
-                        <i className="fa fa-commenting fa-2x" aria-hidden="true"></i>
+                       <ReactPlayer
+                            id="video-bot"
+                            className="videoInsert"
+                            playing={true}
+                            height="128px"
+                            width="128px"
+                            controlsList="nodownload"
+                            // onContextMenu={(e) => e.preventDefault()}
+                            url={url}
+                        />
                     </button>
                 </div>
             </div>

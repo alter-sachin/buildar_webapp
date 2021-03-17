@@ -3426,9 +3426,9 @@ button.w3-bar-item.w3-button.w3-large {
 
 .chatbot-head button{
 	text-align: center;
-	border-radius: 40px;
+	border-radius: 1em;
 	color:white;
-	background-color: orangered;
+	background-color: #bd694d;
 }
 
 
@@ -3439,6 +3439,8 @@ button.w3-bar-item.w3-button.w3-large {
 	max-height: 0%;
  	transition: 0.5s;
  	overflow: hidden;
+ 	background-color: #bd694d;
+ 	text-align: center;
 }
 
 #chat-bot.animate{
