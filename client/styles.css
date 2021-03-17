@@ -3421,6 +3421,7 @@ button.w3-bar-item.w3-button.w3-large {
 .chatbot-head{
 	position: fixed;
   	bottom: 23px;
+	right: 0;
 }
 
 .chatbot-head button{
@@ -3430,18 +3431,24 @@ button.w3-bar-item.w3-button.w3-large {
 	background-color: orangered;
 }
 
+
 #chat-bot{
 	display: none;
+  	position: fixed;
+  	bottom: 0;
+  	right: 5px;;
 }
 
 .chatbot #video-bot{
+	width: 150%;
+	margin-top: 0.5em;
 	position: relative;
 	align-items: center;
 	text-align: center;
 }
 
 .chatbot .container{
-	background-color: oldlace;
+	background-color: orange;
 	border-radius: 10px;
 	width: 50%;
 	display: flex;
@@ -3472,7 +3479,7 @@ button.w3-bar-item.w3-button.w3-large {
 }
 
 .chatbot .overlay {
-	margin-bottom: 2em;
+	margin-bottom: 1em;
 	bottom: 0;
 	font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
