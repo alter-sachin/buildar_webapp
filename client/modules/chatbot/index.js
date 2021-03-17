@@ -7,7 +7,8 @@ class Bot extends Component {
         super(props)
 
         this.state = {
-            url: "https://buildar.in/vid/1615800618.4738576.mp4"
+            url: "https://buildar.in/vid/1615800618.4738576.mp4",
+            isHeadClicked: false
         }
         this.changeToArticles = this.changeToArticles.bind(this)
         this.changeToNewsLetter = this.changeToNewsLetter.bind(this)
@@ -41,6 +42,9 @@ class Bot extends Component {
         let bot = document.getElementById("chat-bot")
         if (bot.style.display === "none") {
             bot.style.display = "block"
+            this.setState({
+                isHeadClicked: true
+            })
         }
         else {
             bot.style.display = "none"
@@ -48,7 +52,7 @@ class Bot extends Component {
     }
 
     render() {
-        const { url } = this.state
+        const { url, isHeadClicked } = this.state
         return (
             <div>
                 <div id="chat-bot" className="chatbot">
@@ -57,7 +61,7 @@ class Bot extends Component {
                         <ReactPlayer
                             id="video-bot"
                             className="videoInsert"
-                            playing
+                            playing={isHeadClicked}
                             controls
                             height="960"
                             width="540"

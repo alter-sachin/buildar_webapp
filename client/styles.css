@@ -3434,11 +3434,6 @@ button.w3-bar-item.w3-button.w3-large {
 	display: none;
 }
 
-.chatbot{
-	position: relative;
-	transition: 1s ease-in-out;
-}
-
 .chatbot #video-bot{
 	position: relative;
 	align-items: center;
@@ -3455,6 +3450,19 @@ button.w3-bar-item.w3-button.w3-large {
 	flex-direction: column;
 }
 
+.chatbot video::-webkit-media-controls-fullscreen-button {
+    display: none;
+}
+
+.chatbot video::-webkit-media-controls-timeline {
+  	display:none
+}
+.chatbot video::-webkit-media-controls-current-time-display{
+  	display:none
+}
+.chatbot video::-webkit-media-controls-time-remaining-display {
+  	display:none
+}
 .chatbot video{
 	max-width: 50%;
 	outline: none;
