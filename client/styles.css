@@ -3452,11 +3452,6 @@ button.w3-bar-item.w3-button.w3-large {
 #chat-bot #video-bot video{
 	border-radius: 10px;
 }
-
-#chat-bot video{
-	min-width: 100%;
-}
-
 #chat-bot video::-webkit-media-controls-fullscreen-button {
     display: none;
 }
@@ -3472,6 +3467,8 @@ button.w3-bar-item.w3-button.w3-large {
 }
 #chat-bot video{
 	max-width: 50%;
+	min-width: 100%;
+	height: 85% !important;
 	outline: none;
 	border-radius: 25px;
 	position:relative;
@@ -3496,8 +3493,12 @@ button.w3-bar-item.w3-button.w3-large {
     margin: 0.25em auto;
     color: white;
     font-weight: 500;
+	border: solid 2px transparent;
+	outline: none;
 }
-
+#chat-bot .overlay button:hover,#chat-bot .overlay a:hover{
+	border: solid 2px lightgrey;
+}
 
 #chat-bot .overlay-articles a{
 	font-size: 1.125em;
@@ -3521,4 +3522,30 @@ button.w3-bar-item.w3-button.w3-large {
 .btn-primary2 {
     background-color: #00000061;
     border: none;
+}
+
+#chat-bot .close {
+  position: sticky;
+  right: 0.5em;
+  top: 0;
+  width: 32px;
+  height: 32px;
+  opacity: 0.3;
+}
+#chat-bot .close:hover {
+  opacity: 1;
+}
+#chat-bot .close:before, .close:after {
+  position: absolute;
+  left: 15px;
+  content: ' ';
+  height: 33px;
+  width: 2px;
+  background-color: #333;
+}
+#chat-bot .close:before {
+  transform: rotate(45deg);
+}
+#chat-bot .close:after {
+  transform: rotate(-45deg);
 }

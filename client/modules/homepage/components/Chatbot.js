@@ -15,6 +15,7 @@ class ChatBot extends Component {
         this.changeToNewsLetter = this.changeToNewsLetter.bind(this)
         this.changeToTwitter = this.changeToTwitter.bind(this)
         this.showBot = this.showBot.bind(this)
+        this.closeBot = this.closeBot.bind(this)
     }
 
     changeToArticles() {
@@ -54,26 +55,31 @@ class ChatBot extends Component {
             })
         }
     }
+    closeBot() {
+        document.getElementById("chathead").style.display = "block"
+        this.setState({
+            transitionClass: '',
+            isHeadClicked: !this.state.isHeadClicked
+        })
+    }
 
     render() {
         const { url, isHeadClicked } = this.state
         return (
             <div id="main">
                 <div id="chat-bot" className={this.state.transitionClass}>
-                    
+                    <a href="#" className="close" onClick={this.closeBot}></a>
                     <ReactPlayer
                         id="video-bot"
                         className="videoInsert"
                         playing={isHeadClicked}
                         controlsList="nodownload"
                         width="320px"
-                        // height="180px"
+                        height="385px"
                         // onContextMenu={(e) => e.preventDefault()}
                         /* style={{width: "160px",height:"90px"}}*/
                         url={url}
                     />
-                    
-                    
                     <div className="overlay" >
                         <div id="overlay-intro">
                             <button className="btn btn-primary2" onClick={this.changeToArticles}>Show me your best articles</button>
@@ -97,7 +103,6 @@ class ChatBot extends Component {
                     </div>
                 </div>
                 <div id="chathead" className="chatbot-head">
-                
                     <button type="button" className="btn" onClick={this.showBot}>
                         <ReactPlayer
                             id="video-bot"
@@ -113,8 +118,6 @@ class ChatBot extends Component {
                         />
                         <div className="initial_overlay">Want to talk to AI me?</div>
                     </button>
-
-                    
                 </div>
             </div>
         )
