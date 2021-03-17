@@ -60,6 +60,7 @@ class ChatBot extends Component {
         return (
             <div id="main">
                 <div id="chat-bot" className={this.state.transitionClass}>
+                    
                     <ReactPlayer
                         id="video-bot"
                         className="videoInsert"
@@ -71,17 +72,18 @@ class ChatBot extends Component {
                         /* style={{width: "160px",height:"90px"}}*/
                         url={url}
                     />
-                    {/* </div> */}
+                    
+                    
                     <div className="overlay" >
                         <div id="overlay-intro">
-                            <Button block variant="primary" onClick={this.changeToArticles}>Show me your best articles</Button>
-                            <Button block variant="primary" onClick={this.changeToNewsLetter}>Subscribe to my newsletter</Button>
-                            <Button block variant="primary" onClick={this.changeToTwitter}>Follow me on Twitter</Button>
+                            <button className="btn btn-primary2" onClick={this.changeToArticles}>Show me your best articles</button>
+                            <button className="btn btn-primary2" onClick={this.changeToNewsLetter}>Subscribe to my newsletter</button>
+                            <button className="btn btn-primary2" onClick={this.changeToTwitter}>Follow me on Twitter</button>
                         </div>
                         <div id="overlay-articles">
-                            <a type="button" className="btn btn-primary " href="#">Fake News</a>
-                            <a type="button" className="btn btn-primary " href="#">How to meditate</a>
-                            <a type="button" className="btn btn-primary " href="#">Selling Startup</a>
+                            <a type="button" className="btn btn-primary2 " href="#">Fake News</a>
+                            <a type="button" className="btn btn-primary2 " href="#">Meditation</a>
+                            <a type="button" className="btn btn-primary2" href="#">Selling Twitch</a>
                         </div>
                         <div id="overlay-email">
                             <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"></input>
@@ -95,19 +97,24 @@ class ChatBot extends Component {
                     </div>
                 </div>
                 <div id="chathead" className="chatbot-head">
+                
                     <button type="button" className="btn" onClick={this.showBot}>
                         <ReactPlayer
                             id="video-bot"
                             className="videoInsert"
                             playing
                             muted
+                            loop={true}
                             height="128px"
                             width="128px"
                             controlsList="nodownload"
                             // onContextMenu={(e) => e.preventDefault()}
                             url="https://buildar.in/vid/1615800618.4738576.mp4"
                         />
+                        <div className="initial_overlay">Want to talk to AI me?</div>
                     </button>
+
+                    
                 </div>
             </div>
         )

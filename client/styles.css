@@ -3434,15 +3434,15 @@ button.w3-bar-item.w3-button.w3-large {
 
 #chat-bot{
   	position: fixed;
-  	bottom: 0;
-  	right: 5px;
-	height: 70%;
+  	bottom: 1em;
+  	right: 1em;
 	max-height: 0%;
  	transition: 0.5s;
  	overflow: hidden;
  	background-color: #bd694d;
  	text-align: center;
 	border-radius: 10px;
+	z-index:2000;
 }
 
 #chat-bot.animate{
@@ -3488,16 +3488,16 @@ button.w3-bar-item.w3-button.w3-large {
 	max-height: 100%;
 }
 
-#chat-bot .overlay button{
+#chat-bot .overlay button,#chat-bot .overlay a{
 	font-size: 1.125em;
 	display: block;
-	width: 100%;
+	width: 80%;
+	border-radius: 1em;
+    margin: 0.25em auto;
+    color: white;
+    font-weight: 500;
 }
-#chat-bot .overlay a{
-	font-size: 1.125em;
-	display: block;
-	width: 100%;
-}
+
 
 #chat-bot .overlay-articles a{
 	font-size: 1.125em;
@@ -3517,4 +3517,8 @@ button.w3-bar-item.w3-button.w3-large {
 }
 #chat-bot .overlay #overlay-twitter button{
 	background-color: oldlace;
+}
+.btn-primary2 {
+    background-color: #00000061;
+    border: none;
 }
