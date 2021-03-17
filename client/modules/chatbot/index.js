@@ -51,26 +51,21 @@ class Bot extends Component {
         const { url } = this.state
         return (
             <div>
-                <div id="chathead" className="chatbot-head">
-                    <button type="button" className="btn" onClick={this.showBot}>
-                        <i className="fa fa-commenting fa-2x" aria-hidden="true"></i>
-                    </button>
-                </div>
                 <div id="chat-bot" className="chatbot">
                     <div className="container">
-                        <div className="wrapper">
-                            <ReactPlayer
-                                id="video-bot"
-                                className="videoInsert"
-                                playing
-                                controls
-                                height="960"
-                                width="540"
-                                controlsList="nodownload"
-                                // onContextMenu={(e) => e.preventDefault()}
-                                url={url}
-                            />
-                        </div>
+                        {/* <div className="wrapper"> */}
+                        <ReactPlayer
+                            id="video-bot"
+                            className="videoInsert"
+                            playing
+                            controls
+                            height="960"
+                            width="540"
+                            controlsList="nodownload"
+                            // onContextMenu={(e) => e.preventDefault()}
+                            url={url}
+                        />
+                        {/* </div> */}
                         <div className="overlay">
                             <div id="overlay-intro">
                                 <Button block variant="primary" onClick={this.changeToArticles}>Show me your best articles</Button>
@@ -87,12 +82,17 @@ class Bot extends Component {
                             </div>
                             <div id="overlay-twitter">
                                 <button type="button" className="btn" href="#twitter">
-                                    Here's my Twitter
-                                    <i className="fa fa-twitter fa-10x" aria-hidden="true"></i>
+                                    <p>Here's my Twitter  </p>
+                                    <i className="fa fa-twitter fa-10x" aria-hidden="true">  </i>
                                 </button>
                             </div>
                         </div>
                     </div>
+                </div>
+                <div id="chathead" className="chatbot-head">
+                    <button type="button" className="btn" onClick={this.showBot}>
+                        <i className="fa fa-commenting fa-2x" aria-hidden="true"></i>
+                    </button>
                 </div>
             </div>
         )

@@ -3419,24 +3419,27 @@ button.w3-bar-item.w3-button.w3-large {
 
 /* Chatbot */
 .chatbot-head{
-	position: -webkit-sticky;
-  	position: sticky;
-  	top: 0;;
+	position: fixed;
+  	bottom: 23px;
 }
 
 .chatbot-head button{
 	text-align: center;
 	border-radius: 40px;
+	color:white;
 	background-color: orangered;
 }
 
-.chatbot{
+#chat-bot{
 	display: none;
+}
+
+.chatbot{
 	position: relative;
 	transition: 1s ease-in-out;
 }
 
-.chatbot .wrapper{
+.chatbot #video-bot{
 	position: relative;
 	align-items: center;
 	text-align: center;
@@ -3445,8 +3448,10 @@ button.w3-bar-item.w3-button.w3-large {
 .chatbot .container{
 	background-color: oldlace;
 	border-radius: 10px;
+	width: 50%;
 	display: flex;
 	margin-bottom: 1em;
+	align-items: center;
 	flex-direction: column;
 }
 
@@ -3459,6 +3464,7 @@ button.w3-bar-item.w3-button.w3-large {
 }
 
 .chatbot .overlay {
+	margin-bottom: 2em;
 	bottom: 0;
 	font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
