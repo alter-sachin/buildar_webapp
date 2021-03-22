@@ -319,26 +319,6 @@ VALUES
 	(2,1,2,'2018-08-21 08:04:30','2018-08-21 08:04:35'),
 	(3,2,2,'2018-08-21 08:04:32','2018-08-21 08:04:37');
 
-UNLOCK TABLES;
-
-CREATE TABLE `subscriptions` (
-  `id` int(3) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL DEFAULT '',
-  `description` varchar(255) DEFAULT NULL,
-  `active` tinyint(1) NOT NULL,
-  `createdAt` datetime DEFAULT NULL,
-  `updatedAt` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-LOCK TABLES `subscriptions` WRITE;
-
-INSERT INTO `subscriptions` (`id`, `name`, `description`, `active`, `createdAt`, `updatedAt`)
-VALUES
-	(1,'Trial','Default Trial account when a new client is created',1,'2019-03-13 11:01:55','2019-03-13 11:01:55'),
-	(2,'Basic','Basic paying customer',1,'2019-03-13 11:01:55','2019-03-13 11:01:55'),
-	(3,'Standard','Standard plan paying customer',1,'2019-03-13 11:01:55','2019-03-13 11:01:55'),
-	(4,'Professional','Professional plan paying customer',1,'2019-03-13 11:01:55','2019-03-13 11:01:55');
 
 UNLOCK TABLES;
 
@@ -456,3 +436,42 @@ INSERT INTO `actor`(id,actorId,name,gender,thumbnail) VALUES (1,0,'Sophie','fema
 
 INSERT INTO `actor`(id,actorId,name,gender,thumbnail) VALUES (2,1,'James','male','https://buildar.in/actors/actor1.jpeg');
 INSERT INTO `actor`(id,actorId,name,gender,thumbnail) VALUES (3,2,'Carmen','female','https://buildar.in/actors/actor2.jpeg');
+
+LOCK TABLES `user` WRITE;
+
+INSERT INTO `user` (`id`,`firstName`,`lastName`,
+  `googleId`,`profilePhoto`,`clientId`,
+  `emailAddress`,`emailVerified`,`password`,
+  `lastLoginDate`,`language`,`active`,
+  `createdAt`,`updatedAt`,`bio`,`location`,`website`) 
+VALUES (1,'Sachin','Sharma',
+  '0',NULL,1,
+  'sachinpec354@gmail.com',0,'password',
+  '2019-03-13 11:25:33',1,1,
+  NULL,NULL,NULL,NULL,NULL);
+
+
+UNLOCK TABLES;
+
+CREATE TABLE `subscriptions` (
+  `id` int(3) unsigned NOT NULL AUTO_INCREMENT,
+  `subscriptionId` varchar(255) NOT NULL DEFAULT '',
+  `planId` varchar(255) NOT NULL DEFAULT '',
+  `subscriptionLink` varchar(255) NOT NULL DEFAULT '',
+  `status` varchar(255) NOT NULL DEFAULT '',
+  `name` varchar(255) NOT NULL DEFAULT '',
+  `description` varchar(255) DEFAULT NULL,
+  `active` tinyint(1) NOT NULL,
+  `createdAt` datetime DEFAULT NULL,
+  `updatedAt` datetime DEFAULT NULL,
+  `nextDueOn` datetime DEFAULT NULL,
+  `userId_FK` int(11) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (userId_FK) REFERENCES user(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+LOCK TABLES `subscriptions` WRITE;
+
+INSERT INTO `subscriptions` (`id`,`subscriptionId`,`planId`,`subscriptionLink`,`status`, `name`, `description`, `active`, `createdAt`, `updatedAt`,`userId_FK`) VALUES (1,'sub_GoSpiQHkYwWeej','plan_GnsLLScpZakuEA','https://rzp.io/i/LNztFrsLJA','created','Basic','30$ for 30 Videos',1,'2019-03-13 11:01:55','2019-03-13 11:01:55',1);
+
+

@@ -2,6 +2,7 @@ let path = require("path");
 let webpack = require("webpack");
 let config = require("./config");
 
+
 function loadPlugins() {
 	var plugins = [];
 	plugins.push(

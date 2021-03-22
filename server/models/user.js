@@ -108,6 +108,12 @@ module.exports = (sequelize, DataTypes) => {
 			foreignKey: "id"
 		});
 	};
+	User.associate = function (models) {
+		User.hasMany(models.subscriptions, {
+			foreignKey: "id"
+		});
+	};
+
 	return User;
 };
 

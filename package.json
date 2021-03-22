@@ -103,6 +103,7 @@
 		"raven": "^2.6.0",
 		"raven-for-redux": "^1.4.0",
 		"raven-js": "^3.27.0",
+		"razorpay": "^2.0.6",
 		"rc-switch": "^1.9.0",
 		"react": "^16.8.6",
 		"react-audio-player": "^0.14.0",

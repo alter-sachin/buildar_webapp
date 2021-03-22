@@ -11,12 +11,25 @@ import { parameterIsSafe } from "shared/utilities/filters";
 import { SUBSCRIPTION_TYPE, PAYMENT_INTERVALS } from "shared/constants";
 import { t } from "shared/translations/i18n";
 import User from "common/components/User";
+import axios from "axios";
+
 
 class SubscriptionList extends Component {
 	constructor(props) {
 		super(props)
+
 		this.w3_open = this.w3_open.bind(this);
 		this.w3_close = this.w3_close.bind(this);
+		this.paySubscription = this.paySubscription.bind(this);
+		this.verifyTransaction = this.verifyTransaction.bind(this);
+	}
+	componentDidMount () {
+    const script = document.createElement("script");
+
+    script.src = "https://checkout.razorpay.com/v1/checkout.js";
+    script.async = true;
+
+    document.body.appendChild(script);
 	}
 
 	trialDays() {
@@ -28,6 +41,50 @@ class SubscriptionList extends Component {
 		}
 		return trialDaysLeft;
 	}
+
+	paySubscription(){
+		// load the razorpay subscription for this particular plan
+		//check if the user already has the plan in use or not and what his end date is 
+		//keep a track of the user and his subscriptions 
+		const { user, interval, changeInterval, selectPlan, loading } = this.props;
+
+		const userId_FK = user.get("userId");
+		//create api where a subscription is created for the particular plan
+		axios.post('/api/v1.0/billing/createSubscription',{
+			userId_FK : userId_FK
+		})
+		  .then(function (response) {
+		    console.log("response is", response.request.response );
+		    const myObj = JSON.parse(response.request.response);
+		    const subscriptionId =  myObj.subscriptionObj.subscriptionId;
+		    //do another post call to the subscription?
+		    var options = {
+		    	key_id :"rzp_test_GVZjTE8wBbPEcd",
+		    	subscription_id : subscriptionId,
+		    	"handler": function(response) {
+			      axios.post('/api/v1.0/billing/verifyTransaction',{
+						razorpay_payment_id : response.razorpay_payment_id,
+						razorpay_subscription_id : response.razorpay_subscription_id,
+						razorpay_signature : response.razorpay_signature,
+						db_subscriptionId : subscriptionId
+					})
+					  .then(function (response) {
+					    console.log("response is", response);
+					  });
+				}
+			}
+
+		    var rzp1 = new Razorpay(options);
+		    rzp1.open();
+		  })
+
+	}
+
+	verifyTransaction(res,subscriptionId){
+		
+	}
+
+
 
 	selectPricing(id) {
 		const price = this.props.subscriptionList.find(row => {
@@ -67,7 +124,7 @@ class SubscriptionList extends Component {
 		const trialDaysLeft = this.trialDays(); // Calculate days left in trial
 
 		const emailVerified = user.get("emailVerified"); // Check if user email is verified
-
+		
 		return (
 			<Fragment>
 				<SideBar />
@@ -76,13 +133,9 @@ class SubscriptionList extends Component {
 					<div className="container py-3">
 						<div className="pricing-header px-3 py-4 pt-md-5 pb-md-5 mx-auto text-center">
 							<h1>
-								{subscriptionActive
-									? trialDaysLeft > 0
-										? t("components.billing.timeRemaining", { count: trialDaysLeft })
-										: t("components.billing.timeRemaining<1")
-									: t("components.billing.timeRemaining_expired")}
+								Subscribe to all services from us
 							</h1>
-							<p className="lead">{subscriptionActive ? t("components.billing.selectPlan") : t("components.billing.selectPlan_expired")}</p>
+							<p className="lead">BuildAR comes with ready to pay as you use plans</p>
 							<div className="mt-4">
 								<span className={interval === PAYMENT_INTERVALS.MONTH ? "font-weight-normal" : "font-weight-light"}>{t("label.monthly")}</span>
 								<Switch className="switch mx-4" checked={interval == PAYMENT_INTERVALS.YEAR ? true : false} onChange={changeInterval} />
@@ -100,44 +153,20 @@ class SubscriptionList extends Component {
 								<div className="card-body">
 									{!loading ? (
 										<h1 className="card-title pricing-card-title">
-											${this.selectPricing(pricingBox1Id)}
+											30$
 											<small className="h5 text-muted"> / {interval === PAYMENT_INTERVALS.MONTH ? t("label.month") : t("label.year")}</small>
 										</h1>
 									) : (
 										<h1><img src={require("distribution/images/loading_spinner_small.gif")} /></h1>
 									)}
 									<ul className="list-unstyled my-4">
-										<li>{t("components.billing.cardFeatures.cardOne.1")}</li>
-										<li>{t("components.billing.cardFeatures.cardOne.2")}</li>
-										<li>{t("components.billing.cardFeatures.cardOne.3")}</li>
-										<li>{t("components.billing.cardFeatures.cardOne.4")}</li>
+										<li>Basic Plan that gets you a video</li>
+										<li>New feature</li>
+										<li>feature 2</li>
+										<li>FEATURE 3</li>
 									</ul>
-									<button type="button" value={pricingBox1Id} className="btn btn-block btn-primary" onClick={selectPlan} disabled={loading || !emailVerified}>
-										{t("components.billing.chooseThisPlan")}
-									</button>
-								</div>
-							</div>
-							<div className="card rounded-0">
-								<div className="card-header bg-white mt-1 border-bottom-0">
-									<h4 className="my-0 font-weight-normal">{t("components.billing.subscriptionType.3")}</h4>
-								</div>
-								<div className="card-body">
-									{!loading ? (
-										<h1 className="card-title pricing-card-title">
-											${this.selectPricing(pricingBox2Id)}
-											<small className="h5 text-muted"> / {interval === PAYMENT_INTERVALS.MONTH ? t("label.month") : t("label.year")}</small>
-										</h1>
-									) : (
-										<h1><img src={require("distribution/images/loading_spinner_small.gif")} /></h1>
-									)}
-									<ul className="list-unstyled my-4">
-										<li>{t("components.billing.cardFeatures.cardTwo.1")}</li>
-										<li>{t("components.billing.cardFeatures.cardTwo.2")}</li>
-										<li>{t("components.billing.cardFeatures.cardTwo.3")}</li>
-										<li>{t("components.billing.cardFeatures.cardTwo.4")}</li>
-									</ul>
-									<button type="button" value={pricingBox2Id} className="btn btn-block btn-primary" onClick={selectPlan} disabled={loading || !emailVerified}>
-										{t("components.billing.chooseThisPlan")}
+									<button type="button" value={pricingBox1Id} className="btn btn-block btn-primary" onClick={this.paySubscription}>
+										this is the api button check what happens
 									</button>
 								</div>
 							</div>
@@ -155,31 +184,18 @@ class SubscriptionList extends Component {
 										<h1><img src={require("distribution/images/loading_spinner_small.gif")} /></h1>
 									)}
 									<ul className="list-unstyled my-4">
-										<li>{t("components.billing.cardFeatures.cardThree.1")}</li>
-										<li>{t("components.billing.cardFeatures.cardThree.2")}</li>
-										<li>{t("components.billing.cardFeatures.cardThree.3")}</li>
-										<li>{t("components.billing.cardFeatures.cardThree.4")}</li>
+										<li>Basic Plan that gets you a video</li>
+										<li>New feature</li>
+										<li>feature 2</li>
+										<li>FEATURE 3</li>
 									</ul>
 									<button type="button" value={pricingBox3Id} className="btn btn-block btn-primary" onClick={selectPlan} disabled={loading || !emailVerified}>
-										{t("components.billing.chooseThisPlan")}
+										Choose this Plan
 									</button>
 								</div>
 							</div>
 						</div>
-						<div className="subscription-features">
-							<Button variant="link">See all features and benefits</Button>
-						</div>
-						<Card className="text-center">
-							<Card.Header>Featured</Card.Header>
-							<Card.Body>
-								<Card.Title>Special title treatment</Card.Title>
-								<Card.Text>
-									With supporting text below as a natural lead-in to additional content.
-    							</Card.Text>
-								<Button variant="primary">Go somewhere</Button>
-							</Card.Body>
-							<Card.Footer className="text-muted">2 days ago</Card.Footer>
-						</Card>
+						
 					</div>
 				</div>
 			</Fragment>
