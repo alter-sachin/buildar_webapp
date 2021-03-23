@@ -2,25 +2,38 @@ import React, { Component } from "react";
 import Actor from "./components/Actor";
 import axios from "axios";
 import store, { injectReducer } from "common/store/store";
+import { Route, withRouter } from "react-router-dom";
+
+import video, { VIDEO } from "common/store/reducers/video.js";
+import PropTypes from "prop-types";
+import User from "common/components/User";
 
 import SideBar from "../sidebar";
+import user from "../../../server/models/user";
 
 
 
 class CreateVideo extends Component {
 
 	constructor(props) {
-		super(props)
+		super(props);
 
 		this.state = {
 			loading: true,
 			actors: [],
 			voices: [],
+			user:this.props.user
 			
-		}
+		};
 		
 	}
 	componentDidMount() {
+		const config = {
+			headers:{Authorization:"bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwaXVzIiwiZXhwIjoxNjE5MTAwNDM0fQ.hYp92NmEILdG2QUr6ZEEVB8rE2VA4WF3Q-_uUDiTLAg"}
+		};
+		const bodyParameters = {
+			key:"value"
+		};
 		axios
 			.get("/api/v1.0/actor")
 			.then(({ data }) => {
@@ -34,14 +47,17 @@ class CreateVideo extends Component {
 				//console.log(this.state.actors);
 			});
 		axios
-			.get("http://35.232.47.147:8008/audio")
+			.get("http://35.232.47.147:8008/audio",
+				bodyParameters,
+				config,
+			)
 			.then(({ data }) => {
 				if (data) {
 					// console.log(data)
 					this.setState({
 						loading: false,
 						voices: data
-					})
+					});
 					/*console.log("voice");
 					console.log(this.state.voices);	*/
 				}
@@ -62,11 +78,13 @@ class CreateVideo extends Component {
 		}
 		else {
 			const { actors, voices } = this.state;
+			const {user} = this.props;
+			console.log(user);
 			return (
 				<div>
 					<SideBar />
 					<div id="main">
-							<Actor data={{ actors: actors, voices: voices }} />
+						<Actor data={{ actors: actors, voices: voices }} />
 					</div>
 				</div>
 			);
@@ -76,9 +94,8 @@ class CreateVideo extends Component {
 // Inject Profile Reducer
 injectReducer(store, VIDEO, video);
 
-Actor.propTypes = {
+CreateVideo.propTypes = {
 	history: PropTypes.object,
 	user: PropTypes.object
 };
-export default CreateVideo;
-
+export default withRouter(User(CreateVideo));

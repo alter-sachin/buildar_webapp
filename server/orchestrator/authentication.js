@@ -339,21 +339,23 @@ export function authenticateWithLocalStrategy(req, res, next, browserLng) {
 						}
 
 						// Store lastLoginDate in database
+						console.log("this is before update");
 						userObject.update({
 							lastLoginDate: currentTime,
 							authToken:authToken.token_type+" "+authToken.access_token
 							
 						});
+						const response = { status: 200, message: t("label.success", { lng: browserLng }), token: user.token, keepSignedIn: req.body.keepSignedIn };
+
+						// Return the response object
+						return res.status(200).send(response);
 					} catch (error) {
 						throw error;
 					}
 				});
 
 				// Build our response object
-				const response = { status: 200, message: t("label.success", { lng: browserLng }), token: user.token, keepSignedIn: req.body.keepSignedIn };
-
-				// Return the response object
-				return res.status(200).send(response);
+				
 			} else {
 				const errorMsg = new ServerResponseError(403, t("validation.userInvalidProperties", { lng: browserLng }), {
 					emailAddress: [t("validation.incorrectLoginDetailsSupplied", { lng: browserLng })]
@@ -471,6 +473,7 @@ export function loadUserProperties(requestProperties, authenticatedUser, browser
 				userId: user.get("id"),
 				firstName: user.get("firstName"),
 				lastName: user.get("lastName"),
+				authToken:user.get("authToken"),
 				profilePhoto: profilePhoto,
 				emailAddress: user.get("emailAddress"),
 				emailVerified: Boolean(Number(user.get("emailVerified"))),

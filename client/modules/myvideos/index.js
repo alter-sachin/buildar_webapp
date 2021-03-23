@@ -110,7 +110,7 @@ class MyVideo extends Component {
 		}
 		else {
 			console.log("This is auth token", user.get("authToken"));
-			console.log("this is user", user);
+			// console.log("this is user", user);
 			var videos = this.state.videoList;
 			var isVideosEmpty = false
 			if (videos.length !== 0) {
