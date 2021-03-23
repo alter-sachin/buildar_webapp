@@ -3,7 +3,7 @@ import { t } from "shared/translations/i18n";
 import { ServerResponseError } from "utilities/errors/serverResponseError";
 import { PAYMENT_CURRENCY, PAYMENT_INTERVALS } from "shared/constants";
 import { variableExists } from "shared/utilities/filters";
-import Razorpay from 'razorpay';
+import Razorpay from "razorpay";
 const crypto = require("crypto");
 
 

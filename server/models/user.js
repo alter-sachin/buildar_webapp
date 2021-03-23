@@ -9,10 +9,10 @@ module.exports = (sequelize, DataTypes) => {
 				autoIncrement: true,
 				field: "id"
 			},
-			googleId: {
-				type: DataTypes.INTEGER(11).UNSIGNED,
-				defaultValue: 0,
-				field: "googleId"
+			authToken: {
+				type: DataTypes.STRING(255),
+				defaultValue: "",
+				field: "authToken"
 			},
 			firstName: {
 				type: DataTypes.STRING(255),

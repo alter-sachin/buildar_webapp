@@ -225,7 +225,7 @@ class Actor extends Component {
 	render() {
 		const { user, history } = this.props;
 		const { actors, voices } = this.state;
-
+		console.log(user.get("authToken"));
 
 
 		return (

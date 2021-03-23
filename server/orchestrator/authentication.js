@@ -12,10 +12,13 @@ import { variableExists, arrayContains } from "shared/utilities/filters";
 import { ServerResponseError } from "utilities/errors/serverResponseError";
 import { t } from "shared/translations/i18n";
 import { FEATURES, SUBSCRIPTION_TYPE, ROLE_TYPE, EMAIL_TYPE, BILLING_CYCLE, LANGUAGE_CODES, SIGNED_URL_EXPIRY_TIME } from "shared/constants";
+import axios from "axios";
+import { response } from "express";
+// const axios = require("axios");
 
 // Validate Workspace URL and retrieve client styling (if feature exists)
 export function validateWorkspaceURL(requestProperties, authenticatedUser, browserLng) {
-	return database().transaction(async function (transaction) {
+	return database().transaction(async function(transaction) {
 		try {
 			// Load a client using a workspaceURL
 			const client = await models().client.findOne({ where: { workspaceURL: requestProperties.workspaceURL, active: true } }, { transaction: transaction });
@@ -113,7 +116,7 @@ export async function generateUserEmailValidationCode(userId, clientId, transact
 
 // Register new Client
 export function registerNewClient(requestProperties, authenticatedUser, browserLng) {
-	return database().transaction(async function (transaction) {
+	return database().transaction(async function(transaction) {
 		try {
 
 			const user = await models().user.findOne({where:{emailAddress:requestProperties.emailAddress, active:true}},{transaction:transaction});
@@ -159,8 +162,12 @@ export function registerNewClient(requestProperties, authenticatedUser, browserL
 			// Save client object to database
 			const clientInstance = await models().client.create(clientObject, { transaction: transaction });
 
+			
 			// Encrypt and salt user password
 			const password = await bcrypt.hash(requestProperties.password, 10);
+
+			var result = await createUserInFastAPI(requestProperties.firstName, requestProperties.emailAddress,password);
+			console.log(result);
 
 			// Create new user and save to database
 			const userInstance = await models().user.create(
@@ -211,9 +218,30 @@ export function registerNewClient(requestProperties, authenticatedUser, browserL
 	});
 }
 
+function createUserInFastAPI(username,email,password){
+	return new 	Promise(function(resolve,reject){
+		axios.post("http://35.232.47.147:8008/users/",{
+			email : email,
+			username : username,
+			password : password
+		}).then(
+			response=>{
+				var result  = response.data;
+				console.log("resolving request...");
+				resolve(result);
+			},
+			error=>{
+				console.log("this is error",error);
+				reject(error);
+			}
+		);
+	});
+		
+}
+
 // Authenticate User with security token
 export function authenticateWithJWTStrategy(req, res, next, browserLng) {
-	return passport.perform().authenticate("jwt", { session: false }, function (error, user) {
+	return passport.perform().authenticate("jwt", { session: false }, function(error, user) {
 		// Throw exception if loading passport strategy fails
 		if (error) {
 			return res
@@ -221,21 +249,23 @@ export function authenticateWithJWTStrategy(req, res, next, browserLng) {
 				.send(new ServerResponseError(403, t("validation.tokenInvalidOrExpired", { lng: browserLng }), { token: [t("validation.tokenInvalidOrExpired", { lng: browserLng })] }));
 		}
 		// Authenticate user with strategy
-		req.logIn(user, function (error) {
+		req.logIn(user, function(error) {
 			if (error) {
 				return res
 					.status(403)
 					.send(new ServerResponseError(403, t("validation.tokenInvalidOrExpired", { lng: browserLng }), { token: [t("validation.tokenInvalidOrExpired", { lng: browserLng })] }));
 			}
 			if (user) {
-				database().transaction(async function (transaction) {
+				database().transaction(async function(transaction) {
 					try {
 						// Get current server time
 						const currentTime = moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
 
+						
+
 						// Load user from database
 						const userObject = await models().user.findOne({ where: { id: user.userId, clientId: user.clientId, active: true } }, { transaction: transaction });
-
+						console.log("This is inside user",userObject);
 						// Throw an error if user could not be loaded from database
 						if (userObject === null) {
 							return res
@@ -249,6 +279,7 @@ export function authenticateWithJWTStrategy(req, res, next, browserLng) {
 						userObject.update({
 							lastLoginDate: currentTime
 						});
+
 					} catch (error) {
 						throw error;
 					}
@@ -266,14 +297,11 @@ export function authenticateWithJWTStrategy(req, res, next, browserLng) {
 		});
 	})(req, res, next);
 }
-//Authenticate using google authentication Strategy
 
-export function authenticateWithGoogleStrategy(req,res,next,browserLng){
-	
-}
+
 // Authenticate using Local authentication strategy
 export function authenticateWithLocalStrategy(req, res, next, browserLng) {
-	return passport.perform().authenticate("local", { session: false }, function (error, user) {
+	return passport.perform().authenticate("local", { session: false }, function(error, user) {
 		// Throw exception if loading passport strategy fails
 		if (error) {
 			return res
@@ -281,7 +309,7 @@ export function authenticateWithLocalStrategy(req, res, next, browserLng) {
 				.send(new ServerResponseError(403, t("validation.userInvalidProperties", { lng: browserLng }), { emailAddress: [t("validation.incorrectLoginDetailsSupplied", { lng: browserLng })] }));
 		}
 		// Authenticate user with strategy
-		req.logIn(user, function (error) {
+		req.logIn(user, function(error) {
 			if (error) {
 				return res
 					.status(403)
@@ -290,14 +318,17 @@ export function authenticateWithLocalStrategy(req, res, next, browserLng) {
 					);
 			}
 			if (user) {
-				database().transaction(async function (transaction) {
+
+				database().transaction(async function(transaction) {
 					try {
 						// Get current server time
 						const currentTime = moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
 
 						// Load user from database
 						const userObject = await models().user.findOne({ where: { id: user.userId, clientId: user.clientId, active: true } }, { transaction: transaction });
-
+						// console.log("This is inside user object", userObject);
+						var authToken = await getauthToken(userObject.firstName, userObject.password);
+						console.log("this is authToken",authToken);
 						// Throw an error if user could not be loaded from database
 						if (userObject === null) {
 							return res.status(403).send(
@@ -309,7 +340,9 @@ export function authenticateWithLocalStrategy(req, res, next, browserLng) {
 
 						// Store lastLoginDate in database
 						userObject.update({
-							lastLoginDate: currentTime
+							lastLoginDate: currentTime,
+							authToken:authToken.token_type+" "+authToken.access_token
+							
 						});
 					} catch (error) {
 						throw error;
@@ -331,9 +364,29 @@ export function authenticateWithLocalStrategy(req, res, next, browserLng) {
 	})(req, res, next);
 }
 
+function getauthToken(username,password){
+	
+	return new Promise(function(resolve,reject){
+		axios.post("http://35.232.47.147:8008/token",{
+			username:username,
+			password:password
+		}).then(
+			(response)=>{
+				var result = response.data;
+				console.log("processing request");
+				resolve(result);
+			},
+			(error)=>{
+				console.log("error is",error);
+				reject(error);
+			}
+		);
+	});
+}
+
 // Delete session
 export function deleteSession(requestProperties, authenticatedUser, browserLng) {
-	return database().transaction(async function (transaction) {
+	return database().transaction(async function(transaction) {
 		try {
 			// Delete session from redis db
 			await redis.delete(authenticatedUser.sessionId);
@@ -348,7 +401,7 @@ export function deleteSession(requestProperties, authenticatedUser, browserLng) 
 
 // Load properties for a user
 export function loadUserProperties(requestProperties, authenticatedUser, browserLng) {
-	return database().transaction(async function (transaction) {
+	return database().transaction(async function(transaction) {
 		try {
 			// Load client for authenticated user
 			const client = await models().client.findOne({ where: { id: authenticatedUser.clientId, workspaceURL: authenticatedUser.workspaceURL, active: true } }, { transaction: transaction });
@@ -486,7 +539,7 @@ export function loadUserProperties(requestProperties, authenticatedUser, browser
 
 // Resend verification email for validating email addresses
 export function resendVerifyEmail(requestProperties, authenticatedUser, browserLng) {
-	return database().transaction(async function (transaction) {
+	return database().transaction(async function(transaction) {
 		try {
 			if (authenticatedUser.userId === null || !Number.isInteger(authenticatedUser.userId)) {
 				throw new ServerResponseError(403, t("validation.invalidUserId", { lng: browserLng }), null);
@@ -561,7 +614,7 @@ export function resendVerifyEmail(requestProperties, authenticatedUser, browserL
 
 // Send email with password reset if user forgot their password but workspace name is provided
 export function forgotAccountPasswordEmail(requestProperties, authenticatedUser, browserLng) {
-	return database().transaction(async function (transaction) {
+	return database().transaction(async function(transaction) {
 		try {
 			// Load client object associated with the workspace name
 			const client = await models().client.findOne({ where: { workspaceURL: requestProperties.workspaceURL, active: true } }, { transaction: transaction });
@@ -639,7 +692,7 @@ export function forgotAccountPasswordEmail(requestProperties, authenticatedUser,
 
 // Send email with account details if user forgot their account or workspace url
 export function forgotAccountEmail(requestProperties, authenticatedUser, browserLng) {
-	return database().transaction(async function (transaction) {
+	return database().transaction(async function(transaction) {
 		try {
 			// Check if email sent in the last 5 minutes
 			const currentTime = new Date();
@@ -731,7 +784,7 @@ export function forgotAccountEmail(requestProperties, authenticatedUser, browser
 
 // Validate the reset code used to reset passwords
 export function validateResetPasswordCode(requestProperties, authenticatedUser, browserLng) {
-	return database().transaction(async function (transaction) {
+	return database().transaction(async function(transaction) {
 		try {
 			// Load client from workspace url
 			const client = await models().client.findOne({ where: { workspaceURL: requestProperties.workspaceURL, active: true } }, { transaction: transaction });
@@ -783,7 +836,7 @@ export function validateResetPasswordCode(requestProperties, authenticatedUser, 
 
 // Reset user password
 export function resetUserPassword(requestProperties, authenticatedUser, browserLng) {
-	return database().transaction(async function (transaction) {
+	return database().transaction(async function(transaction) {
 		try {
 			// Load client from workspace url
 			const client = await models().client.findOne({ where: { workspaceURL: requestProperties.workspaceURL, active: true } }, { transaction: transaction });
@@ -865,7 +918,7 @@ export function resetUserPassword(requestProperties, authenticatedUser, browserL
 
 // Verify User Email
 export function verifyUserEmail(requestProperties, authenticatedUser, browserLng) {
-	return database().transaction(async function (transaction) {
+	return database().transaction(async function(transaction) {
 		try {
 			// Load client from workspace url
 			const client = await models().client.findOne({ where: { workspaceURL: requestProperties.workspaceURL, active: true } }, { transaction: transaction });

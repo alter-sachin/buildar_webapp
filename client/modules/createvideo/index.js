@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Actor from "./components/Actor";
 import axios from "axios";
+import store, { injectReducer } from "common/store/store";
 
 import SideBar from "../sidebar";
 
@@ -72,6 +73,12 @@ class CreateVideo extends Component {
 		}
 	}
 }
+// Inject Profile Reducer
+injectReducer(store, VIDEO, video);
 
+Actor.propTypes = {
+	history: PropTypes.object,
+	user: PropTypes.object
+};
 export default CreateVideo;
 
