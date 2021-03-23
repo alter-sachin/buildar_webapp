@@ -17,11 +17,17 @@ import axios from "axios";
 class SubscriptionList extends Component {
 	constructor(props) {
 		super(props)
+		this.state = {
+			counter : 0,
+			planId : "plan_Gq0cwEzJTQZ1Cl",
+			totalCount:12  
+		}
 
 		this.w3_open = this.w3_open.bind(this);
 		this.w3_close = this.w3_close.bind(this);
 		this.paySubscription = this.paySubscription.bind(this);
-		this.verifyTransaction = this.verifyTransaction.bind(this);
+		this.changePlan = this.changePlan.bind(this);
+		
 	}
 	componentDidMount () {
     const script = document.createElement("script");
@@ -30,6 +36,25 @@ class SubscriptionList extends Component {
     script.async = true;
 
     document.body.appendChild(script);
+	}
+
+
+
+	changePlan(e){
+		if(this.state.counter%2 === 0){
+			document.getElementById("pricetag").innerHTML = "24$ / month";
+			// we are in the yearly plan so set the planId to the yearly plan
+			this.state.planId = "plan_Gq0ecmL7qf8Vuk";
+			this.state.totalCount = 1
+			this.state.counter += 1 ;
+		}
+		else{
+			document.getElementById("pricetag").innerHTML = "30$ / month";
+			this.state.planId = "plan_Gq0cwEzJTQZ1Cl";
+			this.state.totalCount = 12
+			this.state.counter += 1 ;
+		}
+		
 	}
 
 	trialDays() {
@@ -51,7 +76,9 @@ class SubscriptionList extends Component {
 		const userId_FK = user.get("userId");
 		//create api where a subscription is created for the particular plan
 		axios.post('/api/v1.0/billing/createSubscription',{
-			userId_FK : userId_FK
+			userId_FK : userId_FK,
+			planId : this.state.planId,
+			totalCount : this.state.totalCount
 		})
 		  .then(function (response) {
 		    console.log("response is", response.request.response );
@@ -79,12 +106,6 @@ class SubscriptionList extends Component {
 		  })
 
 	}
-
-	verifyTransaction(res,subscriptionId){
-		
-	}
-
-
 
 	selectPricing(id) {
 		const price = this.props.subscriptionList.find(row => {
@@ -124,6 +145,8 @@ class SubscriptionList extends Component {
 		const trialDaysLeft = this.trialDays(); // Calculate days left in trial
 
 		const emailVerified = user.get("emailVerified"); // Check if user email is verified
+
+		
 		
 		return (
 			<Fragment>
@@ -133,69 +156,65 @@ class SubscriptionList extends Component {
 					<div className="container py-3">
 						<div className="pricing-header px-3 py-4 pt-md-5 pb-md-5 mx-auto text-center">
 							<h1>
-								Subscribe to all services from us
+								Create Videos With Beautiful Faces.
 							</h1>
 							<p className="lead">BuildAR comes with ready to pay as you use plans</p>
 							<div className="mt-4">
-								<span className={interval === PAYMENT_INTERVALS.MONTH ? "font-weight-normal" : "font-weight-light"}>{t("label.monthly")}</span>
-								<Switch className="switch mx-4" checked={interval == PAYMENT_INTERVALS.YEAR ? true : false} onChange={changeInterval} />
-								<span className={interval === PAYMENT_INTERVALS.YEAR ? "text-success font-weight-normal" : "font-weight-light"}>
-									{t("label.yearly")} ({t("components.billing.save20%")})
-							</span>
+								<div onChange={e =>{this.changePlan(e)}}>
+							       <span id ="radio1"><input  type="radio" value="Billed Monthly" defaultChecked name="billing"/> Billed Monthly</span>
+							        <span id ="radio2"><input type="radio" value="Billed Annually" name="billing"/> Billed annually (20% Savings)</span>
+						      </div>
 							</div>
 						</div>
-						{!emailVerified && <div className="text-danger text-center">{t("validation.verifyEmail")}</div>}
 						<div className="card-deck py-3 text-center">
 							<div className="card rounded-0">
 								<div className="card-header bg-white mt-1 border-bottom-0">
-									<h4 className="my-0 font-weight-normal">{t("components.billing.subscriptionType.2")}</h4>
+									<h4 className="my-0 font-weight-normal">Personal</h4>
 								</div>
 								<div className="card-body">
+
 									{!loading ? (
-										<h1 className="card-title pricing-card-title">
-											30$
-											<small className="h5 text-muted"> / {interval === PAYMENT_INTERVALS.MONTH ? t("label.month") : t("label.year")}</small>
+										<h1 className="card-title pricing-card-title" id ="pricetag">
+											30$ / month
 										</h1>
 									) : (
 										<h1><img src={require("distribution/images/loading_spinner_small.gif")} /></h1>
 									)}
 									<ul className="list-unstyled my-4">
-										<li>Basic Plan that gets you a video</li>
-										<li>New feature</li>
-										<li>feature 2</li>
-										<li>FEATURE 3</li>
+										<li>30 Videos Per Month</li>
+										<li>40+ Languages Supported</li>
+										<li>Access to Premium Actors</li>
+										<li>24*7 Support</li>
 									</ul>
 									<button type="button" value={pricingBox1Id} className="btn btn-block btn-primary" onClick={this.paySubscription}>
-										this is the api button check what happens
+										Subcribe Now
 									</button>
 								</div>
 							</div>
 							<div className="card rounded-0">
 								<div className="card-header bg-white mt-1 border-bottom-0">
-									<h4 className="my-0 font-weight-normal">{t("components.billing.subscriptionType.4")}</h4>
+									<h4 className="my-0 font-weight-normal">Enterprise</h4>
 								</div>
 								<div className="card-body">
 									{!loading ? (
 										<h1 className="card-title pricing-card-title">
-											${this.selectPricing(pricingBox3Id)}
-											<small className="h5 text-muted"> / {interval === PAYMENT_INTERVALS.MONTH ? t("label.month") : t("label.year")}</small>
+											Custom Pricing
 										</h1>
 									) : (
 										<h1><img src={require("distribution/images/loading_spinner_small.gif")} /></h1>
 									)}
 									<ul className="list-unstyled my-4">
-										<li>Basic Plan that gets you a video</li>
-										<li>New feature</li>
-										<li>feature 2</li>
-										<li>FEATURE 3</li>
+										<li>Plan that scales with your use.</li>
+										<li>Everything included in personal</li>
+										<li>API Access</li>
+										<li>Create thousands of videos at scale.</li>
 									</ul>
-									<button type="button" value={pricingBox3Id} className="btn btn-block btn-primary" onClick={selectPlan} disabled={loading || !emailVerified}>
-										Choose this Plan
+									<button type="button" value={pricingBox3Id} className="btn btn-block btn-primary"  >
+										Talk to Business Team
 									</button>
 								</div>
 							</div>
-						</div>
-						
+						</div>						
 					</div>
 				</div>
 			</Fragment>

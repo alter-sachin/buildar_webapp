@@ -3415,3 +3415,8 @@ button.w3-bar-item.w3-button.w3-large {
 	border: solid 3px blue;
 	transition: 0.25s ease-in-out;
 }
+
+
+#radio1 {
+	padding : 1em;
+}

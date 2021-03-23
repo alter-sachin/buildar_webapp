@@ -94,7 +94,7 @@ export function createSubscription(requestProperties, authenticatedUser, browser
 				},
 				{ transaction: transaction }
 			);
-
+			console.log("load",loadSubscription);
 			//get parameters ready to create a subcription whatever the case maybe. 
 
 			//now create this subscription by doing the post call to the end point 
@@ -104,12 +104,13 @@ export function createSubscription(requestProperties, authenticatedUser, browser
 			});
 
 			const pars = {
-				plan_id : "plan_GnsLLScpZakuEA",
-				total_count : 12,
+				plan_id : requestProperties.planId,
+				total_count : requestProperties.totalCount,
 			}
 			/*console.log("loadSubscription is ", loadSubscription);*/
 			// Throw an error if no stripe plans are available
 			if (loadSubscription === null) {
+				//if no subscription exists for user then create a new one
 				const sub = await instance.subscriptions.create(pars);
 				console.log("sub is",sub.short_url);
 				const subscriptionObj = {
@@ -121,14 +122,11 @@ export function createSubscription(requestProperties, authenticatedUser, browser
 					active: 0,
 					userId_FK: userId_FK
 				}
+
+				//write it to the database
 				const subcriptionCreated = await models().subscriptions.create(subscriptionObj, { transaction: transaction });
 				
 /*				if(subscriptionCreated)*/
-				// Create a response object
-
-
-				//now that we have subscription Id, we need to create an order that
-				//will be shown to the user.
 				console.log("json is",subscriptionObj);
 
 
@@ -136,11 +134,43 @@ export function createSubscription(requestProperties, authenticatedUser, browser
 				subscriptionObj};
 				return response;
 				/*throw new ServerResponseError(500, t("error.somethingWentWrong", { lng: browserLng }), null);*/
-			}
-			else{
+			} else { //subscription already exists !!!
+				//check status if active....retrieve the end data and create a new subscription from that day onwards...
+				if(loadSubscription.dataValues.status === "active"){
+
+					//if(loadSubscription.dataValues.planId === "plan_Gq0ecmL7qf8Vuk") // if yearly plan then you start the subscription at end of early plan
+					//both monthly and yearly plans are extended till a year so you should c
+					pars = {
+						subscriptionId : loadSubscription.dataValues.subscriptionId,
+						plan_id : requestProperties.planId,
+						total_count : requestProperties.totalCount,
+						start_at : loadSubscription.dataValues.start_at
+					}
+
+					const sub = await instance.subscriptions.create(pars);
+					//create a new one 
+					const subscriptionObj = {
+						subscriptionId : sub.id,
+						planId:sub.plan_id,
+						status : sub.status,
+						subscriptionLink: sub.short_url,
+						createdAt: sub.created_at,
+						active: 0,
+						userId_FK: userId_FK
+					}
+
+					models().subscriptions.update(subscriptionObj,{ where: { [Op.and]: [
+				      { userId_FK: userId_FK },
+				      { id: requestProperties.sub.id }] } }).then((result)=>{
+				      	console.log("rows?",result);
+				      });
+				}
 				console.log("else statement");
-				const sub = await instance.subscriptions.create(pars);
+				//const sub = await instance.subscriptions.create(pars);
 				console.log("sub else is",sub);
+				/*else{ //if inactive , send the subscription id back so that he can then do the payment
+
+				}*/
 				
 			}
 			// Return the response object
@@ -156,21 +186,24 @@ export function createSubscription(requestProperties, authenticatedUser, browser
 export function verifyTransaction(requestProperties, authenticatedUser, browserLng) {
 	return database().transaction(async function(transaction) {
 		try {
-/*			// Filter subscriptions based on parameters
-			const filterAttributes = { newSubscriptionsAllowed: true, active: true };
+			// Filter subscriptions based on parameters
+			//const filterAttributes = { newSubscriptionsAllowed: true, active: true };
 
-
-			// Filter by payment interval
-			if (variableExists(requestProperties.interval)) {
-				filterAttributes.billingInterval = PAYMENT_INTERVALS[requestProperties.interval.toUpperCase()] || null;
-			}*/
-			/*console.log(requestProperties);*/
 			console.log("aa bhi rha hai ?,",requestProperties.razorpay_signature);
 
 			const db_subscriptionId = requestProperties.db_subscriptionId
 			const razorpay_payment_id = requestProperties.razorpay_payment_id
 			const razorpay_subscription_id = requestProperties.razorpay_subscription_id
 			const razorpay_signature = requestProperties.razorpay_signature
+
+
+			const loadSubscription = await models().subscriptions.findOne(
+				{
+					where: { subscriptionId :db_subscriptionId}
+					//attributes: { exclude: ["name", "description", "stripeProductId", "createdAt", "updatedAt", "newSubscriptionsAllowed", "active"] }
+				},
+				{ transaction: transaction }
+			);		
 
 
 			var hmac = crypto.createHmac('sha256', razorpay_key_secret);
@@ -181,7 +214,19 @@ export function verifyTransaction(requestProperties, authenticatedUser, browserL
 
 			let isSignatureValid = generatedSignature == razorpay_signature;
 
+
+
 			console.log("isSignatureValid",isSignatureValid);
+
+			if(isSignatureValid){
+					// Change email verified column to true
+			loadSubscription.update({
+				status: "active"
+			});
+		}
+			// Create a response object
+			const response = { status: 200, message: t("label.success", { lng: browserLng }), isSignatureValid: isSignatureValid };
+			return response
 			
 		} catch (error) {
 			throw error;

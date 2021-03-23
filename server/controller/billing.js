@@ -72,7 +72,7 @@ module.exports = function(router) {
 			// Load browser language from header
 			const browserLng = browserResponseLng(req);
 			// Check for Query strings
-			const requestProperties = { userId_FK:req.body.userId_FK, currency: req.query.currency, interval: req.query.interval };
+			const requestProperties = { userId_FK:req.body.userId_FK, planId: req.body.planId, totalCount: req.body.totalCount };
 
 			// Retrieve client subscription details and return response
 			createSubscription(requestProperties, null, browserLng).then(
