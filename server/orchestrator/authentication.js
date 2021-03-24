@@ -166,8 +166,8 @@ export function registerNewClient(requestProperties, authenticatedUser, browserL
 			// Encrypt and salt user password
 			const password = await bcrypt.hash(requestProperties.password, 10);
 
-			var result = await createUserInFastAPI(requestProperties.firstName, requestProperties.emailAddress,password);
-			console.log(result);
+			const result = await createUserInFastAPI(requestProperties.firstName, requestProperties.emailAddress,password);
+			console.log("Are we getting something?",result);
 
 			// Create new user and save to database
 			const userInstance = await models().user.create(
@@ -227,7 +227,7 @@ function createUserInFastAPI(username,email,password){
 		}).then(
 			response=>{
 				var result  = response.data;
-				console.log("resolving request...");
+				console.log("resolving request create fing user...");
 				resolve(result);
 			},
 			error=>{

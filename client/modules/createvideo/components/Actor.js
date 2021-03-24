@@ -109,6 +109,14 @@ class Actor extends Component {
 
 	}
 	audioRequest() {
+
+		console.log("before config");
+		const { user } = this.props;
+		const config = {
+			headers:{Authorization:user.get("authToken")}
+		};
+
+
 		if (this.state.textVal !== "") {
 			document.getElementById("audio-timer-wrapper").style.display = 'block'
 			this.startAudioTimer()
@@ -119,8 +127,9 @@ class Actor extends Component {
 			textScript: this.state.textVal,
 			speed: this.state.voiceSpeed
 		};
+
 		axios.post(
-			"api/v1.0/audio", data)
+			"http://35.232.47.147:8008/audio", data,config)
 			.then(({ data }) => {
 				this.setState({
 					audioUrl: data.audioUrl,
@@ -139,6 +148,13 @@ class Actor extends Component {
 	}
 
 	videoRequest() {
+		const { user } = this.props;
+		console.log("before config actor js",user.get("authToken"));
+		
+
+		const config = {
+			headers:{Authorization:user.get("authToken")}
+		};
 
 		if (this.state.audioReceived) {
 			document.getElementById("video-timer-wrapper").style.display = 'block'
@@ -150,7 +166,7 @@ class Actor extends Component {
 			category: "start"
 		}
 		axios.post(
-			"http://fcbbd04a559e.ngrok.io/video", data)
+			"http://35.232.47.147:8008/video", data,config)
 			.then(({ data }) => {
 				this.setState({
 					videoUrl: data.videoUrl,

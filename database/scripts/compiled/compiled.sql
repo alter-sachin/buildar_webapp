@@ -440,12 +440,12 @@ INSERT INTO `actor`(id,actorId,name,gender,thumbnail) VALUES (3,2,'Carmen','fema
 LOCK TABLES `user` WRITE;
 
 INSERT INTO `user` (`id`,`firstName`,`lastName`,
-  `googleId`,`profilePhoto`,`clientId`,
+  `authToken`,`profilePhoto`,`clientId`,
   `emailAddress`,`emailVerified`,`password`,
   `lastLoginDate`,`language`,`active`,
   `createdAt`,`updatedAt`,`bio`,`location`,`website`) 
 VALUES (1,'Sachin','Sharma',
-  '0',NULL,1,
+  '',NULL,1,
   'sachinpec354@gmail.com',0,'password',
   '2019-03-13 11:25:33',1,1,
   NULL,NULL,NULL,NULL,NULL);

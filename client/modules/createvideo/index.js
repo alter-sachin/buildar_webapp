@@ -28,12 +28,13 @@ class CreateVideo extends Component {
 		
 	}
 	componentDidMount() {
+		const {user} = this.props;
+		console.log("before config");
+		
 		const config = {
-			headers:{Authorization:"bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwaXVzIiwiZXhwIjoxNjE5MTAwNDM0fQ.hYp92NmEILdG2QUr6ZEEVB8rE2VA4WF3Q-_uUDiTLAg"}
+			headers:{Authorization:user.get("authToken")}
 		};
-		const bodyParameters = {
-			key:"value"
-		};
+
 		axios
 			.get("/api/v1.0/actor")
 			.then(({ data }) => {
@@ -46,10 +47,11 @@ class CreateVideo extends Component {
 				}
 				//console.log(this.state.actors);
 			});
+
+
 		axios
 			.get("http://35.232.47.147:8008/audio",
-				bodyParameters,
-				config,
+				config
 			)
 			.then(({ data }) => {
 				if (data) {
@@ -58,16 +60,12 @@ class CreateVideo extends Component {
 						loading: false,
 						voices: data
 					});
-					/*console.log("voice");
-					console.log(this.state.voices);	*/
+
 				}
 			});
 
 	}
 	
-	//   const [editing, setEditing] = useState(false);
-	// 	const [value, setValue] = useState('Create Video')
-
 	
 
 	render() {
@@ -78,8 +76,7 @@ class CreateVideo extends Component {
 		}
 		else {
 			const { actors, voices } = this.state;
-			const {user} = this.props;
-			console.log(user);
+			
 			return (
 				<div>
 					<SideBar />
