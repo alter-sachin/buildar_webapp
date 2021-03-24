@@ -12,7 +12,7 @@ import video, { VIDEO } from "common/store/reducers/video.js";
 
 import User from "common/components/User";
 import NumericStepInput from "react-number-steps-input-component";
-
+import { useHistory } from 'react-router-dom';
 
 
 class Actor extends Component {
@@ -31,6 +31,7 @@ class Actor extends Component {
 		this.saveVideo = this.saveVideo.bind(this);
 		this.w3_open = this.w3_open.bind(this);
 	}
+
 	state = {
 		actors: this.props.data.actors,
 		actorId: "",
@@ -41,12 +42,13 @@ class Actor extends Component {
 		active: 0,
 		textVal: "",
 		audioUrl: "",
-		videoUrl: "https://buildar.in/vid/1614581284.455946.mp4",
+		videoUrl: "",
 		audioReceived: false,
 		videoReceived: false,
 		isAudioClicked: false,
 		isVideoClicked: false,
-		key: 0,
+		audioKey: 0,
+		videoKey:0,
 		videoTitle: "",
 		voiceSpeed: 1
 	}
@@ -136,8 +138,8 @@ class Actor extends Component {
 					isAudioClicked: false,
 					audioReceived: true
 				});
-				this.setState({ key: this.state.key + 1 }, () => {
-					console.log(this.state.key)
+				this.setState({ audioKey: this.state.audioKey + 1 }, () => {
+					console.log(this.state.audioKey)
 				});
 			});
 	}
@@ -170,7 +172,11 @@ class Actor extends Component {
 			.then(({ data }) => {
 				this.setState({
 					videoUrl: data.videoUrl,
+					isVideoClicked: false,
 					videoReceived: true
+				});
+				this.setState({ videoKey: this.state.videoKey + 1 }, () => {
+					console.log(this.state.videoKey)
 				});
 			})
 		if (this.state.videoReceived) {
@@ -178,6 +184,7 @@ class Actor extends Component {
 		}
 	}
 	saveVideo() {
+		//const history = useHistory();
 		const data = {
 			title: this.state.videoTitle,
 			description: "this is first video",
@@ -190,6 +197,8 @@ class Actor extends Component {
 			"/api/v1.0/video", data)
 			.then(({ data }) => {
 				console.log(data);
+				/*const url = `${BUILD_PROTOCOL}://${subdomain.workspaceURL}.${BUILD_DOMAINPATH}/myvideos`;
+				window.location.replace(url);*/
 			})
 	}
 
@@ -204,7 +213,7 @@ class Actor extends Component {
 
 
 	renderVideoTime = ({ remainingTime }) => {
-		if ((this.state.videoUrl !== "" || this.state.videoUrl !== "https://buildar.in/vid/1614581284.455946.mp4") && this.state.isVideoClicked == false) {
+		if (this.state.videoUrl !== "" && this.state.isVideoClicked == false) {
 			return <div className="timer">Done</div>;
 		}
 
@@ -259,7 +268,7 @@ class Actor extends Component {
 								<div className="d-flex topnav-right">
 									<div id="video-timer-wrapper">
 										<CountdownCircleTimer
-											key={this.state.key}
+											key={this.state.videoKey}
 											isPlaying={this.state.isVideoClicked}
 											duration={20}
 											colors={[["#004777", 0.33], ["#F7B801", 0.33], ["#A30000"]]}
@@ -270,7 +279,7 @@ class Actor extends Component {
 										</CountdownCircleTimer>
 									</div>
 									<button onClick={this.videoRequest} id="create_video">Create Video</button>
-									<button className="btn btn-success" onClick={this.saveVideo} id="save_video" disabled>Save Video</button>
+									<button className="btn btn-success" onClick={this.saveVideo} id="save_video">Save Video</button>
 								</div>
 							</div>
 							<div className="col-md-6 col-lg-6 left_side">
@@ -287,7 +296,7 @@ class Actor extends Component {
 									))}
 								</div>
 								<div className="actor-select" style={{ display: "flex", flexDirection: "column" }}>
-									<span id="voice_list">Speed</span>
+									<span id="voice_list">Select Voice</span>
 									<Select
 										defaultValue={this.state.voiceArray[0]}
 										label="Single select"
@@ -328,7 +337,7 @@ class Actor extends Component {
 									<AudioPlayer className="audio-player" audioUrl={this.state.audioUrl} />
 									<div id="audio-timer-wrapper">
 										<CountdownCircleTimer
-											key={this.state.key}
+											key={this.state.audioKey}
 											isPlaying={this.state.isAudioClicked}
 											duration={10}
 											colors={[["#004777", 0.33], ["#F7B801", 0.33], ["#A30000"]]}
