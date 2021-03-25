@@ -57,7 +57,17 @@ class SideBar extends Component {
 		};
 
 		this.w3_close = this.w3_close.bind(this);
-	}
+/*        this.invite_open = this.invite_open.bind(this);
+        this.invite_close = this.invite_close.bind(this);
+*/	}
+
+    invite_open = ()=>{
+        document.getElementById("center_container").style.display = "block";
+    }
+
+    invite_close = ()=>{
+        document.getElementById("center_container").style.display = "none";
+    }
 
 
     w3_close = () => {
@@ -113,12 +123,7 @@ class SideBar extends Component {
     						</span>
     					</a>
     				</div>
-    				<div className="bottom_button">
-    					<button>
-    						<span id="inviteicon"><AiIcons.AiOutlineUsergroupAdd /></span>
-    						<span id="invite">Invite Users</span>
-    					</button>
-    				</div>
+    				
     			</div>
     		</div>
     	);
@@ -126,3 +131,4 @@ class SideBar extends Component {
 }
 
 export default SideBar;
+

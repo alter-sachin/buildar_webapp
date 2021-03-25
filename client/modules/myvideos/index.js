@@ -125,18 +125,18 @@ class MyVideo extends Component {
 							<div className="container myvideo-container">
 								<div className="myvideo-buttons">
 									<h1 className="myvideo-header">Personal Videos</h1>
-									<a href="/createvideo" type="button" className="btn ">New Video</a>
+									<a href="/createvideo" type="button" className="btn ">Create New Video</a>
 								</div>
 								{!isVideosEmpty ? (
 									<div className="no-videos">
 										<Card className="text-center">
 											<Card.Body>
-												<Card.Title>Record a Video</Card.Title>
+												<Card.Title>Create A Video</Card.Title>
 												<Card.Text>
-													Every time you record a new video, you’ll find it here. Only you can manage videos in this library.
+													Every time you create a new video, you’ll find it here. Only you can manage videos in this library.
     												</Card.Text>
 												<div className="novideo-button">
-													<a href="/createvideo" type="button" className="btn ">New Video</a>
+													<a href="/createvideo" type="button" className="btn ">Create New Video</a>
 												</div>
 											</Card.Body>
 										</Card>

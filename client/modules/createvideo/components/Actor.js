@@ -184,11 +184,15 @@ class Actor extends Component {
 		}
 	}
 	saveVideo() {
+		//console.log("actors",;
 		//const history = useHistory();
+		let property = this.state.actorId;
+		let thumbnail_url = this.state.actors[property].thumbnail;
+		console.log("property", property);
 		const data = {
 			title: this.state.videoTitle,
-			description: "this is first video",
-			thumbnail: "",
+			description: "Script Used "+this.state.textVal,
+			thumbnail: thumbnail_url,
 			textScript: this.state.textVal,
 			videoUrl: this.state.videoUrl,
 			userId_FK: this.props.user.get("userId")
@@ -196,7 +200,8 @@ class Actor extends Component {
 		axios.post(
 			"/api/v1.0/video", data)
 			.then(({ data }) => {
-				console.log(data);
+				
+				console.log("done");
 				/*const url = `${BUILD_PROTOCOL}://${subdomain.workspaceURL}.${BUILD_DOMAINPATH}/myvideos`;
 				window.location.replace(url);*/
 			})
@@ -280,6 +285,7 @@ class Actor extends Component {
 									</div>
 									<button onClick={this.videoRequest} id="create_video">Create Video</button>
 									<button className="btn btn-success" onClick={this.saveVideo} id="save_video">Save Video</button>
+									
 								</div>
 							</div>
 							<div className="col-md-6 col-lg-6 left_side">
@@ -296,7 +302,7 @@ class Actor extends Component {
 									))}
 								</div>
 								<div className="actor-select" style={{ display: "flex", flexDirection: "column" }}>
-									<span id="voice_list">Select Voice</span>
+									<h4 id="voice_list">Select Voice</h4>
 									<Select
 										defaultValue={this.state.voiceArray[0]}
 										label="Single select"
@@ -304,7 +310,7 @@ class Actor extends Component {
 										value={this.state.selectedElement}
 										onChange={this.handleCheck}
 									/>
-									<span id="voice_speed">Speed</span>
+									<h4 id="voice_speed">Speed</h4>
 									<input
 					                type='number'
 					                step="0.05"

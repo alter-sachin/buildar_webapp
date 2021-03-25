@@ -2217,6 +2217,11 @@ a:hover.back-to-top {
 	display: flex;
 	flex-direction: column;
 	height: 100%;
+	align-items: center;
+}
+
+#google-button > button > span {
+    color: black;
 }
 
 .google-auth-header{
@@ -3033,7 +3038,9 @@ span#voice_speed,span#voice_list{
 	padding-top: .03em;
 }
 
-
+h4#voice_speed {
+    padding-top: .5em;
+}
 
 /*****************************/
 /*     21. Myvideos*/
@@ -3419,4 +3426,32 @@ button.w3-bar-item.w3-button.w3-large {
 
 #radio1 {
 	padding : 1em;
+}
+
+#center_container {
+    display: none;
+    position: fixed;
+    top: 40%;
+    left: 40%;
+    width: 33%;
+    height: 33%;
+    padding: 0;
+    margin: 0;
+    background-color: rgba(128, 128, 128, 1); /* transparency */
+    z-index: 20;
+}
+#center {
+    position: relative;
+    margin: 50px auto;
+    border-radius: 10px;
+}
+#close_center {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    cursor: pointer;
+}
+
+#google_button {
+	align-items: center;
 }

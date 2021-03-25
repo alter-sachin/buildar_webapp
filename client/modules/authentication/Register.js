@@ -305,10 +305,10 @@ class Register extends Component {
 									<h2 className="google-auth-header">Sign up for BuildAR</h2>
 								
 								
-									<div>
+									<div id="google-button">
 										<GoogleLogin
 											clientId={clientId}
-											buttonText = "Signup"
+											buttonText = "Signup With Google"
 											onSuccess = {this.handleLogin}
 											onFailure = {this.handleLogin}
 											cookiePolicy = {"single_host_origin"}

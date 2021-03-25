@@ -16,7 +16,8 @@ class Videocard extends Component {
 			description: this.props.description,
 			url: this.props.url,
 			timeCreated: this.props.timeCreated,
-			isLinkCopied: false
+			isLinkCopied: false,
+			thumbnail : this.props.thumbnail
 		};
 		this.resetMessage = this.resetMessage.bind(this)
 	}
@@ -35,8 +36,9 @@ class Videocard extends Component {
 	}
 
 	render() {
-		const { id, index, title, description, url, timeCreated } = this.props;
+		const { id, index, title, description, url, timeCreated,thumbnail } = this.props;
 		// your link creation
+		
 		const newTo = {
 			pathname: "/video",
 			param1: this.props.id
@@ -63,7 +65,7 @@ class Videocard extends Component {
 						</Dropdown>
 					</div>
 					<Link to={newTo}>
-						<img className="myvideo-thumbnail" src="images/Logo_BuildAR.png" />
+						<img className="myvideo-thumbnail" src={this.state.thumbnail} />
 					</Link>
 					<p className="myvideo-title"> {title}</p>
 				</div>
