@@ -85,7 +85,7 @@
 		"jsonwebtoken": "^8.5.1",
 		"lusca": "^1.6.1",
 		"mime-types": "^2.1.24",
-		"moment": "^2.24.0",
+		"moment": "^2.29.1",
 		"mysql2": "^1.6.5",
 		"node-sass": "^4.14.1",
 		"nodemailer": "^6.1.1",
