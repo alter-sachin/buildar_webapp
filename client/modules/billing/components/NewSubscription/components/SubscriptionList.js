@@ -186,7 +186,7 @@ class SubscriptionList extends Component {
 										<li>Access to Premium Actors</li>
 										<li>24*7 Support</li>
 									</ul>
-									<button type="button" value={pricingBox1Id} className="btn btn-block btn-primary" onClick={this.paySubscription}>
+									<button type="button" value={pricingBox1Id} className="btn btn-block btn-primary btn-buildar" onClick={this.paySubscription}>
 										Subcribe Now
 									</button>
 								</div>
@@ -209,7 +209,7 @@ class SubscriptionList extends Component {
 										<li>API Access</li>
 										<li>Create thousands of videos at scale.</li>
 									</ul>
-									<button type="button" value={pricingBox3Id} className="btn btn-block btn-primary"  >
+									<button type="button" value={pricingBox3Id} className="btn btn-block btn-primary btn-buildar"  >
 										Talk to Business Team
 									</button>
 								</div>

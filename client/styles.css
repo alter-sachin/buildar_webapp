@@ -3455,3 +3455,14 @@ button.w3-bar-item.w3-button.w3-large {
 #google_button {
 	align-items: center;
 }
+
+
+.btn-buildar{
+	background-color : #f45f3c!important;
+	border-color: white!important;
+}
+
+.btn-buildar:hover{
+	background-color : #d73b1e!important;
+	border-color: white!important;
+}
