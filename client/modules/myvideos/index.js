@@ -43,6 +43,7 @@ class MyVideo extends Component {
 			.then(({ data }) => {
 				//console.log("this is videolist",data);
 				this.setState({ videoList: data, loading: false });
+				console.log("videos are",videoList);
 			});
 	}
 	w3_open = () => {
@@ -60,7 +61,7 @@ class MyVideo extends Component {
 					videoId: id
 				})
 				.then(({ data }) => {
-					if (data) {
+					if (dapropsta) {
 						let newVideoList = this.state.videoList
 						newVideoList.splice(index, 1)
 						this.setState({
@@ -153,6 +154,7 @@ class MyVideo extends Component {
 														title={video.title}
 														description={video.description}
 														url={video.videoURL}
+														thumbnail = {video.thumbnail}
 														timeCreated={video.timeCreated}
 														deleteHandler={() => {
 															this.deleteVideo(index, video.id)
