@@ -43,7 +43,6 @@ class MyVideo extends Component {
 			.then(({ data }) => {
 				//console.log("this is videolist",data);
 				this.setState({ videoList: data, loading: false });
-				console.log("videos are",videoList);
 			});
 	}
 	w3_open = () => {
@@ -155,7 +154,7 @@ class MyVideo extends Component {
 														description={video.description}
 														url={video.videoURL}
 														thumbnail = {video.thumbnail}
-														timeCreated={video.timeCreated}
+														timeCreated={video.createdAt}
 														deleteHandler={() => {
 															this.deleteVideo(index, video.id)
 														}
