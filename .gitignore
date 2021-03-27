@@ -56,3 +56,9 @@ typings/
 
 # dotenv environment variables file
 .env
+.elasticbeanstalk/
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
