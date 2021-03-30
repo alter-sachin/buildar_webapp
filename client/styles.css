@@ -3445,6 +3445,21 @@ button.w3-bar-item.w3-button.w3-large {
 	z-index:2000;
 }
 
+#chat-bot .arrow-left {
+  cursor: pointer;
+  width: 0;
+  color: black;
+  left: 0.25em;
+  z-index: 3;
+  position: absolute;
+  height: 0;
+}
+
+#chat-bot a{
+	text-decoration: none !important;
+}
+
+
 #chat-bot.animate{
 	max-height: 100%;
 }

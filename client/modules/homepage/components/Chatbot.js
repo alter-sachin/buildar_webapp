@@ -11,56 +11,71 @@ class ChatBot extends Component {
             isHeadClicked: false,
             transitionClass: ''
         }
-        this.changeToArticles = this.changeToArticles.bind(this)
-        this.changeToNewsLetter = this.changeToNewsLetter.bind(this)
-        this.changeToTwitter = this.changeToTwitter.bind(this)
-        this.showBot = this.showBot.bind(this)
-        this.closeBot = this.closeBot.bind(this)
     }
+    change(key) {
+        switch (key) {
+            case "toArticles":
+                document.getElementById("overlay-intro").style.display = "none"
+                document.getElementById("overlay-articles").style.display = "block"
+                this.setState({
+                    url: "https://buildar.in/vid/1615800834.2182198.mp4"
+                })
+                break;
 
-    changeToArticles() {
-        document.getElementById("overlay-intro").style.display = "none"
-        document.getElementById("overlay-articles").style.display = "block"
-        this.setState({
-            url: "https://buildar.in/vid/1615800834.2182198.mp4"
-        })
-    }
-    changeToNewsLetter() {
-        document.getElementById("overlay-intro").style.display = "none"
-        document.getElementById("overlay-email").style.display = "block"
-        this.setState({
-            url: "https://buildar.in/vid/1615801043.2547426.mp4"
-        })
-    }
-    changeToTwitter() {
-        document.getElementById("overlay-intro").style.display = "none"
-        document.getElementById("overlay-twitter").style.display = "block"
-        this.setState({
-            url: "https://buildar.in/vid/1615801043.2547426.mp4"
-        })
-    }
+            case "toNewsLetter":
+                document.getElementById("overlay-intro").style.display = "none"
+                document.getElementById("overlay-email").style.display = "block"
+                this.setState({
+                    url: "https://buildar.in/vid/1615801043.2547426.mp4"
+                })
+                break;
 
-    showBot() {
-        if (this.state.transitionClass === '') {
-            document.getElementById("chathead").style.display = "none"
-            this.setState({
-                transitionClass: 'animate',
-                isHeadClicked: !this.state.isHeadClicked
-            })
+            case "toTwitter":
+                document.getElementById("overlay-intro").style.display = "none"
+                document.getElementById("overlay-twitter").style.display = "block"
+                this.setState({
+                    url: "https://buildar.in/vid/1615801043.2547426.mp4"
+                })
+                break;
+
+            case "showBot":
+                if (this.state.transitionClass === '') {
+                    document.getElementById("chathead").style.display = "none"
+                    this.setState({
+                        transitionClass: 'animate',
+                        isHeadClicked: !this.state.isHeadClicked
+                    })
+                }
+                else {
+                    this.setState({
+                        transitionClass: '',
+                        isHeadClicked: !this.state.isHeadClicked
+                    })
+                }
+                break;
+
+            case "closeBot":
+                document.getElementById("chathead").style.display = "block"
+                this.setState({
+                    transitionClass: '',
+                    isHeadClicked: !this.state.isHeadClicked
+                })
+                break;
+
+            case "resetBot":
+                document.getElementById("overlay-intro").style.display = "block"
+                document.getElementById("overlay-articles").style.display = "none"
+                document.getElementById("overlay-email").style.display = "none"
+                document.getElementById("overlay-twitter").style.display = "none"
+                this.setState({
+                    url: "https://buildar.in/vid/1615800618.4738576.mp4",
+                    isHeadClicked: true
+                })
+                break;
+
+            default:
+                break;
         }
-        else {
-            this.setState({
-                transitionClass: '',
-                isHeadClicked: !this.state.isHeadClicked
-            })
-        }
-    }
-    closeBot() {
-        document.getElementById("chathead").style.display = "block"
-        this.setState({
-            transitionClass: '',
-            isHeadClicked: !this.state.isHeadClicked
-        })
     }
 
     render() {
@@ -68,7 +83,8 @@ class ChatBot extends Component {
         return (
             <div id="main">
                 <div id="chat-bot" className={this.state.transitionClass}>
-                    <a href="#" className="close" onClick={this.closeBot}></a>
+                    <a href="#" className="close" onClick={() => { this.change("closeBot") }}></a>
+                    <a className="arrow-left" onClick={() => { this.change("resetBot") }}>Menu</a>
                     <ReactPlayer
                         id="video-bot"
                         className="videoInsert"
@@ -82,9 +98,9 @@ class ChatBot extends Component {
                     />
                     <div className="overlay" >
                         <div id="overlay-intro">
-                            <button className="btn btn-primary2" onClick={this.changeToArticles}>Show me your best articles</button>
-                            <button className="btn btn-primary2" onClick={this.changeToNewsLetter}>Subscribe to my newsletter</button>
-                            <button className="btn btn-primary2" onClick={this.changeToTwitter}>Follow me on Twitter</button>
+                            <button className="btn btn-primary2" onClick={() => { this.change("toArticles") }}>Show me your best articles</button>
+                            <button className="btn btn-primary2" onClick={() => { this.change("toNewsLetter") }}>Subscribe to my newsletter</button>
+                            <button className="btn btn-primary2" onClick={() => { this.change("toTwitter") }}>Follow me on Twitter</button>
                         </div>
                         <div id="overlay-articles">
                             <a type="button" className="btn btn-primary2 " href="#">Fake News</a>
@@ -103,7 +119,7 @@ class ChatBot extends Component {
                     </div>
                 </div>
                 <div id="chathead" className="chatbot-head">
-                    <button type="button" className="btn" onClick={this.showBot}>
+                    <button type="button" className="btn" onClick={() => { this.change("showBot") }}>
                         <ReactPlayer
                             id="video-bot"
                             className="videoInsert"
