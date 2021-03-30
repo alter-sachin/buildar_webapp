@@ -14,6 +14,9 @@ import { t } from "shared/translations/i18n";
 import { FEATURES, SUBSCRIPTION_TYPE, ROLE_TYPE, EMAIL_TYPE, BILLING_CYCLE, LANGUAGE_CODES, SIGNED_URL_EXPIRY_TIME } from "shared/constants";
 import axios from "axios";
 import { response } from "express";
+var FormData = require('form-data');
+var rp = require('request-promise');
+
 // const axios = require("axios");
 
 // Validate Workspace URL and retrieve client styling (if feature exists)
@@ -367,15 +370,18 @@ export function authenticateWithLocalStrategy(req, res, next, browserLng) {
 }
 
 function getauthToken(username,password){
+	/*var form = new FormData();
+	form.append('username', username);
+	form.append('password', password);*/
 	
 	return new Promise(function(resolve,reject){
-		axios.post("http://35.232.47.147:8008/token",{
+		rp.post({url:"http://35.232.47.147:8008/token",formData:{
 			username:username,
-			password:password
-		}).then(
+			password:password,
+		}}).then(
 			(response)=>{
-				var result = response.data;
-				console.log("processing request");
+				var result = response;
+				console.log("processing request",result);
 				resolve(result);
 			},
 			(error)=>{

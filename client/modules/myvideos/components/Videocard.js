@@ -5,7 +5,8 @@ import * as CgIcons from "react-icons/cg";
 import * as FaIcons from "react-icons/fa";
 
 import { Link } from 'react-router-dom';
-import humanizedTime from "../../../../server/services/humanizedTime";
+
+
 class Videocard extends Component {
 	constructor(props) {
 		super(props);
