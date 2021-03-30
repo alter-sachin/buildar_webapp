@@ -16,7 +16,7 @@ require("dotenv").config();
 
 
 const jwtSecret = process.env.JWT_SECRET;
-
+console.log("jwtSecret", jwtSecret);
 
 function initialize(app) {
 	app.use(passport.initialize());
