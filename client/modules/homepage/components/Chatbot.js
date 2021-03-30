@@ -104,13 +104,13 @@ class ChatBot extends Component {
                             <button className="btn btn-primary2" onClick={() => { this.change("toCreateVideos") }}>Create videos in 40+ Languages</button>
                             <button className="btn btn-primary2" onClick={() => { this.change("toCreateVideos") }}>Make me your sales girl</button>
                         </div>
-                        <div id="overlay-host">
-                            <p>Yes you can have me for yourself.<br /> I mean I can be present on your website!<br />
+                        <div id="overlay-host" >
+                            <p style={{ color: 'white' }}>Yes you can have me for yourself.<br /> I mean I can be present on your website!<br />
                             I helped others increase click rates<br /> by an astounding 100%.</p>
                             <button className="btn btn-primary2" onClick={() => { this.change("resetBot") }}>Main Menu</button>
                         </div>
                         <div id="overlay-email">
-                            <p>I can talk directly to anyone by their name.<br /> Enter your email address and let me show you.</p>
+                            <p>I can talk directly to anyone by their name.<br /> Enter your email address<br /> and let me show you.</p>
                             <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"></input>
                         </div>
                         <div id="overlay-create-video">
