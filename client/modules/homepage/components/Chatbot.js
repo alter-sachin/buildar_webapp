@@ -7,7 +7,7 @@ class ChatBot extends Component {
         super(props)
 
         this.state = {
-            url: "https://buildar.in/vid/1615800618.4738576.mp4",
+            url: "https://buildar.in/vid/1617105358.7642226.mp4",
             isHeadClicked: false,
             transitionClass: ''
         }
@@ -18,7 +18,7 @@ class ChatBot extends Component {
                 document.getElementById("overlay-intro").style.display = "none"
                 document.getElementById("overlay-host").style.display = "block"
                 this.setState({
-                    url: "https://buildar.in/vid/1615800834.2182198.mp4"
+                    url: "https://buildar.in/vid/1617105564.5969415.mp4"
                 })
                 break;
 
@@ -26,7 +26,13 @@ class ChatBot extends Component {
                 document.getElementById("overlay-intro").style.display = "none"
                 document.getElementById("overlay-email").style.display = "block"
                 this.setState({
-                    url: "https://buildar.in/vid/1615801043.2547426.mp4"
+                    url: "https://buildar.in/vid/1617105692.2789502.mp4"
+                })
+                break;
+
+            case "submitEmail":
+                this.setState({
+                    url: "https://buildar.in/vid/1617106265.5400496.mp4"
                 })
                 break;
 
@@ -34,7 +40,7 @@ class ChatBot extends Component {
                 document.getElementById("overlay-intro").style.display = "none"
                 document.getElementById("overlay-create-video").style.display = "block"
                 this.setState({
-                    url: "https://buildar.in/vid/1615801043.2547426.mp4"
+                    url: "https://buildar.in/vid/1617107689.4509332.mp4"
                 })
                 break;
 
@@ -61,7 +67,7 @@ class ChatBot extends Component {
                 document.getElementById("overlay-email").style.display = "none"
                 document.getElementById("overlay-create-video").style.display = "none"
                 this.setState({
-                    url: "https://buildar.in/vid/1615800618.4738576.mp4",
+                    url: "https://buildar.in/vid/1617105358.7642226.mp4",
                     isHeadClicked: true
                 })
                 break;
@@ -102,7 +108,7 @@ class ChatBot extends Component {
                             <button className="btn btn-primary2" onClick={() => { this.change("toHosting") }}>Host me on your website</button>
                             <button className="btn btn-primary2" onClick={() => { this.change("toMessages") }}>Create Personalized messages</button>
                             <button className="btn btn-primary2" onClick={() => { this.change("toCreateVideos") }}>Create videos in 40+ Languages</button>
-                            <button className="btn btn-primary2" onClick={() => { this.change("toCreateVideos") }}>Make me your sales girl</button>
+                            {/* <button className="btn btn-primary2" onClick={() => { this.change("toCreateVideos") }}>Make me your sales guy</button> */}
                         </div>
                         <div id="overlay-host" >
                             <p style={{ color: 'white' }}>Yes you can have me for yourself.<br /> I mean I can be present on your website!<br />
@@ -110,11 +116,18 @@ class ChatBot extends Component {
                             <button className="btn btn-primary2" onClick={() => { this.change("resetBot") }}>Main Menu</button>
                         </div>
                         <div id="overlay-email">
-                            <p>I can talk directly to anyone by their name.<br /> Enter your email address<br /> and let me show you.</p>
-                            <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"></input>
+                            <p style={{ color: 'white' }}>I can talk directly to anyone by their name.<br /> Enter your email address<br /> and let me show you.</p>
+                            <form onSubmit={() => { this.change("submitEmail") }}>
+                                <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"></input>
+                                <button type="submit" className="btn btn-primary2">Submit</button>
+                            </form>
                         </div>
                         <div id="overlay-create-video">
-                            <p>I can speak in all languages.</p>
+                            <p style={{ color: 'white' }}>I can speak in all languages.<br />
+                            “Main bol k dikhaun?”<br />
+                            “I love my customers”<br />
+                            “and in different accents too”<br />
+                            </p>
                         </div>
                     </div>
                 </div>
