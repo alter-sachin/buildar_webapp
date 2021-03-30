@@ -3482,7 +3482,7 @@ button.w3-bar-item.w3-button.w3-large {
 }
 #chat-bot video{
 	max-width: 50%;
-	min-width: 100%;
+	min-width: 102%;
 	height: 85% !important;
 	outline: none;
 	border-radius: 25px;
@@ -3515,11 +3515,12 @@ button.w3-bar-item.w3-button.w3-large {
 	border: solid 2px lightgrey;
 }
 
-#chat-bot .overlay-articles a{
+#chat-bot .overlay-host p{
+	color: black;
 	font-size: 1.125em;
 }
 
-#chat-bot .overlay #overlay-articles{
+#chat-bot .overlay #overlay-host{
 	display: none;
 }
 
@@ -3527,11 +3528,11 @@ button.w3-bar-item.w3-button.w3-large {
 	display: none;
 }
 
-#chat-bot .overlay #overlay-twitter{
+#chat-bot .overlay #overlay-create-video{
 	display: none;
 	text-align: center;
 }
-#chat-bot .overlay #overlay-twitter button{
+#chat-bot .overlay #overlay-create-video button{
 	background-color: oldlace;
 }
 .btn-primary2 {
