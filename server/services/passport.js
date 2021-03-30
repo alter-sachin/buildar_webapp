@@ -12,6 +12,12 @@ let JwtStrategy = require("passport-jwt").Strategy;
 let ExtractJwt = require("passport-jwt").ExtractJwt;
 let config = require("../../config");
 
+require("dotenv").config();
+
+
+const jwtSecret = process.env.JWT_SECRET;
+
+
 function initialize(app) {
 	app.use(passport.initialize());
 
@@ -44,7 +50,7 @@ function initialize(app) {
 		new JwtStrategy(
 			{
 				jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme("jwt"),
-				secretOrKey: config.authentication.jwtSecret
+				secretOrKey: jwtSecret
 			},
 			function(payload, done) {
 				if (payload == null) {
