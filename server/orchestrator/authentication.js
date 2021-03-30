@@ -223,10 +223,11 @@ export function registerNewClient(requestProperties, authenticatedUser, browserL
 
 function createUserInFastAPI(username,email,password){
 	return new 	Promise(function(resolve,reject){
-		axios.post("http://35.232.47.147:8008/users/",{
+		axios.post("http://35.232.47.147:8002/users/",{
 			email : email,
+			password : password,
 			username : username,
-			password : password
+			business_account:"No"
 		}).then(
 			response=>{
 				var result  = response.data;
@@ -340,9 +341,14 @@ export function authenticateWithLocalStrategy(req, res, next, browserLng) {
 								})
 							);
 						}
-
+						/*console.log("this is type of authtoken",typeof authToken);
+						//var obj = JSON.parse(authToken);
 						// Store lastLoginDate in database
-						console.log("this is before update");
+						//console.log("this is before update",obj);
+						
+						console.log("this authToken token type",authToken.token_type);
+						console.log("this authToken token type",authToken["token_type"]);*/
+
 						userObject.update({
 							lastLoginDate: currentTime,
 							authToken:authToken.token_type+" "+authToken.access_token
@@ -369,19 +375,17 @@ export function authenticateWithLocalStrategy(req, res, next, browserLng) {
 	})(req, res, next);
 }
 
+
 function getauthToken(username,password){
-	/*var form = new FormData();
-	form.append('username', username);
-	form.append('password', password);*/
-	
+
 	return new Promise(function(resolve,reject){
-		rp.post({url:"http://35.232.47.147:8008/token",formData:{
+		axios.post("http://35.232.47.147:8002/token",{
 			username:username,
-			password:password,
-		}}).then(
+			password:password
+		}).then(
 			(response)=>{
-				var result = response;
-				console.log("processing request",result);
+				var result = response.data;
+				console.log("processing request");
 				resolve(result);
 			},
 			(error)=>{
@@ -391,6 +395,8 @@ function getauthToken(username,password){
 		);
 	});
 }
+
+
 
 // Delete session
 export function deleteSession(requestProperties, authenticatedUser, browserLng) {

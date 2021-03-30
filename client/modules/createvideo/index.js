@@ -29,7 +29,7 @@ class CreateVideo extends Component {
 	}
 	componentDidMount() {
 		const {user} = this.props;
-		console.log("before config");
+		console.log("before config",user.get("authToken"));
 		
 		const config = {
 			headers:{Authorization:user.get("authToken")}
@@ -50,7 +50,7 @@ class CreateVideo extends Component {
 
 
 		axios
-			.get("http://35.232.47.147:8008/audio",
+			.get("http://35.232.47.147:8002/audio",
 				config
 			)
 			.then(({ data }) => {
