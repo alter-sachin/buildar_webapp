@@ -244,8 +244,7 @@ class Register extends Component {
 	}
 	changeSubdomain() {
 		//evt.preventDefault(); // Prevent page refresh
-		console.log("did I get here?")
-		
+				
 		this.setState({ redirectPending: true, validationErrors: null, serverError: null });
 		// Fetch subdomain from state
 		const subdomain = {
@@ -379,7 +378,6 @@ class Register extends Component {
 										ariaLabel={"emailAddress"}
 										onChange={this.changeField}
 										disabled={loading}
-										error={validationErrors}
 									/>
 									<InputField
 										label={t("label.password")}

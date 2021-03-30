@@ -31,15 +31,12 @@ module.exports = function(router) {
 	router.get("/api/v1.0/authentication/validate-workspace-url", restrict({ registered: true, unregistered: true }), function(req, res, next) {
 		// Get workspaceURL name from header
 		const workspaceURL = req.headers["workspaceurl"] ? req.headers["workspaceurl"] : "";
-
 		// Load browser language from header
 		const browserLng = browserResponseLng(req);
-
 		// Store workspaceURL in new object
 		const requestProperties = {
 			workspaceURL: workspaceURL
 		};
-
 		// Validate header item exists
 		if (!variableExists(requestProperties.workspaceURL)) {
 			const error = new ServerResponseError(403, t("validation.clientInvalidProperties", { lng: browserLng }), { workspaceURL: [t("validation.emptyWorkspaceURL", { lng: browserLng })] });
@@ -95,7 +92,7 @@ module.exports = function(router) {
 	router.post("/api/v1.0/authentication/google", async(req,res,next)=>{
 		const {token} = req.body;
 		//hey I am printing body here
-		console.log("hey I am prinitng",req.body);
+		/*console.log("hey I am prinitng",req.body);*/
 		const ticket = await client.verifyIdToken({
 			idToken:token,
 			audience:process.env.CLIENT_ID
@@ -104,12 +101,12 @@ module.exports = function(router) {
 		console.log(ticket.getPayload());
 		console.log("result",family_name);
 		if(family_name===undefined){
+			console.log("i am inside undefined");
 			family_name = "BuildAR";
 		}
 		var workspace_url = email.match(/^([^@]*)@/)[1];
 		var workspace_url = workspace_url.replace(/[!@.#$%^&*]/g, "");
 		// console.log(workspace_url);
-		
 		const requestProperties = {
 			
 			workspaceURL: workspace_url,
@@ -122,7 +119,7 @@ module.exports = function(router) {
 			profilePhoto:picture,
 			
 		};
-			//Load browser language from header
+		//Load browser language from header
 		const browserLng = browserResponseLng(req);
 		// Validate properties in received object
 		const valid = validate(requestProperties, register());

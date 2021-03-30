@@ -170,7 +170,7 @@ export function registerNewClient(requestProperties, authenticatedUser, browserL
 			const password = await bcrypt.hash(requestProperties.password, 10);
 
 			const result = await createUserInFastAPI(requestProperties.firstName, requestProperties.emailAddress,password);
-			console.log("Are we getting something?",result);
+			//console.log("Are we getting something?",result);
 
 			// Create new user and save to database
 			const userInstance = await models().user.create(
