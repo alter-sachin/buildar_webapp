@@ -127,7 +127,7 @@ class ChatBot extends Component {
                             muted
                             loop={true}
                             height="128px"
-                            width="128px"
+                            width="140px"
                             controlsList="nodownload"
                             // onContextMenu={(e) => e.preventDefault()}
                             url="https://buildar.in/vid/1615800618.4738576.mp4"
