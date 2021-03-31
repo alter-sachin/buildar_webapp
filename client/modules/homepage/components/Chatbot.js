@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import ReactPlayer from 'react-player'
-import Button from "react-bootstrap/Button"
 
 class ChatBot extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            url: "https://buildar.in/vid/1617105358.7642226.mp4",
+            url: "https://buildar.in/vid/1617166459.836072.mp4",
             isHeadClicked: false,
             transitionClass: ''
         }
@@ -18,7 +17,7 @@ class ChatBot extends Component {
                 document.getElementById("overlay-intro").style.display = "none"
                 document.getElementById("overlay-host").style.display = "block"
                 this.setState({
-                    url: "https://buildar.in/vid/1617105564.5969415.mp4"
+                    url: "https://buildar.in/vid/1617166649.9540873.mp4"
                 })
                 break;
 
@@ -26,13 +25,13 @@ class ChatBot extends Component {
                 document.getElementById("overlay-intro").style.display = "none"
                 document.getElementById("overlay-email").style.display = "block"
                 this.setState({
-                    url: "https://buildar.in/vid/1617105692.2789502.mp4"
+                    url: "https://buildar.in/vid/1617166739.6414397.mp4"
                 })
                 break;
 
             case "submitEmail":
                 this.setState({
-                    url: "https://buildar.in/vid/1617106265.5400496.mp4"
+                    url: "https://buildar.in/vid/1617166819.5867388.mp4"
                 })
                 break;
 
@@ -67,7 +66,7 @@ class ChatBot extends Component {
                 document.getElementById("overlay-email").style.display = "none"
                 document.getElementById("overlay-create-video").style.display = "none"
                 this.setState({
-                    url: "https://buildar.in/vid/1617105358.7642226.mp4",
+                    url: "https://buildar.in/vid/1617166459.836072.mp4",
                     isHeadClicked: true
                 })
                 break;
