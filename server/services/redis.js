@@ -7,7 +7,7 @@ let config = require("../../config");
 // Redis interface variables
 let redisInterface = null;
 let redisRateLimitStore = null;
-
+console.log("am i getting thireds?",config.redis.port);
 let getAsync = null;
 let delAsync = null;
 

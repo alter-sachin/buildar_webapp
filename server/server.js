@@ -61,6 +61,12 @@ app.use(
 	})
 );
 
+
+
+console.log("am i getting here?",config.build.domainPath);
+console.log("am i getting here ?",config.build.protocol);
+console.log("am i getting here ?",config.build.port);
+
 // Enable Helmet for improved endpoint security
 app.use(helmet());
 
@@ -139,7 +145,7 @@ app.use(function errorHandler(err, req, res, next) {
 });
 
 // Set server port
-app.set("port", config.build.port || 3000);
+app.set("port", config.build.port || 3001);
 
 // Connect to MySQL database
 database.connect(() => {

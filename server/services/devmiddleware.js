@@ -5,6 +5,9 @@ let webpackConfig = require("../../webpack.config.js");
 let webpackcompiler = webpack(webpackConfig);
 let config = require("../../config");
 
+console.log("am i getting this?",config.build.environment);
+
+
 function initialize(app) {
 	if (config.build.environment !== "development") {
 		return;

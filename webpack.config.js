@@ -1,7 +1,7 @@
 let path = require("path");
 let webpack = require("webpack");
 let config = require("./config");
-
+console.log("am i getting this?webpacklol",config.build.domainPath);
 
 function loadPlugins() {
 	var plugins = [];

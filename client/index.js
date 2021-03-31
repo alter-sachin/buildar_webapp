@@ -13,6 +13,12 @@ import store from "./common/store/store";
 import './styles.css';
 /* eslint-disable */
 
+//const winston = require('winston');
+
+
+//var morgan = require("morgan");
+
+
 // Load Google Analytics Tracking
 initializeGA();
 
@@ -25,6 +31,8 @@ if (SENTRY_ENABLED) {
 }
 
 /* eslint-enable */
+
+//app.use(morgan('combined'));
 
 ReactDOM.render(
 	<Provider store={store}>

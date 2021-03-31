@@ -6,16 +6,28 @@ import config from "../../config";
 let connection = null;
 let sqModels = {};
 
+require("dotenv").config();
+
+
+const host = process.env.DB_HOST;
+const username = process.env.DB_USER;
+const password = process.env.DB_PASS;
+const schema = process.env.DB_SCHEMA;
+const min = 0;
+const max = 10;
+const acquire = 30000;
+const idle = 10000;
+
 export function connect(done) {
 	// Connect to database through Sequelize
-	connection = new Sequelize(config.database.schema, config.database.username, config.database.password, {
-		host: config.database.host,
+	connection = new Sequelize(schema,username,password, {
+		host: host,
 		dialect: "mysql",
 		pool: {
-			max: config.database.max,
-			min: config.database.min,
-			acquire: config.database.acquire,
-			idle: config.database.idle
+			max: max,
+			min: min,
+			acquire: acquire,
+			idle: idle
 		},
 		logging: false
 	});

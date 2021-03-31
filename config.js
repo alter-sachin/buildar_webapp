@@ -1,6 +1,9 @@
 if (process.env.NODE_ENV !== "production") {
 	require("dotenv").config({ path: "config.env" });
 }
+else{
+    require("dotenv").config({ path: "config.env" });
+}
 
 let config = {
 	build: {

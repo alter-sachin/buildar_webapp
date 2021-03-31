@@ -7,6 +7,10 @@ const ejs = require("ejs");
 const serializeError = require("serialize-error");
 const config = require("../../config");
 
+console.log("am i getting this?",config.email.host);
+
+
+
 let transporter = null;
 
 function initialize(app) {
