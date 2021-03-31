@@ -116,7 +116,8 @@ class ChatBot extends Component {
                         </div>
                         <div id="overlay-email">
                             <p style={{ color: 'white' }}>I can talk directly to anyone by their name.<br /> Enter your email address<br /> and let me show you.</p>
-                            <form onSubmit={() => { this.change("submitEmail") }}>
+                            <iframe name="hiddenFrame" width="0" height="0" border="0" style={{ display: "none" }}></iframe>
+                            <form target="hiddenFrame" onSubmit={() => { this.change("submitEmail") }}>
                                 <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"></input>
                                 <button type="submit" className="btn btn-primary2">Submit</button>
                             </form>
