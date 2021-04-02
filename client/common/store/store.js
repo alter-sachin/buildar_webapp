@@ -9,7 +9,7 @@ import language from "./reducers/language";
 
 // Determine if React development tools should be enabled or disabled
 //if (BUILD_ENVIRONMENT === "production" && window.__REACT_DEVTOOLS_GLOBAL_HOOK__ && Object.keys(window.__REACT_DEVTOOLS_GLOBAL_HOOK__._renderers).length) {
-	window.__REACT_DEVTOOLS_GLOBAL_HOOK__._renderers = {};
+//	window.__REACT_DEVTOOLS_GLOBAL_HOOK__._renderers = {};
 //}
 // Determine if Redux development tools should be enabled or disabled
 const composeEnhancers = (BUILD_ENVIRONMENT !== "production" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
