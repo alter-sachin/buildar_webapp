@@ -92,14 +92,12 @@ module.exports = function(router) {
 	router.post("/api/v1.0/authentication/google", async(req,res,next)=>{
 		const {token} = req.body;
 		//hey I am printing body here
-		/*console.log("hey I am prinitng",req.body);*/
+		console.log("hey I am prinitng",req.body);
 		const ticket = await client.verifyIdToken({
 			idToken:token,
 			audience:process.env.CLIENT_ID
 		});
 		let { given_name,family_name, email, picture, locale } = ticket.getPayload();
-		console.log(ticket.getPayload());
-		console.log("result",family_name);
 		if(family_name===undefined){
 			console.log("i am inside undefined");
 			family_name = "BuildAR";
