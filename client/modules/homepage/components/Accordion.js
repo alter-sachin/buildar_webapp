@@ -7,25 +7,25 @@ const Accordion = () => {
             "id": 1,
             "title": "Sales",
             "description": "Make your sales video driven",
-            url: "https://www.buildar.in/assets/videos/home.mp4"
+            url: "https://www.dreal.in/assets/videos/home.mp4"
         },
         {
             "id": 2,
             "title": "Marketing",
             "description": "Personalised messages sent at the right channel",
-            url: "https://www.buildar.in/assets/videos/home.mp4"
+            url: "https://www.dreal.in/assets/videos/home.mp4"
         },
         {
             "id": 3,
             "title": "Chatbots",
             "description": "We remember faces more than just words on a screen",
-            url: "https://www.buildar.in/assets/videos/home.mp4"
+            url: "https://www.dreal.in/assets/videos/home.mp4"
         },
     ]
     let indexPlus;
 
     const [active, setActive] = useState(0);
-    const [videoUrl, setVideoUrl] = useState("https://www.buildar.in/assets/videos/home.mp4")
+    const [videoUrl, setVideoUrl] = useState("https://www.dreal.in/assets/videos/home.mp4")
 
     function toggle(id) {
         document.getElementById("source").src = data[id - 1].url

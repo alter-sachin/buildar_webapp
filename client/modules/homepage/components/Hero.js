@@ -22,8 +22,8 @@ class Hero extends Component {
                   <div className="img-wrapper">
                     <div className="w-embed">
                       <video autoPlay playsInline height={930} width={900} loop muted poster="https://www.buildar.in/assets/videos/home.mp4" style={{ height: 'auto', maxWidth: '90%', marginTop: '1.5rem' }}>
-                        <source src="https://www.buildar.in/assets/videos/home.mp4" type="video/webm" />
-                        <source src="https://www.buildar.in/assets/videos/home.mp4" type="video/mp4" />
+                        <source src="https://www.dreal.in/assets/videos/home.mp4" type="video/webm" />
+                        <source src="https://www.dreal.in/assets/videos/home.mp4" type="video/mp4" />
                                 Sorry, your browser doesn’t support embedded videos.
                       </video>
                     </div>

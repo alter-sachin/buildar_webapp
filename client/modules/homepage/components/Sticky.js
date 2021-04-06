@@ -4,15 +4,15 @@ import $ from 'jquery'
 const data = [
     {
         id: 1,
-        url: "https://www.buildar.in/assets/videos/home.mp4"
+        url: "https://www.dreal.in/assets/videos/home.mp4"
     },
     {
         id: 2,
-        url: "https://www.buildar.in/assets/videos/home.mp4"
+        url: "https://www.dreal.in/assets/videos/home.mp4"
     },
     {
         id: 3,
-        url: "https://www.buildar.in/assets/videos/home.mp4"
+        url: "https://www.dreal.in/assets/videos/home.mp4"
     },
 ]
 const Sticky = () => {
