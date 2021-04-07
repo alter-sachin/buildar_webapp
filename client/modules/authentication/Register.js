@@ -8,8 +8,8 @@ import validate from "shared/validation/validate";
 import { t, l, activeLanguage } from "shared/translations/i18n";
 import { extractSubdomain } from "shared/utilities/domains";
 import { REDUX_STATE } from "shared/constants";
-import { registerClient, REGISTER_REJECTED , AUTHENTICATION, LOGIN_REJECTED, validateWorkspaceURL, VALIDATE_WORKSPACE_URL_REJECTED, loginUser, loadUser, LOAD_USER_REJECTED } from "common/store/reducers/authentication.js";
-import { register , login, workspaceURL } from "shared/validation/authentication";
+import { registerClient, REGISTER_REJECTED, AUTHENTICATION, LOGIN_REJECTED, validateWorkspaceURL, VALIDATE_WORKSPACE_URL_REJECTED, loginUser, loadUser, LOAD_USER_REJECTED } from "common/store/reducers/authentication.js";
+import { register, login, workspaceURL } from "shared/validation/authentication";
 
 
 import { changeLanguage } from "common/store/reducers/language.js";
@@ -19,7 +19,7 @@ import Checkbox from "common/components/inputs/Checkbox";
 import WorkspaceURLField from "common/components/inputs/WorkspaceURLField";
 import LanguageSwitcher from "./components/LanguageSwitcher";
 import axios from "axios";
-import { GoogleLogin} from "react-google-login";
+import { GoogleLogin } from "react-google-login";
 
 import Alert from "common/components/Alert";
 import { clientStyling } from "./components/ClientStyling";
@@ -46,11 +46,11 @@ class Register extends Component {
 			visible: false,
 			validationErrors: null,
 			serverError: null,
-			newLoading:false,
-			loginPending:false,
+			newLoading: false,
+			loginPending: false,
 			keepSignedIn: false,
 			redirectPending: false,
-		
+
 		};
 
 		this.register = this.register.bind(this);
@@ -71,9 +71,9 @@ class Register extends Component {
 		} else {
 			this.setState({ visible: true });
 		}
-		
-		
-		
+
+
+
 
 	}
 	changeField(evt) {
@@ -85,8 +85,8 @@ class Register extends Component {
 	handleChecked(evt) {
 		this.setState({ [evt.target.name]: !this.state.privacyConsent });
 	}
-	
-	
+
+
 
 	register(evt) {
 		evt.preventDefault(); // Prevent page refresh
@@ -157,15 +157,15 @@ class Register extends Component {
 	handleClick() {
 		this.toggleSecondarySignUp();
 	}
-	async handleLogin(googleData){
+	async handleLogin(googleData) {
 		console.log("handle login");
 		const res = await fetch("api/v1.0/authentication/google", {
-			method : "POST",
-			body : JSON.stringify({
-				token:googleData.tokenId
+			method: "POST",
+			body: JSON.stringify({
+				token: googleData.tokenId
 			}),
-			headers:{
-				"Content-type":"application/json"
+			headers: {
+				"Content-type": "application/json"
 			}
 		});
 		const data = await res.json();
@@ -263,9 +263,9 @@ class Register extends Component {
 
 
 	render() {
-		
-	
-		const { loginPending,keepSignIn,redirectPending,firstName, lastName, emailAddress, password,privacyConsent,loading,visible,validationErrors,serverError, workspaceURL,newLoading } = this.state;
+
+
+		const { loginPending, keepSignIn, redirectPending, firstName, lastName, emailAddress, password, privacyConsent, loading, visible, validationErrors, serverError, workspaceURL, newLoading } = this.state;
 		const { workspaceURLStatus, logInStatus, clientStyle, userToken, userKeepSignedIn, history } = this.props;
 
 		const workspaceURLPending = workspaceURLStatus == null || workspaceURLStatus == REDUX_STATE.PENDING;
@@ -278,7 +278,7 @@ class Register extends Component {
 			saveToken(userToken, userKeepSignedIn);
 		}
 		return (
-		
+
 			<Fragment>
 				<Helmet
 					title={t("headers.register.title")}
@@ -293,23 +293,23 @@ class Register extends Component {
 					{visible && (
 						<div id="register">
 							<div className="p-3 p-sm-5 alignment vertical justify-content-center" >
-							
+
 								<div className="google-auth-signup" id="primary-signup">
 									<h2 className="google-auth-header">Sign up for BuildAR</h2>
-								
-								
-									<div>
+
+
+									<div style={{ textAlign: "center" }}>
 										<GoogleLogin
 											clientId={clientId}
-											buttonText = "Signup"
-											onSuccess = {this.handleLogin}
-											onFailure = {this.handleLogin}
-											cookiePolicy = {"single_host_origin"}
-											style = {{marginTop:"100px"}}
-						
-										/>							
+											buttonText="Signup with Google"
+											onSuccess={this.handleLogin}
+											onFailure={this.handleLogin}
+											cookiePolicy={"single_host_origin"}
+											style={{ marginTop: "100px", width: "100%" }}
+
+										/>
 									</div>
-										
+
 									<div className="secondary-signup-separator">
 										<hr />
 										<span color="grey" fontWeight="bold">or</span>
@@ -385,10 +385,10 @@ class Register extends Component {
 										disabled={loading}
 										error={validationErrors}
 									/>
-									
+
 									<div>
 										<div>
-										
+
 										</div>
 										<br />
 										<div>
