@@ -80,13 +80,13 @@ app.use(favicon(path.join(__dirname, "../favicon.ico")));
 app.use(express.static(path.join(__dirname, "../distribution")));
 
 // Force redirect on routes if HTTPS enabled
-if (config.build.protocol === "https") {
-	app.use(function(req, res, next) {
-		if (req.get("X-Forwarded-Proto") !== "https") {
-			res.redirect("https://" + req.get("Host") + req.url);
-		} else next();
-	});
-}
+//if (config.build.protocol === "https") {
+//	app.use(function(req, res, next) {
+//		if (req.get("X-Forwarded-Proto") !== "https") {
+//			res.redirect("https://" + req.get("Host") + req.url);
+//		} else next();
+//	});
+//}
 
 // Load the Routes
 app.use(function(err, req, res, next) {
