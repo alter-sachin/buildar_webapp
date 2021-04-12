@@ -100,7 +100,7 @@ VALUES
 	<div id=\ "content\">\n
 		<p>Dear
 			<%= firstName %>,</p>\n
-      <img src="distribution/images/message.gif" alt="Welcome to BuildAR"></img>
+      <img src="https://dreal.in/video.gif" alt="Welcome to BuildAR"></img>\n
 		<p>A warm welcome to BuildAR, Where you can create personalized AI videos in 40+ languages.</p>\n
 		<p>Please click the following link to verify your email address
 			<a href=\ "<%= validationLink %>\">
