@@ -78,8 +78,83 @@ LOCK TABLES `emailTemplates` WRITE;
 
 INSERT INTO `emailTemplates` (`id`, `type`, `language`, `name`, `description`, `subject`, `html`, `createdAt`, `updatedAt`)
 VALUES
-	(1,1,1,'Client Welcome','Introductory email (with activation link) on client registration','Welcome to Reeve','<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n<html xmlns=\"http://www.w3.org/1999/xhtml\">\n    <head>\n        <meta name=\"viewport\" content=\"width=device-width\">\n        <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n        <title>Welcome to Reeve</title>\n        <style>\n            img {max-width: 100%; height: auto;}\n        </style>\n</head>\n    <body>\n        <div id=\"content\">\n		<p>Dear <%= firstName %>,</p>\n		<p>Congratulations! You\'ve just joined a phenominal SaaS company, and an amazing trial product to enjoy for the next 30 days.</p>\n		<p>Please click the following link to verify your email address <a href=\"<%= validationLink %>\"><%= validationLink %></a>.</p>		<p>Once your email is verified, you can continue to access your account from the following link <a href=\"<%= workspaceURL %>\"><%= workspaceURL %></a>.</p> 		<p>Please reply to this email if you have any suggestions/feedback.</p>\n		<p>Best Regards,<br>Reeve Customer Support</p>\n	</div>\n	<br><br>\n        <div id=\"footer\">\n	&copy; Copyright 2018 Reeve. All Rights Reserved.\n        </div>\n    </body>\n</html>','2018-07-18 11:59:16','2018-07-18 11:59:16'),
-	(2,2,1,'Verify Email','User email verification link email','Please verify your email address | Reeve','<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n<html xmlns=\"http://www.w3.org/1999/xhtml\">\n    <head>\n        <meta name=\"viewport\" content=\"width=device-width\">\n        <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n        <title>Please verify your email address | Reeve</title>\n        <style>\n            img {max-width: 100%; height: auto;}\n        </style>\n</head>\n    <body>\n        <div id=\"content\">\n		<p>Dear <%= firstName %>,</p>\n		<p>Please click the following link to verify your email address with Reeve <a href=\"<%= validationLink %>\"><%= validationLink %></a>.</p>\n		<p>A verified email address allows you to receive account notifications and ensures you receive updates relating to our product.</p>\n 		<p>Please reply to this email if you have any suggestions/feedback.</p>\n		<p>Best Regards,<br>Reeve Customer Support</p>\n	</div>\n	<br><br>\n        <div id=\"footer\">\n	&copy; Copyright 2018 Reeve. All Rights Reserved.\n        </div>\n    </body>\n</html>','2018-08-01 21:45:00','2018-08-01 21:45:03'),
+  (1,1,1,'Client Welcome','Introductory email (with activation link) on client registration','Welcome to BuildAR','
+<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n
+<html xmlns=\ "http://www.w3.org/1999/xhtml\">\n
+
+<head>\n
+	<meta name=\ "viewport\" content=\ "width=device-width\">\n
+	<meta http-equiv=\ "X-UA-Compatible\" content=\ "IE=edge\">\n
+	<meta http-equiv=\ "Content-Type\" content=\ "text/html; charset=UTF-8\">\n
+	<title>Welcome to BuildAR</title>\n
+	<style>
+	\n img {
+		max-width: 100%;
+		height: auto;
+	}
+	
+	\n
+	</style>\n</head>\n
+
+<body>\n
+	<div id=\ "content\">\n
+		<p>Dear
+			<%= firstName %>,</p>\n
+		<p>A warm welcome to BuildAR, Where you can create personalized AI videos in 40+ languages.</p>\n
+		<p>Please click the following link to verify your email address
+			<a href=\ "<%= validationLink %>\">
+				<%= validationLink %>
+			</a>.</p>
+		<p>Once your email is verified, you can create videos at your workspace
+			<a href=\ "<%= workspaceURL %>\">
+				<%= workspaceURL %>
+			</a>.</p>
+		<p>Always here to help you.</p>\n
+		<p>Best Regards,
+			<br>Sachin Sharma</p>\n 
+			<p>Founder</p>
+			</div>\n
+	<br>
+	<br>\n
+	<div id=\ "footer\">\n &copy; Copyright 2021 BuildAR. All Rights Reserved.\n </div>\n </body>\n
+
+</html>','2018-07-18 11:59:16','2018-07-18 11:59:16'),
+  (2,2,1,'Verify Email','User email verification link email','Please verify your email address | BuildAR','
+<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n
+<html xmlns=\ "http://www.w3.org/1999/xhtml\">\n
+
+<head>\n
+	<meta name=\ "viewport\" content=\ "width=device-width\">\n
+	<meta http-equiv=\ "X-UA-Compatible\" content=\ "IE=edge\">\n
+	<meta http-equiv=\ "Content-Type\" content=\ "text/html; charset=UTF-8\">\n
+	<title>Please verify your email address | BuildAR</title>\n
+	<style>
+	\n img {
+		max-width: 100%;
+		height: auto;
+	}
+	
+	\n
+	</style>\n</head>\n
+
+<body>\n
+	<div id=\ "content\">\n
+		<p>Dear
+			<%= firstName %>,</p>\n
+		<p>Please click the following link to verify your email address with BuildAR
+			<a href=\ "<%= validationLink %>\">
+				<%= validationLink %>
+			</a>.</p>\n
+		<p>A verified email address allows you to fully enjoy our AI video platform.</p>\n
+		<p>Best Regards,
+			<br>Sachin Sharma</p>\n 
+			<p>Founder</p>
+			</div>\n
+	<br>
+	<br>\n
+	<div id=\ "footer\">\n &copy; Copyright BuildAR. All Rights Reserved.\n </div>\n </body>\n
+
+</html>','2018-08-01 21:45:00','2018-08-01 21:45:03'),
 	(3,3,1,'Forgot Account Details','Email containing account details associated with an email address for all client','Forgot Account Details | Reeve','<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n<html xmlns=\"http://www.w3.org/1999/xhtml\">\n    <head>\n        <meta name=\"viewport\" content=\"width=device-width\">\n        <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n        <title>Forgot Account Details | Reeve</title>\n        <style>\n            img {max-width: 100%; height: auto;}\n        </style>\n</head>\n    <body>\n        <div id=\"content\">\n		<p>Hi there!</p>\n		<p>You recently entered your email address into the forgot account details page on Reeve. We want to help you get back into your account.</p>\n		<p>The accounts linked to this email address include:</p>\n		<div>\n			<% accounts.forEach(function(account){ %>\n				<p>\n					<b>Client:</b> <%= account.clientName %><br>\n					<b>FirstName:</b> <%= account.firstName %><br>\n					<b>LastName:</b> <%= account.lastName %><br>\n					<b>Login Link:</b> <a href=\"<%= account.workspaceLink %>\"><%= account.workspaceLink %></a><br>\n					<b>Reset Password Link:</b> <a href=\"<%= account.resetPasswordLink %>\"><%= account.resetPasswordLink %></a>\n				</p>\n  			<% }); %>\n		</div>\n		<p>Best Regards,<br>Reeve Customer Support</p>\n	</div>\n	<br><br>\n        <div id=\"footer\">\n	&copy; Copyright 2018 Reeve. All Rights Reserved.\n        </div>\n    </body>\n</html>','2018-08-04 17:33:49','2018-08-04 17:33:49'),
 	(4,4,1,'Reset Password','Email with link to reset account password','Reset Password | Reeve','<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n<html xmlns=\"http://www.w3.org/1999/xhtml\">\n    <head>\n        <meta name=\"viewport\" content=\"width=device-width\">\n        <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n        <title>Reset Password | Reeve</title>\n        <style>\n            img {max-width: 100%; height: auto;}\n        </style>\n</head>\n    <body>\n        <div id=\"content\">\n		<p>Dear <%= firstName %>,</p>\n		<p>You recently entered your email address into the forgot account details page of the workspace <b><%= clientName %></b>. We want to help you get back into your account.</p>\n		<p>You can use the following link below to reset the password to your account:</p>\n		<div><a href=\"<%= resetPasswordLink %>\"><%= resetPasswordLink %></a></div>\n		<p>Best Regards,<br>Reeve Customer Support</p>\n	</div>\n	<br><br>\n        <div id=\"footer\">\n	&copy; Copyright 2018 Reeve. All Rights Reserved.\n        </div>\n    </body>\n</html>','2018-08-05 19:52:34','2018-08-05 19:52:34'),
 	(5,5,1,'Password Reset Success','Success email when a user resets their password','Your account password has changed | Reeve','<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n<html xmlns=\"http://www.w3.org/1999/xhtml\">\n    <head>\n        <meta name=\"viewport\" content=\"width=device-width\">\n        <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n        <title>Reset Password | Reeve</title>\n        <style>\n            img {max-width: 100%; height: auto;}\n        </style>\n</head>\n    <body>\n        <div id=\"content\">\n		<p>Dear <%= firstName %>,</p>\n		<p>We are sending you this email to confirm that the password to your account on the workspace <%= workspaceName %> has recently been updated.</p>\n		<p>If you did not make this change. Please contact support immediately by replying to this email.</p>\n		<p>Best Regards,<br>Reeve Customer Support</p>\n	</div>\n	<br><br>\n        <div id=\"footer\">\n	&copy; Copyright 2018 Reeve. All Rights Reserved.\n        </div>\n    </body>\n</html>','2018-08-11 18:27:34','2018-08-11 18:27:36'),
