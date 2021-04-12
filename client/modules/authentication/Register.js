@@ -346,8 +346,7 @@ class Register extends Component {
 										label={t("label.emailAddress")}
 										name={"emailAddress"}
 										id={"email-input"}
-										defaultValue={this.emailAddress}
-										value={this.emailAddress}
+										value={emailAddress}
 										type={"textField"}
 										ariaLabel={"emailAddress"}
 										onChange={this.changeField}
