@@ -50,7 +50,7 @@ class CreateVideo extends Component {
 
 
 		axios
-			.get("http://35.232.47.147:8008/audio",
+			.get("https://api.buildar.live:8008/audio",
 				config
 			)
 			.then(({ data }) => {

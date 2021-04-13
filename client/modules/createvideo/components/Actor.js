@@ -131,7 +131,7 @@ class Actor extends Component {
 		};
 
 		axios.post(
-			"http://35.232.47.147:8008/audio", data,config)
+			"https://api.buildar.live:8008/audio", data,config)
 			.then(({ data }) => {
 				this.setState({
 					audioUrl: data.audioUrl,
@@ -167,7 +167,7 @@ class Actor extends Component {
 			audioUrl: this.state.audioUrl
 		}
 		axios.post(
-			"http://35.232.47.147:8008/video", data,config)
+			"https://api.buildar.live/video", data,config)
 			.then(({ data }) => {
 				this.setState({
 					videoUrl: data.videoUrl,
