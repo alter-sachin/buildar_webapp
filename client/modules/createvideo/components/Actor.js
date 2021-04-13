@@ -167,7 +167,7 @@ class Actor extends Component {
 			audioUrl: this.state.audioUrl
 		}
 		axios.post(
-			"https://api.buildar.live/video", data,config)
+			"https://api.buildar.live:8008/video", data,config)
 			.then(({ data }) => {
 				this.setState({
 					videoUrl: data.videoUrl,
