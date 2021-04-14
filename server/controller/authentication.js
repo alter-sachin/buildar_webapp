@@ -165,7 +165,7 @@ module.exports = function(router) {
 			password: req.body.password,
 			keepSignedIn: req.body.keepSignedIn
 		};
-		console.log(requestProperties);
+	//	console.log(requestProperties);
 		// Validate properties in received object
 		const valid = validate(requestProperties, login());
 		if (valid != null) {

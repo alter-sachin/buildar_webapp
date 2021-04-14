@@ -67,7 +67,7 @@ app.use(helmet());
 // Enable CORS for Routes
 app.use(
 	cors({
-		origin: new RegExp(config.build.domainPath + "$"),
+		origin: "*",
 		optionsSuccessStatus: 200,
 		methods: "GET,POST,PATCH,PUT,DELETE"
 	})

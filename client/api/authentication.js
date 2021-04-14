@@ -35,7 +35,7 @@ export function userLogin(user) {
 		password: user.password,
 		keepSignedIn: user.keepSignedIn
 	};
-	console.log("this is user from client api",user);
+	//console.log("this is user from client api",user);
 	if (user.authToken) {
 		body = { authToken: user.authToken };
 	}

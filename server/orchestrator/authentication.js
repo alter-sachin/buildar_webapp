@@ -223,7 +223,7 @@ export function registerNewClient(requestProperties, authenticatedUser, browserL
 
 function createUserInFastAPI(username,email,password){
 	return new 	Promise(function(resolve,reject){
-		axios.post("http://35.232.47.147:8008/users/",{
+		axios.post("https://api.buildar.live:8008/users",{
 			email : email,
 			password : password,
 			username : username,
@@ -377,9 +377,8 @@ export function authenticateWithLocalStrategy(req, res, next, browserLng) {
 
 
 function getauthToken(username,password){
-
 	return new Promise(function(resolve,reject){
-		axios.post("http://35.232.47.147:8008/token",{
+		axios.post("https://api.buildar.live:8008/token",{
 			username:username,
 			password:password
 		}).then(
