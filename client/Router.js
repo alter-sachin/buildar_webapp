@@ -19,6 +19,7 @@ const Authentication = AsyncComponent(() => import("./modules/authentication"));
 const BlogPage = AsyncComponent(() => import("./modules/blogs"));
 const Overview = AsyncComponent(() => import("./modules/overview"));
 const Profile = AsyncComponent(() => import("./modules/profile"));
+const Documentation = AsyncComponent(() => import("./modules/documentation"))
 const CreateVideo = AsyncComponent(() => import("./modules/createvideo"));
 const Video = AsyncComponent(() => import("./modules/video"))
 const MyVideo = AsyncComponent(() => import("./modules/myvideos"));
@@ -87,6 +88,17 @@ class Router extends Component {
 							render={() => (
 								<EmptyLayout key="/register">
 									<Authentication />
+								</EmptyLayout>
+							)}
+						/>
+						<ProtectedRoute
+							exact
+							path="/docs"
+							hasAnyRole={[ROLE_TYPE.UNREGISTERED]}
+							user={user}
+							render={() => (
+								<EmptyLayout key="/docs">
+									<Documentation />
 								</EmptyLayout>
 							)}
 						/>
