@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react'
 
 class Documentation extends Component {
@@ -18,11 +17,9 @@ class Documentation extends Component {
                 <meta httpEquiv="cleartype" content="on" />
                 <meta httpEquiv="X-UA-Compatible" content="IE=edge,chrome=1" />
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-                <link rel="stylesheet" href="hightlightjs-dark.css" />
                 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,500|Source+Code+Pro:300" rel="stylesheet" />
                 <link rel="stylesheet" href="style.css" media="all" />
                 <link rel="stylesheet" href="highlightjs-dark.css" />
-                <script>hljs.initHighlightingOnLoad();</script>
                 <div className="left-menu">
                     <div className="content-logo">
                         <img src="images/Logo_BuildAR.png" height={32} />
@@ -56,7 +53,7 @@ class Documentation extends Component {
                     <div className="content">
                         <div className="overflow-hidden content-section" id="get-started">
                             <h1 id="get-started">Get started</h1>
-                            <pre className="hljs-strong">{"        "}API Endpoint{"\n"}{"\n"}{"          "}https://35.232.47.147:8001/{"\n"}{"                "}</pre>
+                            <pre>API Endpoint{"          "}{"\n"}{"\n"}{""}https:<span style={{ color: "#a8a8a2" }}>//35.232.47.147:8001/</span>{"\n"}{"                "}</pre>
                             <p>
                                 The BuildAR API provides programmatic access to create videos in 40+ Languages from just text.
                                 You need to select an actor, speaker and enter your text script and videos are created in a few minutes.
@@ -64,7 +61,7 @@ class Documentation extends Component {
                         </div>
                         <div className="overflow-hidden content-section" id="get-api-access">
                             <h1 id="get-started">Get API Access</h1>
-                            <pre>{"        "}For API Key {"\n"}{"        "}Reach out to:{"\n"}{"\n"}{"          "}email : team@buildar.live{"\n"}{"          "}call : +91-9646617007{"\n"}{"                "}</pre>
+                            <pre>{""}For API Key {"\n"}{""}Reach out to:{"\n"}{"\n"}{""}<span style={{ color: "#cb7832" }}>email</span>: <span style={{ color: "#cb7832" }}>team</span>@<span style={{ color: "#cb7832" }}>buildar</span>.<span style={{ color: "#cb7832" }}>live</span>{"\n"}{""}<span style={{ color: "#cb7832" }}>call</span>: +<span style={{ color: "#6896ba" }}>91</span>-<span style={{ color: "#6896ba" }}>9646617007</span>{"\n"}{"                "}</pre>
                             <p>
                                 To create BuildAR's AI videos, you need an <strong>API key</strong>. Please contact us at <a href="mailto:team@buildar.live">team@buildar.live</a> to get your own API key.<br />
                 We have subscription plans based on the volume of videos you are looking to create.
@@ -80,17 +77,17 @@ class Documentation extends Component {
                         </div>
                         <div className="overflow-hidden content-section" id="content-get-characters">
                             <h2 id="get-avialable-voices">GET AVAILABLE VOICES FOR AUDIO</h2>
-                            <pre><code className="bash">{"\n"}# Here is a curl example{"\n"}curl -X 'GET' \{"\n"}{"  "}'http://35.232.47.147:8001/audio' \{"\n"}{"  "}-H 'accept: application/json' \{"\n"}{"  "}-H 'Authorization: Bearer YOUR_API_KEY'{"\n"}{"                "}</code></pre>
+                            <pre><code className="bash">{"\n"}<span style={{ color: "#a8a8a2" }}># Here is a curl example</span>{"\n"}curl -X 'GET' \{"\n"}{"  "}'http://35.232.47.147:8001/audio' \{"\n"}{"  "}-H 'accept: application/json' \{"\n"}{"  "}-H 'Authorization: Bearer YOUR_API_KEY'{"\n"}{"                "}</code></pre>
                             <p>
                                 We provide a large variety(40+) of voices both in languages and accents.To get list of all available voices you need to make a GET call to the following url :<br />
                                 <code className="higlighted">http://35.232.47.147:8001/audio</code>
                             </p>
                             <br />
-                            <pre><code className="json">{"\n"}Result example :{"\n"}{"{"}{"\n"}{"  "}query:{"{"}{"}"}{"\n"}{"  "}result: =[{"\n"}{"  "}{"{"}{"\n"}{"    "}"Voice": "Indian English Female Voice 1",{"\n"}{"    "}"Gender": "Female"{"\n"}{"  "}{"}"},{"\n"}{"  "}{"{"}{"\n"}{"    "}"Voice": "Indian English Female Voice 2",{"\n"}{"    "}"Gender": "Female"{"\n"}{"  "}{"}"},{"\n"}{"  "}{"{"}{"\n"}{"    "}"Voice": "Indian English Male Voice 1",{"\n"}{"    "}"Gender": "Male"{"\n"}{"  "}{"}"},{"\n"}{"  "}{"{"}{"\n"}{"    "}"Voice": "Hindi Female Voice 1",{"\n"}{"    "}"Gender": "Female"{"\n"}{"  "}{"}"},{"\n"}{"  "}{"{"}{"\n"}{"    "}"Voice": "Hindi Female Voice 2",{"\n"}{"    "}"Gender": "Female"{"\n"}{"  "}{"}"}{"\n"}]{"\n"}{"}"}{"\n"}{"\n"}{"                "}</code></pre>
+                            <pre><code className="json">{"\n"}Result example :{"\n"}{"{"}{"\n"}{"  "}query:{"{"}{"}"}{"\n"}{"  "}result: =[{"\n"}{"  "}{"{"}{"\n"}{"    "}"Voice": <span style={{ color: "#a8a8a2" }}>"Indian English Female Voice 1"</span>,{"\n"}{"    "}"Gender": <span style={{ color: "#a8a8a2" }}>"Female"</span>{"\n"}{"  "}{"}"},{"\n"}{"  "}{"{"}{"\n"}{"    "}"Voice": <span style={{ color: "#a8a8a2" }}>"Indian English Female Voice 2"</span>,{"\n"}{"    "}"Gender": <span style={{ color: "#a8a8a2" }}>"Female"</span>{"\n"}{"  "}{"}"},{"\n"}{"  "}{"{"}{"\n"}{"    "}"Voice": <span style={{ color: "#a8a8a2" }}>"Indian English Male Voice 1"</span>,{"\n"}{"    "}"Gender": <span style={{ color: "#a8a8a2" }}>"Male"</span>{"\n"}{"  "}{"}"},{"\n"}{"  "}{"{"}{"\n"}{"    "}"Voice": <span style={{ color: "#a8a8a2" }}>"Hindi Female Voice 1"</span>,{"\n"}{"    "}"Gender": <span style={{ color: "#a8a8a2" }}>"Female"</span>{"\n"}{"  "}{"}"},{"\n"}{"  "}{"{"}{"\n"}{"    "}"Voice": <span style={{ color: "#a8a8a2" }}>"Hindi Female Voice 2"</span>,{"\n"}{"    "}"Gender": <span style={{ color: "#a8a8a2" }}>"Female"</span>{"\n"}{"  "}{"}"}{"\n"}]{"\n"}{"}"}{"\n"}{"\n"}{"                "}</code></pre>
                         </div>
                         <div className="overflow-hidden content-section" id="content-errors">
                             <h2 id="generate-audio">GENERATE AUDIO</h2>
-                            <pre><code className="bash">{"\n"}# Here is a curl example{"\n"}curl -X 'POST' \{"\n"}{"  "}'http://35.232.47.147:8001/audio' \{"\n"}{"  "}-H 'accept: application/json' \{"\n"}{"  "}-H 'Authorization: Bearer YOUR_API_KEY' \{"\n"}{"  "}-H 'Content-Type: application/json' \{"\n"}{"  "}-d '{"{"}{"\n"}{"  "}"speakerId": "Indian English Female Voice 1",{"\n"}{"  "}"textScript": "Hello, how are you?",{"\n"}{"  "}"speed": Speed between 0&amp;1{"\n"}{"}"}'{"\n"}{"                "}</code></pre>
+                            <pre><code className="bash">{"\n"}<span style={{ color: "#a8a8a2" }}># Here is a curl example</span>{"\n"}curl -X 'POST' \{"\n"}{"  "}'http://35.232.47.147:8001/audio' \{"\n"}{"  "}-H 'accept: application/json' \{"\n"}{"  "}-H 'Authorization: Bearer YOUR_API_KEY' \{"\n"}{"  "}-H 'Content-Type: application/json' \{"\n"}{"  "}-d '{"{"}{"\n"}{"  "}"speakerId": "Indian English Female Voice 1",{"\n"}{"  "}"textScript": "Hello, how are you?",{"\n"}{"  "}"speed": Speed between 0&amp;1{"\n"}{"}"}'{"\n"}{"                "}</code></pre>
                             <p>
                                 You can generate audio from any text script. <br />
                 Select a single voice from the collection of available voices, and enter the text script <br />
@@ -99,7 +96,7 @@ class Documentation extends Component {
                                 <code className="higlighted">http://35.232.47.147:8001/audio</code>
                             </p>
                             <br />
-                            <pre><code className="json">{"\n"}Result example :{"\n"}{"{"}{"\n"}{"  "}query:{"{"}{"\n"}{"  "}"speakerId": "string",{"\n"}{"  "}"textScript": "string",{"\n"}{"  "}"speed": 0{"\n"}{"}"}{"\n"}{"  "}result: =[{"\n"}{"  "}{"{"}{"{"}{"\n"}{"  "}"audioUrl": "string"{"\n"}{"}"}{"\n"}]{"\n"}{"}"}{"\n"}{"\n"}{"                "}</code></pre>
+                            <pre><code className="json">{"\n"}Result example :{"\n"}{"{"}{"\n"}{"  "}query:{"{"}{"\n"}{"  "}"speakerId": <span style={{ color: "#a8a8a2" }}>"string"</span>,{"\n"}{"  "}"textScript": <span style={{ color: "#a8a8a2" }}>"string"</span>,{"\n"}{"  "}"speed": <span style={{ color: "#6896ba" }}>0</span>{"\n"}{"}"}{"\n"}{"  "}result: =[{"\n"}{"  "}{"{"}{"{"}{"\n"}{"  "}"audioUrl": <span style={{ color: "#a8a8a2" }}>"string"</span>{"\n"}{"}"}{"\n"}]{"\n"}{"}"}{"\n"}{"\n"}{"                "}</code></pre>
                             <h4>QUERY PARAMETERS</h4>
                             <table>
                                 <thead>
@@ -132,7 +129,7 @@ class Documentation extends Component {
                         </div>
                         <div className="overflow-hidden content-section" id="generate-video">
                             <h2 id="generate-video">GENERATE VIDEO</h2>
-                            <pre><code className="bash">{"\n"}# Here is a curl example{"\n"}curl -X 'POST' \{"\n"}{"  "}'http://35.232.47.147:8001/video' \{"\n"}{"  "}-H 'accept: application/json' \{"\n"}{"  "}-H 'Authorization: Bearer YOUR_API_KEY' \{"\n"}{"  "}-H 'Content-Type: application/json' \{"\n"}{"  "}-d '{"{"}{"\n"}{"  "}"actorId": 0,{"\n"}{"  "}"audioUrl": "URL"{"\n"}{"}"}'{"\n"}{"\n"}{"                "}</code></pre>
+                            <pre><code className="bash">{"\n"}<span style={{ color: "#a8a8a2" }}># Here is a curl example</span>{"\n"}curl -X 'POST' \{"\n"}{"  "}'http://35.232.47.147:8001/video' \{"\n"}{"  "}-H 'accept: application/json' \{"\n"}{"  "}-H 'Authorization: Bearer YOUR_API_KEY' \{"\n"}{"  "}-H 'Content-Type: application/json' \{"\n"}{"  "}-d '{"{"}{"\n"}{"  "}"actorId": 0,{"\n"}{"  "}"audioUrl": "URL"{"\n"}{"}"}'{"\n"}{"\n"}{"                "}</code></pre>
                             <p>
                                 <style dangerouslySetInnerHTML={{ __html: "\n            \t\tfigure{\n            \t\t\tpadding:1em;\n            \t\t}\n            \t" }} />
                 BuildAR's AI videos need to inputs the face and audio url.
@@ -149,7 +146,7 @@ class Documentation extends Component {
               </p><p />
                             <code className="higlighted" style={{ margin: '4em' }}>http://35.232.47.147:8001/video</code>
                             <br />
-                            <pre><code className="json">{"\n"}Result example :{"\n"}{"{"}{"\n"}{"  "}query:{"{"}{"\n"}{"  "}"actorId": 0,{"\n"}{"  "}"audioUrl": "string"{"\n"}{"}"}{"\n"}{"  "}result: =[{"\n"}{"  "}{"{"}{"{"}{"\n"}{"  "}"videoUrl": "string"{"\n"}{"}"}{"\n"}]{"\n"}{"}"}{"\n"}{"\n"}{"                "}</code></pre>
+                            <pre><code className="json">{"\n"}Result example :{"\n"}{"{"}{"\n"}{"  "}query:{"{"}{"\n"}{"  "}"actorId": <span style={{ color: "#6896ba" }}>0</span>,{"\n"}{"  "}"audioUrl": <span style={{ color: "#a8a8a2" }}>"string"</span>{"\n"}{"}"}{"\n"}{"  "}result: =[{"\n"}{"  "}{"{"}{"{"}{"\n"}{"  "}"videoUrl": <span style={{ color: "#a8a8a2" }}>"string"</span>{"\n"}{"}"}{"\n"}]{"\n"}{"}"}{"\n"}{"\n"}{"                "}</code></pre>
                             <div style={{ paddingTop: '2em' }}>
                                 <h4>QUERY PARAMETERS</h4>
                                 <table>
