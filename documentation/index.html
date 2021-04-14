@@ -1,2418 +1,296 @@
-<!doctype html>
-<html>
-
+<!--
+ API Documentation HTML Template  - 1.0.1
+ Copyright © 2021 BuildAR
+ Licensed under the MIT license.
+ https://github.com/alter-sachin/
+ !-->
+<!DOCTYPE html>
+<html class="no-js" lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta name="description" content="">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Reeve Documentation</title>
-	<link rel="stylesheet" href="style.css">
+    <meta charset="utf-8">
+    <title>BuildAR AI Videos API - Documentation</title>
+    <meta name="description" content="">
+    <meta name="author" content="ticlekiwi">
+
+    <meta http-equiv="cleartype" content="on">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="hightlightjs-dark.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,500|Source+Code+Pro:300" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" media="all">
+    <script>hljs.initHighlightingOnLoad();</script>
 </head>
 
 <body>
-	<div class="doc__bg"></div>
-	<nav class="header">
-		<h1 class="logo">Reeve <span class="logo__thin">Documentation</span></h1>
-	</nav>
-	<div class="wrapper">
-		<aside class="doc__nav">
-			<ul>
-				<a href="#1.0">
-					<li class="js-btn">1.0 Introduction</li>
-				</a>
-				<a href="#2.0">
-					<li class="js-btn">2.0 Core Features</li>
-				</a>
-				<a href="#3.0">
-					<li class="js-btn">3.0 Technology Stack</li>
-				</a>
-				<a href="#4.0">
-					<li class="js-btn">4.0 Directory Layout</li>
-				</a>
-				<a href="#5.0">
-					<li class="js-btn">5.0 Getting Started</li>
-				</a>
-				<ul class="doc__sub_items">
-					<a href="#5.1">
-						<li class="js-btn">5.1 Node.js & NPM</li>
-					</a>
-					<a href="#5.2">
-						<li class="js-btn">5.2 Building the Database</li>
-					</a>
-					<a href="#5.3">
-						<li class="js-btn">5.3 Running Redis</li>
-					</a>
-					<a href="#5.4">
-						<li class="js-btn">5.4 Developing Locally</li>
-					</a>
-					<a href="#5.5">
-						<li class="js-btn">5.5 Build Tools</li>
-					</a>
-					<a href="#5.6">
-						<li class="js-btn">5.6 Server Configuration</li>
-					</a>
-				</ul>
-				<a href="#6.0">
-					<li class="js-btn">6.0 The Client</li>
-				</a>
-				<ul class="doc__sub_items">
-					<a href="#6.1">
-						<li class="js-btn">6.1 Overview</li>
-					</a>
-					<a href="#6.2">
-						<li class="js-btn">6.2 Routing</li>
-					</a>
-					<a href="#6.3">
-						<li class="js-btn">6.3 Redirects</li>
-					</a>
-					<a href="#6.4">
-						<li class="js-btn">6.4 Missing Paths</li>
-					</a>
-					<a href="#6.5">
-						<li class="js-btn">6.5 API Development</li>
-					</a>
-					<a href="#6.6">
-						<li class="js-btn">6.6 Validation</li>
-					</a>
-					<a href="#6.7">
-						<li class="js-btn">6.7 State Management</li>
-					</a>
-					<a href="#6.8">
-						<li class="js-btn">6.8 The User Store</li>
-					</a>
-					<a href="#6.9">
-						<li class="js-btn">6.9 Common Components</li>
-					</a>
-					<a href="#6.10">
-						<li class="js-btn">6.10 Asynchronous Components</li>
-					</a>
-					<a href="#6.11">
-						<li class="js-btn">6.11 Input Components</li>
-					</a>
-					<a href="#6.12">
-						<li class="js-btn">6.12 Page Layouts</li>
-					</a>
-					<a href="#6.13">
-						<li class="js-btn">6.13 Global Styling</li>
-					</a>
-					<a href="#6.14">
-						<li class="js-btn">6.14 Notifications</li>
-					</a>
-					<a href="#6.15">
-						<li class="js-btn">6.15 Alerts</li>
-					</a>
-					<a href="#6.16">
-						<li class="js-btn">6.16 Success & Error Messages</li>
-					</a>
-					<a href="#6.17">
-						<li class="js-btn">6.17 Interface Icons</li>
-					</a>
-				</ul>
-				<a href="#7.0">
-					<li class="js-btn">7.0 The Server</li>
-				</a>
-				<ul class="doc__sub_items">
-					<a href="#7.1">
-						<li class="js-btn">7.1 Overview</li>
-					</a>
-					<a href="#7.2">
-						<li class="js-btn">7.2 Node.js Environments</li>
-					</a>
-					<a href="#7.3">
-						<li class="js-btn">7.3 Services</li>
-					</a>
-					<a href="#7.4">
-						<li class="js-btn">7.4 Routing</li>
-					</a>
-					<a href="#7.5">
-						<li class="js-btn">7.5 Connecting to the Database</li>
-					</a>
-					<a href="#7.6">
-						<li class="js-btn">7.6 Database Models</li>
-					</a>
-					<a href="#7.7">
-						<li class="js-btn">7.7 API Design & Development</li>
-					</a>
-					<a href="#7.8">
-						<li class="js-btn">7.8 Endpoint Security</li>
-					</a>
-					<a href="#7.9">
-						<li class="js-btn">7.9 Session Management</li>
-					</a>
-					<a href="#7.10">
-						<li class="js-btn">7.10 CORS</li>
-					</a>
-					<a href="#7.11">
-						<li class="js-btn">7.11 Validation</li>
-					</a>
-					<a href="#7.12">
-						<li class="js-btn">7.12 Sending Emails</li>
-					</a>
-					<a href="#7.13">
-						<li class="js-btn">7.13 Passport Authentication</li>
-					</a>
-					<a href="#7.14">
-						<li class="js-btn">7.14 Security Tokens</li>
-					</a>
-					<a href="#7.15">
-						<li class="js-btn">7.15 Stripe Payment Gateway</li>
-					</a>
-					<a href="#7.16">
-						<li class="js-btn">7.16 Sentry Error Logging</li>
-					</a>
-					<a href="#7.17">
-						<li class="js-btn">7.17 Papertrail Logging</li>
-					</a>
-					<a href="#7.18">
-						<li class="js-btn">7.18 Server Errors</li>
-					</a>
-				</ul>
-				<a href="#8.0">
-					<li class="js-btn">8.0 Shared Components</li>
-				</a>
-				<ul class="doc__sub_items">
-					<a href="#8.1">
-						<li class="js-btn">8.1 Overview</li>
-					</a>
-					<a href="#8.2">
-						<li class="js-btn">8.2 Trials & Subscriptions</li>
-					</a>
-					<a href="#8.3">
-						<li class="js-btn">8.3 User Roles</li>
-					</a>
-					<a href="#8.4">
-						<li class="js-btn">8.4 Features</li>
-					</a>
-					<a href="#8.5">
-						<li class="js-btn">8.5 Translations</li>
-					</a>
-				</ul>
-				<a href="#9.0">
-					<li class="js-btn">9.0 Testing</li>
-				</a>
-				<a href="#10.0">
-					<li class="js-btn">10.0 Deployment</li>
-				</a>
-				<a href="#11.0">
-					<li class="js-btn">11.0 Database Updates</li>
-				</a>
-				<a href="#12.0">
-					<li class="js-btn">12.0 License</li>
-				</a>
-			</ul>
-		</aside>
-		<article class="doc__content">
-			<section class="js-section">
-				<a name="1.0">
-					<h2 class="section__title">1.0 Introduction</h2>
-				</a>
-				<div>
-					<p>Reeve is a Node.js boilerplate framework designed to reduce setup time, and mitigate risk when building scalable web applications.</p>
-					<p>Many web applications depend on commonly found, generic functionality. This can include -<br>
-						<ul class="list">
-							<li>User authentication and account management.</li>
-							<li>Payment and subscriptions.</li>
-							<li>Routing and page management.</li>
-							<li>Internationalization (translations).</li>
-							<li>Security.</li>
-							<li>Access and usage logging.</li>
-							<li>Error reporting.</li>
-						</ul>
-					</p>
-					<p>Reeve aims to provide a robust set of solutions to these areas (and more), so that the focus can return to rapid prototyping and feature delivery.</p>
-					<p>Using pre-packaged solutions to common problems found early in the development process, developers can focus on the core features of the product directly, and avoid building secondary functionality that is expected, but not critical of the primary product features.</p>
-					<p><b>Why would someone want this?</b><br> Developing a software product is expensive and time-consuming. By using a framework, you can ensure consistency and enforce commonality across multiple products being developed in parallel.</p>
-					<p>If you are outsourcing, you can reduce risk by standardizing how a product should be developed and enforcing practices that might not be used if you asked a developer to start from scratch.</p>
-				</div>
-			</section>
-			<section class="js-section">
-				<a name="2.0">
-					<h2 class="section__title">2.0 Core Features</h2>
-				</a>
-				<div>
-					<p>Reeve was designed to abstract away a lot of the common functionality found in web applications that doesn't directly contribute to the primary "solution". These features include -</p>
-					<p><b>User Accounts:</b> Common utility pages for logging in, registering client accounts, sending emails when a user forgets their password, and verifying email addresses when new accounts are created.</p>
-					<p><b>Client Accounts:</b> New user accounts are provisioned under a 'client'. A client is a group of users working together in an organisation. They can share resources and information, and collaborate with each other. The overarching client manages the subscription and payment handling for a group of users.</p>
-					<p><b>Client Specific Branding:</b> Each client on the platform can have unique branding, and web address to access their resources. When a user navigates to a client page, they may see the client logo, background and colours specified by the client administrator.</p>
-					<p><b>Routing & Page Management:</b> Pages on the platform can be restricted in their presentation, in a variety of ways. The developer can restrict pages to logged in, or unregistered users. They can require users to have a particular feature or role to view a page. Reeve handles the routing and page management to simply this process, and maintain security.</p>
-					<p><b>Translations:</b> The email templates, front-end and back-end of the application support multi-language text translations with full i18n support. Clients can define a default language to display on the login page, and users can set a language specific to their account.</p>
-					<p><b>Subscription and Payment Gateway:</b> Subscriptions are handled through a Stripe payment processor. When a new client is created, they are automatically placed on a 14 day trial period where they can use the app freely. After this period of time, they need to select a subscription and make ongoing payments to continue accessing the platform.</p>
-					<p><b>Feature Restrictions:</b> The internal database and pages supports defining a series of features, and restricting them to certain clients or subscription types. Restrictions can be as granular as blocking objects on a page, to restricting access to entire routes/pages. An example of using this could include providing extra features to a client that is on a better subscription plan.</p>
-					<p><b>User Roles:</b> User accounts can be assigned multiple roles which act as granular permissions to perform certain actions, view pages or objects.</p>
-					<p><b>Email Sending:</b> Every user has an email address associated with their account, and the platform supports sending emails to them. These messages are structured using a translation-friendly templating system.</p>
-					<p><b>Session Management:</b> An in-memory database is used to handle active user sessions for fast and efficient application performance.</p>
-					<p><b>Error Reporting:</b> Activites, behaviours and system events throughout the platform can be recorded to external services such as Papertrail, or Sentry.</p>
-				</div>
-			</section>
-			<section class="js-section">
-				<a name="3.0">
-					<h2 class="section__title">3.0 Technology Stack</h2>
-				</a>
-				<div>
-					<p>Reeve relies on a variety of open source technologies to function. Key inter-connected services are listed in the table below with a short description of their purpose. It is <b>strongly</b> recommended that you review all the dependencies found in the <i>package.json</i> file in the root directory.</p>
-					<table>
-						<col width="20%">
-						<tr>
-							<th>Component</th>
-							<th>Dependencies</th>
-						</tr>
-						<tr>
-							<td>Front-End</td>
-							<td>
-								<ul class="table-list">
-									<li><b>React:</b> Library for building user interfaces.</li>
-									<li><b>React-Router v4:</b> A collection of navigation components for handling routing in React.</li>
-									<li><b>Redux:</b> Library for handling application state.</li>
-									<li><b>Bootstrap:</b> CSS Framework for designing stylish layouts and components.</li>
-									<li><b>Ejs:</b> A templating framework used by the email sender to insert personalised information into a html email.</li>
-									<li><b>Emotion:</b> A react component for inserting custom css into react components.</li>
-									<li><b>I18next (and associated plugins):</b> Node and React tools for handling language translations throughout the application.</li>
-									<li><b>React-notify-toast:</b> A react component for displaying toast notifications.</li>
-									<li><b>Moment:</b> Time and date manipulation utility.</li>
-									<li><b>Validate.js:</b> Validate user supplied inputs as valid and correct.</li>
-									<li><b>Raven:</b> Sentry is a subscription error tracking service. Raven is a package used to integrate with this service.</li>
-									<li><b>Webpack (and associated plugins):</b> A module bundler that takes javascript files and compiles them into static assets to be loaded by the browser.</li>
-									<li><b>Babel (and associated plugins):</b> A transpiler that converts cutting-edge javascript into code that is supported by most web-browsers.</li>
-								</ul>
-							</td>
-						</tr>
-						<tr>
-							<td>Back-End</td>
-							<td>
-								<ul class="table-list">
-									<li><b>Express:</b> Node.js web application and api framework.</li>
-									<li><b>MySQL2:</b> Improved sql driver for node.js. Used in combination with Sequelize for database management.</li>
-									<li><b>Sequelize:</b> Object Relational Mapping (ORM). Provides a fast, secure and efficient way of communication with the database.</li>
-									<li><b>Stripe:</b> Payment gateway for handling subscriptions.</li>
-									<li><b>Nodemailer:</b> Node.js package for generating and sending emails.</li>
-									<li><b>Passport:</b> Framework for user authentication (Registration & Login) handling. </li>
-									<li><b>Winston (and associated plugins):</b> A number of packages used to provide logging and error handling throughout the application.</li>
-									<li><b>Dotenv:</b> Package that makes loading an environment file on startup very easy and efficient.</li>
-								</ul>
-							</td>
-						</tr>
-						<tr>
-							<td>Database</td>
-							<td>
-								<ul class="table-list">
-									<li><b>MySQL:</b> The default back-end database used by Reeve is a mysql database. Due to the close integration with Sequelize, it is possible to swap this with an alternative offering.</li>
-									<li><b>Sequelize:</b> Object Relational Mapping (ORM). Provides a fast, secure and efficient way of communication with the database.</li>
-								</ul>
-							</td>
-						</tr>
-						<tr>
-							<td>Session Management</td>
-							<td>
-								<ul class="table-list">
-									<li><b>Redis:</b> An extremely fast, efficient and stable 'in-memory' database.</li>
-									<li><b>Connect-redis:</b> Integrates express sessions with Redis.</li>
-									<li><b>Rate-limit-redis:</b> Uses redis to rate limit API use based on ip address; to prevent abuse.</li>
-								</ul>
-							</td>
-						</tr>
-						<tr>
-							<td>Development</td>
-							<td>
-								<ul class="table-list">
-									<li><b>Nodemon:</b> A monitoring tool that checks for code changes and automatically reloads the server.</li>
-									<li><b>Prettier:</b> Developer tool for cleaning up code, ensuring it is well-presented and the correct syntax is used.</li>
-									<li><b>React-hot-loader:</b> Automatically reloads react during development so browser refresh is not required.</li>
-									<li><b>Eslint (and associated plugins):</b> Syntax highlighting to enforce consistency and standardization in code.</li>
-								</ul>
-							</td>
-						</tr>
-						<tr>
-							<td>Integration Testing</td>
-							<td>
-								<ul class="table-list">
-									<li><b>Ava:</b> Testing utility. The primary tool used in Reeve for integration testing.</li>
-									<li><b>Supertest:</b> Loads a basic server during integration testing.</li>
-									<li><b>JMeter:</b> Software tool for load testing.</li>
-								</ul>
-							</td>
-						</tr>
-					</table>
-					<p></p>
-				</div>
-			</section>
-			<section class="js-section">
-				<a name="4.0">
-					<h2 class="section__title">4.0 Directory Layout</h2>
-				</a>
-				<div>
-					<p>The Reeve directory layout is designed to be as simple and organised as possible. Most of the core application functionality is handled inside three directories.</p>
-					<ul class="list">
-						<li><b>Client:</b> Front-end content served to the user when using the application.</li>
-						<li><b>Server:</b> Code specific to the back-end and deployed on a node server/the cloud.</li>
-						<li><b>Shared:</b> Contains functions that are shared between both the client and server directories.</li>
-					</ul>
-					<pre class="code code--block">
-						<code>
-							root directory
-							|____ client
-							|____|____ api
-							|____|____ common
-							|____|____|____ components
-							|____|____|____|____ inputs
-							|____|____|____ layouts
-							|____|____|____ media
-							|____|____|____|____ icons
-							|____|____|____|____|____ flags
-							|____|____|____ store
-							|____|____|____|____ reducers
-							|____|____|____ styles
-							|____|____|____|____ modules
-							|____|____ modules
-							|____|____|____ authentication
-							|____|____|____|____ components
-							|____|____|____ billing
-							|____|____|____|____ components
-							|____|____|____ overview
-							|____|____|____ header
-							|____|____|____|____ components
-							|____|____|____ profile
-							|____|____|____ settings
-							|____ database
-							|____|____ scripts
-							|____ distribution
-							|____|____ images
-							|____ documentation
-							|____ node_modules
-							|____ server
-							|____|____ controller
-							|____|____ models
-							|____|____ orchestrator
-							|____|____ services
-							|____|____ utilities
-							|____|____|____ errors
-							|____ shared
-							|____|____ translations
-							|____|____|____ countries
-							|____|____|____ currencies
-							|____|____|____ languages
-							|____|____|____ links
-							|____|____ utilities
-							|____|____ validation
-							|____ tests_integration
-							|____ tests_load
-						</code>
-					</pre>
-					<p>A more detailed breakdown and explanation of each of the directories and their purpose can be found below. Compare these directories with the notes below to better understand their purpose.</p>
-					<div>
-						<p><b>root directory: </b> The root directory contains the node package file for starting node, and a series of configuration and property files. An environment file <i>config.env</i> contains build configuration information. <i>webpack.config.js</i> handles the configuration of webpack, bundling and building the files when node is started. There are also a number of configuration files to
-							be used with your code editor for code styling and formatting.</p>
-						<p><b>/client/: </b>The client directory contains content that is bundled together during development and served to users. At the root of the directory there is an <i>index.js</i> file, this injects React into the web-browser dom. The <i>app.js</i> file loads the router and other dependencies. The <i>router.js</i> file handles the react routing (using react-router v4) throughout the
-							application.</p>
-						<p><b>/client/api/: </b>Exported js functions that call the browser 'fetch' function to communicate with the api endpoints on the back-end are stored in this directory.</p>
-						<p><b>/client/common/: </b>Common front-end functions that are shared across multiple pages within the client application.</p>
-						<p><b>/client/common/components/: </b>A directory for storing common react page elements.</p>
-						<p><b>/client/common/components/inputs/: </b>Shared react input elements. Fields, checkboxes and drop-downs. The advantage of using a single field component throughout the application is that you can update once and the changes will be visible everywhere.</p>
-						<p><b>/client/common/layouts/: </b>Every page is wrapped in a 'layout' component. This component defines whether a header, navigation bar or sidebar should be visible along with the page content.</p>
-						<p><b>/client/common/media/: </b>Visual front-end components (usually SVG's').</p>
-						<p><b>/client/common/media/icons/: </b>A central repository of icons used throughout the application front-end.</p>
-						<p><b>/client/common/media/icons/flags/: </b>SVG country flags.</p>
-						<p><b>/client/common/store/: </b>This directory contains a <i>store.js</i> file which loads the Redux application state store. In the development environment, it also contains code that loads the React and Redux development tools.</p>
-						<p><b>/client/common/store/reducers/: </b>All the Redux reducers are stored in this directory. Reducers specify how the Redux application state changes in response to actions that are sent to the store.</p>
-						<p><b>/client/common/styles/: </b>A single <i>entry.scss</i> imports styling files (Sass - Syntactically awesome style sheets) from the modules directory. Webpack compiles these files into pure css during development and production. Sass provides a significant number of benefits over writing pure css.</p>
-						<p><b>/client/common/styles/modules/: </b>The most significant file in this directory is <i>_bootstrap_variations.scss</i> which specifies the default styling and colours of the bootstrap css framework.</p>
-						<p><b>/client/modules/: </b>Pages within the web-application are separated into unique directories and loaded in an asynchronous fashion. If you are creating a new page, most of the content should be stored in a sub-directory within this directory. The first file to be loaded is a <i>index.js</i> file which contains a react-router component. This component handles what should be visible on
-							the page.</p>
-						<p><b>/client/modules/authentication/: </b>Contains all of the pages and components for authentication. This includes, sign-in, registration, forgot password, reset password and verify email. The react-router component in <i>index.js</i> determines which one of these components should be visible.</p>
-						<p><b>/client/modules/authentication/components/: </b>Shared components that are used in a particular page or group of pages, but are unlikely to be required across the whole application, should be stored in a 'components' directory.</p>
-						<p><b>/client/modules/billing/: </b>Pages and components for presenting billing and subscription management to the end user.</p>
-						<p><b>/client/modules/billing/components/: </b>Shared components that are used in a particular page or group of pages, but are unlikely to be required across the whole application, should be stored in a 'components' directory.</p>
-						<p><b>/client/modules/overview/: </b>The first page that is presented to a user when they sign-in to an account.</p>
-						<p><b>/client/modules/header/: </b>A navigation header that is shared across multiple pages throughout the app. The visibility of the header is determined by its use in the layouts directory '<i>client/common/layouts</i>'.</p>
-						<p><b>/client/modules/header/components/: </b>Shared components that are used in a particular page or group of pages, but are unlikely to be required across the whole application, should be stored in a 'components' directory.</p>
-						<p><b>/client/modules/profile/: </b>A directory containing pages where users can update their personal information and add a profile picture.</p>
-						<p><b>/client/modules/settings/: </b>This directory contains pages for handling client specific settings that are applied to all users within the client account.</p>
-						<p><b>/database/: </b> The root database directory contains a series of directories pertaining to building the mysql database. There is a readme file that explains how to run the sql installation scripts.</p>
-						<p><b>/database/scripts/: </b>As the product is developed and the underlying database is changed, database scripts containing the changes are included in this directory. Scripts are chronological in order so when new changes are introduced, you only have to run the latest scripts. <br>All scripts used to make database changes should be documented in this directory. <br>Every script records
-							an entry
-							in the 'executedScripts' database table, so you always know what scripts have already been run on the database.</p>
-						<p><b>/database/scripts/compiled/: </b>All individual sql files are compiled into a single script and supplied in this directory. For sake of convenience, if you ever have to build a new database from scratch, you can use the one script. <br>When you add a new sql script to the `scripts` directory, you should also include it in this file.</p>
-						<p><b>/distribution/: </b>The only directory that serves static files to users over the internet. When building for production, <i>bundle.js</i> files are created through webpack and stored in this directory. When a user navigates to the correct address, these resources are loaded.</p>
-						<p><b>/distribution/images/: </b>This directory is for loading static image files. If you are displaying an image from the server to a user without using a distribution network, the images should all be located within this directory.</p>
-						<p><b>/documentation/: </b>Contains reference material for using and developing the product.</p>
-						<p><b>/node_modules/: </b>When the node command <i>'node install'</i> is run, third-party dependencies used by Reeve are downloaded from the internet and stored here.</p>
-						<p><b>/server/: </b>This directory contains the server specific code that is run on a node js server. The service is initialised via the <i>server.js</i> file. A separate file <i>server.dev.js</i> contains code specific to when the server is running in a development environment.</p>
-						<p><b>/server/controller/: </b>The controller supplies and manages the 'routes' used by the server. When a request is sent to a route on the server, a permission check performed by <i>restrictRoutes.js</i> validates the request and passes the action to a function in one of the files in the orchestrator directory.</p>
-						<p><b>/server/models/: </b>The sequelize ORM maps to the database through the models directory. Each database mapping is stored in a unique file in this directory and automatically loaded by the server.</p>
-						<p><b>/server/orchestrator/: </b>The orchestrator directory is where data manipulation and communication with the database occurs.</p>
-						<p><b>/server/services/: </b>Reeve depends on a variety of third-party services. These integrations are stored in separate files in the services directory, and imported via the <i>server.js</i> file located in the root directory.</p>
-						<p><b>/server/utilities/: </b>Server specific utility functions. The file <i>restrictRoutes.js</i> handles the security of routes and whether an endpoint is accessible to a user. <i>browserResponseLng.js</i> Loads the accept-language from the request header. This is used for determining the language a response should be returned.</p>
-						<p><b>/server/utilities/errors/: </b>Provides a common set of functions for cleanly presenting server errors to the client.</p>
-						<p><b>/shared/: </b>The shared directory is used to share code between the client and the server. This is frequently used in translation and validation, where the inputs and outputs on the server are expected to be the same as what is presented on the client. A significant file in this directory is <i>constants.js</i> which provides a central location for static variables, ensuring values
-							are not 'hard-coded' into multiple pages.</p>
-						<p><b>/shared/translations/: </b>The translations directory contains code that initializes i18next with the correct translation strings. Inside this directory, the file <i>i18n.js</i> loads translation strings from a group of sub-directories. A number of utility functions are also provided in this file, used for displaying translation strings, changing the language and determining the
-							currently active language.</p>
-						<p><b>/shared/translations/countries/: </b>Country names translated into the language of the translation file.</p>
-						<p><b>/shared/translations/currencies/: </b>Currencies translated into the language of the translation file.</p>
-						<p><b>/shared/translations/languages/: </b>A collection of translation strings to be used with the i18next package. Translations are divided into separate files based on their language.</p>
-						<p><b>/shared/translations/links/: </b>Translatable links that point to unique url's written in the language.</p>
-						<p><b>/shared/utilities: </b>Common utility functions shared across the client and server. Date and subdomain manipulation, security token handling and array manipulation.</p>
-						<p><b>/shared/validation/: </b>A collection of validation objects used by the 'validate.js' package. Validation should be performed on the client and server, and these validation objects should be as complex as required to maintain the integrity of the application.</p>
-						<p><b>/tests_integration/: </b>JMeter is a powerful software application designed to load-test and measure the performance of services. This directory contains a basic pre-made file to load-test Reeve. You will need to download and install JMeter separately.</p>
-						<p><b>/tests_load/: </b>The javascript test runner 'ava' is heavily used for integration testing in Reeve. This involves testing the communication paths between the endpoints and the front-end to ensure they are all working correctly. All tests should be stored in the <i>tests_integration</i> directory. You can run the tests using the following command -</p>
-						<div class="code__block code__block--notabs">
-							<pre class="code code--block">
-									<code>
-										npm run test
-									</code>
-								</pre>
-						</div>
-					</div>
-				</div>
-			</section>
-			<section class="js-section">
-				<a name="5.0">
-					<h2 class="section__title">5.0 Getting Started</h2>
-				</a>
-				<p>In this section we will go over the required tools and installation steps for setting-up Reeve so you can start developing!</p>
-				<p>While the documentation will try to explain things in as simple terms as possible, we expects reasonable knowledge in a number areas. <br>Experience with <a href="https://nodejs.org/">Node JS</a>, an understanding of <a href="http://es6-features.org/">ECMAScript 6</a>, and useful functions including <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">promises</a>
-					and <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function">await/async</a>. Working knowledge of <a href="http://expressjs.com/">Express</a> and <a href="https://en.wikipedia.org/wiki/Representational_state_transfer">REST API's.</a></p>
-				<p>The documentation is written as a guide for installation on Unix systems. You will need to substitute some of the commands for Windows compatibility.</p>
-			</section>
-			<section class="js-section">
-				<a name="5.1">
-					<h3 class="section__title">5.1 Node.js & NPM</h3>
-				</a>
-				<p>Reeve is designed to work with Node v8.0.0 and later. If you don't have Node installed on your system, simply download the <a href="https://nodejs.org/#download">installer</a> direct from the website. You can also install node using bash, or using a package manager such as <a href="http://brew.sh/">homebrew</a> or <a href="https://pkgsrc.joyent.com/">pkgsrc</a></p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							curl "https://nodejs.org/dist/latest/node-${VERSION:-$(wget -qO- https://nodejs.org/dist/latest/ | sed -nE 's|.*>node-(.*)\.pkg</a>.*|\1|p')}.pkg" > "$HOME/Downloads/node-latest.pkg" && sudo installer -store -pkg "$HOME/Downloads/node-latest.pkg" -target "/"
-						</code>
-					</pre>
-				</div>
-				<p>For the convenience of ensuring node is running on the latest version, you can also use a <i>Node Version Manager</i> such as <a href="https://github.com/creationix/nvm">nvm</a> or <a href="https://github.com/tj/n">n</a> to maintain your node installation.</p>
-				<p>Once you have successfully installed node, you should be able to run the following commands without any problems.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							$ node --version
-							v8.0.0
-						</code>
-					</pre>
-				</div>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							$ npm --version
-							6.4.1
-						</code>
-					</pre>
-				</div>
-				<p>If you haven't had any issues so far, node and npm should be working correctly. We can now setup Reeve.</p>
-				<p>From the directory that you saved/copied Reeve, we want to point our terminal to this directory so that we are working from the root. Usually you would do this as follows.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							cd Reeve
-						</code>
-					</pre>
-				</div>
-				<p>Run the following command to download our node dependencies from the javascript package manager <a href="https://www.npmjs.com/">npmjs</a></p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							npm install
-						</code>
-					</pre>
-				</div>
-				<p>Once the installation is complete, a new directory called <i>node_modules</i> should have been created in the root directory. This contains the node dependencies Reeve is reliant on.</p>
-				<p>We can now move on to setting up our sql and in-memory databases.</p>
-			</section>
-			<section class="js-section">
-				<a name="5.2">
-					<h3 class="section__title">5.2 Building the Database</h3>
-				</a>
-				<p>The MySQL development documentation has a very detailed guide on installing MySQL for various platforms. Please read the following article <a href="https://dev.mysql.com/doc/mysql-getting-started/en/">Getting Started with MySQL</a>.</p>
-				<p>Once you have successfully installed MySQL, you should be able connect to the server using the mysql client through your terminal.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							$ mysql -u root -p
-						</code>
-					</pre>
-				</div>
-				<p>If the connection was successful, you should receive a similar welcome message to the one below.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							Welcome to the MySQL monitor. Commands end with ; or \g.
-							Your MySQL connection id is 4
-							Server version: 5.7.13 MySQL Community Server (GPL)
-						</code>
-					</pre>
-				</div>
-				<p>Run the following command in your terminal to see a list of existing databases.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							mysql> SHOW DATABASES;
-							+--------------------+
-							| Database |
-							+--------------------+
-							| information_schema |
-							| mysql |
-							| performance_schema |
-							| sys |
-							+--------------------+
-						</code>
-					</pre>
-				</div>
-				<p>We now want to create a new database which will be used by Reeve.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							mysql> CREATE DATABASE reeve;
-							Query OK, 1 row affected (0.01 sec)
-						</code>
-					</pre>
-				</div>
-				<p>As we will be importing scripts to build our database, we will have a significantly less painful experience using a graphical user interface over the terminal.</p>
-				<p>Most of the database management during the development of Reeve was handled by a mac program called <a href="https://www.sequelpro.com/">Sequel Pro</a>. An alternative software product for windows is <a href="https://www.heidisql.com/">HeidiSQL</a>. If you installed MySQL through an installer, it is also quite possible you may have already installed <a href="https://www.mysql.com/products/workbench/">MySQL
-						Workbench</a> on your machine.</p>
-				<p>Inside the directory <i>database > scripts > compiled</i> there is a single file called <i>compiled.sql</i>. We need to take the entire contents of this file and execute the contained scripts on our sql database.</p>
-				<p><img src="images/database.png"></p>
-				<p>The database directory also contains each individual script in chronological order since when they were last created. In the future, as new database changes are made, you don't want to have to rebuild the database from scratch, you only have to run the latest scripts that are yet to be installed.</p>
-				<p>Once our database is successfully built, we can now point Reeve to our database.</p>
-				<p>From the Reeve root directory, open the file called <i>config.env</i>. This file contains all the environmental variables used by the server. Populate the following section of the file with the details of the MySQL server you just created -</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							# MySQL Database
-							DB_HOST=localhost
-							DB_USER=root
-							DB_PASS=root
-							DB_SCHEMA=reeve
-							DB_POOL_MIN=0
-							DB_POOL_MAX=10
-							DB_POOL_ACQUIRE=30000
-							DB_POOL_IDLE=10000
-						</code>
-					</pre>
-				</div>
-				<p>Reeve should now be successfully interfacing with our MySQL database. We can now move on to setting up a Redis in-memory database to handle session management.</p>
-			</section>
-			<section class="js-section">
-				<a name="5.3">
-					<h3 class="section__title">5.3 Running Redis</h3>
-				</a>
-				<p>Redis is an in-memory database used by Reeve to store active user sessions. A user session is semi-permanent information that is required throughout a user interacting with Reeve, from login to logout. On logout this information is cleared.</p>
-				<p>To install Redis, read the following official <a href="https://redis.io/topics/quickstart">quick-start guide.</a></p>
-				<p>Alternatively, if you are using a unix machine, one of the easiest ways to install Redis is using <a href="http://brew.sh/">Homebrew</a> (Mac OS) or <a href="http://linuxbrew.sh/">Linuxbrew</a> (Linux), with the command -</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							$ brew install redis
-						</code>
-					</pre>
-				</div>
-				<p>To start the Redis server you need to execute the redis-server binary as follows -</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							$ redis-server
-						</code>
-					</pre>
-				</div>
-				<p>Once these commands have been run, we now need to confirm if the redis-server is working correctly. Run the following command on the redis-cli. You should receive a 'PONG' response.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							$ redis-cli ping
-							PONG
-						</code>
-					</pre>
-				</div>
-				<p>The final installation procedure involves mapping Reeve to Redis so the two systems can communicate with each other. In the Reeve root directory, open the file <i>config.env</i> and replace the following lines with the Redis database details.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							# Redis Session Store
-							R_HOST=127.0.0.1
-							R_PORT=6379
-							R_PROXY=false
-							R_SECRET=redis_secret
-							R_SAVE_UNINITIALIZED=false
-							R_RESAVE=false
-						</code>
-					</pre>
-				</div>
-				<p>By default, the Redis host is 127.0.0.1 and the port is 6379.</p>
-			</section>
-			<section class="js-section">
-				<a name="5.4">
-					<h3 class="section__title">5.4 Developing Locally</h3>
-				</a>
-				<p>Reeve was developed using the flexible code editing software <a href="https://code.visualstudio.com/">Visual Studio Code</a>. VS Code is optimized for building web applications and includes a variety of useful integrations that make the development experience easier.</p>
-				<p>If you do decided to work with VS Code, we recommend a number of plugins to make your experience more enjoyable.</p>
-				<p><b><a href="https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint">ESLint: </a></b>JavaScript linting tool for identifying and reporting on code patterns, to maintain code quality.</p>
-				<p><b><a href="https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode">Prettier - Code Formatter: </a></b>Code formatting for Prettier.</p>
-				<p><b><a href="https://marketplace.visualstudio.com/items?itemName=robinbentley.sass-indented">Sass: </a></b>Syntax highlighting and auto-complete for Sass files.</p>
-				<p><b><a href="https://marketplace.visualstudio.com/items?itemName=hnw.vscode-auto-open-markdown-preview">Auto-Open Markdown Preview: </a></b>Displays a visual preview of markdown (.md) files as changes are made.</p>
-				<p><b><a href="https://marketplace.visualstudio.com/items?itemName=mikestead.dotenv">DotENV: </b>Adds dotenv file syntax support.</a></p>
-				<p>When these plugins are installed they should automatically integrate nicely using the configuration files in the Reeve directory.</p>
-				<p>For complete parity between your development environment and the authors of this product, our user settings file for VS Code has been provided below.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							{
-								"telemetry.enableCrashReporter": false,
-								"telemetry.enableTelemetry": false,
-								"workbench.sideBar.location": "left",
-								"editor.insertSpaces": true,
-								"editor.minimap.enabled": false,
-								"editor.minimap.renderCharacters": false,
-								"workbench.iconTheme": "vs-minimal",
-								"extensions.ignoreRecommendations": false,
-								"html.format.wrapLineLength": 400,
-								"gitlens.advanced.messages": {
-									&nbsp;"suppressCommitHasNoPreviousCommitWarning": false,
-									&nbsp;"suppressCommitNotFoundWarning": false,
-									&nbsp;"suppressFileNotUnderSourceControlWarning": false,
-									&nbsp;"suppressGitVersionWarning": false,
-									&nbsp;"suppressLineUncommittedWarning": false,
-									&nbsp;"suppressNoRepositoryWarning": false,
-									&nbsp;"suppressResultsExplorerNotice": false,
-									&nbsp;"suppressShowKeyBindingsNotice": true,
-									&nbsp;"suppressUpdateNotice": true,
-									&nbsp;"suppressWelcomeNotice": true
-								},
-								"workbench.startupEditor": "newUntitledFile",
-								"gitlens.keymap": "none",
-								"gitlens.gitExplorer.files.layout": "auto",
-								"gitlens.historyExplorer.enabled": true,
-								"javascript.updateImportsOnFileMove.enabled": "never",
-								"workbench.colorTheme": "Tomorrow Night Blue",
-								"editor.formatOnPaste": true,
-								"editor.formatOnSave": true,
-								"html.autoClosingTags": false
-							}
-						</code>
-				</div>
-				<p>Independent of this product, you can work with any code editor to develop your application. Reeve is not exclusively dependent on this one editor.</p>
-				<p><img src="images/vscode.png"></p>
-				<p>Once your development environment has been set up, the MySQL database and Redis in-memory database are both connected through the <i>config.env</i> file; we can now test the Reeve server on our local machine. Run the following command to start the server in <i>development</i> mode.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							$ npm start
-						</code>
-					</pre>
-				</div>
-				<p>If the development server builds correctly, you should receive a response in your terminal similar to the following.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							[nodemon] starting `node ./server/server.js`
-							Server listening on port: 3000
-							Time: 12336ms
-							Asset Size Chunks Chunk Names
-								2.bundle.js 5.77 KiB 2 [emitted]
-								/images/avatar.svg 6.81 KiB [emitted]
-								0.bundle.js 53.3 KiB 0 [emitted]
-								1.bundle.js 4.7 KiB 1 [emitted]
-								bundle.js 3.33 MiB main [emitted] main
-								/images/logo_dark.svg 8.53 KiB [emitted]
-								3.bundle.js 145 KiB 3 [emitted]
-								4.bundle.js 4.18 KiB 4 [emitted]
-								5.bundle.js 26.4 KiB 5 [emitted]
-								6.bundle.js 4.2 KiB 6 [emitted]
-								7.bundle.js 98.8 KiB 7 [emitted]
-							Entrypoint main = bundle.js
-							ℹ ｢wdm｣: Compiled successfully.
-						</code>
-					</pre>
-				</div>
-				<p>Go to the address <a href="http://localhost:3000/">http://localhost:3000/</a> in your web browser to see Reeve successfully loaded on the page.</p>
-				<p>When you make changes to the code-base while the server is running, the server will automatically restart and reload the contents. You may need to occasionally reload your web-browser to see the changes occur.</p>
-			</section>
-			<section class="js-section">
-				<a name="5.5">
-					<h3 class="section__title">5.5 Build Tools</h3>
-				</a>
-				<p>Throughout stages of the development lifecycle, it is important that a development environment responds to each stage with unique behaviour that is relevant to the current stage. When in development, you wouldn't expect the server environment to behave the same as it would in production, you probably want access to extra utilities and tools for debugging and testing.</p>
-				<p>There are three system environments used by Reeve you may be familiar with. <i>Development</i>, <i>Production</i> and <i>Test</i>. All three environments change a number of settings, and should be used as intended. You wouldn't run a development environment on a production server!.</p>
-				<p>You can change the environment setting in the <i>config.env</i> file in the root directory.</p>
-				<p>Reeve utilises Webpack, a module bundler that takes javascript files and compiles them into static assets to be loaded by the browser.</p>
-				<p>Webpack handles a lot of the code change and settings manipulation when swapping between these environments.</p>
-				<p>In the root directory, open the file <i>webpack.config.js</i>.</p>
-				<p>Scroll through the code and look for lines such as the following.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							config.build.environment === "development"
-						</code>
-					</pre>
-				</div>
-				<p>These checks run code specific to certain environments. In the first function called <i>loadPlugins()</i> there are two stand-out plugins that are loaded on different conditions.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							if (config.build.environment === "development") {
-								&nbsp;plugins.push(new webpack.HotModuleReplacementPlugin());
-							}
-						</code>
-					</pre>
-				</div>
-				<p>When in development mode, Webpack loads the HotModuleReplacementPlugin. This plugin provides live page-refresh when code changes occur during development. Plugins such as this, you wouldn't expect to be loaded on production.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							if (config.development.analyzeBundle === true) {
-								&nbsp;plugins.push(new BundleAnalyzerPlugin());
-							}
-						</code>
-					</pre>
-				</div>
-				<p>Inside <i>config.env</i> there is an option to enable analyzeBundle (by default this is false). BundleAnalyzerPlugin is a plugin that performs an analysis of the packages in the bundle.js file and reports on their sizes. This plugin is useful if you are concerned about the size of the client application to be downloaded by the web-browser.</p>
-				<p>If you swap the environmental variable to production, webpack minifies the bundle.js file it is producing, strips out comments and debugging related markers, and creates re-distributable bundle.js files in the <i>./distribution</i> directory. This setting is for ensuring that Reeve is in a state where it can securely work in production.</p>
-				<p><b>React and Redux Developer Tools</b><br>
-					When working with the front-end, there are two useful plugins you may be interested in installing on your machine.</p>
-				<p><a href="https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en">React Developer Tools:</a> Adds React debugging tools to the Chrome Developer Tools.</p>
-				<p><a href="https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en">Redux Developer Tools:</a> Adds Chrome developer tools for debugging redux application state changes.</p>
-				<p>Both of these tools only work when the <i>development</i> environment mode is set.</p>
-			</section>
-			<section class="js-section">
-				<a name="5.6">
-					<h3 class="section__title">5.6 Server Configuration</h3>
-				</a>
-				<p>For security reasons, it is never a good idea to "hard-code" private information directly into a code-base. We use environmental variables to pass universal information throughout.</p>
-				<p>Within Reeve, at the root directory there is a file called <i>config.env</i>. This file contains a large list of environmental variables for configuring, enabling and disabling features on the platform.</p>
-				<p>In the same root directory, the file <i>config.js</i> takes all of the environment variables from <i>config.env</i> and loads them into a static javascript object that can be imported and used across the server.</p>
-				<p>You will need to work through the <i>config.env</i> file and determine what properties need to be updated to reflect the desired server configuration.</p>
-			</section>
-			<section class="js-section">
-				<a name="6.0">
-					<h2 class="section__title">6.0 The Client</h2>
-				</a>
-				<p>Within web-application phraseology, a client is a forward facing application that is visible to the end-user and provides the graphical interface that the user interacts with to communicate with the back-end server.</p>
-				<p>Thanks to improvements in javascript, web browser engines, and the development of powerful frameworks such as React.js, we can now develop complex web-applications that are functionally similar to their desktop counterparts.</p>
-			</section>
-			<section class="js-section">
-				<a name="6.1">
-					<h3 class="section__title">6.1 Overview</h3>
-				</a>
-				<p>When Reeve is deployed to production, a series of bundle files are generated by the webpack application bundler and stored in an accessible repository from the server. These bundle files contain minified javascript code that are effectively loaded into the web browser and contain the client application the user interacts with to communicate with the back-end server. This follows the client-server relationship model.</p>
-				<p>While the whole application is written in javascript, the visual front-end of the client application has been developed using react.js, a library for building user interfaces.</p>
-				<p>Please ensure you have working knowledge of how to use React by reading the following <a href=“https://reactjs.org/docs/getting-started.html”>documentation</a>.</p>
-				<p>Inside the ‘client’ directory, react.js is loaded within the <i>index.js</i> file as follows.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							ReactDOM.render(
-								&nbsp;&lt;Provider store={store}&gt;
-								&nbsp;&lt;I18nextProvider i18n={i18next}&gt;
-									&nbsp;&nbsp;&lt;Fragment&gt;
-										&nbsp;&nbsp;&nbsp;&lt;Notifications /&gt;
-										&nbsp;&nbsp;&nbsp;&lt;App /&gt;
-										&nbsp;&nbsp;&nbsp;&lt;ReactTooltip /&gt;
-									&nbsp;&nbsp;&lt;/Fragment&gt;
-								&nbsp;&lt;/I18nextProvider&gt;
-							&lt;/Provider&gt;,
-							document.getElementById("app"))
-						</code>
-					</pre>
-				</div>
-				<p>Not only does the index file load the ReactDOM, it also initializes a number of key components the client is dependent upon. The first is <i>Provider store={store}</i>; which is the redux store for handling the application state. The component <i>I18nextProvider</i> supplies language translation of strings across the entire application.</p>
-				<p>From within the <i>app.js</i> file, during the ‘componentDidMount’ stage, a function called ‘this.browserVersionCheck()’ is executed. If the user has loaded Reeve into an old or incompatible web-browser, a permanent alert at the top of the screen will be visible recommending them to upgrade their web browser as soon as possible.</p>
-				<p>Once the browser validation is complete, Reeve checks the web-browser local or session storage for a json web token and attempts to authenticate with the server. Regardless of the outcome, once this process is complete and the app knows the login state, React finally renders the page. A react-router component is called which handles what page content to display and whether the user has the necessary security permissions to view the page.</p>
-			</section>
-			<section class="js-section">
-				<a name="6.2">
-					<h3 class="section__title">6.2 Routing</h3>
-				</a>
-				<p>The front-end of the Reeve application uses a unique routing system that ensures only certain pages are accessible to users based on the correct security permissions, roles, features and subscription type they may have as a user or client.</p>
-				<p>This routing is handled within a file called <i>router.js</i> in the ./client directory.</p>
-				<p>Within this file, pages are loaded asyncronously by calling a component called <i>AsyncComponent</i>.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							const overview = AsyncComponent(() => import("./modules/overview"));
-						</code>
-					</pre>
-				</div>
-				<p>Every page component is wrapped in a component called <i>ProtectedRoute</i>.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							&lt;ProtectedRoute
-							exact path="/billing"
-							role={[ROLE_TYPE.OWNER, ROLE_TYPE.FINANCE]}
-							feature={[FEATURES.BILLING]}
-							subscription={[SUBSCRIPTION_TYPE.TRIAL, SUBSCRIPTION_TYPE.BASIC]}
-							user={user}
-							render={()=&gt; (
-								&nbsp;&lt;DefaultLayout key="/billing"&gt;
-									&nbsp;&nbsp;&lt;Billing /&gt;
-								&nbsp;&lt;/DefaultLayout&gt;
-							)}/&gt;
-						</code>
-					</pre>
-				</div>
-				<p>By defining certain parameters within this <i>ProtectedRoute</i>, we can restrict the accessibility of the page to a variety of conditions being met.</p>
-				<p><b>path:</b> The path the page will be accessible from when navigated to in a web browser.</p>
-				<p><b>role:</b> Pages can be restricted on the basis of the type of roles associated with a users account.</p>
-				<p><b>feature:</b> Features can be used to restrict functionality to certain paying customers. With an array of features, you can restrict a page to clients who only have certain features on their account.</p>
-				<p><b>subscription:</b> An array defining the subscription levels required to access the page. In this example, a user with either a trial or basic account will be able to see the page.</p>
-				<p><b>render:</b> When satisfactory conditions are met, <i>render</i> contains the components to be displayed on the page. In this example, a component called <i>DefaultLayout</i> wraps an asyncronously loaded <i>Billing</i> page component. <i>DefaultLayout</i> is a basic component that displays a navigation header on the page.</p>
-			</section>
-			<section class="js-section">
-				<a name="6.3">
-					<h3 class="section__title">6.3 Redirects</h3>
-				</a>
-				<p>At times when you are developing the routing for your application, you may experience pages redirecting; whereby you visit one page and the application automatically navigates to another page. It is important to understand why this is happening to prevent frustration when building your application routes.</p>
-				<p>Inside of <i>ProtectedRoute</i> there are a number of validation checks that need to be satisfied in order for the page to be correctly displayed.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							// Redirect to signin page when on homepage and not logged in
-							if (path === "/" && !userLoggedIn) {
-								&nbsp;return &lt;Redirect to="/signin" /&gt;;
-							}
-						</code>
-					</pre>
-				</div>
-				<p>When a visitor navigates to the homepage of the application, this first validation statement checks if the user is logged in, and if not, redirects them to the sign-in page. If you would like to display alternative pages when a user is not logged in to an account, you can safely delete this code-block.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							// Redirect to billing pages if user is loaded but trial has ended
-							if (path !== "/billing" && userLoggedIn && !user.get("subscriptionActive")) {
-								&nbsp;return &lt;Redirect to="/billing" /&gt;;
-							}
-						</code>
-					</pre>
-				</div>
-				<p>If a user is logged in but their trial or subscription has ended, we don't want them to be able to continue using the application. This validation redirects the user to the billing page when their subscription ends.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							// Show certain routes if user is not logged in
-							if ((path == "/register" || path == "/forgot" || path == "/signin" || path == "/signin/help" || path == "/reset") && !userLoggedIn) {
-								&nbsp;return &lt;Route {...this.props} /&gt;;
-							}
-						</code>
-					</pre>
-				</div>
-				<p>When a visitor is not logged in to an account, there are only certain page routes that the visitor should be able to access. This validation check restricts access to signin, registration and forgot password pages.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							// Redirect if user is loaded
-							if ((path == "/register" || path == "/forgot" || path == "/signin" || path == "/signin/help" || path == "/reset") && userLoggedIn) {
-								&nbsp;return &lt;Redirect to="/" /&gt;;
-							}
-						</code>
-					</pre>
-				</div>
-				<p>Similar to the check above, this one redirects a user back to the homepage if they are already logged in but try to navigate to a signup or registration page. Signup / registration / forgot password should only be accessible when a user is not logged in.</p>
-				<p>You will need to meet these conditions in order to ensure that your page displays correctly. Alternatively, you can modify the parameters to display your pages outside of these conditions.</p>
-			</section>
-			<section class="js-section">
-				<a name="6.4">
-					<h3 class="section__title">6.4 Missing Paths</h3>
-				</a>
-				<p>When a user attempts to navigate in their web browser to a page route that does not exist, we need a way to catch this behaviour and display a generic 'Page Not Found' message.</p>
-				<p>At the end of the <i>Router.js</i> page, a final <i>ProtectedRoute</i> with a wildcard path of "*" is supplied. If a user navigates to a page that does not exist on the router list, the final <i>MissingPath</i> component will be displayed</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							&lt;ProtectedRoute
-								&nbsp;path="*"
-								&nbsp;render={()=> (
-									&nbsp;&nbsp;&lt;DefaultLayout key="*"&gt;
-										&nbsp;&nbsp;&nbsp;&lt;MissingPath /&gt;
-									&nbsp;&nbsp;&lt;/DefaultLayout&gt;
-								&nbsp;)}
-							/>
-						</code>
-					</pre>
-				</div>
-				<p>By default, the <i>MissingPath</i> component will display an alternative message when a client subscription has expired compared to when the account is active.</p>
-				<p>If you are building sub-routes (i.e. /billing/payments/) you should remember to include a MissingPath component with a wildcard path to accomodate the cases where a user enters a partially incorrect page route.</p>
-			</section>
-			<section class="js-section">
-				<a name="6.5">
-					<h3 class="section__title">6.5 API Development</h3>
-				</a>
-				<p>When you are developing the front-end client, at times you are going to want to be able to communicate with the server to transfer information between the two. Whether you are retrieving information, or manipulating data, this section focuses on communicating with the server via an Application Programming Interface (API).</p>
-				<p>An API is a specification of the possible interactions between one component and another. The client / web-browser doesn't necessarily need to know how to perform a complex piece of work, it only needs to know the correct path on the server to call, and the server will do most of the work.</p>
-				<p>In non-technical terms, if you were at a restaraunt and ordered food from a menu, you wouldn't need to know how the food was prepared, only that you received the meal at the end.</p>
-				<p>Reeve interacts with the server using REST (Representational State Transfer) APIs and an inbuilt web-browser technology called 'fetch'. A very good introduction to REST APIs can be found at <a href="https://www.smashingmagazine.com/2018/01/understanding-using-rest-api/">Smashing Magazine</a>.</p>
-				<p>Sending and requesting data through the REST API is formatted using JSON (JavaScript Object Notation). JSON is formatted like the following:</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							{
-							&nbsp;"key1": "value1",
-							&nbsp;"key2": "value2",
-							&nbsp;"key3": "value3"
-							}
-						</code>
-					</pre>
-				</div>
-				<p>In the <i>./client</i> directory there is a directory called <i>./api</i>. We define all of the APIs we want to communicate with on the server as exportable functions in this location. Open the file <i>authentication.js</i> and review the different functions calling the api on the server. The anatomy of a front-end API call looks like the following.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							// Reset User Password
-							export function resetPassword(reset) {
-								&nbsp;return fetch.perform("/api/v1.0/reset_password/", {
-									&nbsp;&nbsp;method: "POST",
-									&nbsp;&nbsp;body: JSON.stringify({
-										&nbsp;&nbsp;&nbsp;password: reset.password,
-										&nbsp;&nbsp;&nbsp;verifyPassword: reset.verifyPassword,
-										&nbsp;&nbsp;&nbsp;code: reset.code,
-										&nbsp;&nbsp;&nbsp;workspaceURL: reset.workspaceURL
-									&nbsp;&nbsp;})
-								&nbsp;});
-							}
-						</code>
-					</pre>
-				</div>
-				<p>- The first line is a comment that defines what the purpose of the API call is. In this instance, we have a function that calls an API endpoint to reset a users password.</p>
-				<p>- The third line calls a unique function called 'fetch' (located in <i>./client/common/fetch.js</i>). This function receives the path of the api endpoint to communicated with. The location on the back-end server.</p>
-				<p>- Line four is the method type. In this example, we are making a 'POST' request. The server expects some information from our web-browser for the command to be successful. Other types of request methods can include GET, PUT, PATCH, DELETE.</p>
-				<p>- The fifth and preceeding lines contains a JSON object with information that we are sending to the server for processing.</p>
-				<p>Now with this information we can successfully start writing methods that make API calls to the back-end server. Most of the functionality is handled by the 'fetch' function. It is important to understand what this function is doing, as you may need to modify it in the future.</p>
-				<p>Open the file <i>fetch.js</i> from the following location <i>./client/common/fetch.js</i></p>
-				<p>Fetch is an asyncronous function that is executed every time a method request is made. The purpose of this function is to introduce standardization; i.e if you make changes, you only have to update one function instead of multiple.</p>
-				<p>Some important functions within <i>fetch.js</i> include -</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							// Add security token to header
-							if (this.token != null) {
-								&nbsp;options.headers = Object.assign(options.headers, {
-								&nbsp;Authorization: `jwt ${this.token}`
-							});
-							}
-						</code>
-					</pre>
-				</div>
-				<p>When a user has logged in to an account, every request is attached with a JSON Web Token to ensure that the request is authorized.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							// Handle server side redirects
-							if (response.redirected) {
-								&nbsp;return window.location.replace(response.url);
-							}
-						</code>
-					</pre>
-				</div>
-				<p>If the server responds with a redirect request, the web-browser will redirect the user to a new page. This is frequently used when a trial account has expired, and we want to direct the user to the billing page.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							// Valid response if status 200 ~ 299
-							let json = response.json();
-							if (response.status >= 200 && response.status < 300) {
-								&nbsp;return json;
-							} 
-							
-							// Throw error if any other response from server
-							return json.then(error=> {
-								&nbsp;throw error;
-							});
-						</code>
-					</pre>
-				</div>
-				<p>Once we receive a request, we need to confirm that it was successful and the server is not sending us an error. On every request we check that the server response status is between 200 and 299. If this is true, the function will return the JSON data as normal, if not, the function will throw an error.</p>
-				<p>While we have built functions that call our REST endpoints, we need to be able to manipulate and store this information as the function itself isn't very useful alone. <a href="#6.7">6.7 State Management</a> covers retrieving data via our endpoints and storing/manipulating this data.</p>
-			</section>
-			<section class="js-section">
-				<a name="6.6">
-					<h3 class="section__title">6.6 Validation</h3>
-				</a>
-				<p>One of the major issues with communicating with API endpoints is security. Because we are sending information back and forth between the client and server, we need to protect the integrity and security of our server.</p>
-				<p>As users are able to send commands to the server, it is always possible that some are malicious and attempts at retrieving secured information or accessing the database.</p>
-				<p>To protect against this, we <b>always</b> need to validate the data on both the client and server.</p>
-				<p>Reeve makes use of a package called <a href="https://validatejs.org/">validate.js</a> to handle basic integrity checking of the data being sent back and forth.</p>
-				<p>Common uses of this package might be making sure that when an email field is required, the user sends a string that contains a valid email address. Fields are not empty or the wrong length. A number field contains a number and not an alphanumeric string.</p>
-				<p>We want to catch all of this as early as possible, and preferably on the client side first.</p>
-				<p>To start validating javascript objects, we need to import validate from the shared directory.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							import validate from "shared/validation/validate";
-						</code>
-					</pre>
-				</div>
-				<p>To use the function, we want to call validate as follows.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							// Validate input parameters
-							const valid = validate(objectToBeValidated, ValidationProperties());
-							
-							if (valid != null) {
-								&nbsp;// there is a validation error
-								&nbsp;// valid will return an object with the invalid parameters
-							});
-						</code>
-					</pre>
-				</div>
-				<p>We pass two parameters into the validate function. The first one 'objectToBeValidated' is a JSON object containing all of the parameters we want to confirm are valid.</p>
-				<p>The second parameter ValidationProperties() is a function (which returns an object) that contains all of the rules 'objectToBeValidated' will need to conform against in order to be valid.</p>
-				<p>Validation rules are stored in the <i>./shared/validation/</i> directory.</p>
-				<p>This is what a set of validation rules looks like.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							const workspaceURL = () => {
-								&nbsp;return {
-									&nbsp;&nbsp;workspaceURL: {
-										&nbsp;&nbsp;&nbsp;presence: {
-											&nbsp;&nbsp;&nbsp;&nbsp;allowEmpty: false
-										&nbsp;&nbsp;&nbsp;},
-										&nbsp;&nbsp;&nbsp;format: {
-											&nbsp;&nbsp;&nbsp;&nbsp;pattern: "[a-z0-9]+",
-											&nbsp;&nbsp;&nbsp;&nbsp;flags: "i",
-											&nbsp;&nbsp;&nbsp;&nbsp;message: t("validation.validators.validCharactersAZ09")
-										&nbsp;&nbsp;&nbsp;},
-										&nbsp;&nbsp;&nbsp;exclusion: {
-											&nbsp;&nbsp;&nbsp;&nbsp;within: RESTRICTED_DOMAINS,
-											&nbsp;&nbsp;&nbsp;&nbsp;message: t("validation.validators.validWorkspaceURL")
-										&nbsp;&nbsp;&nbsp;},
-										&nbsp;&nbsp;&nbsp;length: {
-											&nbsp;&nbsp;&nbsp;&nbsp;minimum: 4,
-											&nbsp;&nbsp;&nbsp;&nbsp;maximum: 255
-										&nbsp;&nbsp;&nbsp;}
-									&nbsp;&nbsp;}
-								&nbsp;};
-							};
-						</code>
-					</pre>
-				</div>
-				<p>We recommend reading the documentation on the <a href="https://validatejs.org/">validate.js website</a> and following their best practices when designing your validation rules.</p>
-			</section>
-			<section class="js-section">
-				<a name="6.7">
-					<h3 class="section__title">6.7 State Management</h3>
-				</a>
-				<p>As a user navigates through an application, we would expect that the pages change and provide relevant contextual information to the user as they interact with it.</p>
-				<p>As these applications grow and involve lots of moving pieces, managing all of these changing components becomes increasingly complex.</p>
-				<p>To handle state management and the frequent data manipulation in large applications, we rely on a package called <a href="https://redux.js.org/">Redux</a>.</p>
-				<p>"Redux is a predictable state container for JavaScript apps."</p>
-				<p>The following <a href="https://medium.freecodecamp.org/understanding-redux-the-worlds-easiest-guide-to-beginning-redux-c695f45546f6">article</a> is a very good introduction to Redux, how it works and how to use it.</p>
-				<p>The Redux store (explained in the proceeding section) is located in the following directory <i>./client/common/store/</i>. A group of imports and helper functions are used on each of the pages to call functions that manipulate this redux state container.</p>
-				<p>To see this in action, open the file <i>authentication.js</i> located at <i>./client/common/store/reducers/authentication.js</i></p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							export default function authentication(state = DEFAULT_STATE, action) {
-							switch (action.type) {
-								&nbsp;case LOGIN_PENDING:
-									&nbsp;&nbsp;return state.setIn(["userLogin", "status"], REDUX_STATE.PENDING);
-								&nbsp;case LOGIN_FULFILLED:
-									&nbsp;&nbsp;return state.set(
-										&nbsp;&nbsp;&nbsp;"userLogin",
-										&nbsp;&nbsp;&nbsp;fromJS({
-											&nbsp;&nbsp;&nbsp;&nbsp;status: REDUX_STATE.FULFILLED,
-											&nbsp;&nbsp;&nbsp;&nbsp;payload: action.payload
-										&nbsp;&nbsp;&nbsp;})
-								&nbsp;);
-						</code>
-					</pre>
-				</div>
-				<p>We first define a series of 'states' we expect our application to be in at certain times. In the example above, a userLogin state, we would expect to be 'pending' and 'fulfilled' once a user has logged in.</p>
-				<p>Next we create functions that call these actions to manipulate the state.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							export function loginUser(body) {
-								&nbsp;return dispatch => {
-									&nbsp;&nbsp;dispatch({
-										&nbsp;&nbsp;&nbsp;type: LOGIN_PENDING
-									&nbsp;&nbsp;});
-									&nbsp;&nbsp;return userLogin(body).then(
-										&nbsp;&nbsp;&nbsp;result => {
-											&nbsp;&nbsp;&nbsp;&nbsp;return dispatch({
-												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type: LOGIN_FULFILLED,
-												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;payload: result
-											&nbsp;&nbsp;&nbsp;&nbsp;});
-										&nbsp;&nbsp;&nbsp;},
-										&nbsp;&nbsp;&nbsp;error =>
-											&nbsp;&nbsp;&nbsp;&nbsp;dispatch({
-												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type: LOGIN_REJECTED,
-												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;payload: error
-											&nbsp;&nbsp;&nbsp;&nbsp;})
-									&nbsp;&nbsp;);
-								&nbsp;};
-							}
-						</code>
-					</pre>
-				</div>
-				<p>Do you notice anything interesting about the example above?</p>
-				<p>The following function manipulating the Redux store calls the function userLogin(). This function is one of the api functions located in our <i>./client/api/</i> directory.</p>
-				<p>So the process is as follows. We are calling an action function called a Reducer. This Reducer sets the state to 'Pending'. While the state is 'Pending,' the action function calls another function in our <i>./api</i> directory. If this communication with the server is successful, we change the state to a 'fulfilled' state.</p>
-				<p>Open the file SignIn.js located in <i>./client/modules/authentication/SignIn.js</i></p>
-				<p>At the base of the file we are using two functions to integrate with our Redux store. mapStateToProps and mapDispatchToProps.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							function mapStateToProps(state) {
-								&nbsp;return {
-									&nbsp;&nbsp;workspaceURLStatus: state.getIn([AUTHENTICATION, "workspaceURL", "status"]),
-									&nbsp;&nbsp;logInStatus: state.getIn([AUTHENTICATION, "userLogin", "status"]),
-									&nbsp;&nbsp;clientStyle: state.getIn([AUTHENTICATION, "workspaceURL", "payload"]),
-									&nbsp;&nbsp;userToken: state.getIn([AUTHENTICATION, "userLogin", "status", "payload", "token"]),
-									&nbsp;&nbsp;userKeepSignedIn: state.getIn([AUTHENTICATION, "userLogin", "status", "payload", "keepSignedIn"])
-								&nbsp;};
-							}
-						</code>
-					</pre>
-				</div>
-				<p>In the mapStateToProps function, we are pulling data from our redux store and loading it into the SignIn component so that is accessible to the user on the front-end.</p>
-				<p>If we want to manipulate this data, we use the mapDispatchToProps function and call one of the Reducers (Action functions) which goes and calls an API and then manipulates the Redux store.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							function mapDispatchToProps(dispatch) {
-								&nbsp;return {
-									&nbsp;&nbsp;loginUser: bindActionCreators(loginUser, dispatch),
-									&nbsp;&nbsp;loadUser: bindActionCreators(loadUser, dispatch),
-									&nbsp;&nbsp;validateWorkspaceURL: bindActionCreators(validateWorkspaceURL, dispatch),
-									&nbsp;&nbsp;changeLanguage: bindActionCreators(changeLanguage, dispatch)
-								&nbsp;};
-							}
-						</code>
-					</pre>
-				</div>
-				<p>This is a basic introduction to how Reeve uses Redux to maintain its application state and where they key files are located. To gain a full understanding of working with Redux, it is important to read the official <a href="https://redux.js.org/">documentation</a>.</p>
-			</section>
-			<section class="js-section">
-				<a name="6.8">
-					<h3 class="section__title">6.8 The User Store</h3>
-				</a>
-				<p>A Redux store, is a central location that maintains the state of an application. The only way to manipulate the application state is to 'dispatch' an action on it.</p>
-				<p>The following <a href="https://redux.js.org/api/store">page</a> explains the store and the type of functions that can be called against it.</p>
-				<p>As you would have seen above, we defined our store and the action functions in the directory <i>./client/common/store/</i>. We then made sure our Redux store and action functions were accessible to our pages using <i>mapStateToProps</i> and <i>mapDispatchToProps</i>.</p>
-				<p>In Reeve (and part of Redux) we also have a 'User Store.' This is a central location where we keep all of the personal information relevant to a logged in user.</p>
-				<p><img src="images/redux-user-store.png"></p>
-				<p>The reason we lump all of this together, is we want the application to have easy access to the features, subscription type, and roles a user might have, so that we display the correct information, and restrict the parts of the application we don't want the user to see.</p>
-				<p>You can access the user store very easily by importing the following component.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							import User from "common/components/User";
-						</code>
-					</pre>
-				</div>
-				<p>And passing it into the React propTypes.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							component.propTypes = {
-							&nbsp;user: PropTypes.object
-							};
-						</code>
-					</pre>
-				</div>
-				<p>The user component is very heavily used in displaying and hiding content, and restricting access to certain pages. You will find further references to this component throughout the documentation.</p>
-			</section>
-			<section class="js-section">
-				<a name="6.9">
-					<h3 class="section__title">6.9 Common Components</h3>
-				</a>
-				<p>Reeve provides a variety of common components to integrate into your application.</p>
-				<p>The goal is to provide a set of standardized components to reduce development time, and maintain consistency in the project.</p>
-				<p>For example, if you have a form field, you can use the same field component to support every element. This reduces duplication, and the risk in discrepancies amongst changes in different areas.</p>
-				<p>For ease of access, all shared React components should be stored in the same directory. <i>./client/common/components/</i></p>
-				<p>Many of the components are explained in significant detail throughout the documentation.</p>
-			</section>
-			<section class="js-section">
-				<a name="6.10">
-					<h3 class="section__title">6.10 Asynchronous Components</h3>
-				</a>
-				<p>Once the code is ready for production and the environment variables have been set, Reeve takes the client side code and creates bundle files. Bundle files are served to the web-browser when a user visits the application website.</p>
-				<p>As there is a lot of code required to build a useful front-end application, we don't want a user to have to download everything at once just to access it. They should not be waiting 30 seconds to download a 4mb bundle file.</p>
-				<p>To address this, we use asynchronous components. Instead of loading everything on start, the web browser only downloads the code required to work the current page. As the user navigates through the application, more content is downloaded asynchronously. Instead of a single bundle file, the application is broken down into multiple smaller bundle files, downloaded when required.</p>
-				<p>To prepare our codebase when developing, we need to make sure that our pages are loaded asynchronously, so that when the bundles are generated, webpack knows to split them into separate bundle files.</p>
-				<p>Import a component called AsyncComponent as follows.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							import AsyncComponent from "./AsyncComponent";
-						</code>
-					</pre>
-				</div>
-				<p>You can now import your pages or components like this.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							const MissingPath = AsyncComponent(() => import("./MissingPath"));
+<div class="left-menu">
+    <div class="content-logo">
+        <img alt="AI Videos platform by BuildAR.in that creates videos in 40 Languages" title="platform by Emily van den Heever from the Noun Project" src="../distribution/images/Logo_BuildAR.png" height="64" />
+        <span>API Documentation</span>
+    </div>
+    <div class="content-menu">
+        <ul>
+            <li class="scroll-to-link active" data-target="get-started">
+                <a href="#get-started">GET STARTED</a>
+            </li>
+            <li class="scroll-to-link" action="get-api-access">
+                <a href="#get-api-access">Get API Access</a>
+            </li>
+            <li class="scroll-to-link" data-target="get-available-voices">
+                <a href="#overview">Overview</a>
+            </li>
+            <li class="scroll-to-link" data-target="get-avialable-voices">
+                <a href="#get-avialable-voices">Get Available Voices</a>
+            </li>
+            <li class="scroll-to-link" data-target="generate-audio">
+                <a href="#generate-audio">Generate Audio</a>
+            </li>
+            <li class="scroll-to-link" data-target="generate-video">
+                <a href="#generate-video">Generate Video</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="content-page">
+    <div class="content-code"></div>
+    <div class="content">
+        <div class="overflow-hidden content-section" id="get-started">
+            <h1 id="get-started">Get started</h1>
+            <pre>
+        API Endpoint
 
-							&lt;MissingPath /&gt;
-						</code>
-					</pre>
-				</div>
-			</section>
-			<section class="js-section">
-				<a name="6.11">
-					<h3 class="section__title">6.11 Input Components</h3>
-				</a>
-				<p>One of the advantages of using React is that components are reusable. Not only does this reduce code duplication, it also means that you can make changes to one component, and the changes are reflected across the whole app.</p>
-				<p>Reeve provides a number of standardized input elements you can integrate into your application.</p>
-				<table>
-					<col width="50%">
-					<tr>
-						<th>Component</th>
-						<th>Inputs</th>
-					</tr>
-					<tr>
-						<td>
-							&lt;InputField /&gt;<br><br>
-							<img src="images/input_inputField.png">
-						</td>
-						<td>
-							<ul class="table-list">
-								<li><b>name:</b> Unique name defining input element.</li>
-								<li><b>value:</b> Text value of the input field.</li>
-								<li><b>onChange:</b> Function call when value inside field changes, i.e. keyboard input.</li>
-								<li><b>label:</b> Text label string positioned to the left of the input field.</li>
-								<li><b>id:</b> CSS id of input field.</li>
-								<li><b>type:</b> HTML type of the input object.</li>
-								<li><b>ariaLabel:</b> Hidden label attribute to for assistive technology.</li>
-								<li><b>placeholder:</b> Placeholder text displayed in field when the input is empty.</li>
-								<li><b>disabled:</b> Boolean check if field should be active or disabled.</li>
-								<li><b>error:</b> Validation error message string displayed below the input field.</li>
-							</ul>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							&lt;Checkbox /&gt;<br><br>
-							<img src="images/input_checkbox.png">
-						</td>
-						<td>
-							<ul class="table-list">
-								<li><b>name:</b> Unique name defining input element.</li>
-								<li><b>value:</b> Boolean value of the checkbox. Selected or unselected.</li>
-								<li><b>onClick:</b> Function call when object is clicked.</li>
-								<li><b>label:</b> Text label string positioned to the left of the checkbox.</li>
-								<li><b>id:</b> CSS id of the checkbox.</li>
-								<li><b>smallText:</b> Boolean check if checkbox label should be printed in small text.</li>
-								<li><b>disabled:</b> Boolean check if field should be active or disabled.</li>
-								<li><b>error:</b> Validation error message string displayed below the input field.</li>
-							</ul>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							&lt;WorkspaceURLField /&gt;<br><br>
-							<img src="images/input_workspaceField.png">
-						</td>
-						<td>
-							<ul class="table-list">
-								<li><b>label:</b> Text label string positioned to the left of the input field.</li>
-								<li><b>value:</b> Text value of the input field.</li>
-								<li><b>onChange:</b> Function call when value inside field changes, i.e. keyboard input.</li>
-								<li><b>disabled:</b> Boolean check if field should be active or disabled.</li>
-								<li><b>error:</b> Validation error message string displayed below the input field.</li>
-							</ul>
-						</td>
-					</tr>
-				</table>
-			</section>
-			<section class="js-section">
-				<a name="6.12">
-					<h3 class="section__title">6.12 Page Layouts</h3>
-				</a>
-				<p>Inside <i>./client/common/</i> there is a directory called <i>layouts</i>.</p>
-				<p>The purpose of this directory is to act as a central location for layout components. Layout components wrap around page components and provide common elements such as Headers, Sidebars and Footers.</p>
-				<p>This is a better alternative than hard-coding these elements into every page, especially when they may not be needed.</p>
-				<p>To use a page layout component, we inject it into the render stage of the React Router in <i>./client/Router.js</i></p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							import DefaultLayout from "common/layouts/DefaultLayout";
+          https://35.232.47.147:8001/
+                </pre>
+            <p>
+                The BuildAR API provides programmatic access to create videos in 40+ Languages from just text. 
+                You need to select an actor, speaker and enter your text script and videos are created in a few minutes.
+            </p>
+            
+        </div>
+        <div class="overflow-hidden content-section" id="get-api-access">
+            <h1 id="get-started">Get API Access</h1>
+            <pre>
+        For API Key 
+        Reach out to:
 
-							&lt;ProtectedRoute
-								&nbsp;exact
-								&nbsp;path="/settings"
-								&nbsp;role={[ROLE_TYPE.OWNER, ROLE_TYPE.ADMINISTRATOR]}
-								&nbsp;user={user}
-								&nbsp;render={() => (
-									&nbsp;&nbsp;&lt;DefaultLayout key="/settings"&gt;
-										&nbsp;&nbsp;&nbsp;&lt;Settings /&gt;
-									&nbsp;&nbsp;&lt;/DefaultLayout&gt;
-								&nbsp;)}
-							/&gt;
-						</code>
-					</pre>
-				</div>
-				<p>Because layout components contain elements that are frequently changing (i.e. Header navigation), a 'key' must be specified. This forces React to refresh the layout on every page change so that the correct display is always visible.</p>
-			</section>
-			<section class="js-section">
-				<a name="6.13">
-					<h3 class="section__title">6.13 Global Styling</h3>
-				</a>
-				<p>Reeve has inbuilt support for <a href="http://getbootstrap.com/about/">Bootstrap</a> 4, which is used in a number of locations throughout the application.</p>
-				<p>Bootstrap is a front-end framework for building responsive websites. They supply a collection of HTML, CSS, and Javascript templates that make it easy to create page layouts and style pages.</p>
-				<p>An introduction to using Bootstrap can be found <a href="https://getbootstrap.com/docs/4.1/getting-started/introduction/">here</a>.</p>
-				<p>Inside the directory <i>./client/common/styles/</i> there are a set of <a href="https://sass-lang.com/">.scss</a> files that include styling customization both dependent and independent of the bootstrap defaults. The file <i>_bootstrap_variations.scss</i> adjusts some of the default bootstrap colours used by the framework.</p>
-				<p>When you create styling sheets, store them in this directory.</p>
-				<p>To offer the most styling flexibility, it may be valuable to integrate a way for users to customise the colours and styling of the application theme.</p>
-				<p>Reeve provides a component called <i>GlobalStyling</i> that overrides the default theme colours to those specified by the user. If you would like to create an element that the colour can be adjusted by the user, you will need to update this file.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							loadPCS(color) {
-								&nbsp;return `
-									&nbsp;&nbsp;a {
-										&nbsp;&nbsp;&nbsp;color: ${color};
-									&nbsp;&nbsp;}
-						
-									&nbsp;&nbsp;.btn-primary {
-										&nbsp;&nbsp;&nbsp;background-color: ${color};
-										&nbsp;&nbsp;&nbsp;border-color: ${color};
-									&nbsp;&nbsp;}
-							...
-						</code>
-					</pre>
-				</div>
-				<p>In the database there is a table called <i>clientStyling</i> where each row represents a primary, secondary color, background image and background color for a particular client. When a user is loaded, these values are checked in the database and then passed to <i>GlobalStyling</i> to overide the default colours.</p>
-				<p><i>GlobalStyling</i> takes the primary and secondary colours from the database and overrides the default colour values supplied by the framework.</p>
-			</section>
-			<section class="js-section">
-				<a name="6.14">
-					<h3 class="section__title">6.14 Notifications</h3>
-				</a>
-				<p>This feature is part of an upcoming release. Documentation will be supplied closer to the release date.</p>
-			</section>
-			<section class="js-section">
-				<a name="6.15">
-					<h3 class="section__title">6.15 Alerts</h3>
-				</a>
-				<p>An alert is a modal component that appears over the screen and overlays the content behind it with a faded background.</p>
-				<p>This type of component is useful if you want to draw a users attention to something, or there is an event you require immediate action.</p>
-				<p><img src="images/alert.png"></p>
-				<p>It is very easy to display an alert overlay. In the render() component of a page, import and return the component within an if statement.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							import Alert from "common/components/Alert";
+          email : team@buildar.live
+          call : +91-9646617007
+                </pre>
+            <p>
+                To create BuildAR's AI videos, you need an <strong>API key</strong>. Please contact us at <a href="mailto:team@buildar.live">team@buildar.live</a> to get your own API key.<br/>
+                We have subscription plans based on the volume of videos you are looking to create.
+            </p>
+        </div>
+        <div class="overflow-hidden content-section" id="overview">
+            <h1 id="overview">Overview</h1>
+            <pre>Your text script is first<br/> converted to audio file.<br/>This audio file is combined <br/>with a selected actor that creates<br/> the final video
+                </pre>
+            <p>
+               BuildAR's API has two main components<strong> Audio</strong> and  <strong>Video</strong>. <br/>We have a selection of voices across 40+ languages that can be used to convert your text to audio.<br/>
+               You are then needed to select an actor from our list of available actors with the previously created audio file to now create your final video.
+            </p>
+        </div>
+        <div class="overflow-hidden content-section" id="content-get-characters">
+            <h2 id="get-avialable-voices">GET AVAILABLE VOICES FOR AUDIO</h2>
+            <pre><code class="bash">
+# Here is a curl example
+curl -X 'GET' \
+  'http://35.232.47.147:8001/audio' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer YOUR_API_KEY'
+                </code></pre>
+            <p>
+                We provide a large variety(40+) of voices both in languages and accents.To get list of all available voices you need to make a GET call to the following url :<br>
+                <code class="higlighted">http://35.232.47.147:8001/audio</code>
+            </p>
+            <br>
+            <pre><code class="json">
+Result example :
+{
+  query:{}
+  result: =[
+  {
+    "Voice": "Indian English Female Voice 1",
+    "Gender": "Female"
+  },
+  {
+    "Voice": "Indian English Female Voice 2",
+    "Gender": "Female"
+  },
+  {
+    "Voice": "Indian English Male Voice 1",
+    "Gender": "Male"
+  },
+  {
+    "Voice": "Hindi Female Voice 1",
+    "Gender": "Female"
+  },
+  {
+    "Voice": "Hindi Female Voice 2",
+    "Gender": "Female"
+  }
+]
+}
 
-							if (visible) {
-								&nbsp;return (
-									&nbsp;&nbsp;&lt;Alert title={} closeModal={}&gt;
-										&nbsp;&nbsp;&nbsp;{message}
-									&nbsp;&nbsp;&lt;/Alert&gt;
-								&nbsp;);
-							}
-						</code>
-					</pre>
-				</div>
-				<p>Alert supports the following configuration properties.</p>
-				<p><b>title:</b> The title message to be displayed in the alert header.</p>
-				<p><b>children:</b> A react propType. Wrap any object around the component (as above) and the content will render within the modal.</p>
-				<p><b>closeModal:</b> A function to be called when the close button, or background shade is clicked.</p>
-			</section>
-			<section class="js-section">
-				<a name="6.16">
-					<h3 class="section__title">6.16 Success & Error Messages</h3>
-				</a>
-				<p>In a number of situations it may be valuable to display a success or error notification. When a user saves a field and the update is completed successfully, you can notify the user of the success.</p>
-				<p>Alternatively, if an update or action results in an error response from the server, you may want to present this information in a clean and appropriate way. Reeve provides a couple of different success and error styles.</p>
-				<p><b>Success Notification</b></p>
-				<p><img src="images/success_notification.png"></p>
-				<p>A success notification appears at the very top of the page above the header. To render a success notification, import the component and render it toward the top of a page.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							import SuccessNotification from "common/components/SuccessNotification";
+                </code></pre>
+            
+        </div>
+        <div class="overflow-hidden content-section" id="content-errors">
+            <h2 id="generate-audio">GENERATE AUDIO</h2>
+            <pre><code class="bash">
+# Here is a curl example
+curl -X 'POST' \
+  'http://35.232.47.147:8001/audio' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer YOUR_API_KEY' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "speakerId": "Indian English Female Voice 1",
+  "textScript": "Hello, how are you?",
+  "speed": Speed between 0&1
+}'
+                </code></pre>
+            <p>
+                You can generate audio from any text script. <br/>
+                Select a single voice from the collection of available voices, and enter the text script <br/>
+                You can also control the speed of the audio.<br/>
+                Normal speed has value 1. We suggest increment or decrement by a step of .05 <br>
+                <code class="higlighted">http://35.232.47.147:8001/audio</code>
+            </p>
+            <br>
+            <pre><code class="json">
+Result example :
+{
+  query:{
+  "speakerId": "string",
+  "textScript": "string",
+  "speed": 0
+}
+  result: =[
+  {{
+  "audioUrl": "string"
+}
+]
+}
 
-							{showSuccessMsg && &lt;SuccessNotification path={{ reset: "success" }} message={t("success.resetPassword")} /&gt;}
-						</code>
-					</pre>
-				</div>
-				<p>In the instance above, when a user navigates to a url with the parameter <i>?reset="success"</i>, the success notification will display when the url parameter and <i>showSuccessMsg</i> variable conditions are met. The message with translation string "success.resetPassword" will be rendered in the notification.</p>
-				<p><b>Server Success Message</b></p>
-				<p><img src="images/success_message.png"></p>
-				<p>A <i>ServerSuccess</i> message is a smaller notification usually displayed above forms or simple input fields. This type of notification is used in a very similar fashion to the <i>SuccessNotification</i> type.</p>
-				<p>Import the code as follows.</p>
-				<div class="code__block code__block--notabs">
-						<pre class="code code--block">
-							<code>
-								import ServerSuccess from "common/components/ServerSuccess";
-								
-								{showSuccessMsg && &lt;ServerSuccess path={{ registration: "success" }} message={t("success.clientRegistration")} /&gt;}
-							</code>
-						</pre>
-				</div>
-				<p>In this example, the message will display when the web-browser url correctly displays the <i>?registration="success"</i> query and the <i>showSuccessMsg</i> variable condition has also been met.</p>
-				<p><b>Server Failure Message</b></p>
-				<p><img src="images/failure_message.png"></p>
-				<p>The final example is very similar to the <i>ServerSuccess</i> type except the <i>ServerFailure</i> component displays a red coloured warning message.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							import ServerError from "common/components/ServerError";
-							
-							return &lt;ServerError error={serverError} /&gt;
-						</code>
-					</pre>
-				</div>
-				<p><i>ServerFailure</i> does not require a query string match in the web-browser to display. Simply render the component and pass the server message directly in as an "error" prop.</p>
-			</section>
-			<section class="js-section">
-				<a name="6.17">
-					<h3 class="section__title">6.17 Interface Icons</h3>
-				</a>
-				<p>Icons are a valuable way to make an interface recognizable. They add common, memorable, symbolic value, and are used to communicate. They improve usability, and strengthen navigation as people perceive images faster than words of text.</p>
-				<p>The value is clear, and designing an application with the inclusion of icons makes a great interactive experience.</p>
-				<p>For organizational purposes, all of the icons used by the front-end in Reeve should be stored within the directory <i>./client/common/media/icons/</i>.</p>
-				<p>Inside this directory, every icon is represented as a Javascript file for easy importing across the application. The exportable function inside the file returns an svg image containing a 'Glyph' icon.</p>
-				<p>For example:</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							return (
-								&nbsp;&lt;svg {...props} fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"&gt;
-									&nbsp;&nbsp;&lt;rect x="3" y="3" width="18" height="18" rx="2" ry="2" /&gt;
-									&nbsp;&nbsp;&lt;line x1="3" x2="21" y1="9" y2="9" /&gt;
-									&nbsp;&nbsp;&lt;line x1="9" x2="9" y1="21" y2="9" /&gt;
-								&nbsp;&lt;/svg&gt;
-							);
-						</code>
-					</pre>
-				</div>
-				<p>The svg has been minified to clean and remove unimportant information, and reduce the overall filesize. You should always use a tool such as <a href="https://www.svgminify.com/">SVGMinify</a> to clean your svg files before you import them into your project.</p>
-			</section>
-			<section class="js-section">
-				<a name="7.0">
-					<h2 class="section__title">7.0 The Server</h2>
-				</a>
-				<p>Following the client-server model, a server is a computer that processess requests and delivers data over a network.</p>
-				<p>Our client, the Reeve application front-end is loaded into the web-browser, and communicates with the server using RESTful API calls.</p>
-				<p>Our web-application server is written in Node.js and the Express middleware framework, and typically sits on-top of a Platform as a Service (PaaS), offered by AWS, Azure, Digital Ocean or Heroku.</p>
-			</section>
-			<section class="js-section">
-				<a name="7.1">
-					<h3 class="section__title">7.1 Overview</h3>
-				</a>
-				<p>Reeve is a web application boilerplate that runs on <a href="https://nodejs.org/">Node.js</a>, a JavaScript runtime environment. This runtime allows developers to write code that executes inside a computer process, and therefore, operate on a server.</p>
-				<p>The Node run-time environment is built on the V8 JavaScript Engine, which is the same engine found in the popular web-browser Google Chrome.</p>
-				<p>You may be asking "Why Node.JS?" and not other popular servers like Apache Tomcat?</p>
-				<p>Javascript as a language is increasingly growing in popularity, and has been used in the web-browser since the 90s. By taking a web-browser based language and applying it to the server-side, we remove the need to distinguish between the two different environments. You can write in the same programming language for both the client and the server.</p>
-				<p>The V8 engine is incredibly fast, and the single thread node event loop performs input/output operations asynchronously, which are non-blocking. This means that the applications you build are fast, take up less memory, and can handle alot of simultaneous connections at once.</p>
-				<p>One layer above the Node.js environment sits <a href="https://expressjs.com/">Express</a>.</p>
-				<p>Express.js is a web-application framework, and the most popular framework for Node.js. Express simplifies development and makes it significantly easier to build web applications, as it introduces simple <a href="https://expressjs.com/en/guide/routing.html">routing</a>, <a href="https://github.com/expressjs/session">sessions</a> and <a href="https://expressjs.com/en/guide/using-middleware.html">middleware</a> handling.</p>
-				<p>These two services provide the "backbone" of the Reeve server-side application.</p>
-			</section>
-			<section class="js-section">
-				<a name="7.2">
-					<h3 class="section__title">7.2 Node.js Environments</h3>
-				</a>
-				<p>When Reeve is started, it looks for the value of an environment variable called <i>NODE_ENV</i>. Depending on this value, the application can behave in unique ways. For example, in a development environment, there is extra debugging and logging tools enabled.</p>
-				<p>There are 3 major environments Reeve recognizes, and are frequently supported by many cloud application hosting providers.</p>
-				<p><b>development:</b> In development mode, webpack automatically builds the bundle files. Extra logging and error reporting is also enabled. Code is decompressed for better reading. Access to React and Redux development tools are enabled.</p>
-				<p><b>production:</b> In production mode, on start, Reeve expects bundle files to already exist, and simply starts the server to communicate via the api endpoint and serve the bundle files. You will need to build the bundle files first by running the command 'npm run build:production'. When the bundle files are built in production, they are compressed, and stripped of unnecessary data. In production, the server disables debugging and error reporting to the front-end.</p>
-				<p><b>test:</b> When you run the command <i>'npm run test'</i> you should also change the environment to 'test'. The test environment loads a basic express server and disables webpack from building bundle files.<p>
-				<p>You can change the value of the environment variable from the <i>config.env</i> file located in the root directory. By default it is set to <i>Development</i>.</p>
-			</section>
-			<section class="js-section">
-				<a name="7.3">
-					<h3 class="section__title">7.3 Services</h3>
-				</a>
-				<p>Reeve integrates with a lot of third-party platforms and products. Our attitude towards Software as a Service (SaaS) products is, there's no point reinventing the wheel. If an existing solution on the market works well, don't try to duplicate it. Use what works, build fast, and ship fast.</p>
-				<p>Some of the services we integrate with include Stripe, Sentry and PaperTrail.</p>
-				<p>In the directory <i>./server/services/</i> are files that provide the integrations for the third-party services.</p>
-				<p>These files and their exported functions are called throughout the application. The value of developing a system like this is that you can easily swap out an integration by changing the functions in the file, without having to make changes throughout the whole application.</p>
-				<p>Initiating these services occurs in <i>./server/server.js</i>. For example:</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							let nodemailer = require("./services/nodemailer");
+                </code></pre>
+                <h4>QUERY PARAMETERS</h4>
+            <table>
+                <thead>
+                <tr>
+                    <th>Field</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>speakerId</td>
+                    <td>String</td>
+                    <td>Voice for the audio</td>
+                </tr>
+                <tr>
+                    <td>textScript</td>
+                    <td>String</td>
+                    <td>The text whose audio needs to be generated</td>
+                </tr>
+                <tr>
+                    <td>speed</td>
+                    <td>float</td>
+                    <td>
+                        to control the speed of the generated audio
+                    </td>
+                </tr>
+                
+                </tbody>
+            </table>
+        </div>
+         <div class="overflow-hidden content-section" id="generate-video">
+            <h2 id="generate-video">GENERATE VIDEO</h2>
+            <pre><code class="bash">
+# Here is a curl example
+curl -X 'POST' \
+  'http://35.232.47.147:8001/video' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer YOUR_API_KEY' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "actorId": 0,
+  "audioUrl": "URL"
+}'
 
-							// Initialise Email Service
-							nodemailer.initialize();
-						</code>
-					</pre>
-				</div>
-				<p>As you increase the integrations used with your application, it is valuable to continue to create an interface in this directory, and call the interface throughout the application, instead of the integration directly.</p>
-			</section>
-			<section class="js-section">
-				<a name="7.4">
-					<h3 class="section__title">7.4 Routing</h3>
-				</a>
-				<p>Just like the front-end, the Reeve back-end has its own internal routing system using <a href="https://expressjs.com/en/guide/routing.html">Express routing</a>.</p>
-				<p>Inside the directory <i>./server/services/</i> the file <i>router.js</i> builds the express routing using all of the files located in the directory <i>./server/controller/</i>.</p>
-				<p>Routes are the api endpoints that the front-end calls in order to send and receive data, and interact with the back-end of the web application. These endpoints follow the <a href="https://en.wikipedia.org/wiki/Representational_state_transfer">RESTful API design</a>.</p>
-				<p>To create new routes, all you have to do is create a file in the above directory, and follow a structured pattern.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-								module.exports = function(router) {
-									&nbsp;// Endpoint 1
-									&nbsp;router.get("/api/v1.0/endpoint_one/", restrict({ registered: true, unregistered: true }), function(req, res, next) {
-										&nbsp;&nbsp;return res.status(200);
-									&nbsp;});
+                </code></pre>
+            <p>
+            	<style>
+            		figure{
+            			padding:1em;
+            		}
+            	</style>
+            	 BuildAR's AI videos need to inputs the face and audio url.
 
-									&nbsp;// Endpoint 2
-									&nbsp;router.get("/api/v1.0/endpoint_two/", restrict({ registered: true, unregistered: true }), function(req, res, next) {
-										&nbsp;&nbsp;return res.status(200);
-									&nbsp;});
-								};
-						</code>
-					</pre>
-				</div>
-				<p>Reeve will automatically take all of the files from the <i>orchestrator</i> directory and build the endpoint routing.</p>
-				<p>In the example above, the front-end could make a request to the address -</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							HTTP GET https://&lt;server_address&gt;.com/api/v1.0/endpoint_one/
-						</code>
-					</pre>
-				</div>
-				<p>Writing good endpoints should always follow a consistent structure.</p>
-				<p>When an endpoint is called, the client always expects a response from the server. There are two types of suggested responses you can return. Here are both ways of returning a response for an endpoint.</p>
-				<p><b>Response Status and JSON Response Data</b></p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							return res.status(200).send({result: resultData});
-						</code>
-					</pre>
-				</div>
-				<p>In this example, the endpoint will respond with a server status of 200, and also supply the JSON response data.</p>
-				<p><b>Error Response</b></p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							return next(error);
-						</code>
-					</pre>
-				</div>
-				<p>Used for when a serious exception / error occurs. The error will bubble upwards, and the stack trace will be sent to server logging. Errors sent like this will always result in a 503 server error response being sent to the client.</p>
-				<p>For details on securing server endpoints, please read the documentation section titled <a href="#7.8">7.8 Endpoint Security</a>.</p>
-			</section>
-			<section class="js-section">
-				<a name="7.5">
-					<h3 class="section__title">7.5 Connecting to the Database</h3>
-				</a>
-				<p>Reeve uses an Object Relational Mapper (ORM) called Sequelize for connection and communication with an external database. An ORM lets you query and manipulate the data in a database using an object-oriented paradigm. Instead of writing scripts in SQL, you can action the database with javascript.</p>
-				<p>By default, Reeve has been developed to use MySQL. However, as Sequelize also supports Postgres, SQLite, and Tedious; it is possible to strip out the database layer and interface with a different database alternative.</p>
-				<p>To do so, simple remove <i>mysql2</i> from package.json and install an alternative:</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							$ npm install --save pg pg-hstore
-							$ npm install --save mysql2
-							$ npm install --save sqlite3
-							$ npm install --save tedious // MSSQL
-						</code>
-					</pre>
-				</div>
-				<p>Open the following file <i>./server/services/sequelize.js</i> and change the following line to your desired database type -</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							dialect: "mysql",
-						</code>
-					</pre>
-				</div>
-				<p>For more information on configuring Sequelize, please read the following <a href="http://docs.sequelizejs.com/manual/installation/getting-started">documentation</a></p>
-				<p>To create the interface between our database and Reeve, we need to update the connection information in <i>./config.env</i>. Database configuration settings are simply environmental variables.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							# MySQL Database
-							DB_HOST=localhost
-							DB_USER=root
-							DB_PASS=root
-							DB_SCHEMA=reeve
-							DB_POOL_MIN=0
-							DB_POOL_MAX=10
-							DB_POOL_ACQUIRE=30000
-							DB_POOL_IDLE=10000
-						</code>
-					</pre>
-				</div>
-				<p>Inside <i>./server/services/sequelize.js</i> these values are passed to a Sequelize class that is created when Reeve starts.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							// Connect to database through Sequelize
-							connection = new Sequelize(config.database.schema, config.database.username, config.database.password, {
-								&nbsp;host: config.database.host,
-								&nbsp;dialect: "mysql",
-								&nbsp;operatorsAliases: false,
-								&nbsp;pool: {
-									&nbsp;&nbsp;max: config.database.max,
-									&nbsp;&nbsp;min: config.database.min,
-									&nbsp;&nbsp;acquire: config.database.acquire,
-									&nbsp;&nbsp;idle: config.database.idle
-								&nbsp;},
-								&nbsp;logging: false
-							});
-						</code>
-					</pre>
-				</div>
-				<p>If the connection is successful, you can access the database by importing Sequelize.js and calling the database() function.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							import { database, models } from "services/sequelize";
+                 A video can now be generated from the previously generated audio by choosing a actor :<br>
 
-							return database().transaction(async function(transaction) {});
-						</code>
-					</pre>
-				</div>
-				<p>Review the code in <i>./server/orchestrator/authentication.js</i> for a good working model of communicating with the database.</p>
-			</section>
-			<section class="js-section">
-				<a name="7.6">
-					<h3 class="section__title">7.6 Database Models</h3>
-				</a>
-				<p>Sequelize uses models to represent tables in the database. Every model maps to a column in the table, and you use 'getters' and 'setters' to retrieve and manipulate this information.</p>
-				<p>In order for Sequelize to recognize a table in the database, the table must have a model defined.</p>
-				<p>You can find out more about creating model definitions <a href="http://docs.sequelizejs.com/manual/tutorial/models-definition.html">here</a>.</p>
-				<p>In the directory <i>./server/models/</i> are located all of the database model definitions. When the Reeve server starts, it automatically looks through this directory for any files and imports them. You don't have to do this manually.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							// Import models to sequelize from the models directory
-							fs.readdirSync(path.join(__dirname, "../models")).forEach(function(file) {
-								&nbsp;if (file.toLowerCase().indexOf(".js")) {
-									&nbsp;&nbsp;var model = connection.import(path.join(__dirname, "../models", file));
-									&nbsp;&nbsp;sqModels[model.name] = model;
-								&nbsp;}
-							});
-						</code>
-					</pre>
-				</div>
-				<p>To call the 'getters' and 'setters' in the models, there is a slight variation from how the Sequelize documentation recommends.</p>
-				<p>Open the file <i>./server/orchestrator/authentication.js</i></p>
-				<p>One of the examples for loading a client from the client table is as follows.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							import { database, models } from "services/sequelize";
+                 We currently support 3 actors and these are :<br/>
+                 <div style="display: flex;">
+                 <figure><img src="https://buildar.in/actors/actor0.png"/><figcaption>actorId:0</figcaption></figure>
+                 <figure><img src="https://buildar.in/actors/actor1.jpeg"/><figcaption>actorId:1</figcaption></figure>
+                  <figure><img src="https://buildar.in/actors/actor2.jpeg"/><figcaption>actorId:2</figcaption></figure>
 
-							// Load a client using a workspaceURL
-							const client = await models().client.findOne({ where: { workspaceURL: workspaceURL, active: true } }, { transaction: transaction });
-						</code>
-					</pre>
-				</div>
-				<p>The first function models() retrieves an object containing all of the database model definitions. The second value 'client' selects the client model from the object. The next function findOne is one of the function calls on the model definition to find a single client with the specified parameters.</p>
-				<p>The process is largely the same as writing standard Sequelize functions, except that you first import all the model definitions in a function, and then select the model you would like to action against.</p>
-				<p>A tutorial on model usage can be found <a href="http://docs.sequelizejs.com/manual/tutorial/models-usage.html">here</a>.</p>
-			</section>
-			<section class="js-section">
-				<a name="7.7">
-					<h3 class="section__title">7.7 API Design & Development</h3>
-				</a>
-				<p>The Reeve server makes a distinct division between endpoints that a client communicates with, and where the processing and database manipulation occurs.</p>
-				<p>Controller: <i>./server/controller/</i></p>
-				<p>Orchestrator: <i>./server/orchestrator/</i></p>
-				<p>The controller is where the endpoints are first defined. When the client communicates with the server, any data that is sent or received passes through the controller. It is the responsibility of the controller to ensure that the endpoints are secure, the user is properly authenticated, and that the correct response is returned.</p>
-				<p>Once the controller has successfully validated the data (and authentication) it has received, it calls the functions in the orchestrator. The orchestrator performs the data manipulation, communicates with the database, and then returns this information back to the controller.</p>
-				<p>Following this organisational pattern is great for function reusability, and improves code structure.</p>
-				<p>A typical endpoint uses this structure -</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							router.post("/api/v1.0/endpoint_url/", restrict({ unregistered: true, registered: true }), function(req, res, next) {
-								&nbsp;// Store received object properties
-								&nbsp;const body = {
-									&nbsp;&nbsp;requestObject: req.body.requestObject,
-								&nbsp;};
-						
-								&nbsp;// Load browser language from header
-								&nbsp;const browserLng = browserResponseLng(req);
-						
-								&nbsp;// Validate properties in received object
-								&nbsp;const valid = validate(body, validateObject());
-								&nbsp;if (valid != null) {
-									&nbsp;&nbsp;return next({});
-								&nbsp;}
-						
-								&nbsp;// Call function in orchestrator
-								&nbsp;orchestratorFunction(body, browserLng).then(
-									&nbsp;&nbsp;result => {
-										&nbsp;&nbsp;&nbsp;return res.status(200).send(result);
-									&nbsp;&nbsp;},
-									&nbsp;&nbsp;error => {
-										&nbsp;&nbsp;&nbsp;return next(error);
-									&nbsp;&nbsp;}
-								&nbsp;);
-							});
-						</code>
-					</pre>
-				</div>
-				<p>In this example, we have a RESTful POST request. The function loads the request body into a body object. It calls a function browserResponseLng that determines the browser language of the request (from the header), validates the properties, and then calls a function in the orchestrator to perform an action, and send a response back to the client.</p>
-				<p>The endpoints that you write should follow the same consistent structure.</p>
-			</section>
-			<section class="js-section">
-				<a name="7.8">
-					<h3 class="section__title">7.8 Endpoint Security</h3>
-				</a>
-				<p>When looking at each of the endpoints in the controller directory, you may have noticed a restrict() function being called after the endpoint url is defined.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-								router.get("/api/v1.0/endpoint_url/", restrict({ registered: true, unregistered: true }), function(req, res, next) {});
-						</code>
-					</pre>
-				</div>
-				<p>Restrict is a middleware function that should be called on every endpoint. Its sole purpose is to provide authentication and security for the endpoint, and acts as a gateway to allowing only certain users with the right roles and permissions to communicate.</p>
-				<p>You can define how you want to restrict an endpoint by passing an object into the restrict() function and specifying any of the parameters below.</p>
-				<table>
-					<col>
-					<tr>
-						<th>Parameter</th>
-						<th>Type</th>
-						<th>Description</th>
-					</tr>
-					<tr>
-						<td>
-							registered
-						</td>
-						<td>Boolean</td>
-						<td>
-							<ul class="table-list">
-								<p>When true, a user that is registered and currently logged in can access the endpoint. When false, registered users cannot access the endpoint.</p>
-							</ul>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							unregistered
-						</td>
-						<td>Boolean</td>
-						<td>
-							<ul class="table-list">
-									<p>When true, a user that is unregistered and not currently logged in can access the endpoint. When false, unregistered users cannot access the endpoint.</p>
-							</ul>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							activeSubscription
-						</td>
-						<td>Boolean</td>
-						<td>
-							<ul class="table-list">
-								<p>When true, a user must have an active subscription to access the endpoint.</p>
-							</ul>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							hasAnyRole
-						</td>
-						<td>Array</td>
-						<td>
-							<ul class="table-list">
-								<p>hasAnyRole takes an array of roles defined in both the database and <i>./shared/constants.js</i>. If a user has any of the defined roles, the criteria to pass this restriction has been met.</p>
-							</ul>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							hasAllFeatures
-						</td>
-						<td>Array</td>
-						<td>
-							<ul class="table-list">
-									<p>hasAllFeatures takes an array of features defined in both the database and <i>./shared/constants.js</i>. A user/client must have all of the defined features before the criteria to pass this restriction is met.</p>
-							</ul>
-						</td>
-					</tr>
-				</table>
-				<p>It is important to note that all of the defined endpoint restriction criteria must be met in-order for endpoint access to be valid. A user cannot pass one restriction and fail another, and still be allowed to communicate through the endpoint.</p>
-			</section>
-			<section class="js-section">
-				<a name="7.9">
-					<h3 class="section__title">7.9 Session Management</h3>
-				</a>
-				<p>In modern cloud architecture, where the goal is to build scalable services, there is a strong emphasis on building "stateless" architectures.</p>
-				<p>A stateless web architecture depends only on input parameters that are supplied, while a stateful architecture relies on a session state to process requests.</p>
-				<p>If a stateful architecture has an internal session state, then it becomes impossible to scale the application horizontally, because every time there is an attempt to route a user to a particular server, a previous request session may be located on a different server, so the information is not correctly shared across all machines.</p>
-				<p>To work around this issue, we externalise the session management to a third-party, then we use stateless machines that pull data session data from the external source in-order to perform an action.</p>
-				<p>The Reeve server is stateless, this means that you can easily scale horizontally and run multiple servers on different ports at once.</p>
-				<p>Reeve pulls session data from Redis, a separately managed in-memory database store.</p>
-				<p>Redis is an in-memory database used by Reeve to store active user sessions. A user session is semi-permanent information that is required throughout a user interacting with Reeve, from login to logout. On logout this information is cleared.</p>
-				<p>Redis can be configured in the <i>config.env</i> file in the root directory, or as specified in the environmental variables. To edit the service configuration directly, edit the file <i>./server/services/redis.js</i></p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							# Redis Session Store
-							R_HOST=127.0.0.1
-							R_PORT=6379
-							R_PASS=
-							R_TTL=604800
-							R_PROXY=false
-							R_SECRET=redis_secret
-							R_SAVE_UNINITIALIZED=false
-							R_RESAVE=false
-						</code>
-					</pre>
-				</div>
-				<p>While session management is one aspect that Reeve relies on Redis for, Redis is also used for basic DDoS protection. When a person initiates a request from an endpoint, the IP address of the user is recorded in the in-memory database. If the user attempts to "hit the endpoint" too frequently, they will be temporarily locked out.</p>
-			</section>
-			<section class="js-section">
-				<a name="7.10">
-					<h3 class="section__title">7.10 CORS</h3>
-				</a>
-				<p>Because Reeve supports subdomains for each client, and it is possible that a server is located on a different domain to the front-end client, CORS is a very important consideration.</p>
-				<p>Cross Origin Resource Sharing (CORS) is a standard defined by the w3c foundation on communication between different domains.</p>
-				<p>For security purposes, it is very important that CORS is properly configured. CORS blocks requests made by unknown domains and keeps the connection open only to the domains in its 'approved list'. It can also restrict access from domains that are unsecured using HTTP instead of HTTPS.</p>
-				<p>Web browsers typically follow a same-origin policy, which prevents javascript from executing code located at a different domain to the one it was served from. CORS relaxes these policies, allowing Javascript on a web page to access a REST API located at a different domain from the origin.</p>
-				<p>By default, the CORS configuration is defined in <i>./server/server.js</i> to support the base domain as well as subdomains.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							cors({
-								&nbsp;origin: new RegExp(config.build.domainPath + "$"),
-								&nbsp;optionsSuccessStatus: 200,
-								&nbsp;methods: "GET,PUT,POST"
-							})
-						</code>
-					</pre>
-				</div>
-				<p>You can modify the <i>origin</i> parameter to an array to support more than one domain. Change the <i>methods</i> parameter to adjust the type of requests that are supported by the server.</p>
-			</section>
-			<section class="js-section">
-				<a name="7.11">
-					<h3 class="section__title">7.11 Validation</h3>
-				</a>
-				<p>Just as we covered front-end validation in <a href="#6.6">6.6</a>, the exact same functionality can be used on the back-end.</p>
-				<p>In every route you should validate the data object received in the request before passing the data on to the orchestrator functions.</p>				<div class="code__block code__block--notabs">
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							// Validate Object
-							const valid = validate({ object1: object1, object2: object2 }, validationModel());
-							
-							if (valid != null) {
-								&nbsp;const errorMsg = new ServerResponseError(403, "response message", { lng: browserLng }), valid);
-								&nbsp;return next(errorMsg);
-							}
-						</code>
-					</pre>
-				</div>
-				<p>If the response fails, simply pass an error message into the next() function inside the route.</p>
-				<p>Validation conditions are defined in <i>./shared/validation/</i>. As validation on the back-end works exactly the same as the front-end, you can comfortably share code between the two.</p>
-			</section>
-			<section class="js-section">
-				<a name="7.12">
-					<h3 class="section__title">7.12 Sending Emails</h3>
-				</a>
-				<p>Reeve uses the popular Node.js package <a href="https://nodemailer.com/">Nodemailer</a>. This module makes it easy to integrate email sending into a web application.</p>
-				<p>The Nodemailer integration is performed in <i>./server/services/nodemailer.js</i>. To start using the service, you need to specify the value of the environmental variables in the <i>config.env</i> file relating to the mail server that the emails are to be sent from.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							# Email Hosting
-							EMAIL_SENDER_ADDRESS=sender@example.com
-							EMAIL_HOST=
-							EMAIL_PORT=
-							EMAIL_SECURE=false
-							EMAIL_AUTH_USERNAME=
-							EMAIL_AUTH_PASSWORD=
-						</code>
-					</pre>
-				</div>
-				<p>Once you have specified the values to connect to your mail server, you can easily send emails in your application by calling the following functions.</p>
-				<p>In your orchestrator layer functions, import the sendEmail function from the nodemailer service.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							import { sendEmail } from "services/nodemailer";
-						</code>
-					</pre>
-				</div>
-				<p>Create a new object and store the values you would like to pass to the email template.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							// Build email parameters object
-							const emailParams = {
-								&nbsp;firstName: "",
-								&nbsp;workspaceName: "",
-							};
-						</code>
-					</pre>
-				</div>
-				<p>Emails are written in the popular <a href="https://ejs.co/">EJS Framework</a>, which allows a user to write HTML markup with JavaScript. The markup is saved in the database in the 'emailTemplates' table.</p>
-				<p>By specifying values in the emailParams object, we are storing properties that will be imported into the email template and appear in the final email.</p>
-				<p>For more information on importing values into templates, please read the following <a href="https://ejs.co/#docs">documentation</a>.</p>
-				<p>You then need to call the sendEmail function and specific the function parameters in the following format.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							// Send welcome email to user example
-							sendEmail(
-								&nbsp;EMAIL_TYPE.CLIENT_WELCOME,
-								&nbsp;userInstance.get("language"),
-								&nbsp;userInstance.get("emailAddress"),
-								&nbsp;emailParams,
-								&nbsp;clientInstance.get("id"),
-								&nbsp;userInstance.get("id")
-							);
-						</code>
-					</pre>
-				</div>
-				<p>The first function parameter is from the constants file, and is a numerical value of the email type to be sent. The second value is the language the email will be sent in, usually the default language defined by the user. The third parameter is the email address to sent the email too. The fourth, we specify the parameters to be passed to the email template. Parameter 5 and 6 is the clientId and userId respectively.</p>
-			</section>
-			<section class="js-section">
-				<a name="7.13">
-					<h3 class="section__title">7.13 Passport Authentication</h3>
-				</a>
-				<p>User account authentication is handled by a Node.js package called <a href="http://www.passportjs.org/">Passport</a>. The configuration of the package is found in <i>./server/services/passport.js</i></p>
-				<p>Passport is middleware that supports a mixture of authentication strategies, from basic username and password, to Facebook, Twitter, Oath, and more. By default, Reeve has been built with username and password authentication.</p>
-				<p>Authentication with passport is very simple. Simply import the passport function, and call authenticate()</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							import passport from "services/passport";
+             	</div>
+             	<p>More actors can be added on demand by contacting the team.
+                Please contact us at <a href="mailto:team@buildar.live">team@buildar.live</a> or call +91-9646617007 to get your new faces added.<br/>
+                If a unique 3D avatar or face is needed do let us know.
+            </p></p>
+                <code class="higlighted" style="margin: 4em;">http://35.232.47.147:8001/video</code>
 
-							passport.perform().authenticate("jwt", function(error, user) {});
-						</code>
-					</pre>
-				</div>
-				<p>The string "jwt" tells passport that the type of authentication being requested is a "JSON Web Token," username and password based authentication type.</p>
-			</section>
-			<section class="js-section">
-				<a name="7.14">
-					<h3 class="section__title">7.14 Security Tokens</h3>
-				</a>
-				<p>Username & Password authentication with Reeve uses JSON Web Tokens.</p>
-				<p>A JSON Web Token (JWT) is an open, industry standard method of securely transmitting information between two parties as a JSON object. JSON web tokens are digitally signed using a secret key, and are a secure way of ensuring that the person sending the key is the one who signed it.</p>
-				<p>Once a user has authenticated via the functions in <i>./server/services/passport.js</i>, they receive a JWT. Subsequent requests with the JWT specified in the request header ensures that they don't have to keep authenticating.</p>
-				<p>The JWT is passed into the header via the <i>./client/common/fetch.js</i> file.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							// Add security token to header
-							if (this.token != null) {
-								&nbsp;options.headers = Object.assign(options.headers, {
-									&nbsp;&nbsp;Authorization: `jwt ${this.token}`
-								&nbsp;});
-							}
-						</code>
-					</pre>
-				</div>
-				<p>As long as you add the restrict() middleware function to each of your routes. The middleware will look for the authentication parameter in the request header, and verify that the token is valid.</p>
-				<p>The JWT is stored in web browser storage for future use. If the user selects the option to 'Keep logged in,' then the JWT is stored in the browsers LocalStorage. Otherwise, the token is stored in SessionStorage.</p>
-				<p>All of the functions to save, retrieve, and delete tokens are found in a file called securityToken.js, located in <i>./shared/utilities/</i></p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							// Store security token in browser
-							export function saveToken(securityToken, keepSignedIn) {
-								&nbsp;...
-							}
-							
-							// Clear security token from browser
-							export function clearToken() {
-								&nbsp;...
-							}
-							
-							// Retrieve security token from browser
-							export function getToken() {
-								&nbsp;...
-							}
-						</code>
-					</pre>
-				</div>
-				<p>As the username and password based authentication has already been built, there isn't too much in this area you should need to change.</p>
-				<p>Once a user has been authenticated, a session is created and stored in Redis. The session data that is stored in Redis includes the workspaceURL, the clientId, and the userId.</p>
-				<p>Reeve decrypts the JWT token, and validates that the information stored in the session matches the properties encrypted in the token.</p>
-				<p>If the two are found to be a match, and the token is valid, the authentication is successful and the request can proceed.</p>
-			</section>
-			<section class="js-section">
-				<a name="7.15">
-					<h3 class="section__title">7.15 Stripe Payment Gateway</h3>
-				</a>
-				<p>This feature is part of an upcoming release. Documentation will be supplied closer to the release date.</p>
-			</section>
-			<section class="js-section">
-				<a name="7.16">
-					<h3 class="section__title">7.16 Sentry Error Logging</h3>
-				</a>
-				<p><a href="https://sentry.io/welcome/">Sentry</a> is a subscription based, error tracking platform that provides realtime deep context analysis.</p>
-				<p>If something goes wrong with your application and there is an exception, it is always valuable to be able to trace the cause and implement a fix as soon as possible.</p>
-				<p>Reeve directly integrates with Sentry by default. Simply update the environmental variables with your configuration details.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							# Sentry Error Reporting
-							SENTRY_ENABLED=false
-							SENTRY_DSN=https://<key>@sentry.io/<project>
-						</code>
-					</pre>
-				</div>
-			</section>
-			<section class="js-section">
-				<a name="7.17">
-					<h3 class="section__title">7.17 Papertrail Logging</h3>
-				</a>
-				<p>Another subscription service that Reeve integrates with directly is <a href="https://papertrailapp.com/">Papertrail</a>.</p>
-				<p>Papertrail is a hosted log aggregation service.</p>
-				<p>To interface with Papertrail, you will need to update the following environmental variables with your configuration details.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							# Papertrail Logging
-							PAPERTRAIL_ENABLED=false
-							PAPERTRAIL_HOST=logs.papertrailapp.com
-							PAPERTRAIL_PORT=1111
-							PAPERTRAIL_HOSTNAME=host
-							PAPERTRAIL_LEVEL=debug
-						</code>
-					</pre>
-				</div>
-				<p>A node package called <a href="https://github.com/winstonjs/winston">Winston</a> logs data and passes the logs over to Papertrail. You can change the type of messages and information that are sent by modifying the following block of code in the <i>./server/server.js</i> file.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							expressWinston.logger({
-								&nbsp;transports: [PTtransport],
-								&nbsp;meta: false,
-								&nbsp;msg: "{{req.ip}} - {{res.statusCode}} - {{req.method}} - {{res.responseTime}}ms - URL: {{req.url}} - ORIGINAL URL: {{req.originalUrl}} - HOST: {{req.headers['host']}} - ORIGIN: {{req.headers['origin']}} - REFERER: {{req.headers['referer']}} - USER AGENT: {{req.headers['user-agent']}}",
-								&nbsp;expressFormat: false,
-								&nbsp;colorize: true,
-								&nbsp;ignoreRoute: function(req, res) {
-									&nbsp;&nbsp;return false;
-								&nbsp;}
-							})
-						</code>
-					</pre>
-				</div>
-			</section>
-			<section class="js-section">
-				<a name="7.18">
-					<h3 class="section__title">7.18 Server Errors</h3>
-				</a>
-				<p>Occasionally due to code or server issues, there may be times when an internal server error occurs. How we handle the response to this error is incredibly important as we don't want to inadvertedly leak any sensitive data to the front-end client, and inevitably, the user.</p>
-				<p>By default, when a server error occurs, Reeve follows a "default deny" policy. The error is recorded to logging services such as Papertrail, but only a generic 500 response message is returned to the front-end client. This is designed to reduce the risk of returning error information.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							{
-								&nbsp;status: 500,
-								&nbsp;message: "It looks like something has gone wrong on our system. Don't panic! While our engineers investigate, feel free to contact us and provide the following code for further details. Code: XXXXXXXXXXXXXX"
-							}
-						</code>
-					</pre>
-				</div>
-				<p>At times, especially when the error is deliberate, you may want to return a custom message and error code to the front-end client.</p>
-				<p>You can easily do so using the <i>ServerResponseError</i> object.</p>
-				<p>Import the component from the utilities directory as below.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							import { ServerResponseError } from "utilities/errors/serverResponseError";
-						</code>
-					</pre>
-				</div>
-				<p>Then throw the error object like so.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-								throw new ServerResponseError(403, t("i18n.translationString", { lng: browserLng }), { object1: object1, object2: object2 });
-						</code>
-					</pre>
-				</div>
-				<p><i>ServerResponseError</i> takes 3 parameters. The first is the error response code. The second is an error response message, and the third is an json object you can pass to the front-end and use accordingly.</p>
-				<p>As the error handler works its way through resolving the issue, it will recognize the <i>ServerResponseError</i> type, and return this object through to the front-end instead of the generic error response message.</p>
-			</section>
-			<section class="js-section">
-				<a name="8.0">
-					<h2 class="section__title">8.0 Shared Components</h2>
-				</a>
-				<p>Traditionally, developers have frequently had to develop client and server applications independently, as they are written in separate languages, and don't understand each other. Communication protocols pass messages between the two, and they work independently to translate the information and work on-it in their own siloed environments.</p>
-				<p>As Reeve is written in Javascript, both on the front-end and back-end, and a babel transpiler on the back-end translates server code to the <a href="http://es6-features.org/">ES6 standard</a>.</p>
-				<p>It is very easy and possible to take code written on the front-end, and use that same code on the node server backend. The full stack is written in Javascript.</p>
-				<p>The value in standardizing programming to JavaScript is that your developers can work across the full stack without needed to constantly context switch. You don't need to hire a separate team to work on the front-end or the back-end, everyone can work on everything, because the code shared between the two is the same.</p>
-				<p>This ensures reduced costs, as you can train your developers to functionally work everywhere, instead of requiring lots of different languages to be learned.</p>
-			</section>
-			<section class="js-section">
-				<a name="8.1">
-					<h3 class="section__title">8.1 Overview</h3>
-				</a>
-				<p>In the root directory of Reeve, there is a folder called <i>/shared/</i>. This directory contains small snippets of code that have been imported on both the front-end and back-end environment, and are shared between the two.</p>
-				<p>Rather than duplicating the same code for both environments, the code is stored in a shared directory, and used by both systems accordingly.</p>
-				<p>This section of the documentation explores some of the shared types of information and code between the two systems.</p>
-			</section>
-			<section class="js-section">
-				<a name="8.2">
-					<h3 class="section__title">8.2 Trials & Subscriptions</h3>
-				</a>
-				<p>Subscriptions allow you to easily bill clients on a monthy basis. You can also leverage subscriptions as a way of offering certain application features on a multi-tiered payment arrangement.</p>
-				<p>Reeve by default, supports a subscription model. When a new user signs up for an account, they are placed onto a trial with a fixed period at which they can demo the product. Once the trial ends, they have to subscribe to continue.</p>
-				<p>You can adjust the default trial period of 14 days by modifying the following value.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							BILLING_CYCLE: {
-								&nbsp;TRIAL: 14,
-								&nbsp;BASIC: 28
-							},
-						</code>
-					</pre>
-				</div>
-				<p>The default trial period is 14 days.</p>
-				<p>Once a trial account has been created, 4 columns in the client table are updated.</p>
-				<p><b>subscriptionId:</b> A single integer value from the <i>subscription</i> table of the account type.</p>
-				<p><b>subscriptionStartDate:</b> The start date of the subscription.</p>
-				<p><b>subscriptionEndDate:</b> The end date of the subscription.</p>
-				<p><b>billingCycle:</b> The frequency of billing (in days) from the start date.</p>
-				<p>On the front-end, all of these details are passed to the user object in Redux. You can easily take this information and display or hide elememts based on the type of subscription a client has.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							if (subscription === (user.get("subscriptionId")) {
-								&nbsp;return "value";
-							}
-						</code>
-					</pre>
-				</div>
-				<p>*Where subscription is an integer value representing the same value as subscriptionId.</p>
-			</section>
-			<section class="js-section">
-				<a name="8.3">
-					<h3 class="section__title">8.3 User Roles</h3>
-				</a>
-				<p>Every user within Reeve can be assigned one or many roles. A role is a way of defining what an individual user is capable of doing when they interact with the application.</p>
-				<p>Typically, there may be an owner level role who can do everything, a financial role who can only update the billing system, and general users who can make changes to specific items at a restricted level.</p>
-				<p>The roles can be defined and modified within the <i>roles</i> table in the database.</p>
-				<p>Roles are mapped to users in a separate table called <i>userRoles</i>. As the mappings are based on user id and a role, it is possible to have many roles mapped to a single user. An individual user can assume the identity and perform the actions of many roles if needed.<p>
-				<p>Once again, the user roles are passed to the user object in Redux in an array.</p>
-				<p><img src="images/userroles.png"></p>
-				<p>You can easily take this information and display or hide elements based on the type of role a user has.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							if ((user.get("subscriptionId") && user.get("subscriptionId").contains(subscription)) {
-								&nbsp;return "value";
-							}
-						</code>
-					</pre>
-				</div>
-				<p>To delete a role, you simply have to remove the mapping from the <i>userRoles</i> table.</p>
-			</section>
-			<section class="js-section">
-				<a name="8.4">
-					<h3 class="section__title">8.4 Features</h3>
-				</a>
-				<p>A feature is unique application functionality that can be enabled and disabled independently without the whole application breaking.</p>
-				<p>The value of this type of architectural structure includes; hiding functionality from the wider public until it is ready for mass adoption, and restricting functionality to a unique or priviledged group of users.</p>
-				<p>If one client is paying for a premium subscription compared to other clients, it is possible to offer more "features" to the greater paying client.</p>
-				<p>Features are defined in the table called <i>features</i> in the database. A feature is mapped to a subscription in the <i>subscriptionFeatures</i> table, in a many-to-many relationship. This means that you can restrict the availability of certain features to clients based on the subscription type they are currently paying for.</p>
-				<p>Features are passed to the user object in Redux in an array.</p>
-				<p><img src="images/features.png"></p>
-				<p>You can display or hide elements based on if a client has a feature, because of their subscription type.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							if ((user.get("clientFeatures") && user.get("clientFeatures").contains(feature)) {
-								&nbsp;return "value";
-							}
-						</code>
-					</pre>
-				</div>
-			</section>
-			<section class="js-section">
-				<a name="8.5">
-					<h3 class="section__title">8.5 Translations</h3>
-				</a>
-				<p>Expanding a product to support a global market can be a very complex process. One way we have focused on making this experience easier is the introduction of translation strings.</p>
-				<p>Rather than a mixture of english throughout the application that prevents it from being accessible worldwide; the entire Reeve application has full translation support to handle any language you supply.</p>
-				<p>This has been made possible by abstracting text away from the pages themselves, and into JSON documents contained in the directory <i>./shared/translations/</i></p>
-				<p>Rather than hard-code a text value into a page. Call a function that references a value in the JSON documents, which translates the text on page render. Here's how it works:</p>
-				<p>The <i>translations</i> directory, contains 4 other directories. Languages, links, currencies and countries.</p>
-				<p>Each of these directories contain JSON language files in the structure - en.json, it.json etc.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							"label": {
-								&nbsp;"firstName": "First Name",
-								&nbsp;"lastName": "Last Name",
-								&nbsp;"emailAddress": "Email Address",
-								&nbsp;"password": "Password"
-							}
-						</code>
-					</pre>
-				</div>
-				<p>To start displaying this string on either the front-end or the back-end, import the translation functions like so.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							import { t } from "shared/translations/i18n";
+                
+            <br>
+            <pre><code class="json">
+Result example :
+{
+  query:{
+  "actorId": 0,
+  "audioUrl": "string"
+}
+  result: =[
+  {{
+  "videoUrl": "string"
+}
+]
+}
 
-							t("components.authentication.workspaceName") // Example pointing to the JSON object string
+                </code></pre>
+            <div style="padding-top: 2em;">
+            <h4>QUERY PARAMETERS</h4>
+            <table>
+                <thead>
+                <tr>
+                    <th>Field</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>actorId</td>
+                    <td>int</td>
+                    <td>Select actor from the list of available actors</td>
+                </tr>
+                <tr>
+                    <td>audioUrl</td>
+                    <td>String</td>
+                    <td>Url of the audio generated from the script, or any audio url</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        </div>
+    </div>
+    <div class="content-code"></div>
+</div>
 
-							>> The function will output "workspacename"
-						</code>
-					</pre>
-				</div>
-				<p>When a user changes their language, the t() function will automatically pull the correct version of the language from the corresponding directory.</p>
-				<p>Language files are defined inside <i>./shared/translations/i18n.js</i></p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							en: {
-								&nbsp;translation: require("./languages/en.json"),
-								&nbsp;links: require("./links/en.json"),
-								&nbsp;countries: require("./countries/en.json"),
-								&nbsp;currencies: require("./currencies/en.json")
-							},
-						</code>
-					</pre>
-				</div>
-				<p>There are a few other directories for different types of translation strings. These include links, countries, and currencies. They can all be imported and called using a different set of functions.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							import { l } from "shared/translations/i18n"; // Link
-							import { co } from "shared/translations/i18n"; // Country
-							import { cu } from "shared/translations/i18n"; // Currency
-						</code>
-					</pre>
-				</div>
-				<p>By default strings are pure text only. At times, you may want to render text on a page while also including html formatting. You can do so by appending the following post processor to your translation string like so.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							t("components.authentication.workspaceModal.body", { postProcess: "markdown-jsx" })
-						</code>
-					</pre>
-				</div>
-			</section>
-			<section class="js-section">
-				<a name="9.0">
-					<h2 class="section__title">9.0 Testing</h2>
-				</a>
-				<p>Integration testing is a level of testing where components are combined together and tested as a group. Reeve provides inbuilt integration tests using the <a href="https://github.com/avajs/ava">Ava testing framework</a>.</p>
-				<p>To run the tests, make sure that the server is disabled, and simply run</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							npm run test
-						</code>
-					</pre>
-				</div>
-				<p>When ava is started, it puts the environment into a 'test' state where a limited server starts up. The front-end is not built.</p>
-				<p>At this point, a number of tests are performed against each of the endpoints defined in the router. The endpoints are called, and a response is returned and analyzed for accuracy.</p>
-				<p>All tests should pass successfully without fail. You may notice that in your database there are new clients and users that have been created; this is necessary to successfully perform the tests, as the database is not "mocked".</p>
-				<p>While some people could have an argument all day about the value of unit testing or integration testing. We've decided to leave it up to the user to define how their tests should work.</p>
-				<p>To build a basic test, do the following:</p>
-				<p>Create a new file in the directory <i>./tests_integration/</i> like so 02_xxxxxx_test_name_xxxxx.js</p>
-				<p>Import standard configuration properties to launch the server on test start.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							const test = require("ava");
-							const uniqid = require("uniqid");
-							const app = require("../server/server.js");
-							const config = require("../config");
-							
-							let request = require("supertest");
-							
-							// Launch Server
-							const server = app.listen();
-							
-							// Define default server path
-							request = request(config.build.publicPath);
-						</code>
-					</pre>
-				</div>
-				<p>Create a new test with the 'test' function.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							test("New test name", async t => {
-								&nbsp;const response = await request.get("internal/endpoint_url/");
-								&nbsp;t.is(response.status, 403); // Check the response
-							});
-						</code>
-					</pre>
-				</div>
-				<p>We recommend reading the following two pieces of documentation. The first is the <a href="https://github.com/avajs/ava">Ava test runner documentation</a>, and the second is the <a href="https://github.com/visionmedia/supertest">Supertest documentation</a>, a utility for testing node HTTP servers.</p>
-			</section>
-			<section class="js-section">
-				<a name="10.0">
-					<h2 class="section__title">10.0 Deployment</h2>
-				</a>
-				<p>Reeve is a very simple node.js package that has been extensively tested on the major cloud application hosting providers.</p>
-				<p>If you understand their managed services at a basic level, you won't have any issues with deploying Reeve. We've focused on making the process as smooth and generic as possible, to work with each of the major providers.</p>
-				<p><a href="https://aws.amazon.com/getting-started/projects/deploy-nodejs-web-app/">Deploying node.js packages on Amazon Web Services</a></p>
-				<p><a href="https://docs.microsoft.com/en-us/azure/app-service/app-service-web-get-started-nodejs">Deploying node.js packages on Azure</a></p>
-				<p><a href="https://console.bluemix.net/docs/runtimes/nodejs/getting-started.html">Deploying node.js packages on IBM CloudFoundry</a></p>
-				<p>This section will cover a basic deployment setup on <a href="https://www.heroku.com/">Heroku</a>.</p>
-				<p><b>Deploying to Heroku [Basic Guide]</b></p>
-				<p>Following opening an account on Heroku, select the 'Create new app' option from the drop-down menu.</p>
-				<p><img src="images/heroku-deploy-1.png"></p>
-				<p>Enter a name for your project, and select a region you would like your application to be deployed to.</p>
-				<p><img src="images/heroku-deploy-2.png"></p>
-				<p>Once the new project has been created, select the 'Settings' tab at the top of the page.</p>
-				<p><img src="images/heroku-deploy-3.png"></p>
-				<p>Scroll down to the section called 'Config Vars,' and click the button 'Reveal Config Vars.' In this section, you want to populate the fields with all of the environmental variables specified in the <i>config.env</i> file in the root directory of the application.</p>
-				<p><img src="images/heroku-deploy-4.png"></p>
-				<p>Click the 'Deploy' tab at the top of the page.</p>
-				<p><img src="images/heroku-deploy-5.png"></p>
-				<p>Under the 'Deployment method' section. Connect to your repository using one of the available methods. In this instance, our application files are stored on GitHub.</p>
-				<p><img src="images/heroku-deploy-6.png"></p>
-				<p>Click the 'Deploy Branch' button in the 'Manual Deploy' section at the bottom of the page.</p>
-				<p><img src="images/heroku-deploy-7.png"></p>
-				<p>Heroku will fetch the application files from the repository, automatically pull the packages, install the application and launch the server. <b>Easy!</b></p>
-			</section>
-			<section class="js-section">
-				<a name="11.0">
-					<h2 class="section__title">11.0 Database Updates</h2>
-				</a>
-				<p>We believe it important to establish good database management and development practices. A big part of this process involves knowing what changes have been made to the database and the impact of these changes.</p>
-				<p>In the directory <i>./database/scripts/</i> every new database change script is stored in a new sql file. When the script with the change is run, a record is stored in the <i>executedScripts</i> table in the database.</p>
-				<div class="code__block code__block--notabs">
-					<pre class="code code--block">
-						<code>
-							INSERT INTO
-							&nbsp;`executedScripts` (`name`, `description`, `createdDate`, `executedDate`)
-							VALUES
-							&nbsp;('180601_01', 'Create new client styling table', NOW(), NOW());
-						</code>
-					</pre>
-				</div>
-				<p>The purpose of doing this is to keep a record of the changes so that if any database problems start occuring, you have a potential focus area to investigate.</p>
-				<p>This is a significantly safer option than changing the database with no proper record of the changes that have been made.</p>
-				<p>We recommend following similar practices when building your own application.</p>
-			</section>
-			<section class="js-section">
-				<a name="12.0">
-					<h2 class="section__title">12.0 License</h2>
-				</a>
-				<p>MIT License</p>
-				<p>Copyright (c) 2019 Peter Joseph</p>
-				<p>Permission is hereby granted, free of charge, to any person obtaining a copy
-				of this software and associated documentation files (the "Software"), to deal
-				in the Software without restriction, including without limitation the rights
-				to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-				copies of the Software, and to permit persons to whom the Software is
-				furnished to do so, subject to the following conditions:</p>
-				<p>The above copyright notice and this permission notice shall be included in all
-				copies or substantial portions of the Software.</p>
-				<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-				IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-				FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-				AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-				LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-				OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-				SOFTWARE.</p>
-				<p>Written by Peter Joseph (contact@peterajoseph.com), 24th April 2019.</p>
-			</section>
-		</article>
-	</div>
+<script src="script.js"></script>
 </body>
-
 </html>

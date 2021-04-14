@@ -70,7 +70,7 @@ class NavBar extends Component {
                 <NavDropdown.Divider />
                 <NavDropdown.Item className="nav-dropdown-item" href="#personalizevideos">Personalize Videos</NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item className="nav-dropdown-item" href="#api">API</NavDropdown.Item>
+                <NavDropdown.Item className="nav-dropdown-item" href="../../../../documentation/index.html">API</NavDropdown.Item>
               </NavDropdown>
               <NavDropdown title="Use Cases" className="basic-nav-dropdown">
                 <NavDropdown.Item className="nav-dropdown-item" href="#sales">Sales</NavDropdown.Item>
@@ -84,7 +84,7 @@ class NavBar extends Component {
                 <NavDropdown.Divider />
                 <NavDropdown.Item className="nav-dropdown-item" href="#blogs">Blogs</NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item className="nav-dropdown-item" href="#developer">Developer API</NavDropdown.Item>
+                <NavDropdown.Item className="nav-dropdown-item" href="../../../../documentation/index.html">Developer API</NavDropdown.Item>
               </NavDropdown>
               <Nav.Link className="nav-blog" href="/blogs">Blogs</Nav.Link>
               <Nav.Link className="nav-sign-in" href="/signin">Sign-In</Nav.Link>
