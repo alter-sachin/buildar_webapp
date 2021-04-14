@@ -56,7 +56,7 @@ class Documentation extends Component {
                     <div className="content">
                         <div className="overflow-hidden content-section" id="get-started">
                             <h1 id="get-started">Get started</h1>
-                            <pre>{"        "}API Endpoint{"\n"}{"\n"}{"          "}https://35.232.47.147:8001/{"\n"}{"                "}</pre>
+                            <pre className="hljs-strong">{"        "}API Endpoint{"\n"}{"\n"}{"          "}https://35.232.47.147:8001/{"\n"}{"                "}</pre>
                             <p>
                                 The BuildAR API provides programmatic access to create videos in 40+ Languages from just text.
                                 You need to select an actor, speaker and enter your text script and videos are created in a few minutes.
