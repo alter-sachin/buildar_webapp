@@ -18,8 +18,6 @@ class Documentation extends Component {
                 <meta httpEquiv="X-UA-Compatible" content="IE=edge,chrome=1" />
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,500|Source+Code+Pro:300" rel="stylesheet" />
-                <link rel="stylesheet" href="style.css" media="all" />
-                <link rel="stylesheet" href="highlightjs-dark.css" />
                 <div className="left-menu">
                     <div className="content-logo">
                         <img src="images/Logo_BuildAR.png" height={32} />
