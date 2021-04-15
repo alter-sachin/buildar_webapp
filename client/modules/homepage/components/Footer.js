@@ -26,7 +26,7 @@ class Footer extends Component {
 									</li>
 									<li className="media">
 										<i className="fas fa-square" />
-										<div className="media-body"><a className="white" href="#">API</a></div>
+										<div className="media-body"><a className="white" href="/docs">API</a></div>
 									</li>
 								</ul>
 							</div>
@@ -64,7 +64,7 @@ class Footer extends Component {
 									</li>
 									<li className="media">
 										<i className="fas fa-square" />
-										<div className="media-body"><a className="white" href="#">Developer API</a></div>
+										<div className="media-body"><a className="white" href="/docs">Developer API</a></div>
 									</li>
 								</ul>
 							</div>

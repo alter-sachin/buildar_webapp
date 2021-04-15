@@ -12,7 +12,7 @@ class ProtectedRoute extends Component {
 		const { path, user, hasAnyRole, hasAllRoles, hasAnyFeature, hasAllFeatures, hasAnySubscription, hasVerifiedEmail, disabled } = this.props;
 
 		// Create a common array of paths we should redirect when found
-		const unauthenticatedUserPaths = ["/", "/register", "/forgot", "/signin", "/signin/help", "/reset", "myvideos", "/blogs"];
+		const unauthenticatedUserPaths = ["/", "/register", "/forgot", "/signin", "/signin/help", "/reset", "myvideos", "/blogs","/docs"];
 
 		// Validate if user is logged in
 		const userLoggedIn = variableExists(user) && !isObjectEmpty(user) && variableExists(user.get("userId"));
