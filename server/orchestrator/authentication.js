@@ -122,12 +122,12 @@ export function registerNewClient(requestProperties, authenticatedUser, browserL
 	return database().transaction(async function(transaction) {
 		try {
 
-			const user = await models().user.findOne({where:{emailAddress:requestProperties.emailAddress, active:true}},{transaction:transaction});
+		//	const user = await models().user.findOne({where:{emailAddress:requestProperties.emailAddress, active:true}},{transaction:transaction});
 			
 			//Send response if user already exists for a emailAddress
-			if(user!=null){
-				return ("user exists");
-			}
+		//	if(user!=null){
+		//		return ("user exists");
+		//	}
 
 			// Check if client already exists for workspaceURL
 			const client = await models().client.findOne({ where: { workspaceURL: requestProperties.workspaceURL, active: true } }, { transaction: transaction });
@@ -169,7 +169,7 @@ export function registerNewClient(requestProperties, authenticatedUser, browserL
 			// Encrypt and salt user password
 			const password = await bcrypt.hash(requestProperties.password, 10);
 
-			const result = await createUserInFastAPI(requestProperties.firstName, requestProperties.emailAddress,password);
+			const result = await createUserInFastAPI(requestProperties.workspaceURL, requestProperties.emailAddress,password);
 			//console.log("Are we getting something?",result);
 
 			// Create new user and save to database
@@ -330,8 +330,10 @@ export function authenticateWithLocalStrategy(req, res, next, browserLng) {
 
 						// Load user from database
 						const userObject = await models().user.findOne({ where: { id: user.userId, clientId: user.clientId, active: true } }, { transaction: transaction });
-						// console.log("This is inside user object", userObject);
-						var authToken = await getauthToken(userObject.firstName, userObject.password);
+						const clientObject  = await models().client.findOne({where : {id:user.clientId, active:true}}, {transaction:transaction});
+						console.log("This is inside client object", clientObject);
+						console.log("client workspaceURL", clientObject.workspaceURL)
+						var authToken = await getauthToken(clientObject.workspaceURL, userObject.password);
 						console.log("this is authToken",authToken);
 						// Throw an error if user could not be loaded from database
 						if (userObject === null) {
