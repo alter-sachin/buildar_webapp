@@ -8,8 +8,8 @@ import Socialproof from "./components/Socialproof";
 import Footer from "./components/Footer";
 import Newsletter from "./components/Newsletter";
 import Accordion from "./components/Accordion.js";
-import Sticky from "./components/Sticky.js"
-
+import Sticky from "./components/Sticky.js";
+import Chatbot from "./components/Chatbot.js";
 
 class Homepage extends Component {
 	render() {
@@ -26,6 +26,7 @@ class Homepage extends Component {
 				<Accordion />
 				<Newsletter />
 				<Footer />
+				<Chatbot />
 			</Fragment>
 
 		);

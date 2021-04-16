@@ -153,4 +153,4 @@ class Chatbot extends Component {
     }
 }
 
-export default ChatBot
+export default Chatbot;
