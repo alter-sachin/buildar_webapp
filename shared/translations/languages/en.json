@@ -1,0 +1,387 @@
+{
+	"site": {
+		"name": "Reeve"
+	},
+	"action": {
+		"login": "Login",
+		"logout": "Logout",
+		"signUp": "Sign Up",
+		"signIn": "Sign In",
+		"register": "Register",
+		"continue": "Continue",
+		"close": "Close",
+		"save": "Save",
+		"sendEmail": "Send Email",
+		"resendEmail": "Resend Email",
+		"emailSent": "Email Sent",
+		"update": "Update",
+		"resetToDefault": "Reset to Default"
+	},
+	"label": {
+		"firstName": "First Name",
+		"lastName": "Last Name",
+		"emailAddress": "Email Address",
+		"password": "Password",
+		"verifyPassword": "Verify Password",
+		"workspaceName": "Workspace Name",
+		"welcome": "Welcome",
+		"success": "Success",
+		"termsAndConditions": "Terms and Conditions",
+		"privacyPolicy": "Privacy Policy",
+		"accountDetails": "Account Details",
+		"resetPassword": "Reset Password",
+		"error": "Error",
+		"overview": "Overview",
+		"activity": "Activity",
+		"contacts": "Contacts",
+		"profile": "Profile",
+		"settings": "Settings",
+		"billing": "Billing",
+		"oops": "Oops!",
+		"errorField": "Error:",
+		"day": "Day",
+		"month": "Month",
+		"year": "Year",
+		"monthly": "Monthly",
+		"yearly": "Yearly",
+		"currency": "Currency",
+		"finish": "Finish",
+		"languageSettings": "Language Settings",
+		"aboutMe": "About Me",
+		"location": "Location",
+		"website": "Website",
+		"browse": "Browse",
+		"offline": "Offline",
+		"saving": "Saving",
+		"deleting": "Deleting",
+		"help": "Help",
+		"helpGuide": "Help Guide",
+		"returnToHomepage": "← Return to the homepage",
+		"general": "General"
+	},
+	"numbers": {
+		"1": "1",
+		"2": "2",
+		"3": "3",
+		"4": "4",
+		"5": "5"
+	},
+	"languages": {
+		"en": "English",
+		"it": "Italian"
+	},
+	"inputs": {
+		"fileUploader": {
+			"dragDropFile": "Drag and drop file here",
+			"dragDropFile_plural": "Drag and drop files here",
+			"dragDropImage": "Drag and drop image here",
+			"dragDropImage_plural": "Drag and drop images here",
+			"unsupportedFileType": "$t(label.errorField) The file you have attempted to upload is not supported",
+			"maxSizeExceeded": "$t(label.errorField) One or more files is larger than {{ maxFileSize }}",
+			"multipleMaxCountExceeded": "$t(label.errorField) You have selected more files than allowed. Maximum: {{ maximumFiles }}",
+			"multipleMaxSizeExceeded": "$t(label.errorField) You have selected one or more files with a total size greater than {{ maxFileSize }}",
+			"multipleNotAllowed": "$t(label.errorField) You have tried to upload more than {{ count }} file",
+			"multipleNotAllowed_plural": "$t(label.errorField) You have tried to upload more than a maximum of {{ count }} files"
+		}
+	},
+	"components": {
+		"authentication": {
+			"workspaceName": "workspacename",
+			"keepSignedIn": "Keep me signed in",
+			"forgotPassword": "Forgot Password?",
+			"getStarted": "To get started, enter the workspace name associated with your account.",
+			"whatIsWorkspaceName": "What is my workspace name?",
+			"noAccount": "Does your team not yet have an account?",
+			"existingAccount": "Already have an account?",
+			"noReset": "Don't need to reset your password?",
+			"policyAgreement": "By registering an account, you agree to the following",
+			"privacyConsent": "I agree to BuildAR's Terms And Conditions",
+			"forgotAccountDetails": {
+				"header": "Can't remember your workspace name, or password?",
+				"headerPasswordOnly": "Can't remember your password?",
+				"description": "Enter your email address and we will send you instructions on how to get back into your account."
+			},
+			"resetPassword": {
+				"description": "Enter a new password below to reset the password to your account."
+			},
+			"workspaceModal": {
+				"title": "What is my workspace name?",
+				"body": "Team or organization, every group has a private workspace.<br />A workspace consists of group members, who collaborate together on projects.<br /><br />You can find your workspace name on the introductory email you received when you created a new account, or were invited to an existing workspace.<br /><br />If you can't remember your workspace name, we can help you get back into your account. What would you like to do?",
+				"forgotWorkspace": "Help me get back into my account",
+				"newWorkspace": "I want to create a new workspace for my team"
+			},
+			"verifyEmailNotification": {
+				"welcomeEmailSent": "Hi {{ firstName }}, a welcome email was sent to {{ email }}. Please click the link in the email to verify your email address."
+			}
+		},
+		"overview": {
+			"title": "Overview",
+			"leadDescription": "Reeve is a Node.js boilerplate framework that assists developers in reducing the setup time required to build production-ready scalable web applications. The framework includes a variety of pre-built pages so you can focus on building your MVP faster.",
+			"cards": {
+				"profile": {
+					"title": "Profile Page",
+					"listOne": "View and edit user profile",
+					"listTwo": "Change password",
+					"listThree": "Change preferred default language"
+				},
+				"billing": {
+					"title": "Billing Page",
+					"listOne": "Tiered subscription types",
+					"listTwo": "Stripe payment handling",
+					"listThree": "Invoice management"
+				},
+				"settings": {
+					"title": "Settings Page",
+					"listOne": "Client branding and color customization",
+					"listTwo": "Default language settings"
+				}
+			}
+		},
+		"profile": {
+			"updateProfile": "Update Profile",
+			"changeProfilePhoto": "Change Profile Photo",
+			"saveImage": "Save Image",
+			"removeExistingProfilePhoto": "Remove existing profile photo",
+			"activeLanguage": "Active Language",
+			"changeEmailWarning": "Before we can change your email address, a confirmation email will be sent to your new email address. Please click the verification link in the email for the change to be applied.",
+			"changeLanguage": "Change Language",
+			"changePassword": "Change Password",
+			"currentPassword": "Current Password",
+			"newPassword": "New Password",
+			"confirmNewPassword": "Confirm New Password",
+			"passwordLengthRequirement": "Please ensure your new password is longer than 6 characters."
+		},
+		"billing": {
+			"trialExpired": "Your trial has expired",
+			"trialDaysLeft": "{{ count }} day left on trial",
+			"trialDaysLeft_plural": "{{ count }} days left on trial",
+			"trialDays<1": "Less than 1 day left on trial",
+			"subscriptionExpired": "Your subscription has expired. The page you are looking for might have been disabled. Please contact your administrator.",
+			"timeRemaining": "$t(site.name) is free for {{ count }} day",
+			"timeRemaining<1": "$t(site.name) is still free for less than a day",
+			"timeRemaining_plural": "$t(site.name) is free for {{ count }} days",
+			"timeRemaining_expired": "Simple and transparent pricing",
+			"selectPlan": "Select a plan below to continue using $t(site.name) once your trial expires.",
+			"selectPlan_expired": "Select a plan below to continue using $t(site.name).",
+			"selectBillingFrequency": "Billing Frequency",
+			"selectAPlan": "Select a Plan",
+			"billingDetails": "Billing Details",
+			"chooseThisPlan": "Choose this Plan",
+			"save20%": "Save 20%",
+			"subscriptionType": {
+				"1": "Trial",
+				"2": "Basic",
+				"3": "Standard",
+				"4": "Professional"
+			},
+			"cardFeatures": {
+				"cardOne": {
+					"1": "Basic Feature 1",
+					"2": "Basic Feature 2",
+					"3": "Basic Feature 3",
+					"4": "Basic Feature 4"
+				},
+				"cardTwo": {
+					"1": "Standard Feature 1",
+					"2": "Standard Feature 2",
+					"3": "Standard Feature 3",
+					"4": "Standard Feature 4"
+				},
+				"cardThree": {
+					"1": "Professional Feature 1",
+					"2": "Professional Feature 2",
+					"3": "Professional Feature 3",
+					"4": "Professional Feature 4"
+				}
+			}
+		},
+		"settings": {
+			"general": {
+				"generalSettings": "General Settings",
+				"accountSummary": "Account Summary",
+				"subscriptionType": "Subscription Type:",
+				"upgradePaidPlan": "Upgrade to a paid plan",
+				"workspaceCreationDate": "Workspace creation date:",
+				"activeUsers": "Active users:",
+				"accessConfiguration": "Access Configuration",
+				"workspaceTitle": "Workspace Title",
+				"workspaceURL": "Workspace URL",
+				"workspaceURLUniqueAddress": "Your Workspace URL is a unique address you can use to access this workspace from your web browser. Please contact us if you would like to change this address.",
+				"workspaceDescription": "Workspace Description",
+				"workspaceDescriptionSubText": "A good description of your workspace can provide valuable information to new and invited users.",
+				"dangerZone": "Danger Zone",
+				"deleteWorkspace": "Delete Workspace",
+				"deleteWorkspaceWarning": "Deleting a Workspace will remove all contents, users, and active subscriptions. This action cannot be undone. Please make sure you are deleting the correct one!",
+				"deleteWorkspaceModal": {
+					"warning": "Are you sure you want to do this? Deleting a workspace will remove all contents, users, and active subscriptions. This action cannot be undone.",
+					"procedure": "To delete your workspace, enter the workspace name and your current password below."
+				}
+			},
+			"appearance": {
+				"appearanceAndBranding": "Appearance & Branding",
+				"backgroundColor": "Background Color",
+				"backgroundColorDescription": "This is the background color on the sign-in page of your workspace. If you also have a background image selected, the image will overlay this color.",
+				"primaryColor": "Primary Color",
+				"primaryColorDescription": "This color is the most prominent color across the pages in your workspace. It is visible in the navigation bar at the top of the page, and in the color of most buttons, links, and other significant page elements.",
+				"secondaryColor": "Secondary Color",
+				"secondaryColorDescription": "A secondary color provides more ways to brand your workspace by accenting smaller and less noticeable areas of each page. This is an optional field.",
+				"logoImage": "Logo Image",
+				"selectLogoImage": "Select Logo Image",
+				"logoImageDescription": "A custom logo image is visible in two places, when a user visits the sign-in page of your workspace, and from the drop-down menu in the header. If no image is selected, the default will be shown.",
+				"backgroundImage": "Background Image",
+				"selectBackgroundImage": "Select Background Image",
+				"backgroundImageDescription": "A custom background image is visible from the sign-in page of your workspace. If no image is selected, a solid color will be shown instead.",
+				"deleteExistingImage": "Remove existing image?",
+				"resetAppearance": "Reset Appearance & Branding options to their defaults?",
+				"resetAppearanceAlert": {
+					"title": "Reset Appearance & Branding?",
+					"message": "Are you sure you want to do this? Selecting 'Reset to Default' will remove the Logo Image and Background Image from your workspace, and reset all color settings to their original values. This change will be applied immediately."
+				}
+			},
+			"localization": {
+				"languageAndLocalization": "Language & Localization",
+				"defaultLanguage": "Default Language",
+				"defaultLanguageSubText": "This will change the language that appears on the login screen, in emails, and content shown to new and invited users. It will not change the individual language preferences of existing users."
+			},
+			"billingOverview": "Go to Billing Overview →"
+		},
+		"offline": {
+			"disconnectedLead": "Hey! Looks like you've been disconnected from the internet.",
+			"continueAsNormal": "You will be able to continue as normal when the browser connects to the internet again."
+		}
+	},
+	"headers": {
+		"home": {
+			"title": "$t(site.name)"
+		},
+		"login": {
+			"title": "Sign In to your Account | $t(site.name)",
+			"description": "Enter your username and password to sign into your account."
+		},
+		"register": {
+			"title": "Register for an Account | $t(site.name)",
+			"description": "Complete your registration details to create a client account."
+		},
+		"forgot": {
+			"title": "Forgot Account Details | $t(site.name)",
+			"description": "Enter your email address to reset your account."
+		},
+		"reset": {
+			"title": "Reset Account Password | $t(site.name)",
+			"description": "Reset the password to your account."
+		},
+		"overview": {
+			"title": "Overview | $t(site.name)",
+			"description": "Workspace overview"
+		},
+		"billing": {
+			"title": "Billing | $t(site.name)",
+			"description": "Manage your account subscription and payments"
+		},
+		"profile": {
+			"title": "Profile | $t(site.name)",
+			"description": "User profile customisation"
+		},
+		"settings": {
+			"title": "Settings | $t(site.name)",
+			"description": "Global account settings"
+		},
+		"offline": {
+			"title": "Offline | $t(site.name)",
+			"description": "$t(site.name) is Offline"
+		},
+		"404": {
+			"title": "404 Page Not Found | $t(site.name)",
+			"description": "404 Page could not be found."
+		}
+	},
+	"success": {
+		"clientRegistration": "Success! Your account has been created.",
+		"forgotPasswordEmail": "Success! If an account is associated with this email address, you will receive a message with instructions on how to login or reset the password to your account.",
+		"changePassword": "Success! The password to your account has been changed.",
+		"resetPassword": "Success! The password to your account has been reset.",
+		"verifyEmail": "Success! Your email address has been verified.",
+		"verifyEmailChange": "Success! Your email address has been successfully updated.",
+		"updatePersonalProfile": "Success! Your profile has been updated.",
+		"changeLanguage": "Success! The language $t(site.name) will use has been updated.",
+		"updateAccessConfiguration": "Success! Settings have been updated.",
+		"updateLocalization": "Success! Localization settings have been updated.",
+		"updateClientStyling": "Success! Your workspace styling has been updated."
+	},
+	"error": {
+		"code": {
+			"403": "You are not authorized to make this request.",
+			"404": "Page could not be found."
+		},
+		"internalServerError": "It looks like something has gone wrong on our system. Don't panic! While our engineers investigate, feel free to contact us and provide the following code for further details. Code: {{ code }}",
+		"somethingWentWrong": "Something went wrong!",
+		"outdatedBrowser": "Hey! You are using an out-of-date web browser version. This might cause compatibility issues with our service. Please consider upgrading your browser.",
+		"verifyEmail": "Error: Your email address could not be successfully verified. Please refresh the page and try again.",
+		"verifyEmailChange": "Error: Your email address could not be successfully changed. Please refresh the page and try again.",
+		"logout": "Error: We were unable to logout of your account. Please refresh the page and try again.",
+		"s3notEnabled": "Error: S3 is not enabled.",
+		"deletionError": "File could not be deleted."
+	},
+	"validation": {
+		"userInvalidProperties": "User object contains invalid properties.",
+		"clientInvalidProperties": "Client object contains invalid properties.",
+		"resetPasswordInvalidProperties": "Reset password code contains invalid properties.",
+		"changePasswordInvalidProperties": "Change password object contains invalid properties.",
+		"verifyEmailInvalidProperties": "Verify email object contains invalid properties.",
+		"verifyChangeEmailInvalidProperties": "Verify change email object contains invalid properties.",
+		"invalidPasswordSupplied": "Incorrect password supplied. Please enter a valid password.",
+		"incorrectCurrentPasswordSupplied": "Incorrect current password supplied. Please enter the correct password.",
+		"invalidUserId": "Incorrect userId supplied",
+		"invalidContentType": "Invalid content type supplied",
+		"imageKeyInvalid": "Supplied image key is invalid",
+		"incorrectLoginDetailsSupplied": "We are having trouble signing you in. Please check your email address and password, and try again.",
+		"userDoesNotExist": "A user with this email address does not exist.",
+		"changeLanguageInvalidProperties": "Language object contains an invalid language selection.",
+		"loadUserPropertiesFailed": "User properties could not be successfully loaded.",
+		"loadClientFailed": "Load client failed.",
+		"loadClientFeaturesFailed": "Load client features failed.",
+		"updateClientInvalidProperties": "Update client object contains invalid properties.",
+		"updateClientStylingInvalidProperties": "Update client styling object contains invalid properties.",
+		"updateLocalizationInvalidProperties": "Update localization object contains invalid properties.",
+		"loadUserFailed": "Load user failed.",
+		"loadUserRolesFailed": "Load user roles failed.",
+		"updateProfileInvalidProperties": "Update profile object contains invalid properties.",
+		"registeredWorkspaceURL": "Sorry, this workspace name has already been used.",
+		"emptyWorkspaceURL": "Workspace name does not exist.",
+		"emptyResetCode": "Password reset code does not exist or is invalid.",
+		"emptyVerifyCode": "Verify email code does not exist or is invalid.",
+		"incorrectWorkspaceURL": "Incorrect workspace name supplied.",
+		"sendNewVerify": "Please send a new verification email and use the provided code.",
+		"sendNewReset": "Please send a new password reset email and use the provided code.",
+		"resetCodeAlreadyUsed": "This password reset code has already been used. $t(validation.sendNewReset)",
+		"resetCodeExpired": "This password reset code has expired. It could be used within a {{ gracePeriod }} hour period. $t(validation.sendNewReset)",
+		"verifyCodeAlreadyUsed": "This verify email code has already been used. $t(validation.sendNewVerify)",
+		"verifyCodeExpired": "This verify email code has expired. It could be used within a {{ gracePeriod }} hour period. $t(validation.sendNewVerify)",
+		"verifyEmail": "Please verify your email address before selecting a plan.",
+		"emailAlreadyVerified": "This email address has already been verified. Please reload the page to continue.",
+		"tokenInvalidOrExpired": "Token invalid or expired.",
+		"emailTemplateNotFound": "Error loading email template.",
+		"emptyChangeEmailCode": "Change email code does not exist or is invalid.",
+		"changeEmailCodeAlreadyUsed": "This change email code has already been used. Please change your email address on the profile page to send a new email.",
+		"changeEmailCodeExpired": "This change email code has expired. It could be used within a {{ gracePeriod }} hour period.",
+		"signedURLInvalidProperties": "Signed URL object contains invalid properties.",
+		"deleteWorkspaceInvalidProperties": "Delete workspace object contains invalid properties.",
+		"validators": {
+			"validDate": "$t(label.errorField) Must be a valid date.",
+			"invalidEmail": "$t(label.errorField) Not a valid email.",
+			"notEqual": "$t(label.errorField) Fields are not equal.",
+			"restricted": "$t(label.errorField) Restricted.",
+			"invalid": "$t(label.errorField) Invalid.",
+			"notIncluded": "$t(label.errorField) Is not included in the list.",
+			"validWorkspaceURL": "$t(label.errorField) Cannot contain the following name.",
+			"missingConsent": "$t(label.errorField) Must be accepted to continue.",
+			"cannotBeBlank": "$t(label.errorField) Field cannot be blank.",
+			"validCharactersAZ09": "$t(label.errorField) Field can only contain characters from a-z and 0-9, and no spaces.",
+			"validHex": "$t(label.errorField) Field is not a valid hex color value.",
+			"validKey": "$t(label.errorField) File upload is not of the correct format.",
+			"invalidURL": "$t(label.errorField) Not a valid URL.",
+			"invalidPasswordLength": "$t(label.errorField) Password field must be greater than 6 characters.",
+			"unmatchedPasswords": "$t(label.errorField) Confirm Password should match New Password."
+		}
+	}
+}

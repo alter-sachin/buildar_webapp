@@ -1,0 +1,287 @@
+import React, { Fragment, Component } from "react";
+import PropTypes from "prop-types";
+import { BrowserRouter, Switch } from "react-router-dom";
+import { Redirect } from "react-router";
+import { ROLE_TYPE, FEATURES, SUBSCRIPTION_TYPE } from "shared/constants";
+
+import AsyncComponent from "common/components/AsyncComponent";
+import ProtectedRoute from "common/components/ProtectedRoute";
+import { GoogleAnalyticsTracker } from "common/components/GoogleAnalytics";
+import User from "common/components/User";
+
+// Layout Components
+import DefaultLayout from "common/layouts/DefaultLayout";
+import EmptyLayout from "common/layouts/EmptyLayout";
+
+// Page Components
+const Homepage = AsyncComponent(() => import("./modules/homepage"));
+const Authentication = AsyncComponent(() => import("./modules/authentication"));
+const BlogPage = AsyncComponent(() => import("./modules/blogs"));
+const Overview = AsyncComponent(() => import("./modules/overview"));
+const Profile = AsyncComponent(() => import("./modules/profile"));
+const Documentation = AsyncComponent(() => import("./modules/documentation"))
+const CreateVideo = AsyncComponent(() => import("./modules/createvideo"));
+const Video = AsyncComponent(() => import("./modules/video"))
+const MyVideo = AsyncComponent(() => import("./modules/myvideos"));
+const Billing = AsyncComponent(() => import("./modules/billing"));
+const Settings = AsyncComponent(() => import("./modules/settings"));
+const MissingPath = AsyncComponent(() => import("common/components/MissingPath"));
+
+class Router extends Component {
+	render() {
+		const { user } = this.props;
+
+		return (
+			<BrowserRouter>
+				<Fragment>
+					<GoogleAnalyticsTracker />
+					<Switch>
+						<ProtectedRoute
+							exact
+							path="/"
+							hasAnyRole={[ROLE_TYPE.OWNER, ROLE_TYPE.ADMINISTRATOR, ROLE_TYPE.FINANCE]}
+							user={user}
+							render={() => (
+								<DefaultLayout key="/">
+									<Homepage />
+								</DefaultLayout>
+							)}
+						/>
+						<ProtectedRoute
+							exact
+							path="/blogs"
+							hasAnyRole={[ROLE_TYPE.UNREGISTERED]}
+							user={user}
+							render={() => (
+								<EmptyLayout key="/blogs">
+									<BlogPage />
+								</EmptyLayout>
+							)}
+						/>
+						<ProtectedRoute
+							exact
+							path="/signin"
+							hasAnyRole={[ROLE_TYPE.UNREGISTERED]}
+							user={user}
+							render={() => (
+								<EmptyLayout key="/signin">
+									<Authentication />
+								</EmptyLayout>
+							)}
+						/>
+						<ProtectedRoute
+							exact
+							path="/signin/help"
+							hasAnyRole={[ROLE_TYPE.UNREGISTERED]}
+							user={user}
+							render={() => (
+								<EmptyLayout key="/signin/help">
+									<Authentication />
+								</EmptyLayout>
+							)}
+						/>
+						<ProtectedRoute
+							exact
+							path="/register"
+							hasAnyRole={[ROLE_TYPE.UNREGISTERED]}
+							user={user}
+							render={() => (
+								<EmptyLayout key="/register">
+									<Authentication />
+								</EmptyLayout>
+							)}
+						/>
+						<ProtectedRoute
+							exact
+							path="/docs"
+							hasAnyRole={[ROLE_TYPE.UNREGISTERED]}
+							user={user}
+							render={() => (
+								<EmptyLayout key="/docs">
+									<Documentation />
+								</EmptyLayout>
+							)}
+						/>
+						<ProtectedRoute
+							exact
+							path="/forgot"
+							hasAnyRole={[ROLE_TYPE.UNREGISTERED]}
+							user={user}
+							render={() => (
+								<EmptyLayout key="/forgot">
+									<Authentication />
+								</EmptyLayout>
+							)}
+						/>
+						<ProtectedRoute
+							exact
+							path="/reset"
+							hasAnyRole={[ROLE_TYPE.UNREGISTERED]}
+							user={user}
+							render={() => (
+								<EmptyLayout key="/reset">
+									<Authentication />
+								</EmptyLayout>
+							)}
+						/>
+						<ProtectedRoute exact path="/verify" user={user} render={() => <Authentication />} />
+						<ProtectedRoute exact path="/verify/email_change" user={user} render={() => <Authentication />} />
+						<ProtectedRoute
+							exact
+							path="/billing"
+							hasAnyRole={[ROLE_TYPE.OWNER, ROLE_TYPE.FINANCE]}
+							hasAllFeatures={[FEATURES.BILLING]}
+							hasAnySubscription={[SUBSCRIPTION_TYPE.TRIAL, SUBSCRIPTION_TYPE.BASIC]}
+							user={user}
+							disabled={!(STRIPE_ENABLED && (user && user.get("subscriptionEndDate") !== null))}
+							render={() => (
+								<EmptyLayout key="/billing">
+									<Billing />
+								</EmptyLayout>
+							)}
+						/>
+						<ProtectedRoute
+							exact
+							path="/profile"
+							hasAnyRole={[ROLE_TYPE.OWNER, ROLE_TYPE.ADMINISTRATOR, ROLE_TYPE.FINANCE]}
+							user={user}
+							render={() => (
+								<DefaultLayout key="/profile">
+									<Profile />
+								</DefaultLayout>
+							)}
+						/>
+						<ProtectedRoute
+							exact
+							path="/createvideo"
+							hasAnyRole={[ROLE_TYPE.OWNER, ROLE_TYPE.ADMINISTRATOR, ROLE_TYPE.FINANCE]}
+							user={user}
+							render={() => (
+								<EmptyLayout key="/createvideo">
+									<CreateVideo />
+								</EmptyLayout>
+							)}
+						/>
+						<ProtectedRoute
+							exact
+							path="/video"
+							hasAnyRole={[ROLE_TYPE.OWNER, ROLE_TYPE.ADMINISTRATOR, ROLE_TYPE.FINANCE]}
+							user={user}
+							render={() => (
+								<EmptyLayout key="/video">
+									<Video />
+								</EmptyLayout>
+							)}
+						/>
+						<ProtectedRoute
+							exact
+							path="/myvideos"
+							hasAnyRole={[ROLE_TYPE.OWNER, ROLE_TYPE.ADMINISTRATOR, ROLE_TYPE.FINANCE]}
+							user={user}
+							render={() => (
+								<EmptyLayout key="/myvideos">
+									<MyVideo />
+								</EmptyLayout>
+							)}
+						/>
+						<ProtectedRoute
+							exact
+							path="/overview"
+							hasAnyRole={[ROLE_TYPE.OWNER, ROLE_TYPE.ADMINISTRATOR, ROLE_TYPE.FINANCE]}
+							user={user}
+							render={() => (
+								<DefaultLayout key="/overview">
+									<Overview />
+								</DefaultLayout>
+							)}
+						/>
+						<ProtectedRoute
+							exact
+							path="/profile/change-profile-photo"
+							hasAnyRole={[ROLE_TYPE.OWNER, ROLE_TYPE.ADMINISTRATOR, ROLE_TYPE.FINANCE]}
+							user={user}
+							render={() => (
+								<DefaultLayout key="/profile/change-profile-photo">
+									<Profile />
+								</DefaultLayout>
+							)}
+						/>
+						<ProtectedRoute exact path="/settings" hasAnyRole={[ROLE_TYPE.OWNER, ROLE_TYPE.ADMINISTRATOR]} user={user} render={() => <Redirect to="/settings/general" />} />
+						<ProtectedRoute
+							exact
+							path="/settings/general"
+							hasAnyRole={[ROLE_TYPE.OWNER, ROLE_TYPE.ADMINISTRATOR]}
+							user={user}
+							render={() => (
+								<DefaultLayout key="/settings/general">
+									<Settings />
+								</DefaultLayout>
+							)}
+						/>
+						<ProtectedRoute
+							exact
+							path="/settings/general/delete-workspace"
+							hasAllRoles={[ROLE_TYPE.OWNER]}
+							user={user}
+							render={() => (
+								<DefaultLayout key="/settings/general/delete-workspace">
+									<Settings />
+								</DefaultLayout>
+							)}
+						/>
+						<ProtectedRoute
+							exact
+							path="/settings/appearance"
+							hasAnyRole={[ROLE_TYPE.OWNER, ROLE_TYPE.ADMINISTRATOR]}
+							hasAllFeatures={[FEATURES.STYLING]}
+							user={user}
+							render={() => (
+								<DefaultLayout key="/settings/appearance">
+									<Settings />
+								</DefaultLayout>
+							)}
+						/>
+						<ProtectedRoute
+							exact
+							path="/settings/appearance/confirm-reset"
+							hasAnyRole={[ROLE_TYPE.OWNER, ROLE_TYPE.ADMINISTRATOR]}
+							hasAllFeatures={[FEATURES.STYLING]}
+							user={user}
+							render={() => (
+								<DefaultLayout key="/settings/appearance/confirm-reset">
+									<Settings />
+								</DefaultLayout>
+							)}
+						/>
+						<ProtectedRoute
+							exact
+							path="/settings/localization"
+							hasAnyRole={[ROLE_TYPE.OWNER, ROLE_TYPE.ADMINISTRATOR]}
+							user={user}
+							render={() => (
+								<DefaultLayout key="/settings/localization">
+									<Settings />
+								</DefaultLayout>
+							)}
+						/>
+						<ProtectedRoute
+							path="*"
+							user={user}
+							render={() => (
+								<DefaultLayout key="*">
+									<MissingPath />
+								</DefaultLayout>
+							)}
+						/>
+					</Switch>
+				</Fragment>
+			</BrowserRouter>
+		);
+	}
+}
+
+Router.propTypes = {
+	user: PropTypes.object
+};
+
+export default User(Router);

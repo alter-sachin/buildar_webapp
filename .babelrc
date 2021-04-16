@@ -1,0 +1,27 @@
+{
+	"plugins": [
+		[
+			"module-resolver",
+			{
+				"alias": {
+					"shared": "./shared",
+					"client": "./client",
+					"api": "./client/api",
+					"common": "./client/common",
+					"modules": "./client/modules",
+					"server": "./server",
+					"services": "./server/services",
+					"controller": "./server/controller",
+					"models": "./server/models",
+					"utilities": "./server/utilities",
+					"orchestrator": "./server/orchestrator",
+					"distribution": "./distribution"
+				}
+			}
+		],
+		["@babel/plugin-transform-runtime"],
+		["@babel/plugin-syntax-dynamic-import"],
+		["@babel/plugin-proposal-class-properties"],
+		["emotion"]
+	]
+}

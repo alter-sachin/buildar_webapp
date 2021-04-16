@@ -1,0 +1,10 @@
+{
+	"supportArticles": {
+		"overview": "#",
+		"profile": "#",
+		"billing": "#",
+		"settings": "#"
+	},
+	"termsAndConditions": "#",
+	"privacyPolicy": "#"
+}

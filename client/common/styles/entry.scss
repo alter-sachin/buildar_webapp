@@ -1,0 +1,12 @@
+// Bootstrap
+@import "modules/bootstrap_variations";
+@import "~bootstrap/scss/bootstrap";
+
+// Custom component styling
+@import "modules/reset";
+@import "modules/spacing";
+@import "modules/containers";
+@import "modules/borders";
+@import "modules/alignment";
+@import "modules/images";
+@import "modules/custom_components";
