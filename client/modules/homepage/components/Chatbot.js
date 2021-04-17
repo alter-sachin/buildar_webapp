@@ -39,7 +39,7 @@ class Chatbot extends Component {
                 document.getElementById("overlay-intro").style.display = "none"
                 document.getElementById("overlay-create-video").style.display = "block"
                 this.setState({
-                    url: "https://buildar.in/vid/1617107689.4509332.mp4"
+                    url: "https://dreal.in/vid/1617107689.4509332.mp4"
                 })
                 break;
 
