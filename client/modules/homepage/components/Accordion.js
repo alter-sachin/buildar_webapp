@@ -46,7 +46,7 @@ const Accordion = () => {
 
     return (
         <div className="accordion">
-            <h2 className="accordion-header">Built for your team.</h2>
+            <h2 className="accordion-header" id="usecases">Built for your team.</h2>
             <div className=" flex-container">
                 <div className="flex-item-left">
                     <div className="img-wrapper">

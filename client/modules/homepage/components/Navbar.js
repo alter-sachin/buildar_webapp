@@ -19,16 +19,16 @@ class NavBar extends Component {
               <NavDropdown title="Products" className="basic-nav-dropdown">
                 <NavDropdown.Item className="nav-dropdown-item" href="#createvideos">Create Videos</NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item className="nav-dropdown-item" href="#personalizevideos">Personalize Videos</NavDropdown.Item>
+                <NavDropdown.Item className="nav-dropdown-item" href="#createvideos">Personalize Videos</NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item className="nav-dropdown-item" href="/docs">API</NavDropdown.Item>
               </NavDropdown>
               <NavDropdown title="Use Cases" className="basic-nav-dropdown">
-                <NavDropdown.Item className="nav-dropdown-item" href="#sales">Sales</NavDropdown.Item>
+                <NavDropdown.Item className="nav-dropdown-item" href="#usecases">Sales</NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item className="nav-dropdown-item" href="#marketing">Marketing</NavDropdown.Item>
+                <NavDropdown.Item className="nav-dropdown-item" href="#usecases">Marketing</NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item className="nav-dropdown-item" href="#chatbot">Chatbot</NavDropdown.Item>
+                <NavDropdown.Item className="nav-dropdown-item" href="#usecases">Chatbot</NavDropdown.Item>
               </NavDropdown>
               <NavDropdown title="Learn" className="basic-nav-dropdown">
                 <NavDropdown.Item className="nav-dropdown-item" href="#casestudies">Case Studies</NavDropdown.Item>

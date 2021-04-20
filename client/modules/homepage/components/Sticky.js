@@ -81,7 +81,7 @@ const Sticky = () => {
                             <h3 >Personalised Videos for Your Customers.</h3>
                             <p id="view1">Every User is different,target them at the right<br />
                                    channel at the right time based on their behavior<br />
-                                   And likings. With A VIdeo.
+                                   Increase Conversions. With A VIdeo.
                             </p>
                             <div className="mobile-player">
                                 <div className="w-embed">
@@ -103,13 +103,13 @@ const Sticky = () => {
                                 </div>
                             </div>
                         </li>
-                        <li className="sticky-two">
+                        <li className="sticky-two" >
                             <h3 >Save Time and Money.</h3>
                             <p id="view2">
                                 Videos take time to create. Infact weeks!<br />
                                     Now do so in just minutes.
                             </p>
-                            <div className="mobile-player">
+                            <div className="mobile-player" id="createvideos">
                                 <div className="w-embed">
                                     <video
                                         id="sticky-player"
