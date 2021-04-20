@@ -158,7 +158,7 @@ class Register extends Component {
 		this.toggleSecondarySignUp();
 	}
 	async handleLogin(googleData){
-		console.log("handle login");
+		 console.log("handle login", googleData.tokenId);
 		const res = await fetch("api/v1.0/authentication/google", {
 			method : "POST",
 			body : JSON.stringify({
@@ -244,14 +244,14 @@ class Register extends Component {
 	}
 	changeSubdomain() {
 		//evt.preventDefault(); // Prevent page refresh
-		console.log("did I get here?")
+		// console.log("did I get here?")
 		
 		this.setState({ redirectPending: true, validationErrors: null, serverError: null });
 		// Fetch subdomain from state
 		const subdomain = {
 			workspaceURL: this.state.workspaceURL
 		};
-		console.log("subdomain",subdomain);
+		// console.log("subdomain",subdomain);
 		const url = `${BUILD_PROTOCOL}://${BUILD_DOMAINPATH}/myvideos`;
 		window.location.replace(url);
 
@@ -301,8 +301,35 @@ class Register extends Component {
 						<div id="register">
 							<div className="p-3 p-sm-5 alignment vertical justify-content-center" >
 							
-							
-								<form name="secondaryForm" className="register-2 w-100" id="secondary-signup">
+								<div className="google-auth-signup" id="primary-signup">
+									<h2 className="google-auth-header">Sign up for BuildAR</h2>
+								
+								
+									<div id="google-button">
+										<GoogleLogin
+											clientId={clientId}
+											buttonText = "Signup With Google"
+											onSuccess = {this.handleLogin}
+											onFailure = {this.handleLogin}
+											cookiePolicy = {"single_host_origin"}
+											style = {{marginTop:"100px"}}
+						
+										/>							
+									</div>
+										
+									<div className="secondary-signup-separator">
+										<hr />
+										<span color="grey" fontWeight="bold">or</span>
+										<hr />
+									</div>
+									<form name="primaryForm" className="primary-email-signup">
+										<input id="first-email-input" className="form-control rounded-lg" name="email" type="text" placeholder="Enter your email to continue" />
+										<span id="email-empty-warning" style={{ display: "none", fontSize: "1em", color: "red" }} color="red">The above field cannot be left empty.</span>
+										<button id="email-submit-button" type="button" className="btn btn-primary go-to-signup-two" onClick={() => this.handleClick()}>Create Free Account</button>
+									</form>
+
+								</div>
+								<form name="secondaryForm" className="register-2 w-100" id="secondary-signup" style={{ display: "none" }}>
 									<div className="w-100 text-center mb-4">
 										<span className="logo">
 											<img src={require("distribution/images/Logo_BuildAR.png")} />
@@ -346,7 +373,8 @@ class Register extends Component {
 										label={t("label.emailAddress")}
 										name={"emailAddress"}
 										id={"email-input"}
-										value={emailAddress}
+										defaultValue={this.emailAddress}
+										value={this.emailAddress}
 										type={"textField"}
 										ariaLabel={"emailAddress"}
 										onChange={this.changeField}
