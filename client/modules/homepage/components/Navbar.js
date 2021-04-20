@@ -30,14 +30,6 @@ class NavBar extends Component {
                 <NavDropdown.Divider />
                 <NavDropdown.Item className="nav-dropdown-item" href="#usecases">Chatbot</NavDropdown.Item>
               </NavDropdown>
-              <NavDropdown title="Learn" className="basic-nav-dropdown">
-                <NavDropdown.Item className="nav-dropdown-item" href="#casestudies">Case Studies</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item className="nav-dropdown-item" href="#blogs">Blogs</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item className="nav-dropdown-item" href="/docs">Developer API</NavDropdown.Item>
-              </NavDropdown>
-              <Nav.Link className="nav-blog" href="/blogs">Blogs</Nav.Link>
               <Nav.Link className="nav-sign-in" href="/signin">Sign-In</Nav.Link>
               <Button className="btn btn-dark" href="/register">Sign-Up</Button>
             </Nav>
