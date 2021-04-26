@@ -90,7 +90,42 @@ function sendEmail(emailType, language, to, messageParams, clientId, userId) {
 	});
 }
 
+
+
+function sendEmailChatbot( to) {
+	database().transaction(async function(transaction) {
+		try {
+			
+			const subject = "Welcome Message";
+			const body ="Hey this is a special message from AI me";
+
+			// Store email properties in object for transporter
+			const mailOptions = {
+				to,
+				from: config.email.senderAddress,
+				subject: subject,
+				html: body
+			};
+
+			// Send email through transporter, gracefully store failure errors in db
+			try {
+				await transporter.sendMail(mailOptions);
+				
+			} catch (error) {
+				// If there is an email send failure, output result to db table
+				const reason = JSON.stringify(serializeError(error));
+				console.log("error in nodemailer", error);
+				
+			}
+			return;
+		} catch (error) {
+			throw error;
+		}
+	});
+}
+
 module.exports = {
 	initialize: initialize,
-	sendEmail: sendEmail
+	sendEmail: sendEmail,
+	sendEmailChatbot:sendEmailChatbot
 };
