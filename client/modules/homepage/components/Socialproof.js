@@ -3,9 +3,9 @@ import React, { Component } from "react";
 class Socialproof extends Component {
   render() {
     return (
-      <div className="cards-1">
         <div className="container">
           <div className="row">
+          <div className="cards-1">
             <div className="trusted-by-row">
               <h4 className="trusted-by-header">Trusted By:</h4>
               <div className="trusted-logo-column">
@@ -17,7 +17,7 @@ class Socialproof extends Component {
             </div>
           </div>
           </div>
-      </div >
+          </div>
     )
   }
 }

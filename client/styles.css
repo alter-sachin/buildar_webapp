@@ -1,9 +1,3 @@
-/* Template: Tivo - SaaS App HTML Landing Page Template
-   Author: Inovatik
-   Created: Sep 2019
-   Description: Master CSS file
-*/
-
 /*****************************************
 Table Of Contents:
 
@@ -859,7 +853,6 @@ button.btn.btn-primary.btn-lg.btn-block.mt-4.p-3.css-t52ojw,button#email-submit-
 .header {
 	background-color: white;
 	color: black;
-	height: 70%;
 }
 
 #header > div > div > div > div.col-lg-7.col-xl-6 > div > h2{
@@ -1159,8 +1152,8 @@ button.btn.btn-primary.btn-lg.btn-block.mt-4.p-3.css-t52ojw,button#email-submit-
 /*     06. Description     */
 /***************************/
 .cards-1 {
-	padding-top: 2.25rem;
-	padding-bottom: 1rem;
+	position: relative;
+	top:1rem;
 	text-align: center;
 }
 
@@ -1292,14 +1285,13 @@ button.btn.btn-primary.btn-lg.btn-block.mt-4.p-3.css-t52ojw,button#email-submit-
 	  margin-top: 0;
 	  width: 100%;
 	  align-items: left;
-	  margin-right: 4em;
   }
 }
 
 .accordion form{
 	/* margin-left: 20em; */
-	width: 30em;
-	padding-top: 2em;
+	width: 100%;
+	padding: 4em 2em;
 }
 
 .accordion button{
@@ -1364,8 +1356,8 @@ button.btn.btn-primary.btn-lg.btn-block.mt-4.p-3.css-t52ojw,button#email-submit-
   box-sizing: border-box;
   border-radius: 1rem;
   opacity:1;
-  margin-left: 6em;
-  width:60%;
+  margin-left: 2em;
+  width:80%;
   height: auto;
   transition-timing-function: ease-in;
   transition: all 1s;
