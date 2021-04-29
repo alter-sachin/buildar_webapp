@@ -475,3 +475,11 @@ LOCK TABLES `subscriptions` WRITE;
 INSERT INTO `subscriptions` (`id`,`subscriptionId`,`planId`,`subscriptionLink`,`status`, `name`, `description`, `active`, `createdAt`, `updatedAt`,`userId_FK`) VALUES (1,'sub_GoSpiQHkYwWeej','plan_GnsLLScpZakuEA','https://rzp.io/i/LNztFrsLJA','created','Basic','30$ for 30 Videos',1,'2019-03-13 11:01:55','2019-03-13 11:01:55',1);
 
 
+CREATE TABLE `chatbot`(
+ `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+      `createdAt` datetime DEFAULT NULL,
+  `updatedAt` datetime DEFAULT NULL,
+  `name` varchar(300) DEFAULT NULL,
+  `email` varchar(300) DEFAULT NULL,
+  PRIMARY KEY(`id`)
+  )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

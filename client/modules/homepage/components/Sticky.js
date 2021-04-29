@@ -64,11 +64,11 @@ const Sticky = () => {
                                     width={900}
                                     loop
                                     muted
-                                    poster="https://www.buildar.in/assets/videos/home.mp4"
+                                    poster="https://www.dreal.in/assets/videos/home.mp4"
                                     style={{ height: 'auto', maxWidth: '90%', marginTop: '1.5rem' }}
                                 >
-                                    <source id="source" src="https://www.buildar.in/assets/videos/home.mp4" type="video/webm" />
-                                    <source id="source" src="https://www.buildar.in/assets/videos/home.mp4" type="video/mp4" />
+                                    <source id="source" src="https://www.dreal.in/assets/videos/home.mp4" type="video/webm" />
+                                    <source id="source" src="https://www.dreal.in/assets/videos/home.mp4" type="video/mp4" />
                                             Sorry, your browser doesn’t support embedded videos.
                                     </video>
                             </div>
@@ -93,11 +93,11 @@ const Sticky = () => {
                                         width={900}
                                         loop
                                         muted
-                                        poster="https://www.buildar.in/assets/videos/home.mp4"
+                                        poster="https://www.dreal.in/assets/videos/home.mp4"
                                         style={{ height: 'auto', maxWidth: '90%', marginTop: '1.5rem' }}
                                     >
-                                        <source id="source" src="https://www.buildar.in/assets/videos/home.mp4" type="video/webm" />
-                                        <source id="source" src="https://www.buildar.in/assets/videos/home.mp4" type="video/mp4" />
+                                        <source id="source" src="https://www.dreal.in/assets/videos/home.mp4" type="video/webm" />
+                                        <source id="source" src="https://www.dreal.in/assets/videos/home.mp4" type="video/mp4" />
                                             Sorry, your browser doesn’t support embedded videos.
                                     </video>
                                 </div>
@@ -119,11 +119,11 @@ const Sticky = () => {
                                         width={900}
                                         loop
                                         muted
-                                        poster="https://www.buildar.in/assets/videos/home.mp4"
+                                        poster="https://www.dreal.in/assets/videos/home.mp4"
                                         style={{ height: 'auto', maxWidth: '90%', marginTop: '1.5rem' }}
                                     >
-                                        <source id="source" src="https://www.buildar.in/assets/videos/home.mp4" type="video/webm" />
-                                        <source id="source" src="https://www.buildar.in/assets/videos/home.mp4" type="video/mp4" />
+                                        <source id="source" src="https://www.dreal.in/assets/videos/home.mp4" type="video/webm" />
+                                        <source id="source" src="https://www.dreal.in/assets/videos/home.mp4" type="video/mp4" />
                                             Sorry, your browser doesn’t support embedded videos.
                                     </video>
                                 </div>
@@ -146,11 +146,11 @@ const Sticky = () => {
                                         width={900}
                                         loop
                                         muted
-                                        poster="https://www.buildar.in/assets/videos/home.mp4"
+                                        poster="https://www.dreal.in/assets/videos/home.mp4"
                                         style={{ height: 'auto', maxWidth: '90%', marginTop: '1.5rem' }}
                                     >
-                                        <source id="source" src="https://www.buildar.in/assets/videos/home.mp4" type="video/webm" />
-                                        <source id="source" src="https://www.buildar.in/assets/videos/home.mp4" type="video/mp4" />
+                                        <source id="source" src="https://www.dreal.in/assets/videos/home.mp4" type="video/webm" />
+                                        <source id="source" src="https://www.dreal.in/assets/videos/home.mp4" type="video/mp4" />
                                             Sorry, your browser doesn’t support embedded videos.
                                     </video>
                                 </div>
