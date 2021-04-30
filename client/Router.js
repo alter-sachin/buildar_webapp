@@ -26,6 +26,9 @@ const MyVideo = AsyncComponent(() => import("./modules/myvideos"));
 const Billing = AsyncComponent(() => import("./modules/billing"));
 const Settings = AsyncComponent(() => import("./modules/settings"));
 const MissingPath = AsyncComponent(() => import("common/components/MissingPath"));
+const Questions = AsyncComponent(() => import("./modules/questions"));
+
+
 
 class Router extends Component {
 	render() {
@@ -89,6 +92,15 @@ class Router extends Component {
 								<EmptyLayout key="/register">
 									<Authentication />
 								</EmptyLayout>
+							)}
+						/>
+						<ProtectedRoute
+							exact
+							path="/questions"
+							hasAnyRole={[ROLE_TYPE.UNREGISTERED]}
+							user={user}
+							render={() => (
+									<Questions />
 							)}
 						/>
 						<ProtectedRoute

@@ -483,3 +483,14 @@ CREATE TABLE `chatbot`(
   `email` varchar(300) DEFAULT NULL,
   PRIMARY KEY(`id`)
   )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+CREATE TABLE `questionTable`(
+ `questionId` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `questionText` varchar(300) DEFAULT NULL,
+  PRIMARY KEY(`questionId`)
+  )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+LOCK TABLES `questionTable` WRITE;
+
+INSERT INTO `questionTable` (`questionId`,`questionText`) VALUES (1,'How are you doing today?');
