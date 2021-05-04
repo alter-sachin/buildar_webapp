@@ -16,11 +16,25 @@ import ChangeAvatar from "./components/ChangeAvatar";
 import EditProfile from "./components/EditProfile";
 import LanguageSettings from "./components/LanguageSettings";
 import ChangePassword from "./components/ChangePassword";
+import * as HiIcons from "react-icons/hi";
+
+
 
 class Profile extends Component {
 	render() {
 		const { user, history } = this.props;
 
+		function startCopy(){
+			copyDivToClipboard();
+		}
+		function copyDivToClipboard() {
+                    var range = document.createRange();
+                    range.selectNode(document.getElementById("apikey"));
+                    window.getSelection().removeAllRanges(); // clear current selection
+                    window.getSelection().addRange(range); // to select text
+                    document.execCommand("copy");
+                    window.getSelection().removeAllRanges();// to deselect
+                }
 		return (
 			<Fragment>
 				<Helmet
@@ -37,12 +51,16 @@ class Profile extends Component {
 						<div className="mb-3">
 							<div className="col-lg-7 mx-auto">
 								<div className="text-center">
+									
 									<Avatar photo={user.get("profilePhoto")} />
 									<h3 className="text-capitalize">
 										{user.get("firstName")} {user.get("lastName")}
 									</h3>
 								</div>
 								<div className="mt-3 mb-5">
+									<h5>Your API Key : </h5> 
+									<h5 onClick={startCopy}> Click to Copy <HiIcons.HiClipboardCopy/> </h5>
+									<div className="apikey" id="apikey" onClick={copyDivToClipboard}>{user.get("authToken")}</div>
 									<h5>{t("label.profile")}</h5>
 									<div className="card rounded-0 mb-3 text-left">
 										<div className="card-body">

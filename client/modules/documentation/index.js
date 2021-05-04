@@ -61,9 +61,9 @@ class Documentation extends Component {
                         </div>
                         <div className="overflow-hidden content-section" id="get-api-access">
                             <h1 id="get-started">Get API Access</h1>
-                            <pre>{""}For API Key {"\n"}{""}Sign Up and Visit:{"\n"}{"\n"}{""}<span style={{ color: "#cb7832" }}>URL </span>: <span style={{ color: "#cb7832" }}>https://buildar.live/apikey</span><span style={{ color: "#cb7832" }}></span><span style={{ color: "#cb7832" }}></span>{"\n"}{""}<span style={{ color: "#cb7832" }}>Call Us in case of issues</span>: +<span style={{ color: "#6896ba" }}>91</span>-<span style={{ color: "#6896ba" }}>9646617007</span>{"\n"}{"                "}</pre>
+                            <pre>{""}For API Key {"\n"}{""}Sign Up and Visit:{"\n"}{"\n"}{""}<span style={{ color: "#cb7832" }}>URL </span>: <span style={{ color: "#cb7832" }}>https://workspaceurl.buildar.live/profile</span><span style={{ color: "#cb7832" }}></span><span style={{ color: "#cb7832" }}></span>{"\n"}{""}<span style={{ color: "#cb7832" }}>Call Us in case of issues</span>: +<span style={{ color: "#6896ba" }}>91</span>-<span style={{ color: "#6896ba" }}>9646617007</span>{"\n"}{"                "}</pre>
                             <p>
-                                To create BuildAR's AI videos, you need an <strong>API key</strong>. Please sign up and then go to <a href="https://buildar.live/apikey">https://buildar.live/apikey/</a> to get your own API key.<br />
+                                To create BuildAR's AI videos, you need an <strong>API key</strong>. Please sign up and then go to <a href="https://buildar.live/signup">https://workspaceurl.buildar.live/profile</a> to get your own API key.<br />
                 We have subscription plans based on the volume of videos you are looking to create. You can buy a plan based on your usage.
               </p>
                         </div>

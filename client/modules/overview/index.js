@@ -29,7 +29,6 @@ class Overview extends Component {
 					]}
 				/>
 				<div className="container p-3">
-				hello
 					<div className="p-3 pt-md-5 pb-md-4">
 						<div className="text-center">
 							<h1>{t("components.overview.title")}</h1>
