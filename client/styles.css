@@ -3933,3 +3933,13 @@ body.one-content-column-version .content thead {
 .dropdown-item.active, .dropdown-item:active {
 	background-color: #c8c8c8!important;
 }
+
+
+.apikey{
+	word-wrap: break-word;
+	font-size: 14px;
+	font-weight: 600;
+	padding: 1em;
+	margin: 0em 0em 1em 0em;
+	border: 1px solid gray;
+}

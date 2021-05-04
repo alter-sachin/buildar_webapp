@@ -23,7 +23,7 @@ export function connect(done) {
 	connection = new Sequelize(schema, username, password, {
 		host: config.database.host,
 		dialect: "mysql",
-		port : 25060,
+		port : 3306,
 		pool: {
 			max: max,
 			min: min,

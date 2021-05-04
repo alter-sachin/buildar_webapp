@@ -114,6 +114,12 @@ module.exports = (sequelize, DataTypes) => {
 		});
 	};
 
+	User.associate = function (models){
+		User.hasMany(models.form, {
+			foreignKey:"id"
+		});
+	};
+
 	return User;
 };
 
