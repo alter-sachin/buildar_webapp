@@ -29,7 +29,7 @@ class CreateVideo extends Component {
 	}
 	componentDidMount() {
 		const {user} = this.props;
-		console.log("before config",user.get("authToken"));
+		//console.log("before config",user.get("authToken"));
 		
 		const config = {
 			headers:{Authorization:user.get("authToken")}

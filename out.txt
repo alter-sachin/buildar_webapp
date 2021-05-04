@@ -1,0 +1,5 @@
+
+> Reeve@1.2.0 start:production /home/ubuntu/buildar_webapp
+> node server/server.js
+
+jwtSecret jwtsecretkey

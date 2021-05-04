@@ -148,7 +148,7 @@ class Forgot extends Component {
 								<div className="w-100 text-center mt-4 mb-4">
 									<Link to={{ pathname: "/signin" }}>
 										<span className="logo">
-											<img src={require("distribution/images/Logo_BuildAR.png")} />
+											{!workspaceURLPending && <img src={(clientStyle && clientStyle.get("logoImage")) || require("distribution/images/logo_dark.svg")} />}
 										</span>
 									</Link>
 								</div>
