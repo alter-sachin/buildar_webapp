@@ -6,7 +6,7 @@ import { ROLE_TYPE, FEATURES, SUBSCRIPTION_TYPE } from "shared/constants";
 
 import AsyncComponent from "common/components/AsyncComponent";
 import ProtectedRoute from "common/components/ProtectedRoute";
-import { GoogleAnalyticsTracker } from "common/components/GoogleAnalytics";
+//import { GoogleAnalyticsTracker } from "common/components/GoogleAnalytics";
 import User from "common/components/User";
 
 // Layout Components
@@ -34,7 +34,6 @@ class Router extends Component {
 		return (
 			<BrowserRouter>
 				<Fragment>
-					<GoogleAnalyticsTracker />
 					<Switch>
 						<ProtectedRoute
 							exact

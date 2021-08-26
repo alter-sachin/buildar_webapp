@@ -26,7 +26,7 @@ import { clientStyling } from "./components/ClientStyling";
 import WorkspaceURL from "./components/WorkspaceURL";
 import SignInForm from "./components/SignInForm";
 import Loading from "common/components/Loading";
-import { setGAUser } from "common/components/GoogleAnalytics";
+//import { setGAUser } from "common/components/GoogleAnalytics";
 
 const clientId = "976971922840-p9eobg6v863nppicf7vsatfup1q82qjt.apps.googleusercontent.com";
 

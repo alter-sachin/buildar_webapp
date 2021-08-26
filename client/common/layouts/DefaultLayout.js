@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
-
+import { Helmet } from "react-helmet";
 import AppOffline from "common/components/AppOffline";
 
 class DefaultLayout extends Component {
@@ -10,9 +10,9 @@ class DefaultLayout extends Component {
 
 		return (
 			<Fragment>
-				
-			
-			
+				<Helmet>
+					<script async defer data-domain="buildar.live" src="https://plausible.io/js/plausible.js"></script>
+				</Helmet>
 				{children}
 			</Fragment>
 		);

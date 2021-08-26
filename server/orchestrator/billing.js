@@ -165,9 +165,9 @@ export function createSubscription(requestProperties, authenticatedUser, browser
 				      	console.log("rows?",result);
 				      });
 				}
-				console.log("else statement");
+				//console.log("else statement");
 				//const sub = await instance.subscriptions.create(pars);
-				console.log("sub else is",sub);
+				//console.log("sub else is",sub);
 				/*else{ //if inactive , send the subscription id back so that he can then do the payment
 
 				}*/
